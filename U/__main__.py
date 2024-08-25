@@ -19,7 +19,7 @@ async def main():
     log.info(f"Bot Started as {app.me.first_name}")
 
     for all_module in ALL_MODULES:
-        importlib.import_module("AnonXMusic.plugins" + all_module)
+        importlib.import_module("U.plugins" + all_module)
     log.info("Successfully Imported Modules...")
 
     try:
