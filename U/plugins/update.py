@@ -24,7 +24,7 @@ def gen_chlog(repo, diff):
     tldr_log = ""
     ch = f"<b>Updates for <a href={upstream_repo_url}/tree/{ac_br}>{ac_br}</a>:</b>"
     ch_tl = f"Updates for {ac_br}:"
-    d_form = "%d/%m/%y || %H:%M"
+    d_form = "%d/%m/%y  %H:%M"
     for c in repo.iter_commits(diff):
         ch_log += (
             f"\n\n💬 <b>{c.count()}</b> 🗓 <b>[{c.committed_datetime.strftime(d_form)}]</b>\n<b>"
