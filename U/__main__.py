@@ -14,7 +14,7 @@ async def main():
     log.info("Starting bot....")
 
     await app.start()
-    log.info(f"bot Started as {app.me.first_name}"
+    log.info(f"bot Started as {app.me.first_name}")
 
     await idle()
     await app.stop()
