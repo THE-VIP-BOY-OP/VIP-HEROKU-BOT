@@ -3,6 +3,7 @@ import asyncio
 import uvloop
 uvloop.install()
 
+import logging
 from pyrogram import Client, filters
 
 from config import API_ID, API_HASH, BOT_TOKEN
