@@ -19,8 +19,8 @@ UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/VivekKumar-IN/U")
 
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
 
-GIT_TOKEN = getenv("GIT_TOKEN", "")
+GIT_TOKEN = getenv("GIT_TOKEN", None)
 
-START_IMAGE = getenv("START_IMAGE", "")
+START_IMAGE = getenv("START_IMAGE", None)
 
 BANNED_USERS = filters.user()
