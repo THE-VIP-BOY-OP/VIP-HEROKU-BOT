@@ -11,6 +11,7 @@ if GIT_TOKEN:
      GIT_USERNAME = UPSTREAM_REPO.split("com/")[1].split("/")[0]
      TEMP_REPO = UPSTREAM_REPO.split("https://")[1]
      UPSTREAM_REPO = f"https://{GIT_USERNAME}:{GIT_TOKEN}@{TEMP_REPO}"
+
 else:
      UPSTREAM_REPO = UPSTREAM_REPO
 
