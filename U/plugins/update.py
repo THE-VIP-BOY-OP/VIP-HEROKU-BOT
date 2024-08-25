@@ -22,7 +22,7 @@ def gen_chlog(repo, diff):
     ac_br = repo.active_branch.name
     ch_log = ""
     tldr_log = ""
-    ch = f"<b>Updates for <a href={upstream_repo_url}/tree/{ac_br}>[{ac_br}]</a>:</b>"
+    ch = f"<b>Updates for <a href={upstream_repo_url}/tree/{ac_br}>{ac_br}</a>:</b>"
     ch_tl = f"Updates for {ac_br}:"
     d_form = "%d/%m/%y || %H:%M"
     for c in repo.iter_commits(diff):
