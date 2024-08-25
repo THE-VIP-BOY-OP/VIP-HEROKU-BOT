@@ -16,7 +16,7 @@ async def main():
     log.info("Starting bot....")
 
     await app.start()
-    log.info(f"bot Started as {app.me.first_name}")
+    log.info(f"Bot Started as {app.me.first_name}")
     try:
         await app.send_message(LOG_GROUP_ID, "Started")
     except:
