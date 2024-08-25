@@ -103,11 +103,6 @@ async def helper_private(
         await update.edit_message_text("Radhe Radhe!\nWelcome to help panel all commamds Startswith /", reply_markup=keyboard)
     else:
         chat_id = update.chat.id
-        if await is_commanddelete_on(update.chat.id):
-            try:
-                await update.delete()
-            except:
-                pass
         keyboard = InlineKeyboardMarkup(
             paginate_modules(0, HELPABLE, "help", close=True)
         )
