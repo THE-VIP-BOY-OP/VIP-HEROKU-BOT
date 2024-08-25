@@ -8,6 +8,8 @@ from pyrogram import Client, filters
 
 from config import API_ID, API_HASH, BOT_TOKEN
 
+log = logging.getLogger(__name__)
+
 async def main():
 
     app = Client(
@@ -19,6 +21,8 @@ async def main():
         plugins=dict(root="plugins"),
         max_concurrent_transmissions=9,     
     )
+
+    log.info("Starting bot")
 
     await app.run()
 
