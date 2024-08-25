@@ -4,7 +4,8 @@ import uvloop
 uvloop.install()
 
 from pyrogram import idle
-from bot import app
+#from bot import app
+from U import app
 
 from .logging import LOGGER
 log = LOGGER("U")
