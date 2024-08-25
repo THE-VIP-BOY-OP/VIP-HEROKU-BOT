@@ -127,7 +127,7 @@ async def helper_private(
 
 @Client.on_message(filters.command("help") & filters.group & ~BANNED_USERS)
 async def help_com_group(client, message: Message):
-        buttons = InlineKeyboardMarkup([[InlineKeyboardButton(text="Click Here To get help",url=f"https://t.me/{client.me.username}?start=help",)]])
+    buttons = InlineKeyboardMarkup([[InlineKeyboardButton(text="Click Here To get help",url=f"https://t.me/{client.me.username}?start=help",)]])
     await message.reply_text("Click on Button to Get help menu on pm", reply_markup=keyboard)
 
 
