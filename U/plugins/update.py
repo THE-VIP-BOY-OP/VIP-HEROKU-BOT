@@ -8,11 +8,13 @@ from pyrogram import filters, Client
 from config import UPSTREAM_REPO, UPSTREAM_BRANCH, GIT_TOKEN, OWNER_ID
 
 if GIT_TOKEN:
+
     GIT_USERNAME = UPSTREAM_REPO.split("com/")[1].split("/")[0]
     TEMP_REPO = UPSTREAM_REPO.split("https://")[1]
     UPSTREAM_REPO = f"https://{GIT_USERNAME}:{GIT_TOKEN}@{TEMP_REPO}"
 
 else:
+
     UPSTREAM_REPO = UPSTREAM_REPO
 
 def gen_chlog(repo, diff):
