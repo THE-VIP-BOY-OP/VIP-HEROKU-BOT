@@ -61,6 +61,6 @@ async def update_bot(_, message: Message):
     if update_avail:
         await msg.edit("**🥀 Restarting...✨ ...**")
         os.system("git pull -f && pip3 install -U -r requirements.txt")
-        os.system(f"kill -9 {os.getpid()} && bikash start")
+        os.system(f"kill -9 {os.getpid()} && bash start")
         return
     await msg.edit(f"**🥀Already up to date. ✨ ...**")
