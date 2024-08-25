@@ -4,7 +4,7 @@ import uvloop
 uvloop.install()
 
 import logging
-from pyrogram import Client, filters
+from pyrogram import Client, idle
 
 from config import API_ID, API_HASH, BOT_TOKEN
 
@@ -24,7 +24,8 @@ async def main():
 
     log.info("Starting bot")
 
-    await app.run()
+    await app.start()
+    await idle()
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(main())
