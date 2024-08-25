@@ -106,7 +106,7 @@ async def helper_private(
         keyboard = InlineKeyboardMarkup(
             paginate_modules(0, HELPABLE, "help", close=True)
         )
-        if START_IMG_URL:
+        if START_IMGAGE:
             await update.reply_photo(
                 photo=START_IMAGE,
                 caption="Radhe Radhe!\nWelcome to help panel all commamds Startswith /",
