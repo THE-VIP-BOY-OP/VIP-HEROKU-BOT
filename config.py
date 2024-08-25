@@ -1,6 +1,7 @@
 from os import getenv
 
 from dotenv import load_dotenv
+from pyrogram import filters 
 
 load_dotenv()
 
@@ -19,3 +20,7 @@ UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/VivekKumar-IN/U")
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
 
 GIT_TOKEN = getenv("GIT_TOKEN", "")
+
+START_IMAGE = getenv("START_IMAGE", "")
+
+BANNED_USERS = filters.user()
