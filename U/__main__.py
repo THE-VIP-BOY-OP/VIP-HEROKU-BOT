@@ -10,7 +10,7 @@ from .logging import LOGGER
 from config import LOG_GROUP_ID
 
 from U.plugins import ALL_MODULES
-
+from U import HELPABLE
 log = LOGGER("U")
 
 
