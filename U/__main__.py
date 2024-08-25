@@ -1,22 +1,27 @@
 import asyncio
-
 import uvloop
+
 uvloop.install()
 
+import importlib
 from pyrogram import idle
 from bot import app
-
 from .logging import LOGGER
-log = LOGGER("U")
-
 from config import LOG_GROUP_ID
 
-async def main():
-    
-    log.info("Starting bot....")
+from U.plugins import ALL_MODULES
 
+log = LOGGER("U")
+
+
+async def main():
     await app.start()
     log.info(f"Bot Started as {app.me.first_name}")
+
+    for all_module in ALL_MODULES:
+        importlib.import_module("AnonXMusic.plugins" + all_module)
+    log.info("Successfully Imported Modules...")
+
     try:
         await app.send_message(LOG_GROUP_ID, "Started")
     except:
