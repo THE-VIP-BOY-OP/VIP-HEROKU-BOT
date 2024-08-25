@@ -1,1 +1,1 @@
-from bot import app
+#from bot import app
