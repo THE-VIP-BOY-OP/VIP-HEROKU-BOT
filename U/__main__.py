@@ -1,7 +1,7 @@
 import asyncio
-#import uvloop
+import uvloop
 
-#uvloop.install()
+uvloop.install()
 
 import importlib
 from pyrogram import idle
