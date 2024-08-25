@@ -1,1 +1,1 @@
-from bot import app
+from pyrogram import filters 
