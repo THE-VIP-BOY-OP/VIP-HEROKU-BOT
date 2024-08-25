@@ -4,6 +4,7 @@ import uvloop
 uvloop.install()
 
 from pyrogram import idle
+from bot import app
 
 async def main():
     await app.start()
