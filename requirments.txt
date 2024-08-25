@@ -1,6 +1,0 @@
-asyncio
-python-dotenv
-requests
-tgcrypto
-uvloop
-https://github.com/KurimuzonAkuma/pyrogram/archive/dev.zip
