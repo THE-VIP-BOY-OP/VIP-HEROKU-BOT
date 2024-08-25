@@ -26,5 +26,4 @@ async def main():
     log.info("Stopping bot Good Bye")
 
 if __name__ == "__main__":
-    #asyncio.get_event_loop().run_until_complete(main())
-    app.run(main())
+    asyncio.get_event_loop().run_until_complete(main())
