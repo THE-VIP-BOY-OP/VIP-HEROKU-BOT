@@ -18,7 +18,7 @@ async def main():
     await app.start()
     log.info(f"Bot Started as {app.me.first_name}")
 
-    for all_module in ALL_MODULES:
+    """for all_module in ALL_MODULES:
         imported_module = importlib.import_module(all_module)
 
         if hasattr(imported_module, "__MODULE__") and imported_module.__MODULE__:
@@ -28,7 +28,7 @@ async def main():
                 else:
                     raise Exception(
                         f"Can't have two modules with name! '{imported_module.__MODULE__}' Please Change One"
-                    )
+                    )"""
 
     try:
         await app.send_message(LOG_GROUP_ID, "Started")
