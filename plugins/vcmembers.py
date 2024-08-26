@@ -9,10 +9,13 @@ from utils import filters
 
 @Client.on_message(filters.command("vcmembers") & filters.sudo)
 async def vc_members(client, message):
+   msg = await message.reply_text("Please wait...")
+
     full_chat: base.messages.ChatFull = await client.invoke(
         GetFullChannel(channel=(await client.resolve_peer(message.chat.id)))
     )
-
+    if not full_chat.full_chat.call:
+        return await msg.edit("Radhe Radhe\nOops looks like Voice chat is off")
     access_hash = full_chat.full_chat.call.access_hash
     ids = full_chat.full_chat.call.id
     input_group_call = InputGroupCall(id=ids, access_hash=access_hash)
@@ -20,8 +23,7 @@ async def vc_members(client, message):
     result = await client.invoke(GetGroupCall(call=input_group_call, limit=1))
 
     users = result.participants
-    msg = await message.reply_text("Please wait...")
-
+ 
     if not users:
         await msg.edit("There are no members in the voice chat currently.")
         return
