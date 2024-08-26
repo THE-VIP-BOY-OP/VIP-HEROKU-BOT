@@ -25,5 +25,5 @@ START_IMAGE = getenv("START_IMAGE", None)
 
 BANNED_USERS = filters.user()
 PREFIX  = list(
-    map(int, getenv("PREFIX", ". ! ").split())
+    map(getenv("PREFIX", ". ! ").split())
 )
