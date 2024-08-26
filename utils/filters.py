@@ -2,7 +2,6 @@ import re
 from typing import List, Union
 
 from pyrogram import Client, filters
-from pyrogram.filters import create
 from pyrogram.types import Message
 
 from config import OWNER_ID, PREFIX
