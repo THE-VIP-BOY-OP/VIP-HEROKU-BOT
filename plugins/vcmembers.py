@@ -65,12 +65,13 @@ async def vc_members(client, message):
         mg += f"""**{'Title' if hasattr(user.peer, 'channel_id') and user.peer.channel_id else 'Name'}** = {title}
 **ID** : {user_id}"""
         if username:
-            mg += f"\n**Username** : {username}\n"
+            mg += f"\n    **Username** : {username}"
 
-        mg += f"""**Is Lefted From Group** : {is_left}
-**Is Just Joined** : {just_joined}
-**Is Silent** : {is_silent}
-**Is Muted By Admin** : {is_muted}\n\n"""
+        mg += f"""
+    **Is Lefted From Group** : {is_left}
+    **Is Just Joined** : {just_joined}
+    **Is Silent** : {is_silent}
+    **Is Muted By Admin** : {is_muted}\n\n"""
 
     if mg != "**Radhe Radhe**\n":
         await msg.edit(mg)
