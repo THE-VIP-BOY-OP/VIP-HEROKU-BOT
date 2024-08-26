@@ -24,24 +24,21 @@ uvloop.install()
 
 log = logging.getLogger("U")
 
-app = Client(
+async def main():
+    log.info("Starting Userbot...")
+    app = Client(
         "Boss",
         api_id=API_ID,
         api_hash=API_HASH,
         app_version="Boss 2.1.25",
         session_string=STRING_SESSION,
         in_memory=True,
-        no_updates=True,
-        takeout=True,
         plugins=dict(root="plugins"),
         max_concurrent_transmissions=9,
         device_model="Boss",
     )
 
 
-async def main():
-    log.info("Starting Userbot...")
-    
     await app.start()
     log.info("Userbot started")
     """try:
