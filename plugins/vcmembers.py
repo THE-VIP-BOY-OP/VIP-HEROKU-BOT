@@ -30,16 +30,16 @@ async def vc_members(client, message):
     for user in users:
         if user.peer.channel_id:
             user_id = -100 + user.peer.channel_id
-             try:
+            try:
                 chat = await client.get_chat(user_id)
                 title = chat.title
                 username = chat.username or "Private Group"
-             except:
+            except:
                 chats = result.chats
                 for c in chats:
                     if c.id == user.peer.channel_id:
-                    title = c.title
-                    username = " Can't Say"
+                        title = c.title
+                        username = "Can't Say"
         else:
             user_id = user.peer.user_id
             user_info = await client.get_users(user_id)
@@ -50,12 +50,12 @@ async def vc_members(client, message):
         just_joined = user.just_joined
         is_muted = True if user.muted and not user.can_self_unmute else False
 
-        mg += f""" {'Title' if user.channel_id else 'Name'} = {title}
-        ID = {user_id}
-        Username = {username}
-        Is Left = {is_left}
-        Just Joined = {just_joined}
-        Is Muted = {is_muted}\n\n"""
+        mg += f""" {'Title' if user.peer.channel_id else 'Name'} = {title}
+ID = {user_id}
+Username = {username}
+Is Left = {is_left}
+Just Joined = {just_joined}
+Is Muted = {is_muted}\n\n"""
 
     if mg:
         await msg.edit(mg)
