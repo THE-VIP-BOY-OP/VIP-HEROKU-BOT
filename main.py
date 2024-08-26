@@ -24,6 +24,7 @@ uvloop.install()
 
 log = logging.getLogger("U")
 
+
 async def main():
     log.info("Starting Userbot...")
     app = Client(
@@ -37,7 +38,6 @@ async def main():
         max_concurrent_transmissions=9,
         device_model="Boss",
     )
-
 
     await app.start()
     log.info("Userbot started")
