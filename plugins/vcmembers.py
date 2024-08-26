@@ -32,7 +32,7 @@ async def vc_members(client, message):
     msg = await message.reply_text("please wait")
     if not users:
         await msg.edit("There Are no memebers in voice chat currently")
-        mg = ""
+    mg = ""
     for user in users:
     	if user.channel_id:
     	    user_id = -100 + user.channel_id
@@ -52,5 +52,6 @@ async def vc_members(client, message):
             is_just_joined = {just_joined}
             is_muted = {is_muted}"""
             
-    await message.reply_text(mg)
+    if not mg == ""
+        await msg.edit(mg)
         
