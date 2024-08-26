@@ -45,7 +45,6 @@ async def vc_members(client, message):
                 for c in chats:
                     if c.id == user.peer.channel_id:
                         title = c.title
-                        username = "Can't Say"
         else:
             user_id = user.peer.user_id
             try:
@@ -64,9 +63,11 @@ async def vc_members(client, message):
         is_silent = True if user.muted and user.can_self_unmute else False
 
         mg += f""" **{'Title' if hasattr(user.peer, 'channel_id') and user.peer.channel_id else 'Name'}** = {title}
-    **ID** : {user_id}
-    **Username** : {username}
-    **Is Lefted From Group** : {is_left}
+    **ID** : {user_id}"""
+        if username:
+            msg+=f"\n**Username** :" {username}\n"
+
+        msg+= """**Is Lefted From Group** : {is_left}
     **Is Just Joined **: {just_joined}
     **Is Silent** : {is_silent}
     **Is Muted By Admin** : {is_muted}\n\n"""
