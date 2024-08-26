@@ -30,7 +30,7 @@ async def vc_members(client, message):
         await msg.edit("**Radhe Radhe**\nThere are no members in the voice chat currently.")
         return
 
-    mg = "**Radhe Radhe**"
+    mg = "**Radhe Radhe**\n"
     for user in users:
         title = None
         username = None
