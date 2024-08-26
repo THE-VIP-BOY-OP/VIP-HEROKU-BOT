@@ -32,10 +32,13 @@ async def main():
         "Boss",
         api_id=API_ID,
         api_hash=API_HASH,
+        app_version="Boss 2.1.25",
         bot_token=BOT_TOKEN,
         in_memory=True,
         plugins=dict(root="plugins"),
         max_concurrent_transmissions=9,
+        lang_pack="android",
+        device_model="Boss",
     )
     await app.start()
     log.info("bot started")
