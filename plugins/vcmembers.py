@@ -52,7 +52,7 @@ async def vc_members(client, message):
                user_info = result.users
               for user in user_info:
                  if user.id == user_id:
-                    username = user.username
+                    username = user.username or "No Username"
                     title = [user.first_name](f"tg://user?id={user_id}")
         is_left = user.left
         just_joined = user.just_joined
