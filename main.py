@@ -1,7 +1,6 @@
 import asyncio
 import logging
 import uvloop 
-uvloop.install()
 import platform
 from pyrogram import Client, idle
 from config import API_HASH, API_ID, STRING_SESSION, LOG_GROUP_ID
@@ -20,22 +19,25 @@ logging.basicConfig(
 
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
+uvloop.install()
 
 log = logging.getLogger("U")
 
-app = Client(
-    "Boss",
-    api_id=API_ID,
-    api_hash=API_HASH,
-    app_version="Boss 2.1.25",
-    session_string=STRING_SESSION,
-    in_memory=True,
-    plugins=dict(root="plugins"),
-    max_concurrent_transmissions=9,
-    device_model="Boss",
-    )
+
 async def main():
     log.info("Starting bot...")
+    app = Client(
+        "Boss",
+        api_id=API_ID,
+        api_hash=API_HASH,
+        app_version="Boss 2.1.25",
+        session_string=STRING_SESSION,
+        in_memory=True,
+        plugins=dict(root="plugins"),
+        max_concurrent_transmissions=9,
+        device_model="Boss",
+    )
+
     await app.start()
     log.info("bot started")
     try:
