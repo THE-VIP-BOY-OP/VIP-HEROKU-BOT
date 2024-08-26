@@ -1,11 +1,13 @@
 import os
 import sys
+from os import environ, execle, system
+
 from git import Repo
-from os import system, execle, environ
 from git.exc import InvalidGitRepositoryError
+from pyrogram import Client, filters
 from pyrogram.types import Message
-from pyrogram import filters, Client
-from config import UPSTREAM_REPO, UPSTREAM_BRANCH, GIT_TOKEN, OWNER_ID
+
+from config import GIT_TOKEN, OWNER_ID, UPSTREAM_BRANCH, UPSTREAM_REPO
 
 if GIT_TOKEN:
 
