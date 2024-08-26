@@ -17,7 +17,9 @@ class CustomFilters:
     text = staticmethod(create(lambda _, __, m: bool(m.text)))
     me = staticmethod(create(lambda _, __, m: bool(m.from_user and m.from_user.is_self or getattr(m, "outgoing", False))))
     sudo = staticmethod(create(lambda _, __, m: bool(m.from_user and m.from_user.id in OWNER_ID or m.from_user.is_self)))
-  
+    forwarded = staticmethod(create(lambda _, __, m: bool(m.forward_date)))
+
+
     @staticmethod
     def command(commands: Union[str, List[str]], case_sensitive: bool = False):
         command_re = re.compile(r"([\"'])(.*?)(?<!\\)\1|(\S+)")
