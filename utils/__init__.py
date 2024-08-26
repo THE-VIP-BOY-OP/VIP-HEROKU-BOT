@@ -1,3 +1,3 @@
-from .filters import CustomFilters
+from .filters import Filters
 
-filters = CustomFilters()
+filters = Filters()
