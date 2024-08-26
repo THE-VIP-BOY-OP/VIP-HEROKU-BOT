@@ -51,5 +51,10 @@ async def main():
 
 
 if __name__ == "__main__":
-    loop = asyncio.new_event_loop()
-    loop.run_until_complete(main())
+    if platform.python_version_tuple() >= ("3", "11"):
+        with asyncio.Runner() as runner:
+            loop = runner.get_loop()
+            loop.run_until_complete(main())
+    else:
+        loop = asyncio.new_event_loop()
+        loop.run_until_complete(main())
