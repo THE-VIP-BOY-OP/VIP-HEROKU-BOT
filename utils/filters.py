@@ -18,6 +18,7 @@ class CustomFilters:
     me = staticmethod(create(lambda _, __, m: bool(m.from_user and m.from_user.is_self or getattr(m, "outgoing", False))))
     sudo = staticmethod(create(lambda _, __, m: bool(m.from_user and m.from_user.id in OWNER_ID or m.from_user.is_self)))
     forwarded = staticmethod(create(lambda _, __, m: bool(m.forward_date)))
+    via_bot = staticmethod(create(lambda _, __, m: bool(m.via_bot)))
 
 
     @staticmethod
