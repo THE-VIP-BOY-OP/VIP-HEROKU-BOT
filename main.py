@@ -1,6 +1,6 @@
 import asyncio
 import logging
-import uviloop 
+import uvloop 
 import platform
 from pyrogram import Client, idle
 from config import API_HASH, API_ID, STRING_SESSION, LOG_GROUP_ID
