@@ -9,12 +9,19 @@ from config import PREFIX
 class CustomFilters:
 
     reaction = staticmethod(create(lambda _, __, m: bool(m.reactions), "ReactionFilter"))
+
     admin = staticmethod(create(lambda _, __, m: bool(m.chat and m.chat.is_admin), "AdminFilter"))
+
     mentions = staticmethod(create(lambda _, __, m: bool(m.chat and m.mentioned)))
+
     private = staticmethod(create(lambda _, __, m: bool(m.chat and m.chat.type in {enums.ChatType.PRIVATE, enums.ChatType.BOT})))
+
     group = staticmethod(create(lambda _, __, m: bool(m.chat and m.chat.type in {enums.ChatType.GROUP, enums.ChatType.SUPERGROUP})))
+
     reply = staticmethod(create(lambda _, __, m: bool(m.reply_to_message_id or m.reply_to_story_id)))
+
     text = staticmethod(create(lambda _, __, m: bool(m.text)))
+
     me = staticmethod(create(lambda _, __, m: bool(m.from_user and m.from_user.is_self or getattr(m, "outgoing", False))))
   
     @staticmethod
