@@ -1,9 +1,12 @@
 import asyncio
 import logging
-
+import uviloop 
+import platform
 from pyrogram import Client, idle
-
 from config import API_HASH, API_ID, STRING_SESSION, LOG_GROUP_ID
+
+
+uvloop.install()
 
 logging.basicConfig(
     level=logging.INFO,
@@ -48,7 +51,6 @@ async def main():
 
 
 if __name__ == "__main__":
-    import uvloop
-
-    uvloop.install()
-    asyncio.get_event_loop().run_until_complete(main())
+    with asyncio.Runner() as runner:
+        loop = runner.get_loop()
+        loop.run_until_complete(main())
