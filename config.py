@@ -24,4 +24,4 @@ GIT_TOKEN = getenv("GIT_TOKEN", None)
 START_IMAGE = getenv("START_IMAGE", None)
 
 BANNED_USERS = filters.user()
-PREFIX = list(map(getenv("PREFIX", ". ! ").split()))
+PREFIX = list(map(int, getenv("PREFIX", ". ! ").split()))
