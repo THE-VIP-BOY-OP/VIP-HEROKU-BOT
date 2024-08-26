@@ -1,12 +1,11 @@
 import asyncio
 import logging
 import uvloop 
+uvloop.install()
 import platform
 from pyrogram import Client, idle
 from config import API_HASH, API_ID, STRING_SESSION, LOG_GROUP_ID
 
-
-uvloop.install()
 
 logging.basicConfig(
     level=logging.INFO,
