@@ -9,7 +9,7 @@ API_ID = int(getenv("API_ID", 25488022))
 
 API_HASH = getenv("API_HASH", "0c999a454fddd79251213be7944811e8")
 
-BOT_TOKEN = getenv("BOT_TOKEN", "6751747123:AAH4631aqVNXv01XufsLFQgWLLkgtU_Du-E")
+STRING_SESSION = getenv("STRING_SESSION", None)
 
 LOG_GROUP_ID = getenv("LOG_GROUP_ID", 6815918609)
 
@@ -24,3 +24,4 @@ GIT_TOKEN = getenv("GIT_TOKEN", None)
 START_IMAGE = getenv("START_IMAGE", None)
 
 BANNED_USERS = filters.user()
+PREFIX = list(map(getenv("PREFIX", ". ! ").split()))

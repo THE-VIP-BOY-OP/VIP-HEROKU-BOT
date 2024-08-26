@@ -1,18 +1,18 @@
 import asyncio
 
-from pyrogram import Client
+from pyrogram import Client, __version__ as v
 
 API_ID = input("\nEnter Your API_ID:\n > ")
 API_HASH = input("\nEnter Your API_HASH:\n > ")
 
+
 i = Client(
-    "boas",
+    "Cute",
     in_memory=True,
     api_id=API_ID,
     api_hash=API_HASH,
-    app_version="Boss 2.1.25",
-    lang_pack="android",
-    device_model="Boss",
+    app_version=f"Cute {v}",
+    device_model="Cute",
 )
 
 
