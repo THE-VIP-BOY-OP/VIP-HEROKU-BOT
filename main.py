@@ -2,13 +2,26 @@ import asyncio
 import uvloop
 
 uvloop.install()
+import logging
 
 from pyrogram import Client, idle
-from logging import LOGGER
-from config import LOG_GROUP_ID
+from config import API_ID, API_HASH, BOT_TOKEN, LOG_GROUP_ID
 
-log = LOGGER("U")
-from config import API_ID, API_HASH, BOT_TOKEN
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
+    datefmt="%d-%b-%y %H:%M:%S",
+    handlers=[
+        logging.FileHandler("log.txt"),
+        logging.StreamHandler(),
+    ],
+)
+
+
+logging.getLogger("pyrogram").setLevel(logging.ERROR)
+
+
+log = logging.getLogger("U")
 
 
 async def main():
