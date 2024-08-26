@@ -30,9 +30,16 @@ async def vc_members(client, message):
     for user in users:
         if user.peer.channel_id:
             user_id = -100 + user.peer.channel_id
-            chat = await client.get_chat(user_id)
-            title = chat.title
-            username = chat.username or "Private Group"
+             try:
+                chat = await client.get_chat(user_id)
+                title = chat.title
+                username = chat.username or "Private Group"
+             except:
+                chats = result.chats
+                for c in chats:
+                    if c.id == user.peer.channel_id:
+                    title = c.title
+                    username = " Can't Say"
         else:
             user_id = user.peer.user_id
             user_info = await client.get_users(user_id)
