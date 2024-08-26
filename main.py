@@ -1,8 +1,4 @@
 import asyncio
-
-import uvloop
-
-uvloop.install()
 import logging
 
 from pyrogram import Client, idle
@@ -52,4 +48,7 @@ async def main():
 
 
 if __name__ == "__main__":
+    import uvloop
+
+    uvloop.install()
     asyncio.get_event_loop().run_until_complete(main())
