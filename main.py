@@ -41,10 +41,9 @@ async def main():
     )
     await app.start()
     log.info("bot started")
-   # try:
+
     await app.send_message(LOG_GROUP_ID, "Started")
-   # except:
-        pass
+
     await idle()
     await app.stop()
     log.info("Stopping bot Good Bye")
