@@ -9,14 +9,14 @@ from utils import filters
 
 @Client.on_message(filters.command("vcmembers") & filters.sudo)
 async def vc_members(client, message):
-    msg = await message.reply_text("Please wait...")
+    msg = await message.reply_text("**Radhe Radhe**\nPlease wait...")
 
     full_chat: base.messages.ChatFull = await client.invoke(
         GetFullChannel(channel=(await client.resolve_peer(message.chat.id)))
     )
 
     if not full_chat.full_chat.call:
-        return await msg.edit("Radhe Radhe\nOops, it looks like Voice chat is off")
+        return await msg.edit("**Radhe Radhe**\nOops, it looks like Voice chat is off")
 
     access_hash = full_chat.full_chat.call.access_hash
     ids = full_chat.full_chat.call.id
@@ -27,10 +27,10 @@ async def vc_members(client, message):
     users = result.participants
 
     if not users:
-        await msg.edit("There are no members in the voice chat currently.")
+        await msg.edit("**Radhe Radhe** \nThere are no members in the voice chat currently.")
         return
 
-    mg = ""
+    mg = "**Radhe Radhe**"
     for user in users:
         if user.peer.channel_id:
             user_id = -100 + user.peer.channel_id
@@ -59,15 +59,17 @@ async def vc_members(client, message):
         is_left = user.left
         just_joined = user.just_joined
         is_muted = True if user.muted and not user.can_self_unmute else False
+        is_silent = True if user.muted and user.can_self_unmute else False
 
-        mg += f""" {'Title' if user.peer.channel_id else 'Name'} = {title}
-ID = {user_id}
-Username = {username}
-Is Left = {is_left}
-Just Joined = {just_joined}
-Is Muted = {is_muted}\n\n"""
+        mg += f""" **{'Title' if user.peer.channel_id else 'Name'}** = {title}
+    **ID** : {user_id}
+    **Username** : {username}
+    **Is Lefted From Group** : {is_left}
+    **Is Just Joined **: {just_joined}
+    **Is Silent** : {is_silent}
+    **Is Muted By Admin** : {is_muted}\n\n"""
 
-    if mg:
+    if mg not == "**Radhe Radhe**":
         await msg.edit(mg)
     else:
-        await msg.edit("No members found.")
+        await msg.edit("**Radhe Radhe**\nNo members found.")
