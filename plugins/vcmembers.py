@@ -44,10 +44,16 @@ async def vc_members(client, message):
                         username = "Can't Say"
         else:
             user_id = user.peer.user_id
-            user_info = await client.get_users(user_id)
-            title = user_info.mention
-            username = user_info.username or "No Username"
-
+           try:
+                user_info = await client.get_users(user_id)
+                title = user_info.mention
+                username = user_info.username or "No Username"
+           except:
+               user_info = result.users
+              for user in user_info:
+                 if user.id == user_id:
+                    username = user.username
+                    title = [user.first_name](f"tg://user?id={user_id}")
         is_left = user.left
         just_joined = user.just_joined
         is_muted = True if user.muted and not user.can_self_unmute else False
