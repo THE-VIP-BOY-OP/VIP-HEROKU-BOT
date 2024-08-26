@@ -47,12 +47,11 @@ class CustomFilters:
                     )
 
                     message.command = [cmd] + [
-                        re.sub(r"\[\"'])", r"\1", m.group(2) or m.group(3) or "")
+                        re.sub(r"\\([\"'])", r"\1", m.group(2) or m.group(3) or "")
                         for m in command_re.finditer(without_command)
                     ]
 
                     return True
-
             return False
 
         commands = commands if isinstance(commands, list) else [commands]
