@@ -8,7 +8,7 @@ from config import PREFIX, OWNER_ID
 
 from pyrogram import filters
 
-class CustomFilters(filters):
+class CustomFilters:
     reaction = staticmethod(create(lambda _, __, m: bool(m.reactions), "ReactionFilter"))
     sudo = staticmethod(create(lambda _, __, m: bool(m.from_user and (m.from_user.id in OWNER_ID or m.from_user.is_self))))
 
@@ -63,4 +63,3 @@ class CustomFilters(filters):
     def __getattr__(self, name):
         # Fall back to pyrogram filters if the attribute doesn't exist in CustomFilters
         return getattr(filters, name)
-
