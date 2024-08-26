@@ -32,7 +32,7 @@ async def main():
         api_hash=API_HASH,
         bot_token=BOT_TOKEN,
         in_memory=True,
-        plugins=dict(root="U/plugins"),
+        plugins=dict(root="plugins"),
         max_concurrent_transmissions=9,
     )
     await app.start()
