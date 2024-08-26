@@ -61,5 +61,6 @@ class CustomFilters(filters):
         return create(func, "CommandFilter", commands=commands, case_sensitive=case_sensitive)
 
     def __getattr__(self, name):
+        # Fall back to pyrogram filters if the attribute doesn't exist in CustomFilters
         return getattr(filters, name)
 
