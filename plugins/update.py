@@ -67,6 +67,6 @@ async def update_bot(_, message: Message):
         await msg.edit(
             f"**🥀 Updated successfully! ✨ ...**\n\n{changelog}\n\n**Now Restarting wait until the bot starts**"
         )
-        os.system(f"kill -9 {os.getpid()} && python3 -m U")
+        os.system(f"kill -9 {os.getpid()} && bash start")
         return
     await msg.edit("**🥀 Already up to date. ✨ ...**")
