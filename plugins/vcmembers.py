@@ -29,7 +29,7 @@ async def vc_members(client, message):
     mg = ""
     for user in users:
         if user.peer.channel_id:
-            user_id = -100 + user.channel_id
+            user_id = -100 + user.peer.channel_id
             chat = await client.get_chat(user_id)
             title = chat.title
             username = chat.username or "Private Group"
