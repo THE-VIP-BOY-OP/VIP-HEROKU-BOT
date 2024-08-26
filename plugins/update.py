@@ -4,7 +4,8 @@ from os import environ, execle, system
 
 from git import Repo
 from git.exc import InvalidGitRepositoryError
-from pyrogram import Client, filters
+from pyrogram import Client
+from utils import filters
 from pyrogram.types import Message
 
 from config import GIT_TOKEN, OWNER_ID, UPSTREAM_BRANCH, UPSTREAM_REPO
@@ -58,7 +59,7 @@ def updater():
     return bool(changelog), changelog, tl_chnglog
 
 
-@Client.on_message(filters.command(["update", "up"]) & filters.user(OWNER_ID))
+@Client.on_message(filters.command(["update", "up"]) & filters.me)
 async def update_bot(_, message: Message):
     chat_id = message.chat.id
     msg = await message.reply_text("**🥀 Checking updates ✨...**")
