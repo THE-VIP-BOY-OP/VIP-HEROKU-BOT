@@ -10,10 +10,10 @@ from config import OWNER_ID, PREFIX
 
 class Filters:
     reaction = staticmethod(
-        create(lambda _, __, m: bool(m.reactions), "ReactionFilter")
+        filters.create(lambda _, __, m: bool(m.reactions), "ReactionFilter")
     )
     sudo = staticmethod(
-        create(
+        filters.create(
             lambda _, __, m: bool(
                 m.from_user and (m.from_user.id in OWNER_ID or m.from_user.is_self)
             )
@@ -65,7 +65,7 @@ class Filters:
         commands = commands if isinstance(commands, list) else [commands]
         commands = {c if case_sensitive else c.lower() for c in commands}
 
-        return create(
+        return filters.create(
             func, "CommandFilter", commands=commands, case_sensitive=case_sensitive
         )
 
