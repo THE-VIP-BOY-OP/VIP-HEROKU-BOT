@@ -3,7 +3,7 @@ from typing import List, Union, Pattern
 from pyrogram import Client, filters, enums
 from pyrogram.filters import create
 from pyrogram.types import Message, Update, CallbackQuery, InlineQuery, PreCheckoutQuery
-from config import PREFIX
+from config import PREFIX, OWNER_ID
 
 
 class CustomFilters:
