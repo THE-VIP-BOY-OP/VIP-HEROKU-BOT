@@ -27,18 +27,20 @@ async def vc_members(client, message):
     users = result.participants
 
     if not users:
-        await msg.edit("**Radhe Radhe** \nThere are no members in the voice chat currently.")
+        await msg.edit("**Radhe Radhe**\nThere are no members in the voice chat currently.")
         return
 
     mg = "**Radhe Radhe**"
     for user in users:
-        if user.peer.channel_id:
+        title = None
+        username = None
+        if hasattr(user.peer, "channel_id") and user.peer.channel_id:
             user_id = -100 + user.peer.channel_id
             try:
                 chat = await client.get_chat(user_id)
                 title = chat.title
                 username = chat.username or "Private Group"
-            except:
+            except Exception as e:
                 chats = result.chats
                 for c in chats:
                     if c.id == user.peer.channel_id:
@@ -50,7 +52,7 @@ async def vc_members(client, message):
                 user_info = await client.get_users(user_id)
                 title = user_info.mention
                 username = user_info.username or "No Username"
-            except:
+            except Exception as e:
                 for user_obj in result.users:
                     if user_obj.id == user_id:
                         username = user_obj.username or "No Username"
@@ -61,7 +63,7 @@ async def vc_members(client, message):
         is_muted = True if user.muted and not user.can_self_unmute else False
         is_silent = True if user.muted and user.can_self_unmute else False
 
-        mg += f""" **{'Title' if user.peer.channel_id else 'Name'}** = {title}
+        mg += f""" **{'Title' if hasattr(user.peer, 'channel_id') and user.peer.channel_id else 'Name'}** = {title}
     **ID** : {user_id}
     **Username** : {username}
     **Is Lefted From Group** : {is_left}
@@ -69,7 +71,7 @@ async def vc_members(client, message):
     **Is Silent** : {is_silent}
     **Is Muted By Admin** : {is_muted}\n\n"""
 
-    if mg not == "**Radhe Radhe**":
+    if mg != "**Radhe Radhe**":
         await msg.edit(mg)
     else:
         await msg.edit("**Radhe Radhe**\nNo members found.")
