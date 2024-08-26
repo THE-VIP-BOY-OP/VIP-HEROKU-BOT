@@ -30,7 +30,7 @@ async def vc_members(client, message):
         await msg.edit("**Radhe Radhe**\nThere are no members in the voice chat currently.")
         return
 
-    mg = "**Radhe Radhe**\n"
+    mg = "**Radhe Radhe**\n\n"
     for user in users:
         title = None
         username = None
@@ -63,7 +63,7 @@ async def vc_members(client, message):
         is_silent = True if user.muted and user.can_self_unmute else False
 
         mg += f"""**{'Title' if hasattr(user.peer, 'channel_id') and user.peer.channel_id else 'Name'}** = {title}
-**ID** : {user_id}"""
+    **ID** : {user_id}"""
         if username:
             mg += f"\n    **Username** : {username}"
 
