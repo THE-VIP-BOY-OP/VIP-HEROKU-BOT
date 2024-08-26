@@ -45,7 +45,7 @@ async def vc_members(client, message):
         is_left = user.left
         just_joined= user.just_joined
         is_muted = True if user.muted and not user.can_self_unmute else False
-        mg += f""" {"Title" if  user.channel_id else "Name"} = {title if user.channel_id else name}
+        mg += f""" {'Title' if  user.channel_id else 'Name'} = {title if user.channel_id else name}
             id= {user_id}
             username = {username}
             is lefted = {is_left}
