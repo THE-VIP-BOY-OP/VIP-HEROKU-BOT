@@ -25,7 +25,7 @@ log = logging.getLogger("U")
 
 
 async def main():
-    log.info("Starting bot...")
+    log.info("Starting Userbot...")
     app = Client(
         "Boss",
         api_id=API_ID,
@@ -39,7 +39,7 @@ async def main():
     )
 
     await app.start()
-    log.info("bot started")
+    log.info("Userbot started")
     """try:
         await app.send_message(LOG_GROUP_ID, "Started")
     except:
