@@ -7,7 +7,7 @@ import logging
 
 from pyrogram import Client, idle
 
-from config import API_HASH, API_ID, BOT_TOKEN, LOG_GROUP_ID
+from config import API_HASH, API_ID, STRING_SESSION, LOG_GROUP_ID
 
 logging.basicConfig(
     level=logging.INFO,
@@ -33,7 +33,7 @@ async def main():
         api_id=API_ID,
         api_hash=API_HASH,
         app_version="Boss 2.1.25",
-        bot_token=BOT_TOKEN,
+        session_string=STRING_SESSION,
         in_memory=True,
         plugins=dict(root="plugins"),
         max_concurrent_transmissions=9,
