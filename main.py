@@ -34,6 +34,8 @@ async def main():
         app_version="Boss 2.1.25",
         session_string=STRING_SESSION,
         in_memory=True,
+        no_updates=True,
+        takeout=True,
         plugins=dict(root="plugins"),
         max_concurrent_transmissions=9,
         device_model="Boss",
