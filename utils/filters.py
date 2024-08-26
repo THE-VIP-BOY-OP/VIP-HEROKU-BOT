@@ -26,7 +26,7 @@ class CustomFilters:
   
     @staticmethod
     def command(commands: Union[str, List[str]], case_sensitive: bool = False):
-        command_re = re.compile(r"([\"'])(.*?)(?<!\\1|(\S+)")
+        command_re = re.compile(r"([\"'])(.*?)(?<!\\1|\S+)")
       
         async def func(flt, client: Client, message: Message):
             username = client.me.username or ""
