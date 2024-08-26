@@ -6,25 +6,16 @@ from pyrogram.types import Message, Update, CallbackQuery, InlineQuery, PreCheck
 from config import PREFIX, OWNER_ID
 
 
+from pyrogram import filters
+
 class CustomFilters:
-
     reaction = staticmethod(create(lambda _, __, m: bool(m.reactions), "ReactionFilter"))
-    admin = staticmethod(create(lambda _, __, m: bool(m.chat and m.chat.is_admin), "AdminFilter"))
-    mentions = staticmethod(create(lambda _, __, m: bool(m.chat and m.mentioned)))
-    private = staticmethod(create(lambda _, __, m: bool(m.chat and m.chat.type in {enums.ChatType.PRIVATE, enums.ChatType.BOT})))
-    group = staticmethod(create(lambda _, __, m: bool(m.chat and m.chat.type in {enums.ChatType.GROUP, enums.ChatType.SUPERGROUP})))
-    reply = staticmethod(create(lambda _, __, m: bool(m.reply_to_message_id or m.reply_to_story_id)))
-    text = staticmethod(create(lambda _, __, m: bool(m.text)))
-    me = staticmethod(create(lambda _, __, m: bool(m.from_user and m.from_user.is_self or getattr(m, "outgoing", False))))
-    sudo = staticmethod(create(lambda _, __, m: bool(m.from_user and m.from_user.id in OWNER_ID or m.from_user.is_self)))
-    forwarded = staticmethod(create(lambda _, __, m: bool(m.forward_date)))
-    via_bot = staticmethod(create(lambda _, __, m: bool(m.via_bot)))
-
+    sudo = staticmethod(create(lambda _, __, m: bool(m.from_user and (m.from_user.id in OWNER_ID or m.from_user.is_self))))
 
     @staticmethod
     def command(commands: Union[str, List[str]], case_sensitive: bool = False):
         command_re = re.compile(r"([\"'])(.*?)(?<!\\)\1|(\S+)")
-      
+        
         async def func(flt, client: Client, message: Message):
             username = client.me.username or ""
             text = message.text or message.caption
@@ -68,29 +59,7 @@ class CustomFilters:
         commands = {c if case_sensitive else c.lower() for c in commands}
 
         return create(func, "CommandFilter", commands=commands, case_sensitive=case_sensitive)
-    @staticmethod
-    def regex(pattern: Union[str, Pattern], flags: int = 0):
-        """Filter updates that match a given regular expression pattern."""
-        async def func(flt, _, update: Update):
-            if isinstance(update, Message):
-                value = update.text or update.caption
-            elif isinstance(update, CallbackQuery):
-                value = update.data
-            elif isinstance(update, InlineQuery):
-                value = update.query
-            elif isinstance(update, PreCheckoutQuery):
-                value = update.invoice_payload
-            else:
-                raise ValueError(f"Regex filter doesn't work with {type(update)}")
 
-            if value:
-                update.matches = list(flt.p.finditer(value)) or None
+    def __getattr__(self, name):
+        return getattr(filters, name)
 
-            return bool(update.matches)
-
-        return create(
-            func,
-            "RegexFilter",
-            p=pattern if isinstance(pattern, Pattern) else re.compile(pattern, flags)
-          )
-    
