@@ -20,7 +20,7 @@ async def main():
         bot_token=BOT_TOKEN,
         in_memory=True,
         plugins=dict(root="U/plugins"),
-        max_concurrent_transmissions=9,     
+        max_concurrent_transmissions=9,
     )
     await app.start()
     log.info("bot started")
@@ -31,6 +31,7 @@ async def main():
     await idle()
     await app.stop()
     log.info("Stopping bot Good Bye")
+
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(main())

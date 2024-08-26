@@ -101,7 +101,10 @@ async def helper_private(
             pass
         chat_id = update.message.chat.id
         keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
-        await update.edit_message_text("Radhe Radhe!\nWelcome to help panel all commamds Startswith /", reply_markup=keyboard)
+        await update.edit_message_text(
+            "Radhe Radhe!\nWelcome to help panel all commamds Startswith /",
+            reply_markup=keyboard,
+        )
     else:
         chat_id = update.chat.id
         keyboard = InlineKeyboardMarkup(
@@ -123,8 +126,19 @@ async def helper_private(
 
 @Client.on_message(filters.command("help") & filters.group & ~BANNED_USERS)
 async def help_com_group(client, message: Message):
-    buttons = InlineKeyboardMarkup([[InlineKeyboardButton(text="Click Here To get help",url=f"https://t.me/{client.me.username}?start=help",)]])
-    await message.reply_text("Click on Button to Get help menu on pm", reply_markup=keyboard)
+    buttons = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton(
+                    text="Click Here To get help",
+                    url=f"https://t.me/{client.me.username}?start=help",
+                )
+            ]
+        ]
+    )
+    await message.reply_text(
+        "Click on Button to Get help menu on pm", reply_markup=keyboard
+    )
 
 
 async def help_parser(name, keyboard=None):
@@ -216,6 +230,7 @@ async def help_button(client, query):
         )
 
     await client.answer_callback_query(query.id)
+
 
 __MODULE__ = "Help"
 __HELP__ = """

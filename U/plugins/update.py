@@ -64,7 +64,9 @@ async def update_bot(_, message: Message):
     if update_avail:
         await msg.edit("**🥀 Updates found!\n Updating... ✨ ...**")
         os.system("git pull -f && pip3 install -U -r requirements.txt")
-        await msg.edit(f"**🥀 Updated successfully! ✨ ...**\n\n{changelog}\n\n**Now Restarting wait until the bot starts**")
+        await msg.edit(
+            f"**🥀 Updated successfully! ✨ ...**\n\n{changelog}\n\n**Now Restarting wait until the bot starts**"
+        )
         os.system(f"kill -9 {os.getpid()} && python3 -m U")
         return
     await msg.edit("**🥀 Already up to date. ✨ ...**")
