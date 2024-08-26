@@ -50,7 +50,7 @@ async def vc_members(client, message):
             username = {username}
             is lefted = {is_left}
             is_just_joined = {just_joined}
-            is_muted = {is_muted}""""
+            is_muted = {is_muted}"""
             
     await message.reply_text(mg)
         
