@@ -2,14 +2,15 @@ import os
 import re
 import subprocess
 import sys
-import asyncio
 import traceback
 from inspect import getfullargspec
 from io import StringIO
 from time import time
-from utils import filters
-from pyrogram import Client 
+
+from pyrogram import Client
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+
+from utils import filters
 
 
 async def aexec(code, client, message):
@@ -31,14 +32,14 @@ async def edit_or_reply(msg: Message, **kwargs):
     & filters.sudo
     & ~filters.forwarded
     & ~filters.via_bot,
-    group=6
+    group=6,
 )
 @Client.on_message(
     filters.command(["eval", "ev"])
     & filters.sudo
     & ~filters.forwarded
     & ~filters.via_bot,
-    group=6
+    group=6,
 )
 async def executor(client: Client, message: Message):
     if len(message.command) < 2:
@@ -126,9 +127,7 @@ async def forceclose_command(_, CallbackQuery):
     query, user_id = callback_request.split("|")
     if CallbackQuery.from_user.id != int(user_id):
         try:
-            return await CallbackQuery.answer(
-                "You Can't do this", show_alert=True
-            )
+            return await CallbackQuery.answer("You Can't do this", show_alert=True)
         except:
             return
     await CallbackQuery.message.delete()
@@ -139,20 +138,14 @@ async def forceclose_command(_, CallbackQuery):
 
 
 @Client.on_edited_message(
-    filters.command("sh")
-    & filters.sudo
-    & ~filters.forwarded
-    & ~filters.via_bot,
-    group=6
+    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
+    group=6,
 )
 @Client.on_message(
-    filters.command("sh")
-    & filters.sudo
-    & ~filters.forwarded
-    & ~filters.via_bot,
-    group=6
+    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
+    group=6,
 )
-async def shellrunner(client : Client, message: Message):
+async def shellrunner(client: Client, message: Message):
     if len(message.command) < 2:
         return await edit_or_reply(message, text="<b>ᴇxᴀᴍᴩʟᴇ :</b>\n/sh git pull")
     text = message.text.split(None, 1)[1]

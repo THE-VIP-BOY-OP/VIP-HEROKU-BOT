@@ -1,21 +1,29 @@
 import re
-from typing import List, Union, Pattern
-from pyrogram import Client, filters, enums
+from typing import List, Union
+
+from pyrogram import Client, filters
 from pyrogram.filters import create
-from pyrogram.types import Message, Update, CallbackQuery, InlineQuery, PreCheckoutQuery
-from config import PREFIX, OWNER_ID
+from pyrogram.types import Message
 
+from config import OWNER_ID, PREFIX
 
-from pyrogram import filters
 
 class Filters:
-    reaction = staticmethod(create(lambda _, __, m: bool(m.reactions), "ReactionFilter"))
-    sudo = staticmethod(create(lambda _, __, m: bool(m.from_user and (m.from_user.id in OWNER_ID or m.from_user.is_self))))
+    reaction = staticmethod(
+        create(lambda _, __, m: bool(m.reactions), "ReactionFilter")
+    )
+    sudo = staticmethod(
+        create(
+            lambda _, __, m: bool(
+                m.from_user and (m.from_user.id in OWNER_ID or m.from_user.is_self)
+            )
+        )
+    )
 
     @staticmethod
     def command(commands: Union[str, List[str]], case_sensitive: bool = False):
         command_re = re.compile(r"([\"'])(.*?)(?<!\\)\1|(\S+)")
-        
+
         async def func(flt, client: Client, message: Message):
             username = client.me.username or ""
             text = message.text or message.caption
@@ -28,7 +36,7 @@ class Filters:
                 if not text.startswith(prefix):
                     continue
 
-                without_prefix = text[len(prefix):]
+                without_prefix = text[len(prefix) :]
 
                 for cmd in flt.commands:
                     if not re.match(
@@ -57,7 +65,9 @@ class Filters:
         commands = commands if isinstance(commands, list) else [commands]
         commands = {c if case_sensitive else c.lower() for c in commands}
 
-        return create(func, "CommandFilter", commands=commands, case_sensitive=case_sensitive)
+        return create(
+            func, "CommandFilter", commands=commands, case_sensitive=case_sensitive
+        )
 
     def __getattr__(self, name):
         # Fall back to pyrogram filters if the attribute doesn't exist in CustomFilters

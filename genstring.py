@@ -1,6 +1,7 @@
 import asyncio
 
-from pyrogram import Client, __version__ as v
+from pyrogram import Client
+from pyrogram import __version__ as v
 
 API_ID = input("\nEnter Your API_ID:\n > ")
 API_HASH = input("\nEnter Your API_HASH:\n > ")
