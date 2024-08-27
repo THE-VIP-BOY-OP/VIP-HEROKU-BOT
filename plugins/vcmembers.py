@@ -37,14 +37,13 @@ async def vc_members(client, message):
             
             TEXT += f"""**NAME**: {title}\n"""
             if username:
-                TEXT += f"    **USERNAME**: {username}"
-            TEXT += f"""
-    **BIO**: {bio}
-    **VIDEO SHARING**: {is_video_enabled}
-    **SCREEN SHARING**: {is_screen_sharing_enabled}
-    **IS_HAND_RAISED**: {is_hand_raised}
-    {'**MUTED**' if is_muted else '**SILENT**'}: {is_muted if is_muted else is_silent}
-    **LEFTED FROM GROUP**: {is_left}\n\n"""
+                TEXT += f"    USERNAME: {username}\n"
+            TEXT += f"""    BIO: {bio}
+    VIDEO SHARING: {is_video_enabled}
+    SCREEN SHARING: {is_screen_sharing_enabled}
+    IS_HAND_RAISED: {is_hand_raised}
+    {'MUTED' if is_muted else 'SILENT'}: {is_muted if is_muted else is_silent}
+    LEFTED FROM GROUP: {is_left}\n\n"""
         
         await msg.edit(TEXT or "No members found.")
 
