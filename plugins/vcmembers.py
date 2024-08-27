@@ -1,8 +1,8 @@
 from pyrogram import Client
 from pyrogram.raw import base
 from pyrogram.raw.functions.channels import GetFullChannel
-from pyrogram.raw.functions.phone import GetGroupCall
-from pyrogram.raw.types import InputGroupCall
+from pyrogram.raw.functions.phone import GetGroupParticipants
+from pyrogram.raw.types import InputGroupCall, InputPeerChat
 
 from utils import filters
 
@@ -21,9 +21,17 @@ async def vc_members(client, message):
     access_hash = full_chat.full_chat.call.access_hash
     ids = full_chat.full_chat.call.id
     input_group_call = InputGroupCall(id=ids, access_hash=access_hash)
-
-    result = await client.invoke(GetGroupCall(call=input_group_call, limit=1))
-
+    input_peer_chat = InputPeerChat(chat_id=message.chat.id)
+    
+    result = await client.invoke(
+            GetGroupParticipants(
+                call=input_group_call,
+                ids=[input_peer_chat],
+                offset="",
+                 sources=[],
+                limit=1000,
+            )
+        ) 
     users = result.participants
 
     if not users:
@@ -39,7 +47,7 @@ async def vc_members(client, message):
             try:
                 chat = await client.get_chat(user_id)
                 title = chat.title
-                username = chat.username or "Private Group"
+                username = chat.username or None
             except Exception as e:
                 chats = result.chats
                 for c in chats:
@@ -50,7 +58,7 @@ async def vc_members(client, message):
             try:
                 user_info = await client.get_users(user_id)
                 title = user_info.mention
-                username = user_info.username or "No Username"
+                username = user_info.username or None
             except Exception as e:
                 for user_obj in result.users:
                     if user_obj.id == user_id:
