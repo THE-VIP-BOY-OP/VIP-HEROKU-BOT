@@ -87,5 +87,5 @@ async def vc_members(client, message):
             await msg.edit("**Radhe Radhe**\nNo members found.")
 
     except Exception as e:
-    	await client.send_message(LOG_GROUP_ID, f"An Error occured in vcmembers.py {e} ")
+        await client.send_message(LOG_GROUP_ID, f"An Error occured in vcmembers.py {e} ")
         await msg.edit(f"**Radhe Radhe**\nAn error occurred: {e}")
