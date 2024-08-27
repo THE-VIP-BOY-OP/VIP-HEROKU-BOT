@@ -9,11 +9,11 @@ async def vc_members(client, message):
 
     try:
         async for m in client.get_call_members(message.chat.id):
-            if m.user.type != ChatType.PRIVATE:
-                chat_id = m.user.id
-                title = m.user.first_name
-                username = m.user.username
-                bio = m.user.bio
+            if m.chat.type != ChatType.PRIVATE:
+                chat_id = m.chat.id
+                title = m.chat.title
+                username = m.chat.username
+                bio = m.chat.bio
                 is_hand_raised = m.is_hand_raised
                 is_video_enabled = m.is_video_enabled
                 is_left = m.is_left
@@ -21,13 +21,13 @@ async def vc_members(client, message):
                 is_muted = bool(m.muted and not m.can_self_unmute)
                 is_silent = bool(m.muted and m.can_self_unmute)
             else:
-                chat_id = m.user.id
+                chat_id = m.chat.id
                 try:
                     title = (await client.get_users(chat_id)).mention
                 except:
-                    title = m.user.first_name
-                username = m.user.username
-                bio = m.user.bio
+                    title = m.chat.first_name
+                username = m.chat.username
+                bio = m.chat.bio
                 is_hand_raised = m.is_hand_raised
                 is_video_enabled = m.is_video_enabled
                 is_left = m.is_left
