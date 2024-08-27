@@ -35,7 +35,7 @@ async def vc_members(client, message):
             
             TEXT += f"""**NAME: {title}**\n"""
             if username:
-                TEXT += f"    USERNAME: {username}\n"
+                TEXT += f"    USERNAME: @{username}\n"
             TEXT += f"""    VIDEO SHARING: {is_video_enabled}
     SCREEN SHARING: {is_screen_sharing_enabled}
     IS_HAND_RAISED: {is_hand_raised}
