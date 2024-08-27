@@ -43,7 +43,7 @@ async def vc_members(client, message):
         for user in users:
             title, username = None, None
             if hasattr(user.peer, "channel_id") and user.peer.channel_id:
-                user_id = -100 + user.peer.channel_id
+                user_id = int(f"-100{user.peer.channel_id}")
                 try:
                     chat = await client.get_chat(user_id)
                     title = chat.title
