@@ -13,7 +13,6 @@ async def vc_members(client, message):
                 chat_id = m.chat.id
                 title = m.chat.title
                 username = m.chat.username
-                bio = m.chat.bio
                 is_hand_raised = m.is_hand_raised
                 is_video_enabled = m.is_video_enabled
                 is_left = m.is_left
@@ -27,7 +26,6 @@ async def vc_members(client, message):
                 except:
                     title = m.chat.first_name
                 username = m.chat.username
-                bio = m.chat.bio
                 is_hand_raised = m.is_hand_raised
                 is_video_enabled = m.is_video_enabled
                 is_left = m.is_left
@@ -35,11 +33,10 @@ async def vc_members(client, message):
                 is_muted = bool(m.is_muted and not m.can_self_unmute)
                 is_silent = bool(m.is_muted and m.can_self_unmute)
             
-            TEXT += f"""**NAME**: {title}\n"""
+            TEXT += f"""**NAME: {title}**\n"""
             if username:
                 TEXT += f"    USERNAME: {username}\n"
-            TEXT += f"""    BIO: {bio}
-    VIDEO SHARING: {is_video_enabled}
+            TEXT += f"""    VIDEO SHARING: {is_video_enabled}
     SCREEN SHARING: {is_screen_sharing_enabled}
     IS_HAND_RAISED: {is_hand_raised}
     {'MUTED' if is_muted else 'SILENT'}: {is_muted if is_muted else is_silent}
