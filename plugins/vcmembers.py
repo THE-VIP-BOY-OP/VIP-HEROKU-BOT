@@ -70,7 +70,7 @@ async def vc_members(client, message):
             is_muted = bool(user.muted and not user.can_self_unmute)
             is_silent = bool(user.muted and user.can_self_unmute)
 
-            mg += f"""**{'Title' if hasattr(user.peer, 'channel_id') and user.peer.channel_id else 'Name'}** = {title}
+            mg += f"""**{'Title' if hasattr(user.peer, 'channel_id') and user.peer.channel_id else 'Name'} = {title}**
     **ID** : {user_id}"""
             if username:
                 mg += f"\n    **Username** : {username}"
