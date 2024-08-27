@@ -25,10 +25,7 @@ uvloop.install()
 
 log = logging.getLogger("U")
 
-
-async def main():
-    log.info("Starting Userbot...")
-    app = Client(
+app = Client(
         "Boss",
         api_id=API_ID,
         api_hash=API_HASH,
@@ -42,6 +39,9 @@ async def main():
         takeout=True,
     )
 
+async def main():
+    log.info("Starting Userbot...")
+    
     await app.start()
     log.info("Userbot started")
     """try:
