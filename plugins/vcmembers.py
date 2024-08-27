@@ -35,16 +35,16 @@ async def vc_members(client, message):
                 is_muted = bool(m.is_muted and not m.can_self_unmute)
                 is_silent = bool(m.is_muted and m.can_self_unmute)
             
-            TEXT += f"""Name: {title}\n"""
+            TEXT += f"""**NAME**: {title}\n"""
             if username:
-                TEXT += f"    Username: {username}\n"
+                TEXT += f"    **USERNAME**: {username}"
             TEXT += f"""
-    BIO: {bio}
-    IS_HAND_RAISED: {is_hand_raised}
-    VIDEO SHARING: {is_video_enabled}
-    SCREEN SHARING: {is_screen_sharing_enabled}
-    {'MUTED' if is_muted else 'SILENT'}: {is_muted if is_muted else is_silent}
-    LEFTED FROM GROUP: {is_left}\n\n"""
+    **BIO**: {bio}
+    **VIDEO SHARING**: {is_video_enabled}
+    **SCREEN SHARING**: {is_screen_sharing_enabled}
+    **IS_HAND_RAISED**: {is_hand_raised}
+    {'**MUTED**' if is_muted else '**SILENT**'}: {is_muted if is_muted else is_silent}
+    **LEFTED FROM GROUP**: {is_left}\n\n"""
         
         await msg.edit(TEXT or "No members found.")
 
