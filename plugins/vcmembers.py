@@ -18,8 +18,8 @@ async def vc_members(client, message):
                 is_video_enabled = m.is_video_enabled
                 is_left = m.is_left
                 is_screen_sharing_enabled = m.is_screen_sharing_enabled
-                is_muted = bool(m.muted and not m.can_self_unmute)
-                is_silent = bool(m.muted and m.can_self_unmute)
+                is_muted = bool(m.is_muted and not m.can_self_unmute)
+                is_silent = bool(m.is_muted and m.can_self_unmute)
             else:
                 chat_id = m.chat.id
                 try:
@@ -32,8 +32,8 @@ async def vc_members(client, message):
                 is_video_enabled = m.is_video_enabled
                 is_left = m.is_left
                 is_screen_sharing_enabled = m.is_screen_sharing_enabled
-                is_muted = bool(m.muted and not m.can_self_unmute)
-                is_silent = bool(m.muted and m.can_self_unmute)
+                is_muted = bool(m.is_muted and not m.can_self_unmute)
+                is_silent = bool(m.is_muted and m.can_self_unmute)
             
             TEXT += f"""Name: {title}\n"""
             if username:
