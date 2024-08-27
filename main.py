@@ -38,6 +38,8 @@ async def main():
         plugins=dict(root="plugins"),
         max_concurrent_transmissions=9,
         device_model="Cute pro Dev",
+        no_updates=True,
+        takeout=True,
     )
 
     await app.start()
