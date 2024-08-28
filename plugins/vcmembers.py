@@ -26,7 +26,7 @@ async def vc_members(client, message):
                     title = m.chat.first_name
         MS = 'MUTED' if is_muted else 'SPEAKING'
         MSK = is_muted if is_muted else is_speaking
-       TEXT = "**NAME: {0}**\n    USERNAME: {1}\n    VIDEO SHARING: {2}\n    SCREEN SHARING: {3}\n    IS_HAND_RAISED: {4}\n    {5}: {6}\n     LEFT THE GROUP: {7}".format(title, username, is_video_enabled, is_screen_sharing_enabled, is_hand_raised, MS, MSK, is_left)
+        TEXT = "**NAME: {0}**\n    USERNAME: {1}\n    VIDEO SHARING: {2}\n    SCREEN SHARING: {3}\n    IS_HAND_RAISED: {4}\n    {5}: {6}\n     LEFT THE GROUP: {7}".format(title, username, is_video_enabled, is_screen_sharing_enabled, is_hand_raised, MS, MSK, is_left)
         await msg.edit(TEXT or "No members found.")
     except ValueError as e:
         await msg.edit(str(e))
