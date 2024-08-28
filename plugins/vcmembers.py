@@ -6,8 +6,6 @@ from utils import filters
 @Client.on_message(filters.command("vcmembers") & filters.sudo)
 async def vc_members(client, message):
     msg = await message.reply_text("**Radhe Radhe**\nPlease wait...")
-    TEXT = ""
-
     try:
         async for m in client.get_call_members(message.chat.id):
             chat_id = m.chat.id
@@ -26,16 +24,10 @@ async def vc_members(client, message):
                     title = (await client.get_users(chat_id)).mention
                 except:
                     title = m.chat.first_name
-
-            TEXT += f"""**NAME: {title}**\n"""
-            if username:
-                TEXT += f"    USERNAME: @{username}\n"
-            TEXT += f"""    VIDEO SHARING: {is_video_enabled}
-    SCREEN SHARING: {is_screen_sharing_enabled}
-    IS_HAND_RAISED: {is_hand_raised}
-    {'MUTED' if is_muted else 'SPEAKING'}: {is_muted if is_muted else is_speaking}
-    LEFT THE GROUP: {is_left}\n\n"""
-
+        MS = 'MUTED' if is_muted else 'SPEAKING'
+        MSK = is_muted if is_muted else is_speaking
+       TEXT = "**NAME: {0}**\n    USERNAME: {1}\n    VIDEO SHARING: {2}\n    SCREEN SHARING: {3}\n    IS_HAND_RAISED: {4}\n    {5}: {6}\n     LEFT THE GROUP: {7}".format(title, username, is_video_enabled, is_screen_sharing_enabled, is_hand_raised, MS, MSK, is_left)
         await msg.edit(TEXT or "No members found.")
     except ValueError as e:
         await msg.edit(str(e))
+
