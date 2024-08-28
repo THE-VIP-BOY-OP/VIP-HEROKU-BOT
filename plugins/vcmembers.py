@@ -17,7 +17,7 @@ async def vc_members(client, message):
             is_left = m.is_left
             is_screen_sharing_enabled = m.is_screen_sharing_enabled
             is_muted = bool(m.is_muted and not m.can_self_unmute)
-            is_speaking = not is_muted
+            is_speaking = not m.is_muted
 
             if m.chat.type != ChatType.PRIVATE:
                 title = m.chat.title
