@@ -25,7 +25,7 @@ async def vc_members(client, message):
                     title = (await client.get_users(chat_id)).mention
                 except:
                     title = m.chat.first_name
-            TEXT += "**NAME: {0}**\n   Id:{1}\n    **Username:** {2}\n    **Video Sharing:** {3}\n    **Screen Sharing:** {4}\n    **Is_hand_raised**: {5}\n    Muted: {6}\n    Speaking: {7}\n    **Left The Group:** {8}".format(title, chat_id, username, is_video_enabled, is_screen_sharing_enabled, is_hand_raised, is_muted, is_speaking, is_left)
+            TEXT += "**NAME: {0}**\n   Id:{1}\n    **Username:** {2}\n    **Video Sharing:** {3}\n    **Screen Sharing:** {4}\n    **Is_hand_raised**: {5}\n    **Muted**: {6}\n    **Speaking**: {7}\n    **Left The Group:** {8}\n\n".format(title, chat_id, username, is_video_enabled, is_screen_sharing_enabled, is_hand_raised, is_muted, is_speaking, is_left)
         await msg.edit(TEXT or "No Participants in Voice Chat")
     except ValueError as e:
         await msg.edit(str(e))
