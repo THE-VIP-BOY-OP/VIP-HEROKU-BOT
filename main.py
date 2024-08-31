@@ -2,10 +2,7 @@ import asyncio
 import logging
 import platform
 
-import uvloop
 from pyrogram import idle
-
-uvloop.install()
 
 from bot import app
 
