@@ -4,10 +4,10 @@ import platform
 
 import uvloop
 from pyrogram import idle
-from pyrogram import __version__ as v
 
-from config import API_HASH, API_ID, STRING_SESSION
-from utils import Client
+uvloop.install()
+
+from bot import app
 
 logging.basicConfig(
     level=logging.INFO,
@@ -22,29 +22,13 @@ logging.basicConfig(
 
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
-uvloop.install()
 
 log = logging.getLogger("U")
 
 async def main():
     log.info("Starting Userbot...")
-    app = Client(
-        "Boss",
-        api_id=API_ID,
-        api_hash=API_HASH,
-        app_version=f"Cute {v}",
-        session_string=STRING_SESSION,
-        in_memory=True,
-        plugins=dict(root="plugins"),
-        max_concurrent_transmissions=9,
-        device_model="Cute pro Dev",
-    )
     await app.start()
     log.info("Userbot started")
-    """try:
-        await app.send_message(LOG_GROUP_ID, "Started")
-    except:
-        pass"""
     await idle()
     await app.stop()
     log.info("Stopping bot Good Bye")
