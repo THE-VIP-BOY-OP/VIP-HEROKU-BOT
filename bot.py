@@ -1,3 +1,5 @@
+from pyrogram import __version__ as v
+
 from config import API_HASH, API_ID, STRING_SESSION
 from utils import Client
 
