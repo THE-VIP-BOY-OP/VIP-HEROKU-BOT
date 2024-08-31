@@ -3,10 +3,11 @@ import logging
 import platform
 
 import uvloop
-from pyrogram import Client, idle
+from pyrogram import idle
 from pyrogram import __version__ as v
 
 from config import API_HASH, API_ID, STRING_SESSION
+from utils import Client
 
 logging.basicConfig(
     level=logging.INFO,
