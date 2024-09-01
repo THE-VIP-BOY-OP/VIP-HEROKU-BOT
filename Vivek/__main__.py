@@ -3,7 +3,7 @@ import platform
 from pyrogram import idle
 from Vivek import app, LOGGER
 
-log = LOGGER(__name__)
+log = LOGGER("Vivek")
 
 async def main():
 
