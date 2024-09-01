@@ -9,7 +9,7 @@ async def main():
 
     await app.start()
     await Vivek().import_all_module()
-
+    await call.start()
     await idle()
 
     await app.stop()
