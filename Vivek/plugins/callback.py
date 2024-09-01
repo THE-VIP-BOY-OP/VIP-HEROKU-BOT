@@ -1,8 +1,10 @@
-from pyrogram import Client, filters
+from pyrogram import filters
 from pyrogram.types import CallbackQuery
 
+from Vivek import app
 
-@Client.on_callback_query(filters.regex("close"))
+@app.on_callback_query(filters.regex("close"))
+@app.bot.on_callback_query(filters.regex("close"))
 async def close_menu(_, query: CallbackQuery):
     try:
         await query.answer()
