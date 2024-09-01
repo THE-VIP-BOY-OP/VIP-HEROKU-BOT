@@ -1,9 +1,10 @@
 from pyrogram import Client
 from pyrogram.enums import ChatType
 
-from utils import filters
+from Vivek.utils import filters
+from Vivek import app 
 
-@Client.on_message(filters.command("vcmembers") & filters.sudo)
+@app.on_message(filters.command("vcmembers") & filters.sudo)
 async def vc_members(client, message):
     msg = await message.reply_text("Fetching Participants please wait")
     TEXT = ""
