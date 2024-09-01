@@ -4,7 +4,7 @@ from pyrogram.errors import UsernameInvalid
 
 @app.on_message(filters.sudo & filters.command(["common_chats"]))
 async def get_common_chats(client, message):
-    # Ensure the user provides a username
+
     if len(message.command) < 2:
         return await message.reply_text("Usage: /common_chats @username")
 
