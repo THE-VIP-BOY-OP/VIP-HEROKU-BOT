@@ -50,11 +50,11 @@ class Vivek(VClient):
     async def start(self):
         await super().start()
         LOGGER(__name__).info(f"UserBot Started")
-        await self.bot.start()
-        LOGGER(__name__).info(f"Helper Bot Started")
-        await self.bot.send_message(LOG_GROUP_ID, "Bot has Started Successfully")
+        #await self.bot.start()
+        #LOGGER(__name__).info(f"Helper Bot Started")
+        #await self.bot.send_message(LOG_GROUP_ID, "Bot has Started Successfully")
     async def stop(self):
         LOGGER(__name__).info(f"Stopping! Radhe Radhe")
         await super().stop()
-        await self.bot.stop()
+        #await self.bot.stop()
            
