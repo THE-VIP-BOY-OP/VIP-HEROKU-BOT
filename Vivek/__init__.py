@@ -4,5 +4,3 @@ from Vivek.utils.filters import edit_filters
 
 app = Vivek()
 edit_filters()
-
-HELPABLE = {}
