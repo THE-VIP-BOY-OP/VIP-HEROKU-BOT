@@ -2,7 +2,7 @@ import asyncio
 
 from pyrogram import idle
 from Vivek import app
-from Vivek.core.clients import call
+from Vivek.core.pytgcall import call
 
 async def main():
 
