@@ -12,4 +12,4 @@ class pytgcall(PyTgCalls):
             session_string=STRING_SESSION,
         )
         
-        super().__init__(self.app, cache_duration=100)
+        super().__init__(self.app)
