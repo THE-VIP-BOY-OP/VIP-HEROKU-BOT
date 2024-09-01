@@ -5,7 +5,7 @@ from pyrogram import __version__ as v
 from Vivek.utils import Client
 from Vivek.logging import LOGGER
 
-from config import API_HASH, API_ID, STRING_SESSION, BOT_TOKEN
+from config import API_HASH, API_ID, STRING_SESSION, BOT_TOKEN, LOG_GROUP_ID
 
 
 class Vivek(Client):
@@ -38,7 +38,7 @@ class Vivek(Client):
         LOGGER(__name__).info(f"UserBot Started")
         await self.bot.start()
         LOGGER(__name__).info(f"Helper Bot")
-
+        await self.bot.send_message(LOG_GROUP_ID, "Bot has Started Successfully")
     async def stop(self):
         LOGGER(__name__).info(f"Stopping! Radhe Radhe")
         await super().stop()
