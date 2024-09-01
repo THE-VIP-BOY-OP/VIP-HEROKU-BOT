@@ -1,5 +1,5 @@
 import asyncio
-import importlib
+
 from pyrogram import idle
 from Vivek import app
 
@@ -7,8 +7,7 @@ from Vivek import app
 async def main():
 
     await app.start()
-    for module in ALL_MODULES:
-        importlib.import_module("Vivek.plugins" + module)
+    await app.import_all_module()
     await idle()
     await app.stop()
 
