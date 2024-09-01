@@ -1,5 +1,7 @@
 from pyrogram import __version__ as v
 from config import API_HASH, API_ID, STRING_SESSION
+import platform
+import asyncio
 
 from utils import Client
 import uvloop
@@ -20,4 +22,14 @@ class Vivek(Client):
             plugins=dict(root="Vivek/plugins"),
             max_concurrent_transmissions=9,
         )
+
+
+    def run(self, main):
+        if platform.python_version_tuple() >= ("3", "11"):
+            with asyncio.Runner() as runner:
+                loop = runner.get_loop()
+                loop.run_until_complete(main())
+        else:
+            loop = asyncio.new_event_loop()
+            loop.run_until_complete(main())
       
