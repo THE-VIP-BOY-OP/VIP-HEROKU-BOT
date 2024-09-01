@@ -15,6 +15,7 @@ i = Client(
     app_version=f"Cute {v}",
 )
 
+
 async def main():
     await i.start()
     ss = await i.export_session_string()
