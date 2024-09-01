@@ -13,6 +13,18 @@ from Vivek.plugins import ALL_MODULES
 
 HELPABLE = {}
 
+
+app = VClient(
+            name="Vivek1",
+            api_id=API_ID,
+            api_hash=API_HASH,
+            app_version=f"Cute {v}",
+            session_string=STRING_SESSION,
+            in_memory=True,
+            plugins=dict(root="Vivek/plugins"),
+            max_concurrent_transmissions=9
+        )
+
 class Vivek(VClient):
     def __init__(self):
         LOGGER(__name__).info(f"Starting Bot")
@@ -48,13 +60,13 @@ class Vivek(VClient):
 
 
     async def start(self):
-        await super().start()
+        await app.start()
         LOGGER(__name__).info(f"UserBot Started")
         #await self.bot.start()
         #LOGGER(__name__).info(f"Helper Bot Started")
         #await self.bot.send_message(LOG_GROUP_ID, "Bot has Started Successfully")
     async def stop(self):
         LOGGER(__name__).info(f"Stopping! Radhe Radhe")
-        await super().stop()
+        await app.stop()
         #await self.bot.stop()
            
