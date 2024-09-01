@@ -22,11 +22,13 @@ class Vivek(Client):
             max_concurrent_transmissions=9,
         )
 
-    def run(self, main):
-        if platform.python_version_tuple() >= ("3", "11"):
-            with asyncio.Runner() as runner:
-                loop = runner.get_loop()
-                loop.run_until_complete(main())
-        else:
-            loop = asyncio.new_event_loop()
-            loop.run_until_complete(main())
+    self.bot = Client(
+                    "Vivek1",
+                   api_id=API_ID,
+                   api_hash=API_HASH,
+                   app_version=f"Cute {v}",
+                  bot_token=BOT_TOKEN,
+                  in_memory=True,
+                  plugins=dict(root="Vivek/plugins/bot"),
+            max_concurrent_transmissions=9,
+           
