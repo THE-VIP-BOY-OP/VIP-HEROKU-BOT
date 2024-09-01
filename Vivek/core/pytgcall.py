@@ -3,8 +3,10 @@ from pytgcalls import PyTgCalls
 
 from config import API_ID, API_HASH, STRING_SESSION
 
+from .clients import app
 
-class pytgcall(PyTgCalls):
+
+"""class pytgcall(PyTgCalls):
     def __init__(self):
         super().__init__(
             Client(
@@ -15,4 +17,6 @@ class pytgcall(PyTgCalls):
             )
         )
 
-call = pytgcall()
+call = pytgcall()"""
+
+call = PyTgCalls(app)
