@@ -1,21 +1,29 @@
+from loguru import logger
+import sys
 
-import logging
-from logging.handlers import RotatingFileHandler
+logger.remove()
 
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
-    datefmt="%d-%b-%y %H:%M:%S",
-    handlers=[
-        RotatingFileHandler("log.txt", maxBytes=5000000, backupCount=10),
-        logging.StreamHandler(),
-    ],
+logger.add(
+    "log.txt",
+    rotation="5 MB",
+    retention="10 files",
+    compression="zip",
+    format="{time:YYYY-MM-DD HH:mm:ss} | {level} | {name} - {message}",
 )
 
-logging.getLogger("pyrogram").setLevel(logging.ERROR)
-logging.getLogger("httpx").setLevel(logging.ERROR)
+logger.add(
+    sys.stdout,
+    colorize=True,
+    format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
+           "<level>{level}</level> | "
+           "<cyan>{name}</cyan> - <level>{message}</level>",
+)
 
 
-def LOGGER(name: str) -> logging.Logger:
-    return logging.getLogger(name)
+logger.level("ERROR", color="<red>")
+logger.disable("pyrogram")
+logger.disable("httpx")
+
+
+def LOGGER(name: str):
+    return logger.bind(name=name)
