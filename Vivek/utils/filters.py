@@ -7,19 +7,18 @@ from pyrogram.types import Message
 from config import OWNER_ID, PREFIX
 
 
-class Filters:
-    reaction = staticmethod(
-        filters.create(lambda _, __, m: bool(m.reactions), "ReactionFilter")
-    )
-    sudo = staticmethod(
-        filters.create(
-            lambda _, __, m: bool(
-                m.from_user and (m.from_user.id in OWNER_ID or m.from_user.is_self)
-            )
-        )
+def edit_filters():
+
+    filters.reaction = filters.create(
+        lambda _, __, m: bool(m.reactions), "ReactionFilter"
     )
 
-    @staticmethod
+    filters.sudo = filters.create(
+        lambda _, __, m: bool(
+            m.from_user and (m.from_user.id in OWNER_ID or m.from_user.is_self)
+        ), "SudoFilter"
+    )
+
     def command(commands: Union[str, List[str]], case_sensitive: bool = False):
         command_re = re.compile(r"([\"'])(.*?)(?<!\\)\1|(\S+)")
 
@@ -68,5 +67,4 @@ class Filters:
             func, "CommandFilter", commands=commands, case_sensitive=case_sensitive
         )
 
-    def __getattr__(self, name):
-        return getattr(filters, name)
+    filters.command = command
