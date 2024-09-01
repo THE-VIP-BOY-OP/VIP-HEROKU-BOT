@@ -1,5 +1,6 @@
 from pyrogram import __version__ as v
 from Vivek.utils import Vivek
+from Vivek.logging import LOGGER
 import uvloop
 
 uvloop.install()
