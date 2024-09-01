@@ -28,6 +28,6 @@ async def get_common_chats(client, message):
         username = chat.username or "Private Group"
         members_count = chat.members_count or "Unknown"
 
-        msg += f"Chat Name: {title}\n    ID: {chat_id}\n    Username: {username}\n    Members: {members_count}\n\n"
+        msg += f"**Chat Name:** {title}\n    ID: {chat_id}\n    Username: @{username}\n    Members: {members_count}\n\n"
 
     await message.reply_text(msg)
