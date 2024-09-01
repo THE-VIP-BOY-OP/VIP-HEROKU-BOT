@@ -1,5 +1,7 @@
 asyncio
+py-tgcalls==1.2.9
 python-dotenv
+httpx[http2]
 requests
 tgcrypto
 uvloop
