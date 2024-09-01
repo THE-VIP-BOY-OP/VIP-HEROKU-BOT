@@ -6,6 +6,7 @@ from Vivek import app, LOGGER
 log = LOGGER(__name__)
 
 async def main():
+
     await app.start()
     log.info("Userbot started")
     await idle()
@@ -14,4 +15,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    app.run(main)
+    
