@@ -13,3 +13,5 @@ class pytgcall(PyTgCalls):
         )
         
         super().__init__(self.app)
+
+call = pytgcall()
