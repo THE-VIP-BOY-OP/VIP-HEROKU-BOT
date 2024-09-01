@@ -8,7 +8,7 @@ async def main():
 
     await app.start()
     await app.import_all_module()
-    await call.start()
+    #await call.start()
 
     await idle()
 
