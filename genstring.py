@@ -13,7 +13,6 @@ i = Client(
     api_id=API_ID,
     api_hash=API_HASH,
     app_version=f"Cute {v}",
-    device_model="Cute",
 )
 
 
