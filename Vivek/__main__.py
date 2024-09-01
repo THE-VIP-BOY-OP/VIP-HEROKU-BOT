@@ -5,7 +5,7 @@ from pyrogram import idle
 
 from Vivek import HELPABLE, LOGGER, app, call
 from Vivek.plugins import ALL_MODULES
-
+from Vivek.core.pytgcalls import call
 
 async def main():
     LOGGER("Vivek").info("Staring Clients")
