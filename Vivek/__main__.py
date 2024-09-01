@@ -1,7 +1,7 @@
 import asyncio
 
 from pyrogram import idle
-from Vivek import app
+#from Vivek import app
 #from Vivek.core.clients import Vivek
 from Vivek.core.pytgcall import call, app
 
