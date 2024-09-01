@@ -1,26 +1,11 @@
 import asyncio
-import logging
 import platform
 from pyrogram import idle
+from Vivek import app, LOGGER
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
-    datefmt="%d-%b-%y %H:%M:%S",
-    handlers=[
-        logging.FileHandler("log.txt"),
-        logging.StreamHandler(),
-    ],
-)
-
-
-logging.getLogger("pyrogram").setLevel(logging.ERROR)
-
-
-log = logging.getLogger("U")
+log = LOGGER(__name__)
 
 async def main():
-    log.info("Starting Userbot...")
     await app.start()
     log.info("Userbot started")
     await idle()
