@@ -28,15 +28,15 @@ class Vivek(Client):
         )
 
         self.bot = Client(
-                name="Vivek1",
-                api_id=API_ID,
-                api_hash=API_HASH,
-                app_version=f"Cute {v}",
-                bot_token=BOT_TOKEN,
-                in_memory=True,
-                plugins=dict(root="Vivek/plugins/bot"),
-                max_concurrent_transmissions=9
-            )
+            name="Vivek1",
+            api_id=API_ID,
+            api_hash=API_HASH,
+            app_version=f"Cute {v}",
+            bot_token=BOT_TOKEN,
+            in_memory=True,
+            plugins=dict(root="Vivek/plugins/bot"),
+            max_concurrent_transmissions=9
+        )
 
     async def import_all_module(self):
         for all_module in ALL_MODULES:
