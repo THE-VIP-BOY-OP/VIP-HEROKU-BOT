@@ -14,7 +14,7 @@ from pytgcalls import PyTgCalls
 from Vivek.utils import VClient
 HELPABLE = {}
 
-app = VClient(
+app = Client(
     name="Vivek", 
     api_id=API_ID,
     api_hash=API_HASH,
@@ -35,13 +35,6 @@ bot = VClient(
     max_concurrent_transmissions=9
 )
 
-call = PyTgCalls(
-    Client(
-        name="Vivek", 
-        api_id=API_ID,
-        api_hash=API_HASH,
-        session_string=STRING_SESSION,
-    )
-)
+call = PyTgCalls(app)
 
 edit_filters()
