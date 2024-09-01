@@ -21,7 +21,7 @@ class Vivek(Vivek):
             max_concurrent_transmissions=9,
         )
 
-    self.bot = Client(
+    self.bot = Vivek(
                 "Vivek1",
                 api_id=API_ID,
                 api_hash=API_HASH,
