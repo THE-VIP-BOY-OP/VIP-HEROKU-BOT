@@ -1,12 +1,15 @@
 import uvloop
 uvloop.install()
 
+import importlib
+
 from pyrogram import __version__ as v
 from Vivek.utils import Client
 from Vivek.logging import LOGGER
 
 from config import API_HASH, API_ID, STRING_SESSION, BOT_TOKEN, LOG_GROUP_ID
 
+from Vivek.plugins import ALL_MODULES
 
 class Vivek(Client):
     def __init__(self):
@@ -32,6 +35,15 @@ class Vivek(Client):
                 plugins=dict(root="Vivek/plugins/bot"),
                 max_concurrent_transmissions=9
             )
+
+    async def import_all_module(self):
+        for all_module in ALL_MODULES:
+            imported_module = importlib.import_module("Vivek.plugins" + all_module)
+
+            if hasattr(imported_module, "__MODULE__") and imported_module.__MODULE__:
+                if hasattr(imported_module, "__HELP__") and imported_module.__HELP__:
+                    HELPABLE[imported_module.__MODULE__.lower()] = imported_module
+
 
     async def start(self):
         await super().start()
