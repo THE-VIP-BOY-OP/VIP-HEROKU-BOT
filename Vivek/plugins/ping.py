@@ -1,8 +1,7 @@
-from pyrogram import Client
+from pyrogram import Client, filters
+from Vivek import app
 
-from Vivek.utils import filters
 
-
-@Client.on_message(filters.command(["ping"]) & filters.sudo)
+@app.on_message(filters.command(["ping"]) & filters.sudo)
 async def ping(client, message):
     await message.reply_text("I Am alive brooo")
