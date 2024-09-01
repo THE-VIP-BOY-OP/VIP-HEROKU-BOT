@@ -5,7 +5,7 @@ from config import API_ID, API_HASH, STRING_SESSION
 
 
 class pytgcall(PyTgCalls):
-    def __init__(self, app:Client):
+    def __init__(self):
         super().__init__(
             Client(
                 name="pytgcall",
@@ -15,4 +15,4 @@ class pytgcall(PyTgCalls):
             )
         )
 
-call = pytgcall(app)
+call = pytgcall()
