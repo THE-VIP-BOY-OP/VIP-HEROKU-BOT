@@ -4,7 +4,7 @@ uvloop.install()
 import importlib
 
 from pyrogram import __version__ as v
-from Vivek.utils import VClient
+from Vivek.utils import Client as VClient
 from Vivek.logging import LOGGER
 
 from config import API_HASH, API_ID, STRING_SESSION, BOT_TOKEN, LOG_GROUP_ID
