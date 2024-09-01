@@ -4,10 +4,10 @@ import sys
 from pyrogram import Client
 from pyrogram.types import Message
 
-from utils import filters
+from Vivek.utils import filters
+from Vivek import app 
 
-
-@Client.on_message(filters.command(["restart"]) & filters.sudo & ~filters.forwarded)
+@app.on_message(filters.command(["restart"]) & filters.sudo & ~filters.forwarded)
 async def restart(_: Client, message: Message):
     await message.reply_text("<code>Restarting...</code>")
     os.execvp(sys.executable, [sys.executable, *sys.argv])
