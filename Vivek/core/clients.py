@@ -8,7 +8,6 @@ import uvloop
 
 uvloop.install()
 
-
 class Vivek(Client):
     def __init__(self):
         LOGGER(__name__).info(f"Starting Bot")
@@ -23,7 +22,6 @@ class Vivek(Client):
             max_concurrent_transmissions=9,
         )
 
-
     def run(self, main):
         if platform.python_version_tuple() >= ("3", "11"):
             with asyncio.Runner() as runner:
@@ -32,4 +30,3 @@ class Vivek(Client):
         else:
             loop = asyncio.new_event_loop()
             loop.run_until_complete(main())
-      
