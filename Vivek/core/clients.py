@@ -1,3 +1,6 @@
+import uvloop
+uvloop.install()
+
 from pyrogram import __version__ as v
 from Vivek.utils import Client
 from Vivek.logging import LOGGER
