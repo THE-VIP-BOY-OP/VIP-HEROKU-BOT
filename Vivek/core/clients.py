@@ -10,6 +10,7 @@ from Vivek.logging import LOGGER
 from config import API_HASH, API_ID, STRING_SESSION, BOT_TOKEN, LOG_GROUP_ID
 
 from Vivek.plugins import ALL_MODULES
+from Vivek import HELPABLE
 
 class Vivek(Client):
     def __init__(self):
