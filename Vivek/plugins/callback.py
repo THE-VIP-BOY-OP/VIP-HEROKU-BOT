@@ -3,7 +3,7 @@ from pyrogram.types import CallbackQuery
 
 from Vivek import app
 
-@app.on_callback_query(filters.regex("close"))
+
 @app.bot.on_callback_query(filters.regex("close"))
 async def close_menu(_, query: CallbackQuery):
     try:
