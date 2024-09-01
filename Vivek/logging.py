@@ -1,33 +1,23 @@
-from loguru import logger
-import sys
-import time
+import logging
+from logging.handlers import RotatingFileHandler
 
-logger.remove()
+from config import LOG_FILE_NAME
 
-def clt(seconds: int):
-    return f"{seconds} seconds"
-
-def setup_logger(exp: int):
-    logger.add(
-        "log.txt",
-        rotation="5 MB", retention=clt(exp),
-        compression="zip",
-        format="{time:YYYY-MM-DD HH:mm:ss} | {level} | {name} - {message}",
-    )
-
-logger.add(
-    sys.stdout,
-    colorize=True,
-    format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
-           "<level>{level}</level> | "
-           "<cyan>{name}</cyan> - <level>{message}</level>",
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
+    datefmt="%d-%b-%y %H:%M:%S",
+    handlers=[
+        RotatingFileHandler(LOG_FILE_NAME, maxBytes=5000000, backupCount=10),
+        logging.StreamHandler(),
+    ],
 )
 
-logger.level("ERROR", color="<red>")
-logger.disable("pyrogram")
-logger.disable("httpx")
+logging.getLogger("pyrogram").setLevel(logging.ERROR)
+logging.getLogger("pytgcalls").setLevel(logging.ERROR)
+logging.getLogger("ntgcalls").setLevel(logging.ERROR)
+logging.getLogger("httpx").setLevel(logging.ERROR)
 
-def LOGGER(name: str, exp: int = 864000):
 
-    setup_logger(exp)
-    return logger.bind(name=name)
+def LOGGER(name: str) -> logging.Logger:
+    return logging.getLogger(name)
