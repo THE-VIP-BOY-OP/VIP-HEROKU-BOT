@@ -1,8 +1,8 @@
 import asyncio
 
 from pyrogram import idle
-from Vivek import app
-from Vivek.core.pytgcall import call
+#from Vivek import app
+from Vivek.core.pytgcall import call, app
 
 async def main():
 
