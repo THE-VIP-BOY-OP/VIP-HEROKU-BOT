@@ -1,4 +1,4 @@
-from pyrogram import filters
+"""from pyrogram import filters
 from pyrogram.types import CallbackQuery
 
 from Vivek import app
@@ -10,4 +10,4 @@ async def close_menu(_, query: CallbackQuery):
         await query.answer()
         await query.message.delete()
     except:
-        pass
+        pass"""
