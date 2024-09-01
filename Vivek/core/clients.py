@@ -7,6 +7,7 @@ from pyrogram import __version__ as v
 from Vivek.utils import VClient
 from Vivek.logging import LOGGER
 
+from pyrogram import Client
 from config import API_HASH, API_ID, STRING_SESSION, BOT_TOKEN, LOG_GROUP_ID
 
 from Vivek.plugins import ALL_MODULES
@@ -14,7 +15,7 @@ from Vivek.plugins import ALL_MODULES
 HELPABLE = {}
 
 
-app = VClient(
+app = Client(
             name="Vivek1",
             api_id=API_ID,
             api_hash=API_HASH,
