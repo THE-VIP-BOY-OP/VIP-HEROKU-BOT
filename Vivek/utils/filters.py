@@ -7,7 +7,7 @@ from pyrogram.types import Message
 from config import OWNER_ID, PREFIX
 
 
-def filters():
+def edit_filters():
 
     filters.reaction = filters.create(
         lambda _, __, m: bool(m.reactions), "ReactionFilter"
