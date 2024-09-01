@@ -1,21 +1,22 @@
 import uvloop
+
 uvloop.install()
 
 
-from .logging import LOGGER
-from Vivek.utils.filters import edit_filters
-
-from pyrogram import __version__ as v
 from pyrogram import Client
-
-from config import API_HASH, API_ID, STRING_SESSION, BOT_TOKEN, LOG_GROUP_ID
+from pyrogram import __version__ as v
 from pytgcalls import PyTgCalls
 
+from config import API_HASH, API_ID, BOT_TOKEN, LOG_GROUP_ID, STRING_SESSION
 from Vivek.utils import VClient
+from Vivek.utils.filters import edit_filters
+
+from .logging import LOGGER
+
 HELPABLE = {}
 
 app = Client(
-    name="Vivek", 
+    name="Vivek",
     api_id=API_ID,
     api_hash=API_HASH,
     app_version=f"Cute {v}",
@@ -32,7 +33,7 @@ bot = VClient(
     bot_token=BOT_TOKEN,
     in_memory=True,
     plugins=dict(root="Vivek/plugins/bot"),
-    max_concurrent_transmissions=9
+    max_concurrent_transmissions=9,
 )
 
 call = PyTgCalls(app)

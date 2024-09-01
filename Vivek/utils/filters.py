@@ -16,7 +16,8 @@ def edit_filters():
     filters.sudo = filters.create(
         lambda _, __, m: bool(
             m.from_user and (m.from_user.id in OWNER_ID or m.from_user.is_self)
-        ), "SudoFilter"
+        ),
+        "SudoFilter",
     )
 
     def command(commands: Union[str, List[str]], case_sensitive: bool = False):
