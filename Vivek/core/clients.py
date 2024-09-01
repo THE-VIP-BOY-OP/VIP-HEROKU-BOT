@@ -40,7 +40,7 @@ class Vivek(Client):
         LOGGER(__name__).info(f"Helper Bot")
 
     async def stop(self):
+        LOGGER(__name__).info(f"Stopping! Radhe Radhe")
         await super().stop()
         await self.bot.stop()
-
            
