@@ -1,5 +1,5 @@
 from pyrogram import __version__ as v
-from Vivek.utils import Vivek
+from Vivek.utils import Client
 from Vivek.logging import LOGGER
 import uvloop
 
@@ -8,7 +8,7 @@ uvloop.install()
 from config import API_HASH, API_ID, STRING_SESSION, BOT_TOKEN
 
 
-class Vivek(Vivek):
+class Vivek(Client):
     def __init__(self):
         LOGGER(__name__).info(f"Starting Bot")
         super().__init__(
@@ -22,7 +22,7 @@ class Vivek(Vivek):
             max_concurrent_transmissions=9,
         )
 
-        self.bot = Vivek(
+        self.bot = Client(
                 name="Vivek1",
                 api_id=API_ID,
                 api_hash=API_HASH,
