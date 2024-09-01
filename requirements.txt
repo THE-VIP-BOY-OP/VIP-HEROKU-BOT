@@ -1,5 +1,5 @@
 asyncio
-py-tgcalls==1.2.9
+py-tgcalls
 python-dotenv
 httpx[http2]
 requests
