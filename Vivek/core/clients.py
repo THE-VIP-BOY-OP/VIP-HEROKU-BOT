@@ -32,4 +32,16 @@ class Vivek(Client):
                 plugins=dict(root="Vivek/plugins/bot"),
                 max_concurrent_transmissions=9
             )
+
+    async def start(self):
+        await super().start()
+        LOGGER(__name__).info(f"UserBot Started")
+        await self.bot.start()
+        LOGGER(__name__).info(f"Helper Bot")
+
+    async def stop(self):
+        await super().stop()
+        await self.bot.stop()
+        LOGGER(__name__).info(f"Helper Bot")
+
            
