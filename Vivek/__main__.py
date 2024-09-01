@@ -5,7 +5,7 @@ from Vivek import app, bot, call, HELPABLE, LOGGER
 from Vivek.plugins import ALL_MODULES
 
 async def main():
-    LOGGER(__name__}).info("Staring Clients")
+    LOGGER(__name__).info("Staring Clients")
 
     await app.start()
     await bot.start()
