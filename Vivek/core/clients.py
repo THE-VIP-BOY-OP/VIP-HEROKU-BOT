@@ -21,7 +21,7 @@ class Vivek(Vivek):
             max_concurrent_transmissions=9,
         )
 
-    self.bot = Vivek(
+        self.bot = Vivek(
                 "Vivek1",
                 api_id=API_ID,
                 api_hash=API_HASH,
@@ -30,5 +30,5 @@ class Vivek(Vivek):
                 in_memory=True,
                 plugins=dict(root="Vivek/plugins/bot"),
                 max_concurrent_transmissions=9
-            )
+                )
            
