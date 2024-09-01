@@ -1,10 +1,9 @@
 import os
 import sys
 
-from pyrogram import Client
+from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from Vivek.utils import filters
 from Vivek import app 
 
 @app.on_message(filters.command(["restart"]) & filters.sudo & ~filters.forwarded)
