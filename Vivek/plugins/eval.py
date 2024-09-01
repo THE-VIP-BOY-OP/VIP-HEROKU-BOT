@@ -26,14 +26,14 @@ async def edit_or_reply(msg: Message, **kwargs):
     await func(**{k: v for k, v in kwargs.items() if k in spec})
 
 
-@Client.on_edited_message(
+@app.on_edited_message(
     filters.command(["eval", "ev"])
     & filters.sudo
     & ~filters.forwarded
     & ~filters.via_bot,
     group=6,
 )
-@Client.on_message(
+@app.on_message(
     filters.command(["eval", "ev"])
     & filters.sudo
     & ~filters.forwarded
@@ -76,71 +76,24 @@ async def executor(client: Client, message: Message):
         with open(filename, "w+", encoding="utf8") as out_file:
             out_file.write(str(evaluation))
         t2 = time()
-        keyboard = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        text="⏳",
-                        callback_data=f"runtime {t2-t1} Seconds",
-                    )
-                ]
-            ]
-        )
         await message.reply_document(
             document=filename,
-            caption=f"<b>⥤ ᴇᴠᴀʟ :</b>\n<code>{cmd[0:980]}</code>\n\n<b>⥤ ʀᴇsᴜʟᴛ :</b>\nAttached Document",
+            caption=f"<b>⥤ ᴇᴠᴀʟ :</b>\n<code>{cmd[0:1000]}</code>\n\n<b>⥤ ʀᴇsᴜʟᴛ :</b>\nAttached Document",
             quote=False,
-            reply_markup=keyboard,
         )
         await message.delete()
         os.remove(filename)
     else:
         t2 = time()
-        keyboard = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        text="⏳",
-                        callback_data=f"runtime {round(t2-t1, 3)} Seconds",
-                    ),
-                    InlineKeyboardButton(
-                        text="🗑",
-                        callback_data=f"forceclose abc|{message.from_user.id}",
-                    ),
-                ]
-            ]
-        )
-        await edit_or_reply(message, text=final_output, reply_markup=keyboard)
+        await edit_or_reply(message, text=final_output)
 
 
-@Client.on_callback_query(filters.regex(r"runtime"))
-async def runtime_func_cq(_, cq):
-    runtime = cq.data.split(None, 1)[1]
-    await cq.answer(runtime, show_alert=True)
 
-
-@Client.on_callback_query(filters.regex("forceclose"))
-async def forceclose_command(_, CallbackQuery):
-    callback_data = CallbackQuery.data.strip()
-    callback_request = callback_data.split(None, 1)[1]
-    query, user_id = callback_request.split("|")
-    if CallbackQuery.from_user.id != int(user_id):
-        try:
-            return await CallbackQuery.answer("You Can't do this", show_alert=True)
-        except:
-            return
-    await CallbackQuery.message.delete()
-    try:
-        await CallbackQuery.answer()
-    except:
-        return
-
-
-@Client.on_edited_message(
+@app.on_edited_message(
     filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
     group=6,
 )
-@Client.on_message(
+@app.on_message(
     filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
     group=6,
 )
