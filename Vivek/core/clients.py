@@ -4,7 +4,7 @@ uvloop.install()
 import importlib
 
 from pyrogram import __version__ as v
-from Vivek.utils import Client
+from Vivek.utils import VClient
 from Vivek.logging import LOGGER
 
 from config import API_HASH, API_ID, STRING_SESSION, BOT_TOKEN, LOG_GROUP_ID
@@ -13,7 +13,7 @@ from Vivek.plugins import ALL_MODULES
 
 HELPABLE = {}
 
-class Vivek(Client):
+class Vivek(VClient):
     def __init__(self):
         LOGGER(__name__).info(f"Starting Bot")
         super().__init__(
@@ -27,7 +27,7 @@ class Vivek(Client):
             max_concurrent_transmissions=9,
         )
 
-        self.bot = Client(
+        self.bot = VClient(
             name="Vivek1",
             api_id=API_ID,
             api_hash=API_HASH,
