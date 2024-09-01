@@ -2,13 +2,13 @@ import asyncio
 
 from pyrogram import idle
 from Vivek import app
-from Vivek.core.clients import Vivek
-from Vivek.core.pytgcall import call
+#from Vivek.core.clients import Vivek
+from Vivek.core.pytgcall import call, app
 
 async def main():
 
     await app.start()
-    await app.import_all_module()
+    #await app.import_all_module()
     await call.start()
     await idle()
 
