@@ -1,7 +1,6 @@
-from pyrogram import Client
+from pyrogram import Client, filters
 from pyrogram.enums import ChatType
 
-from Vivek.utils import filters
 from Vivek import app 
 
 @app.on_message(filters.command("vcmembers") & filters.sudo)
