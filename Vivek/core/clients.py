@@ -23,8 +23,8 @@ class Vivek(VClient):
             app_version=f"Cute {v}",
             session_string=STRING_SESSION,
             #in_memory=True,
-            plugins=dict(root="Vivek/plugins"),
-            max_concurrent_transmissions=9,
+            #plugins=dict(root="Vivek/plugins"),
+            #max_concurrent_transmissions=9,
         )
 
         self.bot = VClient(
