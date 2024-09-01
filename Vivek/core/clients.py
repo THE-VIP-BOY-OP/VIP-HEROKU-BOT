@@ -24,11 +24,11 @@ class Vivek(Client):
 
     self.bot = Client(
                     "Vivek1",
-                   api_id=API_ID,
-                   api_hash=API_HASH,
-                   app_version=f"Cute {v}",
-                  bot_token=BOT_TOKEN,
-                  in_memory=True,
-                  plugins=dict(root="Vivek/plugins/bot"),
-            max_concurrent_transmissions=9,
+                    api_id=API_ID,
+                    api_hash=API_HASH,
+                    app_version=f"Cute {v}",
+                    bot_token=BOT_TOKEN,
+                    in_memory=True,
+                    plugins=dict(root="Vivek/plugins/bot"),
+                    max_concurrent_transmissions=9,)
            
