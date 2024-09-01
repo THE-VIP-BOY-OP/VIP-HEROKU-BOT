@@ -1,7 +1,3 @@
-import uvloop
-
-uvloop.install()
-
 from pyrogram import __version__ as v
 from Vivek.utils import Client
 from Vivek.logging import LOGGER
@@ -32,5 +28,5 @@ class Vivek(Client):
                 in_memory=True,
                 plugins=dict(root="Vivek/plugins/bot"),
                 max_concurrent_transmissions=9
-                )
+            )
            
