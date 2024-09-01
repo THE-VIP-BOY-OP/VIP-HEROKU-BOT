@@ -12,7 +12,7 @@ class Vivek(Vivek):
     def __init__(self):
         LOGGER(__name__).info(f"Starting Bot")
         super().__init__(
-            "Vivek", 
+            name="Vivek", 
             api_id=API_ID,
             api_hash=API_HASH,
             app_version=f"Cute {v}",
@@ -23,7 +23,7 @@ class Vivek(Vivek):
         )
 
         self.bot = Vivek(
-                "Vivek1",
+                name="Vivek1",
                 api_id=API_ID,
                 api_hash=API_HASH,
                 app_version=f"Cute {v}",
