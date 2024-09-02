@@ -8,9 +8,7 @@ from git.exc import GitCommandError, InvalidGitRepositoryError
 from pyrogram import filters
 
 from config import UPSTREAM_BRANCH
-
 from Vivek import app
-
 
 BASE = "https://batbin.me/"
 
