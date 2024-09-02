@@ -27,7 +27,7 @@ class MusicPlayer(PyTgCalls):
         chat_id: int, 
         video: Union[bool, str] = None,
     ):
-    	if video:
+        if video:
             stream = MediaStream(
                 file_path,
                 audio_parameters=AudioQuality.HIGH,
