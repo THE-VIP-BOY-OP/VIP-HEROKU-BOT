@@ -14,4 +14,5 @@ class MusicPlayer(PyTgCalls):
     async def leave_call(self, chat_id: int):
         await self.leave_call(chat_id)
 
+
 call = MusicPlayer()
