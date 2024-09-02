@@ -1,8 +1,6 @@
 import os
 
 import ffmpeg
-from pydub import AudioSegment
-from pydub.effects import low_pass_filter
 from pyrogram import filters
 
 from config import LOG_GROUP_ID
