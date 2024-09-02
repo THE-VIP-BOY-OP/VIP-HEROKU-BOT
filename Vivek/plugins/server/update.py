@@ -33,7 +33,7 @@ async def paste(text):
 
 @app.on_message(filters.command(["update", "up", "gitpull"]) & filters.sudo)
 async def update_(client, message):
-    response = await message.reply_text("Checking for available updates.....)
+    response = await message.reply_text("Checking for available updates.....")
     try:
         repo = Repo()
     except GitCommandError:
