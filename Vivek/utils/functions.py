@@ -1,5 +1,6 @@
-from pyrogram import Client
 from typing import Optional
+
+from pyrogram import Client
 
 S12KK = {}
 pause = {}

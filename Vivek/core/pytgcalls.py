@@ -5,8 +5,7 @@ from pytgcalls import PyTgCalls
 from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import AudioQuality, MediaStream, VideoQuality
 
-from Vivek.utils.functions import (MelodyError, add_active_chat,
-                                   remove_active_chat)
+from Vivek.utils.functions import MelodyError, add_active_chat, remove_active_chat
 
 from .clients import app
 
