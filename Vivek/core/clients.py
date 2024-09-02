@@ -1,5 +1,6 @@
 import os
-import sys 
+import sys
+
 from pyrogram import Client
 from pyrogram import __version__ as v
 
@@ -26,9 +27,10 @@ bot = VClient(
     max_concurrent_transmissions=9,
 )
 
+
 async def restart():
     os.execvp(sys.executable, [sys.executable, *sys.argv])
 
+
 app.bot = bot
 app.restart = restart
-
