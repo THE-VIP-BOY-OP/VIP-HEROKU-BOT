@@ -35,8 +35,4 @@ async def audio_play(client, message):
 async def audio_play(client, message):
     chat_id = S12K()
     await call.leave_call(chat_id)
-    await message.reply_text(
-        "Stopped"
-    )
-
-
+    await message.reply_text("Stopped")
