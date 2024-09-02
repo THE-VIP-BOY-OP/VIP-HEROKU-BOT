@@ -9,7 +9,7 @@ from pyrogram import filters
 
 from config import UPSTREAM_BRANCH
 from Vivek import app
-
+from Vivek.utils import restart
 BASE = "https://batbin.me/"
 
 
@@ -74,4 +74,4 @@ async def update_(client, message):
     os.system("git stash &> /dev/null && git pull")
 
     os.system("pip3 install -r requirements.txt")
-    await app.restart()
+    await restart()
