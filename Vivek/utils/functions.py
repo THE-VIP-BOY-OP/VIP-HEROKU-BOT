@@ -1,5 +1,7 @@
 from pyrogram import Client
+from typing import Optional
 
+S12KK = {}
 pause = {}
 mute = {}
 active = []
@@ -14,6 +16,12 @@ class MelodyError(Exception):
     def __init__(self, message):
         self.message = message
         super().__init__(self.message)
+
+
+def S12k(chat_id: Optional[int] = None):
+    if chat_id is not None:
+        S12KK[1234] = chat_id
+    return S12KK.get(1234)
 
 
 async def is_music_playing(chat_id: int) -> bool:
