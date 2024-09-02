@@ -1,6 +1,5 @@
 import os
-from asyncio import Queue as AsyncQueue
-from asyncio import QueueEmpty
+from asyncio import Queue as AsyncQueue, QueueEmpty
 from typing import Any, Dict, Optional
 
 
@@ -17,11 +16,13 @@ class QueueManager:
     async def get(self, chat_id: int) -> Optional[Dict[str, Any]]:
         """Asynchronously return the first stored item for the given chat_id without removing it."""
         if chat_id in self.queues and not self.queues[chat_id].empty():
-            # Retrieve the first item without removing it
+            # Peek at the first item in the queue without removing it
             first_item = await self.queues[chat_id].get()
-            await self.queues[chat_id].put(
-                first_item
-            )  # Re-add the item back to the queue
+            await self.queues[chat_id].put(first_item)  # Re-add the item back to the end
+            # Move items to the front to restore order
+            for _ in range(self.queues[chat_id].qsize() - 1):
+                item = await self.queues[chat_id].get()
+                await self.queues[chat_id].put(item)
             return first_item
         return None
 
