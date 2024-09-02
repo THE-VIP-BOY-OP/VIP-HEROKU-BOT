@@ -20,7 +20,7 @@ async def audio_play(client, message):
         file_name = message.audio.file_name
     if message.voice:
         file_path = message.voice.file_id
-        file_name = message.voice.file_name
+        file_name = f"{message.voice.file_unique_id}.ogg"
 
     a = await app.download_media(file_path)
 
