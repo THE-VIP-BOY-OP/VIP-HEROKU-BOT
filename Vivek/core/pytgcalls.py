@@ -1,33 +1,24 @@
 from typing import Union
-from pytgcalls import PyTgCalls
-from pytgcalls.types import (
-    MediaStream,
-    AudioQuality, 
-    VideoQuality,
-)
+
 from ntgcalls import TelegramServerError
-from pytgcalls.exceptions import (
-    NoActiveGroupCall,
-    AlreadyJoinedError,
-)
-from Vivek.utils.functions import (
-    is_music_playing,
-    music_off,
-    music_on,
-    MelodyError,
-    add_active_chat,
-    remove_active_chat,
-)
+from pytgcalls import PyTgCalls
+from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
+from pytgcalls.types import AudioQuality, MediaStream, VideoQuality
+
+from Vivek.utils.functions import (MelodyError, add_active_chat,
+                                   remove_active_chat)
+
 from .clients import app
+
 
 class MusicPlayer(PyTgCalls):
     def __init__(self):
         super().__init__(app)
 
     async def play(
-        self, 
-        file_path: str, 
-        chat_id: int, 
+        self,
+        file_path: str,
+        chat_id: int,
         video: Union[bool, str] = None,
     ):
         if video:
@@ -38,7 +29,7 @@ class MusicPlayer(PyTgCalls):
             )
         else:
             stream = MediaStream(
-                file_path, 
+                file_path,
                 audio_parameters=AudioQuality.HIGH,
                 video_flags=MediaStream.Flags.IGNORE,
             )
@@ -50,7 +41,9 @@ class MusicPlayer(PyTgCalls):
         except AlreadyJoinedError as e:
             raise MelodyError(str(e))
         except TelegramServerError:
-            raise MelodyError("Telegram is experiencing issues. Please restart the voice chat.")
+            raise MelodyError(
+                "Telegram is experiencing issues. Please restart the voice chat."
+            )
         except Exception as e:
             if "phone.CreateGroupCall" in str(e):
                 raise MelodyError("There is no active group call.")
@@ -66,10 +59,15 @@ class MusicPlayer(PyTgCalls):
 
     async def mute_stream(self, chat_id: int):
         await super().mute_stream(chat_id)
+
     async def pause_stream(self, chat_id: int):
         await super().pause_stream(chat_id)
+
     async def resume_stream(self, chat_id: int):
         await super().resume_stream(chat_id)
+
     async def unmute_stream(self, chat_id: int):
         await super().unmute_stream(chat_id)
+
+
 call = MusicPlayer()
