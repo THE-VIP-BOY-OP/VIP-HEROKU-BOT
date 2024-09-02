@@ -1,6 +1,5 @@
 from pyrogram import Client
 from pyrogram import __version__ as v
-
 from pytgcalls import PyTgCalls
 
 from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
@@ -26,6 +25,7 @@ bot = VClient(
     plugins=dict(root="Vivek/plugins/bot"),
     max_concurrent_transmissions=9,
 )"""
+
 
 class App(Client):
     def __init__(self):
@@ -54,5 +54,5 @@ class App(Client):
         await super().start()
         await self.call.start()
 
+
 app = App()
-        
