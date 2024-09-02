@@ -1,5 +1,6 @@
 import asyncio
-import os, sys
+import os
+import sys
 from datetime import datetime
 
 import aiohttp
@@ -9,7 +10,6 @@ from pyrogram import filters
 
 from config import UPSTREAM_BRANCH
 from Vivek import app
-from Vivek.utils import restart
 
 BASE = "https://batbin.me/"
 
@@ -76,4 +76,3 @@ async def update_(client, message):
 
     os.system("pip3 install -r requirements.txt")
     os.execvp(sys.executable, [sys.executable, *sys.argv])
-
