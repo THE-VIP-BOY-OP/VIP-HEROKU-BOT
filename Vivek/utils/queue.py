@@ -7,13 +7,13 @@ class QueueManager:
     def __init__(self):
         self.queues: Dict[int, Queue] = {}
 
-    async def add_queue(self, chat_id: int, **params: Any):
+    async def add(self, chat_id: int, **params: Any):
         """Asynchronously add a set of parameters to the queue for a given chat_id."""
         if chat_id not in self.queues:
             self.queues[chat_id] = Queue()
         await self.queues[chat_id].put(params)
 
-    async def retrieve(self, chat_id: int) -> Optional[Dict[str, Any]]:
+    async def get(self, chat_id: int) -> Optional[Dict[str, Any]]:
         """Asynchronously retrieve the first stored item for the given chat_id."""
         if chat_id in self.queues:
             try:
@@ -36,7 +36,7 @@ class QueueManager:
         else:
             raise ValueError(f"No queue found for chat_id {chat_id}")
 
-    async def clear_queue(self, chat_id: int):
+    async def clear(self, chat_id: int):
         """Asynchronously clear the entire queue for a given chat_id, deleting files if file_path exists."""
         if chat_id in self.queues:
             while not self.queues[chat_id].empty():
@@ -49,6 +49,6 @@ class QueueManager:
                     break
             self.queues.pop(chat_id, None)
 
-    async def has_queue(self, chat_id: int) -> bool:
+    async def has(self, chat_id: int) -> bool:
         """Check asynchronously if there is a queue for a given chat_id."""
         return chat_id in self.queues and not self.queues[chat_id].empty()
