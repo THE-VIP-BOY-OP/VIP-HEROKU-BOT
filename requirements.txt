@@ -1,4 +1,5 @@
 asyncio
+ffmpeg-python
 python-dotenv
 httpx[http2]
 requests
