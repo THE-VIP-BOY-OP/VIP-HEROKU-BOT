@@ -1,16 +1,16 @@
 import os
-from asyncio import Queue, QueueEmpty
+from asyncio import Queue as AsyncQueue, QueueEmpty
 from typing import Any, Dict, Optional
 
 
 class QueueManager:
     def __init__(self):
-        self.queues: Dict[int, Queue] = {}
+        self.queues: Dict[int, AsyncQueue] = {}
 
     async def add(self, chat_id: int, **params: Any):
         """Asynchronously add a set of parameters to the queue for a given chat_id."""
         if chat_id not in self.queues:
-            self.queues[chat_id] = Queue()
+            self.queues[chat_id] = AsyncQueue()
         await self.queues[chat_id].put(params)
 
     async def get(self, chat_id: int) -> Optional[Dict[str, Any]]:
