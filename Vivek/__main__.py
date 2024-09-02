@@ -19,6 +19,7 @@ async def main():
             if hasattr(imported_module, "__HELP__") and imported_module.__HELP__:
                 HELPABLE[imported_module.__MODULE__.lower()] = imported_module
     await call.start()
+    await call.dec()
     LOGGER("Vivek").info("Clients Started Successfully")
     await idle()
 
