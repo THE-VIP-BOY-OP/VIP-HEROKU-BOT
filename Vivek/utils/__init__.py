@@ -1,1 +1,1 @@
-from .functions import VClient
+from .functions import VClient, restart
