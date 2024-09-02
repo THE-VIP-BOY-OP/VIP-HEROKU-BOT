@@ -52,3 +52,6 @@ class QueueManager:
     async def has(self, chat_id: int) -> bool:
         """Check asynchronously if there is a queue for a given chat_id."""
         return chat_id in self.queues and not self.queues[chat_id].empty()
+
+
+Queue = QueueManager()
