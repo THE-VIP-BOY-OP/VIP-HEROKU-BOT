@@ -31,10 +31,10 @@ async def audio_play(client, message):
         .overwrite_output()
         .run()
     )
-    audio = AudioSegment.from_file(file_name)
+    """audio = AudioSegment.from_file(file_name)
     low_passed = low_pass_filter(audio, cutoff=700)
     bass_boosted = low_passed + 7
-    bass_boosted.export(file_name, format="mp3")
+    bass_boosted.export(file_name, format="mp3")"""
     chat_id = S12K()
     await call.play(chat_id, file_name)
     await message.reply_text("Started Playing")
