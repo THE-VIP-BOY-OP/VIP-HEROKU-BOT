@@ -78,7 +78,3 @@ async def add_active_chat(chat_id: int):
 async def remove_active_chat(chat_id: int):
     if chat_id in active:
         active.remove(chat_id)
-
-
-async def restart():
-    os.execvp(sys.executable, [sys.executable, *sys.argv])
