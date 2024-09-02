@@ -72,7 +72,7 @@ class MusicPlayer(PyTgCalls):
     async def dec(self):
         @super().on_update(filters.stream_end)
         async def my_handler(client: PyTgCalls, update: Update):
-            await app.send_message(LOG_GROUP_ID, update)
-
+            if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
+                await self.leave_call(update.chat_id)
 
 call = MusicPlayer()
