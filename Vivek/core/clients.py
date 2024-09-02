@@ -1,5 +1,6 @@
 from pyrogram import Client
 from pyrogram import __version__ as v
+import os, sys
 
 from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
 from Vivek.utils import VClient
@@ -24,5 +25,10 @@ bot = VClient(
     max_concurrent_transmissions=9,
 )
 
+async def restart():
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    os.execvp(sys.executable, [sys.executable, *sys.argv])
+
 
 app.bot = bot
+app.restart = restart
