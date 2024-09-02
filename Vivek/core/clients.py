@@ -13,8 +13,7 @@ from Vivek.utils import VClient
     session_string=STRING_SESSION,
     in_memory=True,
     plugins=dict(root="Vivek/plugins"),
-)
-
+)"""
 bot = VClient(
     name="Vivek1",
     api_id=API_ID,
@@ -24,7 +23,7 @@ bot = VClient(
     in_memory=True,
     plugins=dict(root="Vivek/plugins/bot"),
     max_concurrent_transmissions=9,
-)"""
+)
 
 
 class App(Client):
