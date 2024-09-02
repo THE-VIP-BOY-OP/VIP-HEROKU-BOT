@@ -5,12 +5,13 @@ from pytgcalls import PyTgCalls, filters
 from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
 
+from Vivek import LOGGER
 from Vivek.utils.functions import MelodyError, add_active_chat, remove_active_chat
 
-from Vivek import LOGGER
 from .clients import app
 
 log = LOGGER(__name__)
+
 
 class MusicPlayer(PyTgCalls):
     def __init__(self):
@@ -80,5 +81,6 @@ class MusicPlayer(PyTgCalls):
                 await self.leave_call(update.chat_id)
             else:
                 log.info("Update type not handled.")
+
 
 call = MusicPlayer()
