@@ -23,3 +23,5 @@ bot = VClient(
     plugins=dict(root="Vivek/plugins/bot"),
     max_concurrent_transmissions=9,
 )
+
+app.bot = bot
