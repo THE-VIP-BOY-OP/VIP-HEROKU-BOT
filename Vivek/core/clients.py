@@ -29,8 +29,7 @@ bot = VClient(
 
 
 async def restart():
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    os.execvp(sys.executable, [sys.executable, *sys.argv])
+    os.execvp(sys.executable, [sys.executable, '-m', 'Vivek', *sys.argv[1:]])
 
 
 app.bot = bot
