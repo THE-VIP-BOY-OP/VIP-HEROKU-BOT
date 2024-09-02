@@ -1,14 +1,14 @@
 import os
 
+import ffmpeg
+from pydub import AudioSegment
+from pydub.effects import low_pass_filter
 from pyrogram import filters
 
 from config import LOG_GROUP_ID
 from Vivek import app
 from Vivek.core.pytgcalls import call
 from Vivek.utils.functions import S12K
-import ffmpeg
-from pydub import AudioSegment
-from pydub.effects import low_pass_filter
 
 
 @app.on_message(
@@ -25,14 +25,13 @@ async def audio_play(client, message):
     a = await app.download_media(file_path)
 
     (
-        ffmpeg
-        .input(a)
-        .filter('volume', '18dB')
+        ffmpeg.input(a)
+        .filter("volume", "18dB")
         .output(file_name)
         .overwrite_output()
         .run()
     )
-    audio = AudioSegment.from_file(file_name) 
+    audio = AudioSegment.from_file(file_name)
     low_passed = low_pass_filter(audio, cutoff=700)
     bass_boosted = low_passed + 7
     bass_boosted.export(file_name, format="mp3")
