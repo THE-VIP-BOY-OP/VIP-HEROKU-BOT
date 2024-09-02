@@ -3,20 +3,15 @@ from pytgcalls.types import MediaStream
 
 from .clients import app
 
-call = PyTgCalls(app)
 
+class MusicPlayer(PyTgCalls):
+    def __init__(self):
+        super().__init__(app)
 
-class MusicPlayer:
+    async def play(self, file_path: str, chat_id: int):
+        await self.play(chat_id, MediaStream(file_path))
 
-    @staticmethod
-    def __getattr__(name):
-        return getattr(call, name)
+    async def leave_call(self, chat_id: int):
+        await self.leave_call(chat_id)
 
-    @staticmethod
-    async def play(file_path, chat_id):
-
-        await call.play(chat_id, MediaStream(file_path))
-
-    @staticmethod
-    async def leave_call(chat_id):
-        await call.leave_call(chat_id)
+call = MusicPlayer()
