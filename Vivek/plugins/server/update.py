@@ -75,4 +75,4 @@ async def update_(client, message):
     os.system("git stash &> /dev/null && git pull")
 
     os.system("pip3 install -r requirements.txt")
-    os.execvp(sys.executable, [sys.executable, *sys.argv])
+    await app.restart()
