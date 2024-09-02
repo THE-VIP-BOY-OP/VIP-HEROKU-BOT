@@ -3,7 +3,7 @@ import importlib
 
 from pyrogram import idle
 
-from Vivek import HELPABLE, LOGGER, app, call
+from Vivek import HELPABLE, LOGGER, App 
 from Vivek.core.pytgcalls import call
 from Vivek.plugins import ALL_MODULES
 
