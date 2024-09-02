@@ -25,9 +25,6 @@ class MusicPlayer(PyTgCalls):
 
     async def unmute_stream(self, chat_id: int):
         await self.unmute_stream(chat_id)
-        
-        
-        
 
 
 call = MusicPlayer()
