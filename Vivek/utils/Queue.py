@@ -1,5 +1,5 @@
 import os
-from  asyncio import Queue, QueueEmpty
+from asyncio import Queue, QueueEmpty
 from typing import Any, Dict, Optional
 
 
@@ -27,7 +27,7 @@ class QueueManager:
         if chat_id in self.queues:
             try:
                 params = self.queues[chat_id].get_nowait()
-                file_path = params.get('file_path')
+                file_path = params.get("file_path")
                 if file_path and os.path.exists(file_path):
                     os.remove(file_path)
                 return params
@@ -42,7 +42,7 @@ class QueueManager:
             while not self.queues[chat_id].empty():
                 try:
                     params = self.queues[chat_id].get_nowait()
-                    file_path = params.get('file_path')
+                    file_path = params.get("file_path")
                     if file_path and os.path.exists(file_path):
                         os.remove(file_path)
                 except QueueEmpty:
@@ -52,4 +52,3 @@ class QueueManager:
     async def has_queue(self, chat_id: int) -> bool:
         """Check asynchronously if there is a queue for a given chat_id."""
         return chat_id in self.queues and not self.queues[chat_id].empty()
- 
