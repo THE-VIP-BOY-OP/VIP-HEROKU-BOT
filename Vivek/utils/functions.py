@@ -10,6 +10,13 @@ class VClient(Client):
         super().__init__(name, *args, **kwargs)
 
 
+class MelodyError(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
+        
+
+
 async def is_music_playing(chat_id: int) -> bool:
     mode = pause.get(chat_id)
     if not mode:
