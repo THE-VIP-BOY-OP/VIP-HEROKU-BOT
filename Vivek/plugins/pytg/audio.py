@@ -6,6 +6,9 @@ from config import LOG_GROUP_ID
 from Vivek import app
 from Vivek.core.pytgcalls import call
 from Vivek.utils.functions import S12K
+import ffmpeg
+from pydub import AudioSegment
+from pydub.effects import low_pass_filter
 
 
 @app.on_message(
@@ -14,13 +17,30 @@ from Vivek.utils.functions import S12K
 async def audio_play(client, message):
     if message.audio:
         file_path = message.audio.file_id
+        file_name = message.audio.file_name
     if message.voice:
         file_path = message.voice.file_id
+        file_name = message.voice.file_name
+
     a = await app.download_media(file_path)
+
+    (
+        ffmpeg
+        .input(a)
+        .filter('volume', '18dB')
+        .output(file_name)
+        .overwrite_output()
+        .run()
+    )
+    audio = AudioSegment.from_file(file_name) 
+    low_passed = low_pass_filter(audio, cutoff=700)
+    bass_boosted = low_passed + 7
+    bass_boosted.export(file_name, format="mp3")
     chat_id = S12K()
-    await call.play(chat_id, a)
+    await call.play(chat_id, file_name)
     await message.reply_text("Started Playing")
     os.remove(a)
+    os.remove(file_name)
 
 
 @app.on_message(filters.sudo & filters.command("playhere"))
