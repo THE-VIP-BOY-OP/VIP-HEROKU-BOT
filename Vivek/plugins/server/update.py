@@ -2,13 +2,12 @@ import asyncio
 import os
 from datetime import datetime
 
+import aiohttp
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError
-from pyrogram import Client, filters
+from pyrogram import filters
 
 from Vivek import app
-
-import aiohttp
 
 BASE = "https://batbin.me/"
 
@@ -29,7 +28,7 @@ async def paste(text):
         return
     link = BASE + resp["message"]
     return link
-    
+
 
 @app.on_message(filters.command(["update", "up", "gitpull"]) & filters.sudo)
 async def update_(client, message):
