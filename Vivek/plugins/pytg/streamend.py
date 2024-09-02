@@ -1,10 +1,8 @@
-from Vivek.core.pytgcalls import call
-
 from pytgcalls import PyTgCalls, filters
 from pytgcalls.types import Update
-from pytgcalls.types import MediaStream
-from config import LOG_GROUP_ID
 
+from config import LOG_GROUP_ID
+from Vivek.core.pytgcalls import call
 
 
 @call.on_update(filters.stream_end)
