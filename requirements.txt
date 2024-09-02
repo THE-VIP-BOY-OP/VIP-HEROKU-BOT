@@ -1,6 +1,7 @@
 asyncio
 aiohttp
 ffmpeg-python
+gitpython
 python-dotenv
 pydub
 httpx[http2]
