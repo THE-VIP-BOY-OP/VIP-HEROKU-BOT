@@ -1,7 +1,7 @@
 from pyrogram import Client
 
-
 pause = {}
+
 
 class VClient(Client):
     def __init__(self, name, *args, **kwargs):
