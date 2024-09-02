@@ -1,6 +1,7 @@
 from typing import Optional
 
 from pyrogram import Client
+from config import LOG_GROUP_ID
 
 S12KK = {}
 pause = {}
@@ -22,7 +23,7 @@ class MelodyError(Exception):
 def S12K(chat_id: Optional[int] = None):
     if chat_id is not None:
         S12KK[1234] = chat_id
-    return S12KK.get(1234)
+    return S12KK.get(1234) or LOG_GROUP_ID
 
 
 async def is_music_playing(chat_id: int) -> bool:
