@@ -1,6 +1,7 @@
 asyncio
 ffmpeg-python
 python-dotenv
+pydub
 httpx[http2]
 requests
 tgcrypto
