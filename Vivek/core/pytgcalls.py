@@ -72,13 +72,13 @@ class MusicPlayer(PyTgCalls):
 
     async def dec(self):
         @super().on_update(filters.stream_end)
-            async def my_handler(client: PyTgCalls, update: Update):
-                log.info(f"Received update: {update}")
+        async def my_handler(client: PyTgCalls, update: Update):
+            log.info(f"Received update: {update}")
 
-                if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
-                    log.info(f"Ending stream for chat_id: {update.chat_id}")
-                    await self.leave_call(update.chat_id)
-                else:
-                    log.info("Update type not handled.")
+            if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
+                log.info(f"Ending stream for chat_id: {update.chat_id}")
+                await self.leave_call(update.chat_id)
+            else:
+                log.info("Update type not handled.")
 
 call = MusicPlayer()
