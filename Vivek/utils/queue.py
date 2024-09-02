@@ -1,6 +1,5 @@
 import os
-from asyncio import Queue as AsyncQueue
-from asyncio import QueueEmpty
+from asyncio import Queue as AsyncQueue, QueueEmpty
 from typing import Any, Dict, Optional
 
 
@@ -15,19 +14,19 @@ class QueueManager:
         await self.queues[chat_id].put(params)
 
     async def get(self, chat_id: int) -> Optional[Dict[str, Any]]:
-        """Asynchronously retrieve the first stored item for the given chat_id."""
-        if chat_id in self.queues:
-            try:
-                return self.queues[chat_id].get_nowait()
-            except QueueEmpty:
-                return None
+        """Asynchronously return the first stored item for the given chat_id without removing it."""
+        if chat_id in self.queues and not self.queues[chat_id].empty():
+            # Retrieve the first item without removing it
+            first_item = await self.queues[chat_id].get()
+            await self.queues[chat_id].put(first_item)  # Re-add the item back to the queue
+            return first_item
         return None
 
-    async def remove(self, chat_id: int):
+    async def remove(self, chat_id: int) -> Optional[Dict[str, Any]]:
         """Asynchronously remove the first set of parameters for the given chat_id, and delete file if file_path exists."""
         if chat_id in self.queues:
             try:
-                params = self.queues[chat_id].get_nowait()
+                params = await self.queues[chat_id].get()
                 file_path = params.get("file_path")
                 if file_path and os.path.exists(file_path):
                     os.remove(file_path)
@@ -42,7 +41,7 @@ class QueueManager:
         if chat_id in self.queues:
             while not self.queues[chat_id].empty():
                 try:
-                    params = self.queues[chat_id].get_nowait()
+                    params = await self.queues[chat_id].get()
                     file_path = params.get("file_path")
                     if file_path and os.path.exists(file_path):
                         os.remove(file_path)
@@ -56,3 +55,4 @@ class QueueManager:
 
 
 Queue = QueueManager()
+ 
