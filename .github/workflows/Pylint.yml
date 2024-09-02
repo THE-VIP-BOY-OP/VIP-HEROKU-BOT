@@ -21,13 +21,12 @@ jobs:
       - name: Remove unused imports
         run: |
           autoflake --in-place --recursive --remove-all-unused-imports --ignore-init-module-imports .
-
-      - name: format with black
-        run: |
-          black .
       - name: format with isort
         run: |
           isort .
+      - name: format with black
+        run: |
+          black .
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
             commit_message: "Auto Fixes"
