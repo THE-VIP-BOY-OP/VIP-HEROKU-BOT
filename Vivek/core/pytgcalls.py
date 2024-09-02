@@ -16,8 +16,8 @@ class MusicPlayer(PyTgCalls):
 
     async def play(
         self,
-        file_path: str,
         chat_id: int,
+        file_path: str,
         video: Union[bool, str] = None,
     ):
         if video:
@@ -33,7 +33,7 @@ class MusicPlayer(PyTgCalls):
                 video_flags=MediaStream.Flags.IGNORE,
             )
         try:
-            await self.play(chat_id, stream=stream)
+            await super().play(chat_id, stream=stream)
             await add_active_chat(chat_id)
         except NoActiveGroupCall:
             raise MelodyError("There is no active group call.")
