@@ -8,7 +8,7 @@ from git.exc import GitCommandError, InvalidGitRepositoryError
 from pyrogram import filters
 
 from Vivek import app
-
+from config import UPSTREAM_REPO, UPSTREAM_BRANCH
 BASE = "https://batbin.me/"
 
 
@@ -40,12 +40,12 @@ async def update_(client, message):
     except InvalidGitRepositoryError:
         return await response.edit("Invalid Git Respiratory")
 
-    os.system(f"git fetch origin {config.UPSTREAM_BRANCH} &> /dev/null")
+    os.system(f"git fetch origin {UPSTREAM_BRANCH} &> /dev/null")
     await asyncio.sleep(7)
 
     verification = ""
     REPO_ = repo.remotes.origin.url.split(".git")[0]
-    for checks in repo.iter_commits(f"HEAD..origin/{config.UPSTREAM_BRANCH}"):
+    for checks in repo.iter_commits(f"HEAD..origin/{UPSTREAM_BRANCH}"):
         verification = str(checks.count())
 
     if verification == "":
@@ -56,7 +56,7 @@ async def update_(client, message):
         format,
         "tsnrhtdd"[(format // 10 % 10 != 1) * (format % 10 < 4) * format % 10 :: 4],
     )
-    for info in repo.iter_commits(f"HEAD..origin/{config.UPSTREAM_BRANCH}"):
+    for info in repo.iter_commits(f"HEAD..origin/{UPSTREAM_BRANCH}"):
         updates += f"<b>➣ #{info.count()}: <a href={REPO_}/commit/{info}>{info.summary}</a> BY -> {info.author}</b>\n\t\t\t\t<b>➥ Commited On :</b> {ordinal(int(datetime.fromtimestamp(info.committed_date).strftime('%d')))} {datetime.fromtimestamp(info.committed_date).strftime('%b')}, {datetime.fromtimestamp(info.committed_date).strftime('%Y')}\n\n"
 
     _update_response_ = "<b>A New Upadte Is Available For The Bot !</b>\n\n➣ Pushing Upadtes Now \n\n<b><u>Upadtes:</u></b>\n\n"
