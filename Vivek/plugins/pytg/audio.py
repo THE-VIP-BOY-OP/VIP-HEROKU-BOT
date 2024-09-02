@@ -29,3 +29,14 @@ async def audio_play(client, message):
     await message.reply_text(
         "Now All recieved audio/voice has been playing here from since Now"
     )
+
+
+@app.on_message(filters.sudo & filters.command("end"))
+async def audio_play(client, message):
+    chat_id = S12K()
+    await call.leave_call(chat_id)
+    await message.reply_text(
+        "Stopped"
+    )
+
+
