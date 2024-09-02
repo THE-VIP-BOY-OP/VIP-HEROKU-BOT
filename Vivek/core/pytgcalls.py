@@ -11,11 +11,6 @@ from Vivek.utils.functions import MelodyError, add_active_chat, remove_active_ch
 from .clients import app
 
 
-@call.on_update(filters.stream_end)
-async def my_handler(client: PyTgCalls, update: Update):
-    await app.send_message(LOG_GROUP_ID, update)
-
-
 class MusicPlayer(PyTgCalls):
     def __init__(self):
         super().__init__(app)
