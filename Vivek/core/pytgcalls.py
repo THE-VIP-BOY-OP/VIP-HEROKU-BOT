@@ -5,7 +5,6 @@ from pytgcalls import PyTgCalls, filters
 from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
 
-from config import LOG_GROUP_ID
 from Vivek.utils.functions import MelodyError, add_active_chat, remove_active_chat
 
 from .clients import app
@@ -74,5 +73,6 @@ class MusicPlayer(PyTgCalls):
         async def my_handler(client: PyTgCalls, update: Update):
             if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
                 await self.leave_call(update.chat_id)
+
 
 call = MusicPlayer()
