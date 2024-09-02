@@ -1,4 +1,5 @@
 asyncio
+aiohttp
 ffmpeg-python
 python-dotenv
 pydub
