@@ -10,7 +10,7 @@ from Vivek.utils.functions import MelodyError, add_active_chat, remove_active_ch
 from Vivek import LOGGER
 from .clients import app
 
-log = LOGGER(__name__)
+log = LOGGER(__name__).info
 
 class MusicPlayer(PyTgCalls):
     def __init__(self):
