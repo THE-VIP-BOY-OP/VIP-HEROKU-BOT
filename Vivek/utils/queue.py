@@ -1,5 +1,6 @@
 import os
-from asyncio import Queue as AsyncQueue, QueueEmpty
+from asyncio import Queue as AsyncQueue
+from asyncio import QueueEmpty
 from typing import Any, Dict, Optional
 
 
@@ -18,7 +19,9 @@ class QueueManager:
         if chat_id in self.queues and not self.queues[chat_id].empty():
             # Retrieve the first item without removing it
             first_item = await self.queues[chat_id].get()
-            await self.queues[chat_id].put(first_item)  # Re-add the item back to the queue
+            await self.queues[chat_id].put(
+                first_item
+            )  # Re-add the item back to the queue
             return first_item
         return None
 
@@ -55,4 +58,3 @@ class QueueManager:
 
 
 Queue = QueueManager()
- 
