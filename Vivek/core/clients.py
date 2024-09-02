@@ -29,7 +29,7 @@ bot = VClient(
 
 
 async def restart():
-    os.execvp(sys.executable, [sys.executable, '-m', 'Vivek', *sys.argv[1:]])
+    os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
 
 
 app.bot = bot
