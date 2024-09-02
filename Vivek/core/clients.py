@@ -24,4 +24,9 @@ bot = VClient(
     max_concurrent_transmissions=9,
 )
 
+async def restart():
+    os.execvp(sys.executable, [sys.executable, *sys.argv])
+
 app.bot = bot
+app.restart = restart
+
