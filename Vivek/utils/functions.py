@@ -18,7 +18,7 @@ class MelodyError(Exception):
         super().__init__(self.message)
 
 
-def S12k(chat_id: Optional[int] = None):
+def S12K(chat_id: Optional[int] = None):
     if chat_id is not None:
         S12KK[1234] = chat_id
     return S12KK.get(1234)
