@@ -1,18 +1,14 @@
 from typing import Union
 
 from ntgcalls import TelegramServerError
-from pytgcalls import PyTgCalls
+from pytgcalls import PyTgCalls, filters
 from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
-from pytgcalls.types import AudioQuality, MediaStream, VideoQuality
+from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
 
+from config import LOG_GROUP_ID
 from Vivek.utils.functions import MelodyError, add_active_chat, remove_active_chat
 
 from .clients import app
-
-from pytgcalls import PyTgCalls, filters
-from pytgcalls.types import Update
-
-from config import LOG_GROUP_ID
 
 
 @call.on_update(filters.stream_end)
@@ -77,6 +73,7 @@ class MusicPlayer(PyTgCalls):
 
     async def unmute_stream(self, chat_id: int):
         await super().unmute_stream(chat_id)
+
     async def dec(self):
         @super().on_update(filters.stream_end)
         async def my_handler(client: PyTgCalls, update: Update):
