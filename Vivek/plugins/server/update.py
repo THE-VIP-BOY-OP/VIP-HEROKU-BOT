@@ -13,7 +13,6 @@ from Vivek import app
 BASE = "https://batbin.me/"
 
 
-
 async def post(url: str, *args, **kwargs):
     async with aiohttp.ClientSession() as session:
         async with session.post(url, *args, **kwargs) as resp:
