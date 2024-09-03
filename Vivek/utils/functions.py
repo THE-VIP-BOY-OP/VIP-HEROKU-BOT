@@ -80,7 +80,7 @@ class Vivek:
             "duration_min": duration_min,
             "thumb": thumbnail,
         }
-        return track_details, vidid
+        return track_details
 
 
 async def is_music_playing(chat_id: int) -> bool:
