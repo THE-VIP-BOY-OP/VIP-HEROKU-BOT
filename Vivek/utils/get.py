@@ -1,6 +1,8 @@
 from typing import Union
+
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
+
 
 class Get:
 
@@ -9,11 +11,11 @@ class Get:
         messages = [message_1]
         if message_1.reply_to_message:
             messages.append(message_1.reply_to_message)
-        
+
         text = ""
         offset = None
         length = None
-        
+
         for message in messages:
             if offset:
                 break
@@ -27,8 +29,8 @@ class Get:
                 for entity in message.caption_entities:
                     if entity.type == MessageEntityType.TEXT_LINK:
                         return entity.url
-        
+
         if offset is None:
             return None
-        
+
         return text[offset : offset + length]
