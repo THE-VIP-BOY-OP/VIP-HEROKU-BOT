@@ -3,8 +3,8 @@ from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
 
 class Get:
-    @staticmethod
 
+    @staticmethod
     async def url(message_1: Message) -> Union[str, None]:
         messages = [message_1]
         if message_1.reply_to_message:
