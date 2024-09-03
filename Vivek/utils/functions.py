@@ -33,7 +33,7 @@ def S12K(chat_id: Optional[int] = None):
 class Vivek:
 
     @staticmethod
-    async def url(message_1: Message) -> Union[str, None]:
+    async def get_url(message_1: Message) -> Union[str, None]:
         messages = [message_1]
         if message_1.reply_to_message:
             messages.append(message_1.reply_to_message)
