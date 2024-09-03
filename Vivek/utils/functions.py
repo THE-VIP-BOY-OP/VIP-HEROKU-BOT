@@ -3,10 +3,9 @@ from typing import Optional, Union
 from pyrogram import Client
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
-
-from config import LOG_GROUP_ID
 from youtubesearchpython.__future__ import VideosSearch
 
+from config import LOG_GROUP_ID
 
 S12KK = {}
 pause = {}
@@ -73,7 +72,7 @@ class Vivek:
             vidid = result["id"]
             yturl = result["link"]
             thumbnail = result["thumbnails"][0]["url"].split("?")[0]
-        
+
         track_details = {
             "title": title,
             "link": yturl,
@@ -82,6 +81,7 @@ class Vivek:
             "thumb": thumbnail,
         }
         return track_details, vidid
+
 
 async def is_music_playing(chat_id: int) -> bool:
     mode = pause.get(chat_id)
