@@ -12,7 +12,6 @@ from Vivek import app
 
 BASE = "https://batbin.me/"
 
-
 async def post(url: str, *args, **kwargs):
     async with aiohttp.ClientSession() as session:
         async with session.post(url, *args, **kwargs) as resp:
@@ -22,14 +21,12 @@ async def post(url: str, *args, **kwargs):
                 data = await resp.text()
         return data
 
-
 async def paste(text):
     resp = await post(f"{BASE}api/v2/paste", data=text)
     if not resp["success"]:
         return
     link = BASE + resp["message"]
     return link
-
 
 @app.on_message(filters.command(["update", "up", "gitpull"]) & filters.sudo)
 async def update_(client, message):
@@ -57,7 +54,8 @@ async def update_(client, message):
     origin = repo.remotes.origin
 
     if GIT_TOKEN:
-        origin.set_url(f"https://{GIT_TOKEN}@{UPSTREAM_REPO.split('https://')[1]}")
+        repo_url_with_token = f"https://{GIT_TOKEN}@{UPSTREAM_REPO.split('https://')[1]}"
+        origin.set_url(repo_url_with_token)
 
     os.system(f"git fetch origin {UPSTREAM_BRANCH} &> /dev/null")
     await asyncio.sleep(7)
@@ -89,7 +87,7 @@ async def update_(client, message):
     else:
         await response.edit(_final_updates_, disable_web_page_preview=True)
 
-    os.system("git stash &> /dev/null && git pull")
+    os.system(f"git stash &> /dev/null && git pull {repo_url_with_token} {UPSTREAM_BRANCH}")
 
     os.system("pip3 install -r requirements.txt")
     await app.restart()
