@@ -19,7 +19,7 @@ class QueueManager:
         if chat_id in self.queues and not self.queues[chat_id].empty():
             first_item = await self.queues[chat_id].get()
             await self.queues[chat_id].put(first_item)
-            
+
             for _ in range(self.queues[chat_id].qsize() - 1):
                 item = await self.queues[chat_id].get()
                 await self.queues[chat_id].put(item)
