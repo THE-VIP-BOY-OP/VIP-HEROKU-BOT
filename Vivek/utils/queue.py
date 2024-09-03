@@ -19,6 +19,7 @@ class QueueManager:
         if chat_id in self.queues and not self.queues[chat_id].empty():
             first_item = await self.queues[chat_id].get()
             await self.queues[chat_id].put(first_item)
+            
             for _ in range(self.queues[chat_id].qsize() - 1):
                 item = await self.queues[chat_id].get()
                 await self.queues[chat_id].put(item)
@@ -38,6 +39,11 @@ class QueueManager:
                 raise ValueError(f"No parameters to remove for chat_id {chat_id}")
         else:
             raise ValueError(f"No queue found for chat_id {chat_id}")
+
+    async def next(self, chat_id: int) -> Optional[Dict[str, Any]]:
+        """Asynchronously remove the first item and return the next item in the queue."""
+        await self.remove(chat_id)
+        return await self.get(chat_id)
 
     async def clear(self, chat_id: int):
         """Asynchronously clear the entire queue for a given chat_id, deleting files if file_path exists."""
