@@ -1,5 +1,6 @@
 import os
-from asyncio import Queue as AsyncQueue, QueueEmpty
+from asyncio import Queue as AsyncQueue
+from asyncio import QueueEmpty
 from typing import Any, Dict, List, Optional
 
 
