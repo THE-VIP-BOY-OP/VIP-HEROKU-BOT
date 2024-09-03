@@ -5,6 +5,8 @@ from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
 
 from config import LOG_GROUP_ID
+from youtubesearchpython.__future__ import VideosSearch
+
 
 S12KK = {}
 pause = {}
@@ -60,6 +62,26 @@ class Vivek:
 
         return text[offset : offset + length]
 
+    @staticmethod
+    async def track(link: str):
+        if "&" in link:
+            link = link.split("&")[0]
+        results = VideosSearch(link, limit=1)
+        for result in (await results.next())["result"]:
+            title = result["title"]
+            duration_min = result["duration"]
+            vidid = result["id"]
+            yturl = result["link"]
+            thumbnail = result["thumbnails"][0]["url"].split("?")[0]
+        
+        track_details = {
+            "title": title,
+            "link": yturl,
+            "vidid": vidid,
+            "duration_min": duration_min,
+            "thumb": thumbnail,
+        }
+        return track_details, vidid
 
 async def is_music_playing(chat_id: int) -> bool:
     mode = pause.get(chat_id)
