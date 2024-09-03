@@ -3,14 +3,15 @@ import os
 from datetime import datetime
 
 import aiohttp
-from git import Repo, remote
+from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError
 from pyrogram import filters
 
-from config import UPSTREAM_BRANCH, UPSTREAM_REPO, GIT_TOKEN
+from config import GIT_TOKEN, UPSTREAM_BRANCH, UPSTREAM_REPO
 from Vivek import app
 
 BASE = "https://batbin.me/"
+
 
 async def post(url: str, *args, **kwargs):
     async with aiohttp.ClientSession() as session:
@@ -21,12 +22,14 @@ async def post(url: str, *args, **kwargs):
                 data = await resp.text()
         return data
 
+
 async def paste(text):
     resp = await post(f"{BASE}api/v2/paste", data=text)
     if not resp["success"]:
         return
     link = BASE + resp["message"]
     return link
+
 
 @app.on_message(filters.command(["update", "up", "gitpull"]) & filters.sudo)
 async def update_(client, message):
@@ -39,13 +42,17 @@ async def update_(client, message):
         if UPSTREAM_REPO:
             repo_dir = os.getcwd()
             repo = Repo.init(repo_dir)
-            origin = repo.create_remote('origin', UPSTREAM_REPO)
+            origin = repo.create_remote("origin", UPSTREAM_REPO)
             origin.fetch()
             repo.create_head(UPSTREAM_BRANCH, origin.refs[UPSTREAM_BRANCH])
-            repo.heads[UPSTREAM_BRANCH].set_tracking_branch(origin.refs[UPSTREAM_BRANCH])
+            repo.heads[UPSTREAM_BRANCH].set_tracking_branch(
+                origin.refs[UPSTREAM_BRANCH]
+            )
             repo.heads[UPSTREAM_BRANCH].checkout()
         else:
-            return await response.edit("Invalid Git repository and no UPSTREAM_REPO specified.")
+            return await response.edit(
+                "Invalid Git repository and no UPSTREAM_REPO specified."
+            )
 
     origin = repo.remotes.origin
 
