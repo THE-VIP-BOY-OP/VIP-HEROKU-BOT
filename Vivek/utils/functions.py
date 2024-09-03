@@ -1,15 +1,10 @@
-from typing import Optional
+from typing import Optional, Union
 
 from pyrogram import Client
-
-from config import LOG_GROUP_ID
-
-from typing import Union
-
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
 
-
+from config import LOG_GROUP_ID
 
 S12KK = {}
 pause = {}
@@ -64,6 +59,7 @@ class Vivek:
             return None
 
         return text[offset : offset + length]
+
 
 async def is_music_playing(chat_id: int) -> bool:
     mode = pause.get(chat_id)
