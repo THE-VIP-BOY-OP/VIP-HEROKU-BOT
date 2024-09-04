@@ -51,7 +51,6 @@ class MusicPlayer(PyTgCalls):
 
     async def leave_call(self, chat_id: int):
         try:
-            await Vivek.remove_active_chat(chat_id)
             await super().leave_call(chat_id)
         except:
             pass
