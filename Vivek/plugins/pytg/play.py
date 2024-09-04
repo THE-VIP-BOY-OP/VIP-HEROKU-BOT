@@ -2,6 +2,7 @@ import re
 
 from pyrogram import filters
 from pyrogram.types import Message
+from pyrogram.enums import ParseMode
 
 from Vivek import app
 from Vivek.core.pytgcalls import call
@@ -65,8 +66,9 @@ async def play_command(client, message: Message):
         count = len(await Queue.get_queues(message.chat.id))
         return await mystic.edit(
             message.chat.id,
-            f"**Added To Queue At {count}**\nTitle: {title}\n**Duration**: {duration_min}\n**By**: {user_name}",
+            f"<b>Added To Queue At {count}</b>\n<b>Title:</b> {title}\n<b>Duration</b>: {duration_min}\n<b>By</b>: {user_name}",
             disable_web_page_preview=True,
+            parse_mode=ParseMode.HTML
         )
 
     try:
