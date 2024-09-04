@@ -139,7 +139,7 @@ class Vivek:
                         raise ValueError("No download URL found in the response")
 
                     cmd = f"yt-dlp '{results}' -o '{path}'"
-                    await self.run_shell_cmd(cmd)
+                    await Vivek.run_shell_cmd(cmd)
 
                     if os.path.isfile(path):
                         success = True
