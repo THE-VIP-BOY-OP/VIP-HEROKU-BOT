@@ -8,8 +8,6 @@ from Vivek.core.pytgcalls import call
 from Vivek.utils.functions import DownloadError, MelodyError, Vivek
 from Vivek.utils.queue import Queue
 
-log = LOGGER(__name__)
-
 
 @app.on_message(filters.command(["play", "vplay"]) & filters.group & filters.sudo)
 async def play_command(client, message: Message):
@@ -50,10 +48,8 @@ async def play_command(client, message: Message):
     try:
         file_path = await Vivek.download(vidid, video=video)
     except DownloadError as e:
-        log.error(e)
         return await mystic.edit(e)
     except Exception as e:
-        log.error(e)
         return await mystic.edit(e)
 
     if await Vivek.is_active_chat(message.chat.id):
