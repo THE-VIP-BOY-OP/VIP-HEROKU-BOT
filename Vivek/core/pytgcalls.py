@@ -6,7 +6,7 @@ from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
-from Vivek.utils.functions import MelodyError, Vivek
+from Vivek.utils.functions import MelodyError
 
 from .clients import app
 
