@@ -6,7 +6,7 @@ from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
-from Vivek.utils.functions import MelodyError, add_active_chat, remove_active_chat
+from Vivek.utils.functions import MelodyError, Vivek
 
 from .clients import app
 
@@ -52,7 +52,7 @@ class MusicPlayer(PyTgCalls):
 
     async def leave_call(self, chat_id: int):
         try:
-            await remove_active_chat(chat_id)
+            await Vivek.remove_active_chat(chat_id)
             await super().leave_call(chat_id)
         except:
             pass
