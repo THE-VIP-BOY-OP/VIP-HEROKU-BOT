@@ -90,6 +90,15 @@ async def play_command(client, message: Message):
         return await mystic.edit(e)
     except Exception as e:
         return await mystic.edit(e)
+    await Queue.add(
+        message.chat.id,
+        title=title,
+        duration=duration_min,
+        vidid=vidid,
+        video=video,
+        file_path=file_path,
+        by=user_name,
+    )
 
     await Vivek.add_active_chat(message.chat.id)
     await app.send_message(
