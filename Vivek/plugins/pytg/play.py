@@ -66,7 +66,7 @@ async def play_command(client, message: Message):
             file_path=file_path,
             by=user_name,
         )
-        count = len(await Queue.get(message.chat.id))
+        count = len(await Queue.get_queues(message.chat.id))
         return await app.send_message(
             message.chat.id,
             f"**Added To Queue At {count}**\nTitle: {title}\nDuration: {duration_min}\n By: {user_name}",
