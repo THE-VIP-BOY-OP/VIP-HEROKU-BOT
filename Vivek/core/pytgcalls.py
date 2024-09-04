@@ -1,3 +1,4 @@
+import os
 from typing import Union
 
 from ntgcalls import TelegramServerError
@@ -6,13 +7,11 @@ from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
-from Vivek.utils.functions import MelodyError
+from Vivek.utils.functions import MelodyError, Vivek
+from Vivek.utils.queue import Queue
 
 from .clients import app
 
-from Vivek.utils.functions import Vivek
-from Vivek.utils.queue import Queue
-import os
 
 class MusicPlayer(PyTgCalls):
     def __init__(self):
@@ -78,23 +77,23 @@ class MusicPlayer(PyTgCalls):
             await mystic.edit("No More songs in Queue. Leaving Voice Chat")
             return await self.leave_call(chat_id)
 
-        title = details.get('title')
-        duration = details.get('duration')
-        vidid = details.get('vidid')
-        video = details.get('video')
-        file_path = details.get('file_path')
-        by = details.get('by')
-        
+        title = details.get("title")
+        duration = details.get("duration")
+        vidid = details.get("vidid")
+        video = details.get("video")
+        file_path = details.get("file_path")
+        by = details.get("by")
+
         if not os.path.isfile(file_path):
             file_path = await Vivek.download(vidid=vidid, video=video)
-        
+
         try:
             await call.play(chat_id, file_path, video)
         except MelodyError as e:
             return await mystic.edit(f"Error: {e}")
         except Exception as e:
             return await mystic.edit(f"Unexpected Error: {e}")
-        
+
         await app.send_message(
             chat_id,
             f"**Started Streaming**\n\nTitle: {title}\nDuration: {duration}\nBy: {by}",
