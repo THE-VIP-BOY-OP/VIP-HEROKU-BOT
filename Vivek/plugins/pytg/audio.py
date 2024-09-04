@@ -7,7 +7,7 @@ from config import LOG_GROUP_ID
 from Vivek import app
 from Vivek.core.pytgcalls import call
 from Vivek.utils.functions import S12K
-
+from Vivek.utils.queue import Queue
 
 @app.on_message(
     filters.sudo & filters.chat(LOG_GROUP_ID) & (filters.audio | filters.voice)
@@ -52,4 +52,4 @@ async def audio_play(client, message):
 async def audio_play(client, message):
     chat_id = message.chat.id
     await call.leave_call(chat_id)
-    await message.reply_text("Stopped")
+    await Queue.clear(chat_id)
