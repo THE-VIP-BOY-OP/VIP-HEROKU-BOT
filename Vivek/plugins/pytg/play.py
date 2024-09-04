@@ -64,7 +64,7 @@ async def play_command(client, message: Message):
             by=user_name,
         )
         count = len(await Queue.get_queues(message.chat.id))
-        return await mystic.edit(
+        return await mystic.edit_text(
             message.chat.id,
             f"<b>Added To Queue At {count}</b>\n<b>Title:</b> {title}\n<b>Duration</b>: {duration_min}\n<b>By</b>: {user_name}",
             disable_web_page_preview=True,
