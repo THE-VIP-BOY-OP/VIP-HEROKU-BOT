@@ -1,4 +1,6 @@
 import asyncio
+import os
+import httpx
 from typing import Optional, Union
 
 from pyrogram import Client
