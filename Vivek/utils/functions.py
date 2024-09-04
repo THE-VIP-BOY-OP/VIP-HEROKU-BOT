@@ -103,7 +103,10 @@ class Vivek:
 
     @staticmethod
     async def download(url, video=False):
-        match = re.search(r"(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/|live_stream\?stream_id=|(?:\/|\?|&)v=)?([^&\n]+)", url)
+        match = re.search(
+            r"(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/|live_stream\?stream_id=|(?:\/|\?|&)v=)?([^&\n]+)",
+            url,
+        )
         vidid = match.group(1)
         API = "https://api.cobalt.tools/api/json"
         headers = {
