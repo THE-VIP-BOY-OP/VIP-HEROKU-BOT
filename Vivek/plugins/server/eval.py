@@ -14,8 +14,10 @@ from Vivek import app
 
 
 async def aexec(code, client, message):
-    exec("async def __aexec(client, message): " +
-         "".join(f"\n {a}" for a in code.split("\n")))
+    exec(
+        "async def __aexec(client, message): "
+        + "".join(f"\n {a}" for a in code.split("\n"))
+    )
     return await locals()["__aexec"](client, message)
 
 
@@ -41,8 +43,7 @@ async def edit_or_reply(msg: Message, **kwargs):
 )
 async def executor(client: Client, message: Message):
     if len(message.command) < 2:
-        return await edit_or_reply(message,
-                                   text="<b>ᴡʜᴀᴛ ʏᴏᴜ ᴡᴀɴɴᴀ ᴇxᴇᴄᴜᴛᴇ ?</b>")
+        return await edit_or_reply(message, text="<b>ᴡʜᴀᴛ ʏᴏᴜ ᴡᴀɴɴᴀ ᴇxᴇᴄᴜᴛᴇ ?</b>")
     try:
         cmd = message.text.split(" ", maxsplit=1)[1]
     except IndexError:
@@ -78,8 +79,7 @@ async def executor(client: Client, message: Message):
         t2 = time()
         await message.reply_document(
             document=filename,
-            caption=
-            f"<b>⥤ ᴇᴠᴀʟ :</b>\n<code>{cmd[0:1000]}</code>\n\n<b>⥤ ʀᴇsᴜʟᴛ :</b>\nAttached Document",
+            caption=f"<b>⥤ ᴇᴠᴀʟ :</b>\n<code>{cmd[0:1000]}</code>\n\n<b>⥤ ʀᴇsᴜʟᴛ :</b>\nAttached Document",
             quote=False,
         )
         await message.delete()
@@ -90,19 +90,16 @@ async def executor(client: Client, message: Message):
 
 
 @app.on_edited_message(
-    filters.command("sh") & filters.sudo & ~filters.forwarded
-    & ~filters.via_bot,
+    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
     group=6,
 )
 @app.on_message(
-    filters.command("sh") & filters.sudo & ~filters.forwarded
-    & ~filters.via_bot,
+    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
     group=6,
 )
 async def shellrunner(client: Client, message: Message):
     if len(message.command) < 2:
-        return await edit_or_reply(message,
-                                   text="<b>ᴇxᴀᴍᴩʟᴇ :</b>\n/sh git pull")
+        return await edit_or_reply(message, text="<b>ᴇxᴀᴍᴩʟᴇ :</b>\n/sh git pull")
     text = message.text.split(None, 1)[1]
     if "\n" in text:
         code = text.split("\n")
@@ -116,8 +113,7 @@ async def shellrunner(client: Client, message: Message):
                     stderr=subprocess.PIPE,
                 )
             except Exception as err:
-                await edit_or_reply(message,
-                                    text=f"<b>ERROR :</b>\n<pre>{err}</pre>")
+                await edit_or_reply(message, text=f"<b>ERROR :</b>\n<pre>{err}</pre>")
             output += f"<b>{code}</b>\n"
             output += process.stdout.read()[:-1].decode("utf-8")
             output += "\n"
@@ -140,7 +136,8 @@ async def shellrunner(client: Client, message: Message):
                 tb=exc_tb,
             )
             return await edit_or_reply(
-                message, text=f"<b>ERROR :</b>\n<pre>{''.join(errors)}</pre>")
+                message, text=f"<b>ERROR :</b>\n<pre>{''.join(errors)}</pre>"
+            )
         output = process.stdout.read()[:-1].decode("utf-8")
     if str(output) == "\n":
         output = None
@@ -155,8 +152,7 @@ async def shellrunner(client: Client, message: Message):
                 caption="<code>Output</code>",
             )
             return os.remove("output.txt")
-        await edit_or_reply(message,
-                            text=f"<b>OUTPUT :</b>\n<pre>{output}</pre>")
+        await edit_or_reply(message, text=f"<b>OUTPUT :</b>\n<pre>{output}</pre>")
     else:
         await edit_or_reply(message, text="<b>OUTPUT :</b>\n<code>None</code>")
     await message.stop_propagation()
