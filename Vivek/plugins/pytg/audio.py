@@ -50,6 +50,6 @@ async def audio_play(client, message):
 
 @app.on_message(filters.sudo & filters.command("end"))
 async def audio_play(client, message):
-    chat_id = S12K()
+    chat_id = message.chat.id
     await call.leave_call(chat_id)
     await message.reply_text("Stopped")
