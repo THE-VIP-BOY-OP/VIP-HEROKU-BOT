@@ -90,13 +90,11 @@ async def executor(client: Client, message: Message):
 
 
 @app.on_edited_message(
-    filters.command(
-        "sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
+    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
     group=6,
 )
 @app.on_message(
-    filters.command(
-        "sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
+    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
     group=6,
 )
 async def shellrunner(client: Client, message: Message):

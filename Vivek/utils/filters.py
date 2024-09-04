@@ -37,14 +37,14 @@ def edit_filters():
                 # If SPACE is True, consider the entire text if no prefix matches
                 for prefix in PREFIX:
                     if text.startswith(prefix):
-                        text = text[len(prefix):].lstrip()
+                        text = text[len(prefix) :].lstrip()
                         break
                 else:
                     text = text.lstrip()
             else:
                 for prefix in PREFIX:
                     if text.startswith(prefix):
-                        text = text[len(prefix):].lstrip()
+                        text = text[len(prefix) :].lstrip()
                         break
                 else:
                     return False
@@ -64,8 +64,7 @@ def edit_filters():
                     )
 
                     message.command = [cmd] + [
-                        re.sub(r"\\([\"'])", r"\1", m.group(
-                            2) or m.group(3) or "")
+                        re.sub(r"\\([\"'])", r"\1", m.group(2) or m.group(3) or "")
                         for m in command_re.finditer(without_command)
                     ]
 

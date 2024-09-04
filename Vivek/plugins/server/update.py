@@ -75,11 +75,12 @@ async def update_(client, message):
 
     updates = ""
 
-    def ordinal(format): return "%d%s" % (
-        format,
-        "tsnrhtdd"[(format // 10 % 10 != 1) * (format %
-                                               10 < 4) * format % 10:: 4],
-    )
+    def ordinal(format):
+        return "%d%s" % (
+            format,
+            "tsnrhtdd"[(format // 10 % 10 != 1) * (format % 10 < 4) * format % 10 :: 4],
+        )
+
     for info in repo.iter_commits(f"HEAD..origin/{UPSTREAM_BRANCH}"):
         updates += f"<b>➣ #{info.count()}: <a href={REPO_}/commit/{info}>{info.summary}</a> BY -> {info.author}</b>\n\t\t\t\t<b>➥ Commited On :</b> {ordinal(int(datetime.fromtimestamp(info.committed_date).strftime('%d')))} {datetime.fromtimestamp(info.committed_date).strftime('%b')}, {datetime.fromtimestamp(info.committed_date).strftime('%Y')}\n\n"
 

@@ -69,7 +69,7 @@ class Vivek:
         if offset is None:
             return None
 
-        return text[offset: offset + length]
+        return text[offset : offset + length]
 
     @staticmethod
     async def track(link: str):
@@ -137,8 +137,7 @@ class Vivek:
 
                     results = response.json().get("url")
                     if not results:
-                        raise ValueError(
-                            "No download URL found in the response")
+                        raise ValueError("No download URL found in the response")
 
                     cmd = ["yt-dlp", results, "-o", path]
                     returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
