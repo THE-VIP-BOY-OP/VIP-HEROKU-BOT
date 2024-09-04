@@ -6,6 +6,7 @@ from pyrogram.types import Message
 
 from config import OWNER_ID, PREFIX
 
+SPACE = True
 
 def edit_filters():
 
@@ -31,29 +32,32 @@ def edit_filters():
             if not text:
                 return False
 
-            for prefix in PREFIX:
-                if prefix == "":
-                    if not text.startswith(" "):
-                        continue
-                elif not text.startswith(prefix):
-                    continue
+            if SPACE:
+                # If SPACE is True, consider the entire text if no prefix matches
+                for prefix in PREFIX:
+                    if text.startswith(prefix):
+                        text = text[len(prefix):].lstrip()
+                        break
+                else:
+                    text = text.lstrip()
+            else:
+                for prefix in PREFIX:
+                    if text.startswith(prefix):
+                        text = text[len(prefix):].lstrip()
+                        break
+                else:
+                    return False
 
-                without_prefix = text[
-                    len(prefix) :
-                ].lstrip()  # Remove prefix and leading spaces
-
-                for cmd in flt.commands:
-                    if not re.match(
-                        f"^(?:{cmd}(?:@?{username})?)(?:\s|$)",
-                        without_prefix,
-                        flags=0 if flt.case_sensitive else re.IGNORECASE,
-                    ):
-                        continue
-
+            for cmd in flt.commands:
+                if re.match(
+                    f"^(?:{cmd}(?:@?{username})?)(?:\s|$)",
+                    text,
+                    flags=0 if flt.case_sensitive else re.IGNORECASE,
+                ):
                     without_command = re.sub(
                         f"{cmd}(?:@?{username})?\s?",
                         "",
-                        without_prefix,
+                        text,
                         count=1,
                         flags=0 if flt.case_sensitive else re.IGNORECASE,
                     )
@@ -64,6 +68,7 @@ def edit_filters():
                     ]
 
                     return True
+
             return False
 
         commands = commands if isinstance(commands, list) else [commands]
