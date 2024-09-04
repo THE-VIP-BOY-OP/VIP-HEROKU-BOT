@@ -11,14 +11,12 @@ SPACE = True
 
 def edit_filters():
 
-    filters.reaction = filters.create(
-        lambda _, __, m: bool(m.reactions), "ReactionFilter"
-    )
+    filters.reaction = filters.create(lambda _, __, m: bool(m.reactions),
+                                      "ReactionFilter")
 
     filters.sudo = filters.create(
-        lambda _, __, m: bool(
-            m.from_user and (m.from_user.id in OWNER_ID or m.from_user.is_self)
-        ),
+        lambda _, __, m: bool(m.from_user and (m.from_user.id in OWNER_ID or m.
+                                               from_user.is_self)),
         "SudoFilter",
     )
 
@@ -37,23 +35,23 @@ def edit_filters():
                 # If SPACE is True, consider the entire text if no prefix matches
                 for prefix in PREFIX:
                     if text.startswith(prefix):
-                        text = text[len(prefix) :].lstrip()
+                        text = text[len(prefix):].lstrip()
                         break
                 else:
                     text = text.lstrip()
             else:
                 for prefix in PREFIX:
                     if text.startswith(prefix):
-                        text = text[len(prefix) :].lstrip()
+                        text = text[len(prefix):].lstrip()
                         break
                 else:
                     return False
 
             for cmd in flt.commands:
                 if re.match(
-                    f"^(?:{cmd}(?:@?{username})?)(?:\s|$)",
-                    text,
-                    flags=0 if flt.case_sensitive else re.IGNORECASE,
+                        f"^(?:{cmd}(?:@?{username})?)(?:\s|$)",
+                        text,
+                        flags=0 if flt.case_sensitive else re.IGNORECASE,
                 ):
                     without_command = re.sub(
                         f"{cmd}(?:@?{username})?\s?",
@@ -64,7 +62,8 @@ def edit_filters():
                     )
 
                     message.command = [cmd] + [
-                        re.sub(r"\\([\"'])", r"\1", m.group(2) or m.group(3) or "")
+                        re.sub(r"\\([\"'])", r"\1",
+                               m.group(2) or m.group(3) or "")
                         for m in command_re.finditer(without_command)
                     ]
 
@@ -75,8 +74,9 @@ def edit_filters():
         commands = commands if isinstance(commands, list) else [commands]
         commands = {c if case_sensitive else c.lower() for c in commands}
 
-        return filters.create(
-            func, "CommandFilter", commands=commands, case_sensitive=case_sensitive
-        )
+        return filters.create(func,
+                              "CommandFilter",
+                              commands=commands,
+                              case_sensitive=case_sensitive)
 
     filters.command = command

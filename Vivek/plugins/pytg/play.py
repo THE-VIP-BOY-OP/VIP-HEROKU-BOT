@@ -10,7 +10,8 @@ from Vivek.utils.functions import DownloadError, MelodyError, Vivek
 from Vivek.utils.queue import Queue
 
 
-@app.on_message(filters.command(["play", "vplay"]) & filters.group & filters.sudo)
+@app.on_message(
+    filters.command(["play", "vplay"]) & filters.group & filters.sudo)
 async def play_command(client, message: Message):
     mystic = await message.reply_text("Processing....")
     user_id = message.from_user.id
@@ -25,7 +26,8 @@ async def play_command(client, message: Message):
         )
         if match:
             if "playlist" in url:
-                return await mystic.edit("Youtube Playlist Url not supported for now")
+                return await mystic.edit(
+                    "Youtube Playlist Url not supported for now")
             if "shorts" in url:
                 match = re.search(
                     r"(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/|shorts\/|live_stream\?stream_id=|(?:\/|\?|&)v=)?([^&\n?#]+)",

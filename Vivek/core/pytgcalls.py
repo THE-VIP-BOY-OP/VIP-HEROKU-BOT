@@ -15,6 +15,7 @@ from .clients import app
 
 
 class MusicPlayer(PyTgCalls):
+
     def __init__(self):
         super().__init__(app)
 
@@ -71,25 +72,22 @@ class MusicPlayer(PyTgCalls):
         await super().unmute_stream(chat_id)
 
     async def seek_stream(self, chat_id, file_path, to_seek, duration, mode):
-        stream = (
-            MediaStream(
-                file_path,
-                audio_parameters=AudioQuality.STUDIO,
-                video_parameters=VideoQuality.FHD_1080p,
-                ffmpeg_parameters=f"-ss {to_seek} -to {duration}",
-            )
-            if mode
-            else MediaStream(
-                file_path,
-                audio_parameters=AudioQuality.HIGH,
-                ffmpeg_parameters=f"-ss {to_seek} -to {duration}",
-                video_flags=MediaStream.Flags.IGNORE,
-            )
-        )
+        stream = (MediaStream(
+            file_path,
+            audio_parameters=AudioQuality.STUDIO,
+            video_parameters=VideoQuality.FHD_1080p,
+            ffmpeg_parameters=f"-ss {to_seek} -to {duration}",
+        ) if mode else MediaStream(
+            file_path,
+            audio_parameters=AudioQuality.HIGH,
+            ffmpeg_parameters=f"-ss {to_seek} -to {duration}",
+            video_flags=MediaStream.Flags.IGNORE,
+        ))
         await super().play(chat_id, stream=stream)
 
     async def change_stream(self, chat_id):
-        mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
+        mystic = await app.send_message(chat_id,
+                                        "Downloading Next track from Queue")
         details = await Queue.next(chat_id)
         if not details or details is None:
             await Vivek.remove_active_chat(chat_id)
@@ -122,6 +120,7 @@ class MusicPlayer(PyTgCalls):
         await mystic.delete()
 
     async def dec(self):
+
         @super().on_update(filters.stream_end)
         async def my_handler(client: PyTgCalls, update: Update):
             if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):

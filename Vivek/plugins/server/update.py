@@ -46,20 +46,17 @@ async def update_(client, message):
             origin.fetch()
             repo.create_head(UPSTREAM_BRANCH, origin.refs[UPSTREAM_BRANCH])
             repo.heads[UPSTREAM_BRANCH].set_tracking_branch(
-                origin.refs[UPSTREAM_BRANCH]
-            )
+                origin.refs[UPSTREAM_BRANCH])
             repo.heads[UPSTREAM_BRANCH].checkout()
         else:
             return await response.edit(
-                "Invalid Git repository and no UPSTREAM_REPO specified."
-            )
+                "Invalid Git repository and no UPSTREAM_REPO specified.")
 
     origin = repo.remotes.origin
 
     if GIT_TOKEN:
         repo_url_with_token = (
-            f"https://{GIT_TOKEN}@{UPSTREAM_REPO.split('https://')[1]}"
-        )
+            f"https://{GIT_TOKEN}@{UPSTREAM_REPO.split('https://')[1]}")
         origin.set_url(repo_url_with_token)
 
     os.system(f"git fetch origin {UPSTREAM_BRANCH} &> /dev/null")
@@ -76,7 +73,8 @@ async def update_(client, message):
     updates = ""
     ordinal = lambda format: "%d%s" % (
         format,
-        "tsnrhtdd"[(format // 10 % 10 != 1) * (format % 10 < 4) * format % 10 :: 4],
+        "tsnrhtdd"[(format // 10 % 10 != 1) *
+                   (format % 10 < 4) * format % 10::4],
     )
     for info in repo.iter_commits(f"HEAD..origin/{UPSTREAM_BRANCH}"):
         updates += f"<b>➣ #{info.count()}: <a href={REPO_}/commit/{info}>{info.summary}</a> BY -> {info.author}</b>\n\t\t\t\t<b>➥ Commited On :</b> {ordinal(int(datetime.fromtimestamp(info.committed_date).strftime('%d')))} {datetime.fromtimestamp(info.committed_date).strftime('%b')}, {datetime.fromtimestamp(info.committed_date).strftime('%Y')}\n\n"

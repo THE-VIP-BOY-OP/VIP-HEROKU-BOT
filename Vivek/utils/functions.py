@@ -17,16 +17,19 @@ active = []
 
 
 class VClient(Client):
+
     def __init__(self, name, *args, **kwargs):
         super().__init__(name, *args, **kwargs)
 
 
 class MelodyError(Exception):
+
     def __init__(self, message):
         super().__init__(message)
 
 
 class DownloadError(Exception):
+
     def __init__(self, errr: str):
         super().__init__(errr)
 
@@ -66,7 +69,7 @@ class Vivek:
         if offset is None:
             return None
 
-        return text[offset : offset + length]
+        return text[offset:offset + length]
 
     @staticmethod
     async def track(link: str):
@@ -104,9 +107,12 @@ class Vivek:
     async def download(vidid, video=False):
         API = "https://api.cobalt.tools/api/json"
         headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+            "Accept":
+            "application/json",
+            "Content-Type":
+            "application/json",
+            "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
         }
 
         if video:
@@ -129,12 +135,15 @@ class Vivek:
         for attempt in range(max_retries):
             try:
                 async with httpx.AsyncClient(http2=True) as client:
-                    response = await client.post(API, headers=headers, json=data)
+                    response = await client.post(API,
+                                                 headers=headers,
+                                                 json=data)
                     response.raise_for_status()
 
                     results = response.json().get("url")
                     if not results:
-                        raise ValueError("No download URL found in the response")
+                        raise ValueError(
+                            "No download URL found in the response")
 
                     cmd = ["yt-dlp", results, "-o", path]
                     returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)

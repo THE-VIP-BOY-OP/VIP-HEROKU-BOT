@@ -6,7 +6,6 @@ from pyrogram import __version__ as v
 API_ID = input("\nEnter Your API_ID:\n > ")
 API_HASH = input("\nEnter Your API_HASH:\n > ")
 
-
 i = Client(
     "Cute",
     in_memory=True,

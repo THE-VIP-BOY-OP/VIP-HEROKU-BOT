@@ -10,9 +10,8 @@ from Vivek.utils.functions import S12K, Vivek
 from Vivek.utils.queue import Queue
 
 
-@app.on_message(
-    filters.sudo & filters.chat(LOG_GROUP_ID) & (filters.audio | filters.voice)
-)
+@app.on_message(filters.sudo & filters.chat(LOG_GROUP_ID)
+                & (filters.audio | filters.voice))
 async def audio_play(client, message):
     if message.audio:
         file_path = message.audio.file_id
@@ -23,13 +22,8 @@ async def audio_play(client, message):
 
     a = await app.download_media(file_path)
 
-    (
-        ffmpeg.input(a)
-        .filter("volume", "18dB")
-        .output(file_name)
-        .overwrite_output()
-        .run()
-    )
+    (ffmpeg.input(a).filter("volume",
+                            "18dB").output(file_name).overwrite_output().run())
     """audio = AudioSegment.from_file(file_name)
     low_passed = low_pass_filter(audio, cutoff=700)
     bass_boosted = low_passed + 7
@@ -45,8 +39,7 @@ async def audio_play(client, message):
 async def audio_play(client, message):
     S12K(message.chat.id)
     await message.reply_text(
-        "Now All recieved audio/voice has been playing here from since Now"
-    )
+        "Now All recieved audio/voice has been playing here from since Now")
 
 
 @app.on_message(filters.sudo & filters.command("end"))

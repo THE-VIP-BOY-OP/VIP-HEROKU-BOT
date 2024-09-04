@@ -5,6 +5,7 @@ from typing import Any, Dict, List, Optional
 
 
 class QueueManager:
+
     def __init__(self):
         self.queues: Dict[int, AsyncQueue] = {}
 
@@ -39,7 +40,8 @@ class QueueManager:
                         pass
                 return params
             except QueueEmpty:
-                raise ValueError(f"No parameters to remove for chat_id {chat_id}")
+                raise ValueError(
+                    f"No parameters to remove for chat_id {chat_id}")
         else:
             raise ValueError(f"No queue found for chat_id {chat_id}")
 
