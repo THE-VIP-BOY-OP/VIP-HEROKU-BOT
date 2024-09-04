@@ -26,6 +26,8 @@ async def play_command(client, message: Message):
         if match:
             if "playlist" in url:
                 return await mystic.edit("Youtube Playlist Url not supported for now")
+            if "shorts" in url:
+                query = url
             elif "https://youtu.be" in url:
                 videoid = url.split("/")[-1].split("?")[0]
                 query = f"https://www.youtube.com/watch?v={videoid}"
