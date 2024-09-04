@@ -35,7 +35,6 @@ class MusicPlayer(PyTgCalls):
             )
         try:
             await super().play(chat_id, stream=stream)
-            await add_active_chat(chat_id)
         except NoActiveGroupCall:
             raise MelodyError("There is no active group call.")
         except AlreadyJoinedError as e:
