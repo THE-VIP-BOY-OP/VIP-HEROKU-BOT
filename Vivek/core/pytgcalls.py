@@ -68,8 +68,7 @@ class MusicPlayer(PyTgCalls):
         await super().resume_stream(chat_id)
 
     async def unmute_stream(self, chat_id: int):
-        await 
-super().unmute_stream(chat_id)
+        await super().unmute_stream(chat_id)
 
     async def change_stream(chat_id):
         mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
