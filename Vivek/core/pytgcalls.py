@@ -8,10 +8,12 @@ from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
-from Vivek.utils.functions import MelodyError, Vivek, chatlist
+from Vivek.utils.functions import MelodyError, Vivek
 from Vivek.utils.queue import Queue
 
 from .clients import app
+
+from Vivek.utils.functions import chatlist
 
 
 class MusicPlayer(PyTgCalls):
@@ -90,50 +92,49 @@ class MusicPlayer(PyTgCalls):
         await super().play(chat_id, stream=stream)
 
 
-async def change_stream(self, chat_id):
-    mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
-    title = (await Queue.get(chat_id)).get("title")[:10]
-    video = (await Queue.get(chat_id)).get("video")
-    details = await Queue.next(chat_id)
+    async def change_stream(self, chat_id):
+        mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
+        title  = (await Queue.get(chat_id)).get('title')[:10]
+        video  = (await Queue.get(chat_id)).get('video')
+        details = await Queue.next(chat_id)
 
-    if not details:
-        if chat_id not in chatlist:
-            await self.leave_call(chat_id)
-            await Vivek.remove_active_chat(chat_id)
-            return await mystic.edit("No More songs in Queue. Leaving Voice Chat")
+        if not details:
+            if chat_id not in chatlist:
+                await self.leave_call(chat_id)
+                await Vivek.remove_active_chat(chat_id)
+                return await mystic.edit("No More songs in Queue. Leaving Voice Chat")
+            else:
+                details = await Vivek.track(f"{title} playlist songs", randomize=True)
+                title = details.get("title")
+                duration = details.get("duration_min")
+                vidid = details.get("vidid")
+                by = "ENDLESS PLAY MODE"
         else:
-            details = await Vivek.track(f"{title} playlist songs", randomize=True)
             title = details.get("title")
-            duration = details.get("duration_min")
+            duration = details.get("duration")
             vidid = details.get("vidid")
-            by = "ENDLESS PLAY MODE"
-    else:
-        title = details.get("title")
-        duration = details.get("duration")
-        vidid = details.get("vidid")
-        video = details.get("video")
-        file_path = details.get("file_path")
-        by = details.get("by")
+            video = details.get("video")
+            file_path = details.get("file_path")
+            by = details.get("by")
 
-    if not os.path.isfile(file_path) or file_path is None:
-        file_path = await Vivek.download(vidid=vidid, video=video)
+        if not os.path.isfile(file_path) or file_path is None:
+            file_path = await Vivek.download(vidid=vidid, video=video)
 
-    try:
-        await call.play(chat_id, file_path, video)
-    except (
-        MelodyError
-    ) as e:  # Replace `MelodyError` with the new custom exception name.
-        return await mystic.edit(f"Error: {e}")
-    except Exception as e:
-        return await mystic.edit(f"Unexpected Error: {e}")
+        try:
+            await call.play(chat_id, file_path, video)
+        except MelodyError as e:
+            return await mystic.edit(f"Error: {e}")
+        except Exception as e:
+            return await mystic.edit(f"Unexpected Error: {e}")
 
-    await app.send_message(
-        chat_id,
-        f"<b>Started Streaming</b>\n\n<b>Title</b>: {title}\n<b>Duration</b>: {duration}\n<b>By</b>: {by}",
-        disable_web_page_preview=True,
-        parse_mode=ParseMode.HTML,
-    )
-    await mystic.delete()
+        await app.send_message(
+            chat_id,
+            f"<b>Started Streaming</b>\n\n<b>Title</b>: {title}\n<b>Duration</b>: {duration}\n<b>By</b>: {by}",
+            disable_web_page_preview=True,
+            parse_mode=ParseMode.HTML,
+        )
+        await mystic.delete()
+
 
     async def dec(self):
 
