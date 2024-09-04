@@ -10,6 +10,9 @@ from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
 
 from config import LOG_GROUP_ID
+from Vivek.logger import LOGGER
+
+log = LOGGER(__name__)
 
 S12KK = {}
 pause = {}
@@ -157,6 +160,7 @@ class Vivek:
                     returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
 
                     if returncode == 0 and os.path.isfile(path):
+                        log.error("output\n\n\n{stdout}\n\nerror {stderr}")
                         success = True
                         break
 
