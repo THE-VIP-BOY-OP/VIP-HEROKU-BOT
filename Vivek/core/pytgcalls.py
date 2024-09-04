@@ -94,7 +94,7 @@ class MusicPlayer(PyTgCalls):
         title = (await Queue.get(chat_id)).get("title")[:10]
         video = (await Queue.get(chat_id)).get("video")
         details = await Queue.next(chat_id)
-
+        file_path = None
         if not details:
             if chat_id not in chatlist:
                 await self.leave_call(chat_id)
