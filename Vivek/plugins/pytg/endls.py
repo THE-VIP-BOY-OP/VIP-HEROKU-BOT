@@ -1,7 +1,9 @@
 from pyrogram import filters
+
 from Vivek import app
 
 chatlist = []
+
 
 @app.on_message(filters.sudo & filters.command("playendless"))
 async def endless(c, m):
@@ -19,4 +21,6 @@ async def endless(c, m):
         else:
             await m.reply("Endless playback mode was not **ON**.")
     else:
-        await m.reply("Usage: `!playendless on` to enable or `!playendless off` to disable.")
+        await m.reply(
+            "Usage: `!playendless on` to enable or `!playendless off` to disable."
+        )
