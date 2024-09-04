@@ -40,7 +40,7 @@ async def play_command(client, message: Message):
 
     details = await Vivek.track(query)
     title = details["title"]
-    url = details["yturl"]
+    url = details["link"]
     duration_min = details["duration_min"]
     vidid = details["vidid"]
     video = message.command[0][0] == "v"
