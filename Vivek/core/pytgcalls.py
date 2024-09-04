@@ -10,9 +10,9 @@ from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
 from Vivek.utils.functions import MelodyError, Vivek
 from Vivek.utils.queue import Queue
-from Vivek.utils.functions import chatlist
 
 from .clients import app
+
 
 class MusicPlayer(PyTgCalls):
 
