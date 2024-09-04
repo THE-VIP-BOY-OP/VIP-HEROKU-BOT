@@ -2,7 +2,9 @@ import os
 from asyncio import Queue as AsyncQueue
 from asyncio import QueueEmpty
 from typing import Any, Dict, List, Optional
+
 from .functions import MelodyError
+
 
 class QueueManager:
 
