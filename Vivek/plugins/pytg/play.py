@@ -3,7 +3,7 @@ import re
 from pyrogram import filters
 from pyrogram.types import Message
 
-from Vivek import LOGGER, app
+from Vivek import app
 from Vivek.core.pytgcalls import call
 from Vivek.utils.functions import DownloadError, MelodyError, Vivek
 from Vivek.utils.queue import Queue
