@@ -10,9 +10,9 @@ from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
 from Vivek.utils.functions import MelodyError, Vivek
 from Vivek.utils.queue import Queue
+from Vivek.utils.functions import chatlist
 
 from .clients import app
-
 
 class MusicPlayer(PyTgCalls):
 
@@ -93,9 +93,9 @@ class MusicPlayer(PyTgCalls):
         mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
         details = await Queue.next(chat_id)
         if not details or details is None:
+            await self.leave_call(chat_id)
             await Vivek.remove_active_chat(chat_id)
-            await mystic.edit("No More songs in Queue. Leaving Voice Chat")
-            return await self.leave_call(chat_id)
+            return await mystic.edit("No More songs in Queue. Leaving Voice Chat")
 
         title = details.get("title")
         duration = details.get("duration")
