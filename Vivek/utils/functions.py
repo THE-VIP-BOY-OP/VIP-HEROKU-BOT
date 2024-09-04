@@ -14,7 +14,7 @@ S12KK = {}
 pause = {}
 mute = {}
 active = []
-
+chatlist = []
 
 class VClient(Client):
 
