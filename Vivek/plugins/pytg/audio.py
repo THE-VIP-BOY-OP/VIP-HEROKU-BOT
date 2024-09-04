@@ -6,9 +6,9 @@ from pyrogram import filters
 from config import LOG_GROUP_ID
 from Vivek import app
 from Vivek.core.pytgcalls import call
-from Vivek.utils.functions import S12K
+from Vivek.utils.functions import S12K, Vivek
 from Vivek.utils.queue import Queue
-from Vivek.utils.functions import MelodyError, Vivek
+
 
 @app.on_message(
     filters.sudo & filters.chat(LOG_GROUP_ID) & (filters.audio | filters.voice)
