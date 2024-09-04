@@ -65,7 +65,7 @@ async def play_command(client, message: Message):
         count = len(await Queue.get_queues(message.chat.id))
         return await app.send_message(
             message.chat.id,
-            f"**Added To Queue At {count}**\nTitle: {title}\nDuration: {duration_min}\n By: {user_name}",
+            f"**Added To Queue At {count}**\nTitle: {title}\n**Duration**: {duration_min}\n**By**: {user_name}",
             disable_web_page_preview=True,
         )
 
