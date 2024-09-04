@@ -50,7 +50,7 @@ async def play_command(client, message: Message):
             return await mystic.edit("Provide a name or YouTube url")
     else:
         if len(message.command) < 2:
-            return await message.reply_text("What do you want to play baby")
+            return await mystic.edit("What do you want to play baby")
         query = message.text.split(None, 1)[1]
 
     details = await Vivek.track(query)
@@ -105,4 +105,6 @@ async def play_command(client, message: Message):
         message.chat.id,
         f"**Started Streaming**\nTitle: {title}\nDuration: {duration_min}\nby {user_name}",
         disable_web_page_preview=True,
-    )
+    ) 
+
+    await mystic.delete()
