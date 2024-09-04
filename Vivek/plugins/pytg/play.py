@@ -1,5 +1,4 @@
 import re
-
 from pyrogram import filters
 from pyrogram.types import Message
 
@@ -8,9 +7,8 @@ from Vivek.utils.functions import Vivek, MelodyError, DownloadError
 from Vivek.utils.queue import Queue
 from Vivek.core.pytgcalls import call
 
-@app.on_message(filters.command(["play","vplay"]) & filters.group & filters.sudo)
-async def play_commnd(client, message: Message):
-	
+@app.on_message(filters.command(["play", "vplay"]) & filters.group & filters.sudo)
+async def play_command(client, message: Message):
     mystic = await message.reply_text("Processing....")
     user_id = message.from_user.id
     user_name = message.from_user.mention
@@ -26,27 +24,29 @@ async def play_commnd(client, message: Message):
                 videoid = url.split("/")[-1].split("?")[0]
                 query = f"https://www.youtube.com/watch?v={videoid}"
             else:
-                if match:
-                    videoid = match.group(1)
-                    query = f"https://www.youtube.com/watch?v={videoid}"
-                else:
-                	return await mystic.edit("Provide a name or YouTube url")
+                videoid = match.group(1)
+                query = f"https://www.youtube.com/watch?v={videoid}"
+        else:
+            return await mystic.edit("Provide a name or YouTube url")
     else:
         if len(message.command) < 2:
             return await message.reply_text("What do you want to play baby")
         query = message.text.split(None, 1)[1]
+    
     details = await Vivek.track(query)
     title = details['title']
     url = details['yturl']
     duration_min = details['duration_min']
     vidid = details['vidid']
     video = message.command[0][0] == "v"
+    
     try:
-    	file_path = await Vivek.download(vidid, video=video)
+        file_path = await Vivek.download(vidid, video=video)
     except DownloadError as e:
-    	return await mystic.edit(e)
+        return await mystic.edit(e)
     except Exception as e:
-    	return await mystic.edit(e)
+        return await mystic.edit(e)
+    
     if await Vivek.is_active_chat(message.chat.id):
         await Queue.add(
             message.chat.id,
@@ -56,16 +56,24 @@ async def play_commnd(client, message: Message):
             video=video,
             file_path=file_path,
             by=user_name,
-       )
-       count = len(await Queue.get(message.chat.id))
-       return await app.send_message(message.chat.id, f"**Added To Queue At {count}\nTitle: {title}\nDuration: {duration_min}\n By: {user_name}", disable_web_page_preview=True)
-    try:
-    	await call.play(message.chat.id, file_path, video)
-    except MelodyError as e:
-    	return await mystic.edit(e)
-    except Exception as e:
-    	return return await mystic.edit(e)
-    await Vivek.add_active_chat(message.chat.id)
-    await app.send_message(message.chat.id, f"**Started Streaming**\nTitle : {title}\nDuration: {duration_min}\n by {user_name}", disable_web_page_preview=True)
+        )
+        count = len(await Queue.get(message.chat.id))
+        return await app.send_message(
+            message.chat.id, 
+            f"**Added To Queue At {count}**\nTitle: {title}\nDuration: {duration_min}\n By: {user_name}", 
+            disable_web_page_preview=True
+        )
     
-        
+    try:
+        await call.play(message.chat.id, file_path, video)
+    except MelodyError as e:
+        return await mystic.edit(e)
+    except Exception as e:
+        return await mystic.edit(e)
+    
+    await Vivek.add_active_chat(message.chat.id)
+    await app.send_message(
+        message.chat.id, 
+        f"**Started Streaming**\nTitle: {title}\nDuration: {duration_min}\n by {user_name}", 
+        disable_web_page_preview=True
+    )
