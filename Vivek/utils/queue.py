@@ -33,7 +33,10 @@ class QueueManager:
                 params = await self.queues[chat_id].get()
                 file_path = params.get("file_path")
                 if file_path and os.path.exists(file_path):
-                    os.remove(file_path)
+                    try:
+                        os.remove(file_path)
+                    except:
+                        pass
                 return params
             except QueueEmpty:
                 raise ValueError(f"No parameters to remove for chat_id {chat_id}")
@@ -53,7 +56,10 @@ class QueueManager:
                     params = await self.queues[chat_id].get()
                     file_path = params.get("file_path")
                     if file_path and os.path.exists(file_path):
+                    try:
                         os.remove(file_path)
+                    except:
+                        pass
                 except QueueEmpty:
                     break
             self.queues.pop(chat_id, None)
