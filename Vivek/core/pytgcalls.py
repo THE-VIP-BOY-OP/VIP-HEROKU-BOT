@@ -8,12 +8,10 @@ from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
-from Vivek.utils.functions import MelodyError, Vivek
+from Vivek.utils.functions import MelodyError, Vivek, chatlist
 from Vivek.utils.queue import Queue
 
 from .clients import app
-
-from Vivek.utils.functions import chatlist
 
 
 class MusicPlayer(PyTgCalls):
@@ -91,11 +89,10 @@ class MusicPlayer(PyTgCalls):
         )
         await super().play(chat_id, stream=stream)
 
-
     async def change_stream(self, chat_id):
         mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
-        title  = (await Queue.get(chat_id)).get('title')[:10]
-        video  = (await Queue.get(chat_id)).get('video')
+        title = (await Queue.get(chat_id)).get("title")[:10]
+        video = (await Queue.get(chat_id)).get("video")
         details = await Queue.next(chat_id)
 
         if not details:
@@ -134,7 +131,6 @@ class MusicPlayer(PyTgCalls):
             parse_mode=ParseMode.HTML,
         )
         await mystic.delete()
-
 
     async def dec(self):
 
