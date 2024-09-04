@@ -90,16 +90,14 @@ class Vivek:
         return track_details
 
     @staticmethod
-    async def run_shell_cmd(command: str):
-
+    async def run_shell_cmd(command: list):
         process = await asyncio.create_subprocess_exec(
-            command,
+            *command,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
 
         stdout, stderr = await process.communicate()
-
         return process.returncode, stdout.decode(), stderr.decode()
 
     @staticmethod
@@ -138,10 +136,10 @@ class Vivek:
                     if not results:
                         raise ValueError("No download URL found in the response")
 
-                    cmd = f"yt-dlp '{results}' -o '{path}'"
-                    await Vivek.run_shell_cmd(cmd)
+                    cmd = ["yt-dlp", results, "-o", path]
+                    returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
 
-                    if os.path.isfile(path):
+                    if returncode == 0 and os.path.isfile(path):
                         success = True
                         break
 
