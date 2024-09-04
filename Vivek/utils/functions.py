@@ -74,27 +74,6 @@ class Vivek:
         return text[offset : offset + length]
 
     @staticmethod
-    async def track(link: str):
-        if "&" in link:
-            link = link.split("&")[0]
-        results = VideosSearch(link, limit=1)
-        for result in (await results.next())["result"]:
-            title = result["title"]
-            duration_min = result["duration"]
-            vidid = result["id"]
-            yturl = result["link"]
-            thumbnail = result["thumbnails"][0]["url"].split("?")[0]
-
-        track_details = {
-            "title": title,
-            "link": yturl,
-            "vidid": vidid,
-            "duration_min": duration_min,
-            "thumb": thumbnail,
-        }
-        return track_details
-
-    @staticmethod
     async def track_(link: str, randomize=False):
         if "&" in link:
             link = link.split("&")[0]
