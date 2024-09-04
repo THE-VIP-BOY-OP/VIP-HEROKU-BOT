@@ -54,7 +54,7 @@ async def play_command(client, message: Message):
         query = message.text.split(None, 1)[1]
 
     details = await Vivek.track(query)
-    title = details["title"][:15]
+    title = details["title"][:20]
     url = details["link"]
     duration_min = details["duration_min"]
     vidid = details["vidid"]
@@ -103,7 +103,7 @@ async def play_command(client, message: Message):
     await Vivek.add_active_chat(message.chat.id)
     await app.send_message(
         message.chat.id,
-        f"**Started Streaming**\nTitle: {title}\nDuration: {duration_min}\nby {user_name}",
+        f"**Started Streaming**\n\nTitle: {title}\nDuration: {duration_min}\nby {user_name}",
         disable_web_page_preview=True,
     )
 
