@@ -88,10 +88,10 @@ class Vivek:
         return track_details
 
     @staticmethod
-    async def run_command(command: str):
+    async def run_shell_cmd(command: str):
 
         process = await asyncio.create_subprocess_exec(
-            *command.split(),
+            command,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
