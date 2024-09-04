@@ -104,7 +104,7 @@ super().unmute_stream(chat_id)
         @super().on_update(filters.stream_end)
         async def my_handler(client: PyTgCalls, update: Update):
             if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
-                await self.leave_call(update.chat_id)
+                await self.change_stream(update.chat_id)
 
 
 call = MusicPlayer()
