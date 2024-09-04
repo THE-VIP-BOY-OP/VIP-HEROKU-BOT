@@ -1,5 +1,6 @@
-import asyncio
 import os
+import asyncio
+import random
 from typing import Optional, Union
 
 import httpx
@@ -83,6 +84,38 @@ class Vivek:
             vidid = result["id"]
             yturl = result["link"]
             thumbnail = result["thumbnails"][0]["url"].split("?")[0]
+
+        track_details = {
+            "title": title,
+            "link": yturl,
+            "vidid": vidid,
+            "duration_min": duration_min,
+            "thumb": thumbnail,
+        }
+        return track_details
+
+    @staticmethod
+    async def track_(link: str, randomize=False):
+        if "&" in link:
+            link = link.split("&")[0]
+        
+        limit = 10 if randomize else 1
+        results = VideosSearch(link, limit=limit)
+        result_data = await results.next()
+        
+        if not result_data["result"]:
+            raise MelodyError("No results Found in Search")
+        
+        if randomize:
+            result = random.choice(result_data["result"])
+        else:
+            result = result_data["result"][0]
+        
+        title = result["title"]
+        duration_min = result["duration"]
+        vidid = result["id"]
+        yturl = result["link"]
+        thumbnail = result["thumbnails"][0]["url"].split("?")[0]
 
         track_details = {
             "title": title,
