@@ -27,13 +27,13 @@ class MusicPlayer(PyTgCalls):
         if video:
             stream = MediaStream(
                 file_path,
-                audio_parameters=AudioQuality.HIGH,
-                video_parameters=VideoQuality.SD_480p,
+                audio_parameters=AudioQuality.STUDIO,
+                video_parameters=VideoQuality.FHD_1080p,
             )
         else:
             stream = MediaStream(
                 file_path,
-                audio_parameters=AudioQuality.HIGH,
+                audio_parameters=AudioQuality.STUDIO,
                 video_flags=MediaStream.Flags.IGNORE,
             )
         try:
@@ -69,6 +69,25 @@ class MusicPlayer(PyTgCalls):
 
     async def unmute_stream(self, chat_id: int):
         await super().unmute_stream(chat_id)
+
+    async def seek_stream(self, chat_id, file_path, to_seek, duration, mode):
+        stream = (
+            MediaStream(
+                file_path,
+                audio_parameters=AudioQuality.STUDIO,
+                video_parameters=VideoQuality.FHD_1080p,
+                ffmpeg_parameters=f"-ss {to_seek} -to {duration}",
+            )
+            if mode:
+            else MediaStream(
+                file_path,
+                audio_parameters=AudioQuality.HIGH,
+                ffmpeg_parameters=f"-ss {to_seek} -to {duration}",
+                video_flags=MediaStream.Flags.IGNORE,
+            )
+        )
+        await super().play(chat_id, stream=stream)
+
 
     async def change_stream(self, chat_id):
         mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
