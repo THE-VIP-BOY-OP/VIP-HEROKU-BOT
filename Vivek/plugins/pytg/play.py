@@ -54,7 +54,7 @@ async def play_command(client, message: Message):
         query = message.text.split(None, 1)[1]
 
     details = await Vivek.track(query)
-    title = details["title"][:20]
+    title = details["title"]
     url = details["link"]
     duration_min = details["duration_min"]
     vidid = details["vidid"]
