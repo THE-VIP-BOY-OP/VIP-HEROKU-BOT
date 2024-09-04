@@ -72,7 +72,7 @@ class MusicPlayer(PyTgCalls):
 super().unmute_stream(chat_id)
 
     async def change_stream(chat_id):
-    	mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
+        mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
         details = await Queue.next(chat_id)
         if not details:
         	await Vivek.remove_active_chat(chat_id)
