@@ -28,18 +28,18 @@ async def play_command(client, message: Message):
                 return await mystic.edit("Youtube Playlist Url not supported for now")
             if "shorts" in url:
                 match = re.search(
-    r"(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/|shorts\/|live_stream\?stream_id=|(?:\/|\?|&)v=)?([^&\n?#]+)",
-                url,
+                    r"(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/|shorts\/|live_stream\?stream_id=|(?:\/|\?|&)v=)?([^&\n?#]+)",
+                    url,
                 )
 
                 if match:
                     videoid = match.group(1)
-    
+
                     query = f"https://www.youtube.com/watch?v={videoid}"
                 else:
                     return await mystic.edit(
-                    "look like you want to play a YotuTube Shorts by i can play only Video or Songs"
-                )
+                        "look like you want to play a YotuTube Shorts by i can play only Video or Songs"
+                    )
             elif "https://youtu.be" in url:
                 videoid = url.split("/")[-1].split("?")[0]
                 query = f"https://www.youtube.com/watch?v={videoid}"
