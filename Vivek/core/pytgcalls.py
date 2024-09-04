@@ -115,7 +115,7 @@ class MusicPlayer(PyTgCalls):
 
         await app.send_message(
             chat_id,
-            f"<b>Started Streaming</b>\n\nTitle: {title}\nDuration: {duration}\nBy: {by}",
+            f"<b>Started Streaming</b>\n\n<b>Title</b>: {title}\n<b>Duration</b>: {duration}\n<b>By</b>: {by}",
             disable_web_page_preview=True,
             parse_mode=ParseMode.HTML,
         )
