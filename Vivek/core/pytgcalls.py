@@ -2,12 +2,12 @@ import os
 from typing import Union
 
 from ntgcalls import TelegramServerError
+from pyrogram.enums import ParseMode
 from pytgcalls import PyTgCalls, filters
 from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
-from pyrogram.enums import ParseMode
 from Vivek.utils.functions import MelodyError, Vivek
 from Vivek.utils.queue import Queue
 
@@ -99,7 +99,7 @@ class MusicPlayer(PyTgCalls):
             chat_id,
             f"<b>Started Streaming</b>\n\nTitle: {title}\nDuration: {duration}\nBy: {by}",
             disable_web_page_preview=True,
-            parse_mode=ParseMode.HTML
+            parse_mode=ParseMode.HTML,
         )
 
     async def dec(self):
