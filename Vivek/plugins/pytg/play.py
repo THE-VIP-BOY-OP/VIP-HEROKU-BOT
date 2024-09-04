@@ -103,7 +103,7 @@ async def play_command(client, message: Message):
     await Vivek.add_active_chat(message.chat.id)
     await app.send_message(
         message.chat.id,
-        f"**Started Streaming**\n\nTitle: {title}\nDuration: {duration_min}\nby {user_name}",
+        f"**Started Streaming**\n\n**Title**: {title}\n**Duration**: {duration_min}\n**by** {user_name}",
         disable_web_page_preview=True,
     )
 
