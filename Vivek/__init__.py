@@ -27,4 +27,4 @@ for file in os.listdir():
         os.remove(file)
 
 if "downloads" not in listdir():
-        mkdir("downloads")
+    mkdir("downloads")
