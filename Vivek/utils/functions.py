@@ -1,5 +1,4 @@
 import asyncio
-import re
 from typing import Optional, Union
 
 from pyrogram import Client
@@ -102,12 +101,7 @@ class Vivek:
         return process.returncode, stdout.decode(), stderr.decode()
 
     @staticmethod
-    async def download(url, video=False):
-        match = re.search(
-            r"(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/|live_stream\?stream_id=|(?:\/|\?|&)v=)?([^&\n]+)",
-            url,
-        )
-        vidid = match.group(1)
+    async def download(vidid, video=False):
         API = "https://api.cobalt.tools/api/json"
         headers = {
             "Accept": "application/json",
