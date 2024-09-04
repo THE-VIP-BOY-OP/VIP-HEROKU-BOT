@@ -74,7 +74,7 @@ class Vivek:
         return text[offset : offset + length]
 
     @staticmethod
-    async def track_(link: str, randomize=False):
+    async def track(link: str, randomize=False):
         if "&" in link:
             link = link.split("&")[0]
 
