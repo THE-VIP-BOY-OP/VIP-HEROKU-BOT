@@ -38,7 +38,9 @@ def edit_filters():
                 elif not text.startswith(prefix):
                     continue
 
-                without_prefix = text[len(prefix):].lstrip()  # Remove prefix and leading spaces
+                without_prefix = text[
+                    len(prefix) :
+                ].lstrip()  # Remove prefix and leading spaces
 
                 for cmd in flt.commands:
                     if not re.match(
