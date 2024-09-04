@@ -24,13 +24,11 @@ class VClient(Client):
 
 class MelodyError(Exception):
     def __init__(self, message):
-        logging.exception(f" Melody error {message}")
         super().__init__(message)
 
 
 class DownloadError(Exception):
     def __init__(self, errr: str):
-        logging.exception(f" download error {errr}")
         super().__init__(errr)
 
 
