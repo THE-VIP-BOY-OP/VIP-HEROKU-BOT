@@ -7,6 +7,7 @@ from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
+from pyrogram.enums import ParseMode
 from Vivek.utils.functions import MelodyError, Vivek
 from Vivek.utils.queue import Queue
 
@@ -96,8 +97,9 @@ class MusicPlayer(PyTgCalls):
 
         await app.send_message(
             chat_id,
-            f"**Started Streaming**\n\nTitle: {title}\nDuration: {duration}\nBy: {by}",
+            f"<b>Started Streaming</b>\n\nTitle: {title}\nDuration: {duration}\nBy: {by}",
             disable_web_page_preview=True,
+            parse_mode=ParseMode.HTML
         )
 
     async def dec(self):
