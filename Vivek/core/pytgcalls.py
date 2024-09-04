@@ -114,7 +114,7 @@ class MusicPlayer(PyTgCalls):
             file_path = details.get("file_path")
             by = details.get("by")
 
-        if not os.path.isfile(file_path) or file_path is None:
+        if file_path is None or not os.path.isfile(file_path):
             file_path = await Vivek.download(vidid=vidid, video=video)
 
         try:
