@@ -1,5 +1,5 @@
 from typing import Optional, Union
-
+import asyncio
 from pyrogram import Client
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
@@ -20,9 +20,11 @@ class VClient(Client):
 
 class MelodyError(Exception):
     def __init__(self, message):
-        self.message = message
-        super().__init__(self.message)
+        super().__init__(message)
 
+class DownloadError(Exception):
+    def __init__(self, errr: str):
+        super().__init__(errr)
 
 def S12K(chat_id: Optional[int] = None):
     if chat_id is not None:
@@ -81,6 +83,71 @@ class Vivek:
             "thumb": thumbnail,
         }
         return track_details
+    @staticmethod
+
+
+
+    async def run_command(command: str):
+    
+        process = await asyncio.create_subprocess_exec(
+            *command.split(),
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE
+        )
+
+        stdout, stderr = await process.communicate()
+
+        return process.returncode, stdout.decode(), stderr.decode()
+
+    @staticmethod
+    async def download(vidid, video=False):
+        API = "https://api.cobalt.tools/api/json"
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+        }
+
+        if video:
+            path = os.path.join("downloads", f"{vidid}.mp4")
+            data = {"url": f"https://www.youtube.com/watch?v={vidid}", "vQuality": "480"}
+        else:
+            path = os.path.join("downloads", f"{vidid}.m4a")
+            data = {
+                "url": f"https://www.youtube.com/watch?v={vidid}",
+                "isAudioOnly": "True",
+                "aFormat": "opus",
+            }
+
+        max_retries = 2
+        success = False
+
+        for attempt in range(max_retries):
+            try:
+                async with httpx.AsyncClient(http2=True) as client:
+                    response = await client.post(API, headers=headers, json=data)
+                    response.raise_for_status()
+
+                    results = response.json().get("url")
+                    if not results:
+                        raise ValueError("No download URL found in the response")
+
+                    cmd = f"yt-dlp '{results}' -o '{path}'"
+                    await self.run_shell_cmd(cmd)
+
+                    if os.path.isfile(path):
+                        success = True
+                        break
+
+            except (httpx.RequestError, httpx.HTTPStatusError, ValueError):
+                continue
+
+        if not success:
+            raise DownloadError(
+            "The song has not been downloaded yet, possibly due to an API error."
+            )
+
+        return path
 
 
 async def is_music_playing(chat_id: int) -> bool:
