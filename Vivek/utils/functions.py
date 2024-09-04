@@ -153,53 +153,44 @@ class Vivek:
 
         return path
 
+    @staticmethod
+    async def is_music_playing(chat_id: int, pause: dict) -> bool:
+        return pause.get(chat_id, False)
 
-async def is_music_playing(chat_id: int) -> bool:
-    mode = pause.get(chat_id)
-    if not mode:
-        return False
-    return mode
+    @staticmethod
+    async def music_on(chat_id: int, pause: dict):
+        pause[chat_id] = True
 
+    @staticmethod
+    async def music_off(chat_id: int, pause: dict):
+        pause[chat_id] = False
 
-async def music_on(chat_id: int):
-    pause[chat_id] = True
+    @staticmethod
+    async def is_muted(chat_id: int, mute: dict) -> bool:
+        return mute.get(chat_id, False)
 
+    @staticmethod
+    async def mute_on(chat_id: int, mute: dict):
+        mute[chat_id] = True
 
-async def music_off(chat_id: int):
-    pause[chat_id] = False
+    @staticmethod
+    async def mute_off(chat_id: int, mute: dict):
+        mute[chat_id] = False
 
+    @staticmethod
+    async def get_active_chats(active: list) -> list:
+        return active
 
-async def is_muted(chat_id: int) -> bool:
-    mode = mute.get(chat_id)
-    if not mode:
-        return False
-    return mode
+    @staticmethod
+    async def is_active_chat(chat_id: int, active: list) -> bool:
+        return chat_id in active
 
+    @staticmethod
+    async def add_active_chat(chat_id: int, active: list):
+        if chat_id not in active:
+            active.append(chat_id)
 
-async def mute_on(chat_id: int):
-    mute[chat_id] = True
-
-
-async def mute_off(chat_id: int):
-    mute[chat_id] = False
-
-
-async def get_active_chats() -> list:
-    return active
-
-
-async def is_active_chat(chat_id: int) -> bool:
-    if chat_id not in active:
-        return False
-    else:
-        return True
-
-
-async def add_active_chat(chat_id: int):
-    if chat_id not in active:
-        active.append(chat_id)
-
-
-async def remove_active_chat(chat_id: int):
-    if chat_id in active:
-        active.remove(chat_id)
+    @staticmethod
+    async def remove_active_chat(chat_id: int, active: list):
+        if chat_id in active:
+            active.remove(chat_id)
