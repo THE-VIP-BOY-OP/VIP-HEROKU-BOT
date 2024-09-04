@@ -1,5 +1,6 @@
-from typing import Optional, Union
 import asyncio
+from typing import Optional, Union
+
 from pyrogram import Client
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
@@ -22,9 +23,11 @@ class MelodyError(Exception):
     def __init__(self, message):
         super().__init__(message)
 
+
 class DownloadError(Exception):
     def __init__(self, errr: str):
         super().__init__(errr)
+
 
 def S12K(chat_id: Optional[int] = None):
     if chat_id is not None:
@@ -83,16 +86,14 @@ class Vivek:
             "thumb": thumbnail,
         }
         return track_details
+
     @staticmethod
-
-
-
     async def run_command(command: str):
-    
+
         process = await asyncio.create_subprocess_exec(
             *command.split(),
             stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE
+            stderr=asyncio.subprocess.PIPE,
         )
 
         stdout, stderr = await process.communicate()
@@ -110,7 +111,10 @@ class Vivek:
 
         if video:
             path = os.path.join("downloads", f"{vidid}.mp4")
-            data = {"url": f"https://www.youtube.com/watch?v={vidid}", "vQuality": "480"}
+            data = {
+                "url": f"https://www.youtube.com/watch?v={vidid}",
+                "vQuality": "480",
+            }
         else:
             path = os.path.join("downloads", f"{vidid}.m4a")
             data = {
@@ -144,7 +148,7 @@ class Vivek:
 
         if not success:
             raise DownloadError(
-            "The song has not been downloaded yet, possibly due to an API error."
+                "The song has not been downloaded yet, possibly due to an API error."
             )
 
         return path
