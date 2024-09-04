@@ -78,8 +78,7 @@ class MusicPlayer(PyTgCalls):
                 video_parameters=VideoQuality.FHD_1080p,
                 ffmpeg_parameters=f"-ss {to_seek} -to {duration}",
             )
-            if mode:
-            else MediaStream(
+            if mode else MediaStream(
                 file_path,
                 audio_parameters=AudioQuality.HIGH,
                 ffmpeg_parameters=f"-ss {to_seek} -to {duration}",
