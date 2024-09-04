@@ -101,6 +101,7 @@ class MusicPlayer(PyTgCalls):
             disable_web_page_preview=True,
             parse_mode=ParseMode.HTML,
         )
+        await mystic.delete()
 
     async def dec(self):
         @super().on_update(filters.stream_end)
