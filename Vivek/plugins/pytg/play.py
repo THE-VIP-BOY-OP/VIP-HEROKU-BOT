@@ -105,6 +105,6 @@ async def play_command(client, message: Message):
         message.chat.id,
         f"**Started Streaming**\nTitle: {title}\nDuration: {duration_min}\nby {user_name}",
         disable_web_page_preview=True,
-    ) 
+    )
 
     await mystic.delete()
