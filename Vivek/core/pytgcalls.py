@@ -133,13 +133,13 @@ class MusicPlayer(PyTgCalls):
         await mystic.delete()
         if by == "ENDLESS PLAY MODE":
             await Queue.add(
-                message.chat.id,
+                chat_id,
                 title=title,
-                duration=duration_min,
+                duration=duration,
                 vidid=vidid,
                 video=video,
                 file_path=file_path,
-                by=user_name,
+                by=by,
             )
 
     async def dec(self):
