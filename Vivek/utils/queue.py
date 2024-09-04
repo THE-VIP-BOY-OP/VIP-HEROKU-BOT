@@ -42,7 +42,7 @@ class QueueManager:
                         pass
                 return params
             except QueueEmpty:
-                raise (f"No parameters to remove for chat_id {chat_id}")
+                raise MelodyError(f"No parameters to remove for chat_id {chat_id}")
         else:
             raise MelodyError(f"No queue found for chat_id {chat_id}")
 
