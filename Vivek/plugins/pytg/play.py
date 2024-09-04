@@ -77,7 +77,7 @@ async def play_command(client, message: Message):
             file_path=file_path,
             by=user_name,
         )
-        count = len(await Queue.get_queues(message.chat.id)) -1
+        count = len(await Queue.get_queues(message.chat.id)) - 1
         return await mystic.edit_text(
             f"<b>Added To Queue At {count}</b>\n<b>Title:</b> {title}\n<b>Duration</b>: {duration_min}\n<b>By</b>: {user_name}",
             disable_web_page_preview=True,
