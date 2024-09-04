@@ -18,7 +18,7 @@ OWNER_ID = list(
 )
 
 
-PREFIX = list(map(str, getenv("PREFIX", ". ! ' '").split()))
+PREFIX = list(map(str, getenv("PREFIX", ". ! ").split()))
 
 UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/Vivekkumar-IN/Vivek")
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
