@@ -16,6 +16,7 @@ mute = {}
 active = []
 chatlist = []
 
+
 class VClient(Client):
 
     def __init__(self, name, *args, **kwargs):
