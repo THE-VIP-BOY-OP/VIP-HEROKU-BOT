@@ -8,12 +8,10 @@ from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
-from Vivek.utils.functions import MelodyError, Vivek
+from Vivek.utils.functions import MelodyError, Vivek, chatlist
 from Vivek.utils.queue import Queue
 
 from .clients import app
-
-from Vivek.utils.functions import chatlist
 
 
 class MusicPlayer(PyTgCalls):
@@ -94,8 +92,8 @@ class MusicPlayer(PyTgCalls):
 
 async def change_stream(self, chat_id):
     mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
-    title  = (await Queue.get(chat_id)).get('title')[:10]
-    video  = (await Queue.get(chat_id)).get('video')
+    title = (await Queue.get(chat_id)).get("title")[:10]
+    video = (await Queue.get(chat_id)).get("video")
     details = await Queue.next(chat_id)
 
     if not details:
@@ -122,7 +120,9 @@ async def change_stream(self, chat_id):
 
     try:
         await call.play(chat_id, file_path, video)
-    except MelodyError as e:  # Replace `MelodyError` with the new custom exception name.
+    except (
+        MelodyError
+    ) as e:  # Replace `MelodyError` with the new custom exception name.
         return await mystic.edit(f"Error: {e}")
     except Exception as e:
         return await mystic.edit(f"Unexpected Error: {e}")
@@ -134,7 +134,6 @@ async def change_stream(self, chat_id):
         parse_mode=ParseMode.HTML,
     )
     await mystic.delete()
-
 
     async def dec(self):
 
