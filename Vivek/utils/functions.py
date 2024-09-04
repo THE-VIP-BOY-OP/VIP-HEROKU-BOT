@@ -86,7 +86,8 @@ class Vivek:
             raise MelodyError("No results Found in Search")
 
         if randomize:
-            result = random.choice(result_data["result"])
+            index = random.randint(3, 9)
+            result = result_data["result"][index]
         else:
             result = result_data["result"][0]
 
