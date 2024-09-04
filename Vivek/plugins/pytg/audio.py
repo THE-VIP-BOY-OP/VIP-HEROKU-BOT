@@ -9,7 +9,6 @@ from Vivek.core.pytgcalls import call
 from Vivek.utils.functions import S12K
 from Vivek.utils.queue import Queue
 
-
 @app.on_message(
     filters.sudo & filters.chat(LOG_GROUP_ID) & (filters.audio | filters.voice)
 )
