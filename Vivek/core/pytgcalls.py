@@ -73,7 +73,7 @@ class MusicPlayer(PyTgCalls):
     async def change_stream(self, chat_id):
         mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
         details = await Queue.next(chat_id)
-        if not details:
+        if not details or details is None:
             await Vivek.remove_active_chat(chat_id)
             await mystic.edit("No More songs in Queue. Leaving Voice Chat")
             return await self.leave_call(chat_id)
