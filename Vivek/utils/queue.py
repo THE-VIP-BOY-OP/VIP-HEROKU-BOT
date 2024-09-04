@@ -2,7 +2,7 @@ import os
 from asyncio import Queue as AsyncQueue
 from asyncio import QueueEmpty
 from typing import Any, Dict, List, Optional
-
+from .functions import MelodyError
 
 class QueueManager:
 
@@ -40,9 +40,9 @@ class QueueManager:
                         pass
                 return params
             except QueueEmpty:
-                raise ValueError(f"No parameters to remove for chat_id {chat_id}")
+                raise (f"No parameters to remove for chat_id {chat_id}")
         else:
-            raise ValueError(f"No queue found for chat_id {chat_id}")
+            raise MelodyError(f"No queue found for chat_id {chat_id}")
 
     async def next(self, chat_id: int) -> Optional[Dict[str, Any]]:
         """Asynchronously remove the first item and return the next item in the queue."""
