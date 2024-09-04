@@ -131,7 +131,7 @@ class MusicPlayer(PyTgCalls):
             parse_mode=ParseMode.HTML,
         )
         await mystic.delete()
-        if by == "ENDLESS PLAY MODE"
+        if by == "ENDLESS PLAY MODE":
             await Queue.add(
                 message.chat.id,
                 title=title,
