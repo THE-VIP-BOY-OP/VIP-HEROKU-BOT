@@ -1,5 +1,5 @@
-import os
 import asyncio
+import os
 import random
 from typing import Optional, Union
 
@@ -98,19 +98,19 @@ class Vivek:
     async def track_(link: str, randomize=False):
         if "&" in link:
             link = link.split("&")[0]
-        
+
         limit = 10 if randomize else 1
         results = VideosSearch(link, limit=limit)
         result_data = await results.next()
-        
+
         if not result_data["result"]:
             raise MelodyError("No results Found in Search")
-        
+
         if randomize:
             result = random.choice(result_data["result"])
         else:
             result = result_data["result"][0]
-        
+
         title = result["title"]
         duration_min = result["duration"]
         vidid = result["id"]
