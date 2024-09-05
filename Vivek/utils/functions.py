@@ -119,9 +119,93 @@ class Vivek:
 
         stdout, stderr = await process.communicate()
         return process.returncode, stdout.decode(), stderr.decode()
+ 
+    @staticmethod
+    async def download(vidid, video=True):
+    	
+        audio_path = os.path.join("downloads", f"merge_{vidid}.mp3")
+      
+        video_path = os.path.join("downloads", f"merge_{vidid}.mp4")
+        output_path = os.path.join("downloads", f"{vidid}.mp3")
+        url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
+        try:
+            async with httpx.AsyncClient(http2=True) as client:
+                response = await client.get(url)
+                response.raise_for_status()
+                video_data = response.json()
+
+            formats = video_data.get("adaptiveFormats", [])
+            
+            if not formats:
+                raise MelodyError("No media formats found")
+       
+            if video:
+            	video_url = None
+                for fmt in formats:
+                    if fmt.get('type') and ("video/webm" in fmt.get('type') or "video/mp4" in fmt.get('type')):
+                        if fmt.get('qualityLabel') in ["720p", "1080p", "480p"]:
+                            video_url = fmt.get('url')
+                            break
+
+                if video_url is None:
+                    for fmt in formats:
+                        if fmt.get('qualityLabel') and fmt.get('url'):
+                            video_url = fmt.get('url')
+                            break
+                if video_url is None:
+                	raise MelodyError("Video isn't downloaded by Individous Api")
+ 
+                	
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(['yt-dlp', '-f', 'mp4', '-o', video_path, video_url])
+                if returncode != 0:
+                    raise MelodyError(f"Video download failed with error: {stderr}")
+
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(['yt-dlp', '-f', 'bestaudio', '-o', audio_path, audio_url])
+                if returncode != 0:
+                    raise MelodyError(f"Audio download failed with error: {stderr}")
+
+                returncode, stdout, stderr = await Vivek.run_shell_cmd([
+                    'ffmpeg', '-y', '-i', video_path, '-i', audio_path,
+                    '-c:v', 'copy', '-c:a', 'aac', '-strict', 'experimental', output_path
+                ])
+                if returncode != 0:
+                    raise MelodyError(f"Merge failed with error: {stderr}")
+
+                os.remove(audio_path)
+                os.remove(video_path)
+
+                return output_path
+            else:
+                audio_url = None
+                audio_path = os.path.join("downloads", f"{vidid}.m4a")
+      
+
+                for fmt in formats:
+                    if fmt.get('audioQuality') == 'AUDIO_QUALITY_MEDIUM':
+                        audio_url = fmt.get('url')
+                        break
+                if audio_url is None:
+                    for fmt in formats:
+                        if fmt.get('type') in ["audio/mp4", "audio/webm"]:
+                            audio_url = fmt.get('url')
+                            break
+                            
+                if audio_url is None:
+                	raise MelodyError("Audio is Didn't downloaded by Individous Api")
+ 
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(['yt-dlp', '-f', 'bestaudio', '-o', audio_path, audio_url])
+                if returncode != 0:
+                    raise MelodyError(f"Audio download failed with error: {stderr}")
+
+                return audio_path
+                
+        except (httpx.HTTPStatusError, httpx.RequestError) as e:
+            raise MelodyError(f"Request failed: {e}")
+        except Exception as e:
+            raise MelodyError(f"An error occurred: {e}")
 
     @staticmethod
-    async def download(vidid: str, video: bool = False):
+    async def get_download(vidid: str, video: bool = False):
         API = "https://api.cobalt.tools/api/json"
         headers = {
             "Accept": "application/json",
