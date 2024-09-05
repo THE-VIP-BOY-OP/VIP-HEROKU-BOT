@@ -160,7 +160,7 @@ class Vivek:
                     returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
 
                     if returncode == 0 and os.path.isfile(path):
-                        log.error("output\n\n\n{stdout}\n\nerror {stderr}")
+                        log.error(f"output\n\n\n{stdout}\n\nerror {stderr}")
                         success = True
                         break
 
