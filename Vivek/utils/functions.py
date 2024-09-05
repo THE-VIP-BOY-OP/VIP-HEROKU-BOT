@@ -130,14 +130,13 @@ class Vivek:
                 response.raise_for_status()
                 video_data = response.json()
             if sug:
-                videoid = video_data.get("recommendedVideos", [])[1].get('videoId')
+                videoid = video_data.get("recommendedVideos", [])[1].get("videoId")
                 url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
                 async with httpx.AsyncClient(http2=True) as client:
                     response = await client.get(url)
                     response.raise_for_status()
                     video_data = response.json()
-                
-                
+
             formats = video_data.get("adaptiveFormats", [])
 
             if not formats:
