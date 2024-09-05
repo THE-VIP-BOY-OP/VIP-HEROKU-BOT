@@ -1,7 +1,6 @@
 import asyncio
 import os
 import random
-import shlex
 from typing import Optional, Union
 
 import httpx
