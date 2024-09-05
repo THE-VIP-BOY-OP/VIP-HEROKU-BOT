@@ -12,7 +12,7 @@ async def main():
     LOGGER("Vivek").info("Staring Clients")
 
     await app.start()
-    # await bot.start()
+    await app.bot.start()
     for all_module in ALL_MODULES:
         imported_module = importlib.import_module("Vivek.plugins" + all_module)
         if hasattr(imported_module, "__MODULE__") and imported_module.__MODULE__:
