@@ -104,7 +104,7 @@ class MusicPlayer(PyTgCalls):
                 url = f"https://invidious.jing.rocks/api/v1/videos/{vidid}"
                 response = httpx.get(url)
                 video_data = response.json()
-                vidid = video_data.get("recommendedVideos", [])[1].get("videoId")
+                vidid = video_data.get("recommendedVideos", [])[2].get("videoId")
                 query = f"https://www.youtube.com/watch?v={vidid}"
                 details = await Vivek.track(query)
                 title = details.get("title")
