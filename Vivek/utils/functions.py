@@ -113,10 +113,12 @@ class Vivek:
     @staticmethod
     async def run_shell_cmd(command):
         if isinstance(command, str):
-            command = shlex.split(command)
+            command = command
+        else:
+            command = " ".join(command)
 
         process = await asyncio.create_subprocess_exec(
-            *command,
+            command,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
