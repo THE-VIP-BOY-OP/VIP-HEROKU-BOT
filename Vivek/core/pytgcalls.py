@@ -1,4 +1,5 @@
 import os
+import httpx
 from typing import Union
 
 from ntgcalls import TelegramServerError
@@ -15,7 +16,6 @@ from .clients import app
 
 
 class MusicPlayer(PyTgCalls):
-
     def __init__(self):
         super().__init__(app)
 
@@ -91,7 +91,7 @@ class MusicPlayer(PyTgCalls):
 
     async def change_stream(self, chat_id):
         mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
-        title = (await Queue.get(chat_id)).get("title")[:10]
+        vidid = (await Queue.get(chat_id)).get("vidid")
         video = (await Queue.get(chat_id)).get("video")
         details = await Queue.next(chat_id)
         file_path = None
@@ -101,7 +101,12 @@ class MusicPlayer(PyTgCalls):
                 await Vivek.remove_active_chat(chat_id)
                 return await mystic.edit("No More songs in Queue. Leaving Voice Chat")
             else:
-                details = await Vivek.track(f"{title} playlist songs", randomize=True)
+                url = f"https://invidious.jing.rocks/api/v1/videos/{vidid}"
+                response = httpx.get(url)
+                video_data = response.json()
+                vidid = video_data.get("recommendedVideos", [])[1].get("videoId")
+                query = f"https://www.youtube.com/watch?v={vidid}"
+                details = await Vivek.track(query)
                 title = details.get("title")
                 duration = details.get("duration_min")
                 vidid = details.get("vidid")
