@@ -1,11 +1,9 @@
 import os
 
-import aiohttp
 from pyrogram import filters
 
 from Vivek import app
 
- 
 
 @app.on_message(filters.command(["update", "up", "gitpull"]) & filters.sudo)
 async def update_(client, message):
