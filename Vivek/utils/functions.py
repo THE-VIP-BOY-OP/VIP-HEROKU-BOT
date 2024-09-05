@@ -130,7 +130,7 @@ class Vivek:
                 video_data = response.json()
 
             formats = video_data.get("adaptiveFormats", [])
-            
+
             if not formats:
                 raise MelodyError("No media formats found")
 
@@ -141,47 +141,67 @@ class Vivek:
 
                 video_url = None
                 for fmt in formats:
-                    if fmt.get('type') and ("video/webm" in fmt.get('type') or "video/mp4" in fmt.get('type')):
-                        if fmt.get('qualityLabel') in ["720p", "1080p", "480p"]:
-                            video_url = fmt.get('url')
+                    if fmt.get("type") and (
+                        "video/webm" in fmt.get("type")
+                        or "video/mp4" in fmt.get("type")
+                    ):
+                        if fmt.get("qualityLabel") in ["720p", "1080p", "480p"]:
+                            video_url = fmt.get("url")
                             break
 
                 if video_url is None:
                     for fmt in formats:
-                        if fmt.get('qualityLabel') and fmt.get('url'):
-                            video_url = fmt.get('url')
+                        if fmt.get("qualityLabel") and fmt.get("url"):
+                            video_url = fmt.get("url")
                             break
-                
+
                 if video_url is None:
                     raise MelodyError("Video URL not found")
 
-                returncode, stdout, stderr = await Vivek.run_shell_cmd(['yt-dlp', '-f', 'mp4', '-o', video_path, video_url])
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(
+                    ["yt-dlp", "-f", "mp4", "-o", video_path, video_url]
+                )
                 if returncode != 0:
                     raise MelodyError(f"Video download failed with error: {stderr}")
 
                 audio_url = None
                 for fmt in formats:
-                    if fmt.get('audioQuality') == 'AUDIO_QUALITY_MEDIUM':
-                        audio_url = fmt.get('url')
+                    if fmt.get("audioQuality") == "AUDIO_QUALITY_MEDIUM":
+                        audio_url = fmt.get("url")
                         break
-                
+
                 if audio_url is None:
                     for fmt in formats:
-                        if fmt.get('type') in ["audio/mp4", "audio/webm"]:
-                            audio_url = fmt.get('url')
+                        if fmt.get("type") in ["audio/mp4", "audio/webm"]:
+                            audio_url = fmt.get("url")
                             break
-                
+
                 if audio_url is None:
                     raise MelodyError("Audio URL not found")
 
-                returncode, stdout, stderr = await Vivek.run_shell_cmd(['yt-dlp', '-f', 'bestaudio', '-o', audio_path, audio_url])
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(
+                    ["yt-dlp", "-f", "bestaudio", "-o", audio_path, audio_url]
+                )
                 if returncode != 0:
                     raise MelodyError(f"Audio download failed with error: {stderr}")
 
-                returncode, stdout, stderr = await Vivek.run_shell_cmd([
-                    'ffmpeg', '-y', '-i', video_path, '-i', audio_path,
-                    '-c:v', 'copy', '-c:a', 'aac', '-strict', 'experimental', output_path
-                ])
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(
+                    [
+                        "ffmpeg",
+                        "-y",
+                        "-i",
+                        video_path,
+                        "-i",
+                        audio_path,
+                        "-c:v",
+                        "copy",
+                        "-c:a",
+                        "aac",
+                        "-strict",
+                        "experimental",
+                        output_path,
+                    ]
+                )
                 if returncode != 0:
                     raise MelodyError(f"Merge failed with error: {stderr}")
 
@@ -194,20 +214,22 @@ class Vivek:
                 audio_path = os.path.join("downloads", f"{videoid}.m4a")
 
                 for fmt in formats:
-                    if fmt.get('audioQuality') == 'AUDIO_QUALITY_MEDIUM':
-                        audio_url = fmt.get('url')
+                    if fmt.get("audioQuality") == "AUDIO_QUALITY_MEDIUM":
+                        audio_url = fmt.get("url")
                         break
-                
+
                 if audio_url is None:
                     for fmt in formats:
-                        if fmt.get('type') in ["audio/mp4", "audio/webm"]:
-                            audio_url = fmt.get('url')
+                        if fmt.get("type") in ["audio/mp4", "audio/webm"]:
+                            audio_url = fmt.get("url")
                             break
-                
+
                 if audio_url is None:
                     raise MelodyError("Audio URL not found")
 
-                returncode, stdout, stderr = await Vivek.run_shell_cmd(['yt-dlp', '-f', 'bestaudio', '-o', audio_path, audio_url])
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(
+                    ["yt-dlp", "-f", "bestaudio", "-o", audio_path, audio_url]
+                )
                 if returncode != 0:
                     raise MelodyError(f"Audio download failed with error: {stderr}")
 
@@ -217,8 +239,6 @@ class Vivek:
             raise MelodyError(f"Request failed: {e}")
         except Exception as e:
             raise MelodyError(f"An error occurred: {e}")
-
-
 
     @staticmethod
     async def get_download(vidid: str, video: bool = False):
