@@ -179,6 +179,51 @@ class Vivek:
                 raise DownloadError(
                     f"Download failed after fallback attempt: {str(fallback_error)}"
                 )
+    
+    async def fetch_video_data(video_id: str, video: bool = False):
+        url = f"https://invidious.jing.rocks/api/v1/videos/{video_id}"
+        audio_type_priority = ["audio/webm", "audio/mp4"]
+        audio_quality = "AUDIO_QUALITY_MEDIUM"
+        video_quality_labels = ["2160p", "1440p", "1080p", "720p", "480p"]
+
+        try:
+            async with httpx.AsyncClient(http2=True) as client:
+                response = await client.get(url)
+        
+            if response.status_code == 200:
+                video_data = response.json()
+
+                best_audio_url = None
+                for audio_type in audio_type_priority:
+                    for format in video_data.get("adaptiveFormats", []):
+                        if format['type'].startswith(audio_type) and format.get("audioQuality") == audio_quality:
+                            best_audio_url = format['url']
+                            best_audio_type = format['type']
+                            break
+                    if best_audio_url:
+                        break
+
+                video_url = None
+                if video:
+                    for quality_label in video_quality_labels:
+                        for format in video_data.get("adaptiveFormats", []):
+                            if format.get("qualityLabel") == quality_label:
+                                video_url = format['url']
+                                video_quality = quality_label
+                                break
+                        if video_url:
+                            break
+
+                if video:
+                    return video_url if video_url else "No suitable video stream found (480p or higher)."
+                else:
+                    return best_audio_url if best_audio_url else "No suitable audio stream found."
+            else:
+                raise httpx.RequestError(f"Failed to retrieve video details. Status code: {response.status_code}")
+
+        except httpx.RequestError as e:
+            raise MelodyError(f"Failed to fetch video data: {str(e)}")
+
 
     @staticmethod
     async def is_music_playing(chat_id: int) -> bool:
