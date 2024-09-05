@@ -32,11 +32,6 @@ async def restart():
     os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
 
 
-async def start():
-    await app.start()
-    await app.bot.start()
-
 
 app.bot = bot
 app.restart = restart
-app.start = start
