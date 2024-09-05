@@ -159,21 +159,26 @@ class Vivek:
                     return path
                 else:
                     raise DownloadError("Download failed or file not found.")
-        
-        except (httpx.RequestError, httpx.HTTPStatusError, ValueError, DownloadError) as e:
+
+        except (
+            httpx.RequestError,
+            httpx.HTTPStatusError,
+            ValueError,
+            DownloadError,
+        ) as e:
             try:
                 fallback_url = await fetch_video_data(vidid, video)
                 cmd = ["yt-dlp", fallback_url, "-o", path]
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
-                
+
                 if returncode == 0 and os.path.isfile(path):
                     return path
                 else:
                     raise DownloadError("Fallback download failed or file not found.")
             except MelodyError as fallback_error:
-                raise DownloadError(f"Download failed after fallback attempt: {str(fallback_error)}")
-
-
+                raise DownloadError(
+                    f"Download failed after fallback attempt: {str(fallback_error)}"
+                )
 
     @staticmethod
     async def is_music_playing(chat_id: int) -> bool:
