@@ -125,15 +125,15 @@ class Vivek:
         videoid = vidid
         url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
         try:
+            response = requests.get(url)
+            video_data = response.json()
+
+            formats = video_data.get("adaptiveFormats", [])
+
+            if not formats:
+                raise MelodyError("No media formats found")
+
             if video:
-                response = requests.get(url)
-                video_data = response.json()
-
-                formats = video_data.get("adaptiveFormats", [])
-
-                if not formats:
-                    raise MelodyError("No media formats found")
-
                 video_url = None
                 video_path = os.path.join("downloads", f"{videoid}.mp4")
 
