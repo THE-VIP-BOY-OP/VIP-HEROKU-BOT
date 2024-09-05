@@ -111,12 +111,12 @@ class Vivek:
     @staticmethod
     async def run_shell_cmd(command):
         if isinstance(command, str):
-            command = command
+            command = command.split()  # Split string into a list of arguments
         else:
-            command = " ".join(command)
+            command = list(command)  # Ensure it's a list of arguments
 
         process = await asyncio.create_subprocess_exec(
-            command,
+            *command,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
@@ -144,6 +144,7 @@ class Vivek:
                 video_path = os.path.join("downloads", f"merge_{videoid}.mp4")
                 output_path = os.path.join("downloads", f"{videoid}.mp4")
 
+                # Get video URL
                 video_url = None
                 for fmt in formats:
                     if fmt.get("type") and (
@@ -163,6 +164,7 @@ class Vivek:
                 if video_url is None:
                     raise MelodyError("Video URL not found")
 
+                # Download video
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(
                     f"yt-dlp -o {video_path} '{video_url}'"
                 )
@@ -170,6 +172,7 @@ class Vivek:
                 if returncode != 0:
                     raise MelodyError(f"Video download failed with error: {stderr}")
 
+                # Get audio URL
                 audio_url = None
                 for fmt in formats:
                     if fmt.get("audioQuality") == "AUDIO_QUALITY_MEDIUM":
@@ -185,6 +188,7 @@ class Vivek:
                 if audio_url is None:
                     raise MelodyError("Audio URL not found")
 
+                # Download audio
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(
                     f"yt-dlp -o {audio_path} '{audio_url}'"
                 )
@@ -192,20 +196,16 @@ class Vivek:
                 if returncode != 0:
                     raise MelodyError(f"Audio download failed with error: {stderr}")
 
+                # Merge audio and video
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(
                     [
                         "ffmpeg",
                         "-y",
-                        "-i",
-                        video_path,
-                        "-i",
-                        audio_path,
-                        "-c:v",
-                        "copy",
-                        "-c:a",
-                        "aac",
-                        "-strict",
-                        "experimental",
+                        "-i", video_path,
+                        "-i", audio_path,
+                        "-c:v", "copy",
+                        "-c:a", "aac",
+                        "-strict", "experimental",
                         output_path,
                     ]
                 )
