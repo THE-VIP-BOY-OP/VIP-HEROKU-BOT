@@ -152,7 +152,7 @@ class Vivek:
                 if returncode != 0:
                     raise MelodyError(f"Audio download failed with error: {stderr}")
 
-                return audio_path
+                return video_path
             else:
                 audio_url = None
                 audio_path = os.path.join("downloads", f"{videoid}.m4a")
