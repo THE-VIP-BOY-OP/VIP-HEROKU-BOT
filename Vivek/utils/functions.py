@@ -110,13 +110,8 @@ class Vivek:
 
     @staticmethod
     async def run_shell_cmd(command):
-        if isinstance(command, str):
-            command = command.split()  # Split string into a list of arguments
-        else:
-            command = list(command)  # Ensure it's a list of arguments
-
-        process = await asyncio.create_subprocess_exec(
-            *command,
+        process = await asyncio.create_subprocess_shell(
+            command,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
@@ -129,10 +124,8 @@ class Vivek:
         videoid = vidid
         url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
         try:
-            async with httpx.AsyncClient(http2=True) as client:
-                response = await client.get(url)
-                response.raise_for_status()
-                video_data = response.json()
+            response = httpx.get(url)
+            video_data = response.json()
 
             formats = video_data.get("adaptiveFormats", [])
 
@@ -165,9 +158,8 @@ class Vivek:
                     raise MelodyError("Video URL not found")
 
                 # Download video
-                returncode, stdout, stderr = await Vivek.run_shell_cmd(
-                    f"yt-dlp -o {video_path} '{video_url}'"
-                )
+                cmd = ( f'yt-dlp -o "{video_path}" "{video_url}"')
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
 
                 if returncode != 0:
                     raise MelodyError(f"Video download failed with error: {stderr}")
@@ -189,9 +181,9 @@ class Vivek:
                     raise MelodyError("Audio URL not found")
 
                 # Download audio
-                returncode, stdout, stderr = await Vivek.run_shell_cmd(
-                    f"yt-dlp -o {audio_path} '{audio_url}'"
-                )
+                cmd = ( f'yt-dlp -o "{audio_path}" "{audio_url}"')
+              
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
 
                 if returncode != 0:
                     raise MelodyError(f"Audio download failed with error: {stderr}")
@@ -239,9 +231,8 @@ class Vivek:
                 if audio_url is None:
                     raise MelodyError("Audio URL not found")
 
-                returncode, stdout, stderr = await Vivek.run_shell_cmd(
-                    f"yt-dlp -o {audio_path} '{audio_url}'"
-                )
+                cmd = ( f'yt-dlp -o "{audio_path}" "{audio_url}"')
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
 
                 if returncode != 0:
                     raise MelodyError(f"Audio download failed with error: {stderr}")
