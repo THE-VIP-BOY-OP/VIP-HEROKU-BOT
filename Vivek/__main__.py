@@ -6,6 +6,7 @@ from pyrogram import idle
 from Vivek import HELPABLE, LOGGER, app
 from Vivek.core.pytgcalls import call
 from Vivek.plugins import ALL_MODULES
+from config import LOG_GROUP_ID
 
 
 async def main():
@@ -13,6 +14,7 @@ async def main():
 
     await app.start()
     await app.bot.start()
+    await app.bot.send_message(LOG_GROUP_ID, "started")
     for all_module in ALL_MODULES:
         imported_module = importlib.import_module("Vivek.plugins" + all_module)
         if hasattr(imported_module, "__MODULE__") and imported_module.__MODULE__:
