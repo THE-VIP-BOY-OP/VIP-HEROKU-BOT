@@ -1,13 +1,8 @@
-import asyncio
 import os
-from datetime import datetime
 
 import aiohttp
-from git import Repo
-from git.exc import GitCommandError, InvalidGitRepositoryError
 from pyrogram import filters
 
-from config import GIT_TOKEN, UPSTREAM_BRANCH, UPSTREAM_REPO
 from Vivek import app
 
 BASE = "https://batbin.me/"
