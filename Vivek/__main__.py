@@ -3,10 +3,10 @@ import importlib
 
 from pyrogram import idle
 
+from config import LOG_GROUP_ID
 from Vivek import HELPABLE, LOGGER, app
 from Vivek.core.pytgcalls import call
 from Vivek.plugins import ALL_MODULES
-from config import LOG_GROUP_ID
 
 
 async def main():
