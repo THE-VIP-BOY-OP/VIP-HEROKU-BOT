@@ -4,6 +4,7 @@ import random
 from typing import Optional, Union
 
 import httpx
+import requests
 from pyrogram import Client
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
@@ -124,7 +125,7 @@ class Vivek:
         videoid = vidid
         url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
         try:
-            response = httpx.get(url)
+            response = requests.get(url)
             video_data = response.json()
 
             formats = video_data.get("adaptiveFormats", [])
@@ -239,7 +240,7 @@ class Vivek:
 
                 return audio_path
 
-        except (httpx.HTTPStatusError, httpx.RequestError) as e:
+        except requests.RequestException e:
             raise MelodyError(f"Request failed: {e}")
         except Exception as e:
             raise MelodyError(f"An error occurred: {e}")
