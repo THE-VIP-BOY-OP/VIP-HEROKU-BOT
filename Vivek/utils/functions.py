@@ -201,11 +201,16 @@ class Vivek:
                     [
                         "ffmpeg",
                         "-y",
-                        "-i", video_path,
-                        "-i", audio_path,
-                        "-c:v", "copy",
-                        "-c:a", "aac",
-                        "-strict", "experimental",
+                        "-i",
+                        video_path,
+                        "-i",
+                        audio_path,
+                        "-c:v",
+                        "copy",
+                        "-c:a",
+                        "aac",
+                        "-strict",
+                        "experimental",
                         output_path,
                     ]
                 )
