@@ -159,7 +159,7 @@ class Vivek:
                     raise MelodyError("Video URL not found")
 
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(
-                    ["yt-dlp", "-f", "mp4", "-o", video_path, video_url]
+                    ["yt-dlp", "-f", "mp4", "-o", video_path, f'"{video_url}"']
                 )
                 if returncode != 0:
                     raise MelodyError(f"Video download failed with error: {stderr}")
@@ -180,7 +180,7 @@ class Vivek:
                     raise MelodyError("Audio URL not found")
 
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(
-                    ["yt-dlp", "-f", "bestaudio", "-o", audio_path, audio_url]
+                    ["yt-dlp", "-f", "bestaudio", "-o", audio_path, f'"{audio_url}"']
                 )
                 if returncode != 0:
                     raise MelodyError(f"Audio download failed with error: {stderr}")
@@ -228,7 +228,7 @@ class Vivek:
                     raise MelodyError("Audio URL not found")
 
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(
-                    ["yt-dlp", "-f", "bestaudio", "-o", audio_path, audio_url]
+                    ["yt-dlp", "-f", "bestaudio", "-o", audio_path, f'"{audio_url}"']
                 )
                 if returncode != 0:
                     raise MelodyError(f"Audio download failed with error: {stderr}")
