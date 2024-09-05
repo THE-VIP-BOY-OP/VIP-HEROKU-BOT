@@ -22,7 +22,6 @@ chatlist = []
 
 
 class VClient(Client):
-
     def __init__(self, name, *args, **kwargs):
         super().__init__(name, *args, **kwargs)
 
@@ -165,7 +164,7 @@ class Vivek:
                     raise MelodyError("Video URL not found")
 
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(
-                    f"yt-dlp -o {video_path} {video_url}"
+                    f"yt-dlp -o {video_path} '{video_url}'"
                 )
 
                 if returncode != 0:
@@ -187,7 +186,7 @@ class Vivek:
                     raise MelodyError("Audio URL not found")
 
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(
-                    f"yt-dlp -o {audio_path} {audio_url}"
+                    f"yt-dlp -o {audio_path} '{audio_url}'"
                 )
 
                 if returncode != 0:
@@ -236,7 +235,7 @@ class Vivek:
                     raise MelodyError("Audio URL not found")
 
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(
-                    f"yt-dlp -o {audio_path} {audio_url}"
+                    f"yt-dlp -o {audio_path} '{audio_url}'"
                 )
 
                 if returncode != 0:
