@@ -240,7 +240,7 @@ class Vivek:
 
                 return audio_path
 
-        except requests.RequestException e:
+        except requests.RequestException as e:
             raise MelodyError(f"Request failed: {e}")
         except Exception as e:
             raise MelodyError(f"An error occurred: {e}")
