@@ -28,5 +28,5 @@ async def paste(text):
 
 @app.on_message(filters.command(["update", "up", "gitpull"]) & filters.sudo)
 async def update_(client, message):
-    await message.reply_tect("Updating...")
+    await message.reply_text("Updating...")
     os.system("git pull && bash start")
