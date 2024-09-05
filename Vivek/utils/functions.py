@@ -121,7 +121,8 @@ class Vivek:
         return process.returncode, stdout.decode(), stderr.decode()
 
     @staticmethod
-    async def download(videoid, video=True):
+    async def download(vidid, video=True):
+        videoid = vidid
         url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
         try:
             async with httpx.AsyncClient(http2=True) as client:
