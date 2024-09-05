@@ -121,7 +121,7 @@ class Vivek:
         return process.returncode, stdout.decode(), stderr.decode()
 
     @staticmethod
-    async def download(vidid, video=False):
+    async def download(vidid: str, video: bool = False):
         API = "https://api.cobalt.tools/api/json"
         headers = {
             "Accept": "application/json",
@@ -143,36 +143,37 @@ class Vivek:
                 "aFormat": "opus",
             }
 
-        max_retries = 2
-        success = False
+        try:
+            async with httpx.AsyncClient(http2=True) as client:
+                response = await client.post(API, headers=headers, json=data)
+                response.raise_for_status()
 
-        for attempt in range(max_retries):
+                results = response.json().get("url")
+                if not results:
+                    raise ValueError("No download URL found in the response")
+
+                cmd = ["yt-dlp", results, "-o", path]
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
+
+                if returncode == 0 and os.path.isfile(path):
+                    return path
+                else:
+                    raise DownloadError("Download failed or file not found.")
+        
+        except (httpx.RequestError, httpx.HTTPStatusError, ValueError, DownloadError) as e:
             try:
-                async with httpx.AsyncClient(http2=True) as client:
-                    response = await client.post(API, headers=headers, json=data)
-                    response.raise_for_status()
+                fallback_url = await fetch_video_data(vidid, video)
+                cmd = ["yt-dlp", fallback_url, "-o", path]
+                returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
+                
+                if returncode == 0 and os.path.isfile(path):
+                    return path
+                else:
+                    raise DownloadError("Fallback download failed or file not found.")
+            except MelodyError as fallback_error:
+                raise DownloadError(f"Download failed after fallback attempt: {str(fallback_error)}")
 
-                    results = response.json().get("url")
-                    if not results:
-                        raise ValueError("No download URL found in the response")
 
-                    cmd = ["yt-dlp", results, "-o", path]
-                    returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
-
-                    if returncode == 0 and os.path.isfile(path):
-                        log.error(f"output\n\n\n{stdout}\n\nerror {stderr}")
-                        success = True
-                        break
-
-            except (httpx.RequestError, httpx.HTTPStatusError, ValueError):
-                continue
-
-        if not success:
-            raise DownloadError(
-                "The song has not been downloaded yet, possibly due to an API error."
-            )
-
-        return path
 
     @staticmethod
     async def is_music_playing(chat_id: int) -> bool:
