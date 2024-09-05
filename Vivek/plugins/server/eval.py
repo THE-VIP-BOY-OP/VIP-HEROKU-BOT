@@ -41,6 +41,20 @@ async def edit_or_reply(msg: Message, **kwargs):
     & ~filters.via_bot,
     group=6,
 )
+@app.bot.on_edited_message(
+    filters.command(["eval", "ev"])
+    & filters.sudo
+    & ~filters.forwarded
+    & ~filters.via_bot,
+    group=6,
+)
+@app.bot.on_message(
+    filters.command(["eval", "ev"])
+    & filters.sudo
+    & ~filters.forwarded
+    & ~filters.via_bot,
+    group=6,
+)
 async def executor(client: Client, message: Message):
     if len(message.command) < 2:
         return await edit_or_reply(message, text="<b>ᴡʜᴀᴛ ʏᴏᴜ ᴡᴀɴɴᴀ ᴇxᴇᴄᴜᴛᴇ ?</b>")
@@ -94,6 +108,14 @@ async def executor(client: Client, message: Message):
     group=6,
 )
 @app.on_message(
+    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
+    group=6,
+)
+@app.bot.on_edited_message(
+    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
+    group=6,
+)
+@app.bot.on_message(
     filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
     group=6,
 )
