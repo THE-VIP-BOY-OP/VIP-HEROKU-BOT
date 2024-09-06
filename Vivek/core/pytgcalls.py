@@ -2,6 +2,7 @@ import os
 from typing import Union
 
 import httpx
+import requests
 from ntgcalls import TelegramServerError
 from pyrogram.enums import ParseMode
 from pytgcalls import PyTgCalls, filters
@@ -91,61 +92,60 @@ class MusicPlayer(PyTgCalls):
 
     async def change_stream(self, chat_id):
         mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
-        vidid = (await Queue.get(chat_id)).get("vidid")
-        video = (await Queue.get(chat_id)).get("video")
-        details = await Queue.next(chat_id)
-        file_path = None
-        if not details:
-            if chat_id not in chatlist:
-                await self.leave_call(chat_id)
-                await Vivek.remove_active_chat(chat_id)
-                return await mystic.edit("No More songs in Queue. Leaving Voice Chat")
-            else:
-                url = f"https://invidious.jing.rocks/api/v1/videos/{vidid}"
-                response = httpx.get(url)
-                video_data = response.json()
-                vidid = video_data.get("recommendedVideos", [])[2].get("videoId")
-                query = f"https://www.youtube.com/watch?v={vidid}"
-                details = await Vivek.track(query)
-                title = details.get("title")
-                duration = details.get("duration_min")
-                vidid = details.get("vidid")
-                by = "ENDLESS PLAY MODE"
-        else:
-            title = details.get("title")
-            duration = details.get("duration")
-            vidid = details.get("vidid")
-            video = details.get("video")
-            file_path = details.get("file_path")
-            by = details.get("by")
-
-        if file_path is None or not os.path.isfile(file_path):
-            file_path = await Vivek.download(vidid=vidid, video=video)
-
         try:
-            await call.play(chat_id, file_path, video)
-        except MelodyError as e:
-            return await mystic.edit(f"Error: {e}")
-        except Exception as e:
-            return await mystic.edit(f"Unexpected Error: {e}")
 
-        await app.send_message(
-            chat_id,
-            f"<b>Started Streaming</b>\n\n<b>Title</b>: {title}\n<b>Duration</b>: {duration}\n<b>By</b>: {by}",
-            disable_web_page_preview=True,
-            parse_mode=ParseMode.HTML,
-        )
-        await mystic.delete()
-        if by == "ENDLESS PLAY MODE":
-            await Queue.add(
+            vidid = (await Queue.get(chat_id)).get("vidid")
+            video = (await Queue.get(chat_id)).get("video")
+            details = await Queue.next(chat_id)
+            file_path = None
+            if not details:
+                if chat_id not in chatlist:
+                    await self.leave_call(chat_id)
+                    await Vivek.remove_active_chat(chat_id)
+                    return await mystic.edit("No More songs in Queue. Leaving Voice Chat")
+                else:
+                    url = f"https://invidious.jing.rocks/api/v1/videos/{vidid}"
+                    response = requests.get(url)
+                    video_data = response.json()
+                    vidid = video_data.get("recommendedVideos", [])[2].get("videoId")
+                    query = f"https://www.youtube.com/watch?v={vidid}"
+                    details = await Vivek.track(query)
+                    title = details.get("title")
+                    duration = details.get("duration_min")
+                    vidid = details.get("vidid")
+                    by = "ENDLESS PLAY MODE"
+            else:
+                title = details.get("title")
+                duration = details.get("duration")
+                vidid = details.get("vidid")
+                video = details.get("video")
+                file_path = details.get("file_path")
+                by = details.get("by")
+
+            if file_path is None or not os.path.isfile(file_path):
+                file_path = await Vivek.download(vidid=vidid, video=video)
+
+            await call.play(chat_id, file_path, video)
+
+            await app.send_message(
                 chat_id,
-                title=title,
-                duration=duration,
-                vidid=vidid,
-                video=video,
-                file_path=file_path,
-                by=by,
+                f"<b>Started Streaming</b>\n\n<b>Title</b>: {title}\n<b>Duration</b>: {duration}\n<b>By</b>: {by}",
+                disable_web_page_preview=True,
+                parse_mode=ParseMode.HTML,
             )
+            await mystic.delete()
+            if by == "ENDLESS PLAY MODE":
+                await Queue.add(
+                    chat_id,
+                    title=title,
+                    duration=duration,
+                    vidid=vidid,
+                    video=video,
+                    file_path=file_path,
+                    by=by,
+                )
+        except Exception as e:
+            await mystic.edit(e)
 
     async def dec(self):
 
