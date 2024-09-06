@@ -114,7 +114,7 @@ class MusicPlayer(PyTgCalls):
                     for fmt in formats:
                         if fmt.get('lengthSeconds') < 420:
                             a = fmt.get('videoId')
-                             list.append(a)        
+                            list.append(a)        
                     vidid = random.choice(list)
                     list.clear()
                     query = f"https://www.youtube.com/watch?v={vidid}"
