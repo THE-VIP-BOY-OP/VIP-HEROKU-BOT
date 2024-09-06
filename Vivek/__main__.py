@@ -4,8 +4,7 @@ import importlib
 from pyrogram import idle
 
 from config import LOG_GROUP_ID
-from Vivek import HELPABLE, LOGGER, app
-from Vivek.core.pytgcalls import call
+from Vivek import HELPABLE, LOGGER, app, call
 from Vivek.plugins import ALL_MODULES
 
 
