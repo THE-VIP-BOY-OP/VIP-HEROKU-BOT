@@ -1,4 +1,5 @@
 import os
+import random
 from typing import Union
 
 import requests
@@ -108,7 +109,14 @@ class MusicPlayer(PyTgCalls):
                     url = f"https://invidious.jing.rocks/api/v1/videos/{vidid}"
                     response = requests.get(url)
                     video_data = response.json()
-                    vidid = video_data.get("recommendedVideos", [])[2].get("videoId")
+                    formats = video_data.get("recommendedVideos", [])
+                    list = []
+                    for fmt in formats:
+                        if fmt.get('lengthSeconds') < 420:
+                            a = fmt.get('videoId')
+                             list.append(a)        
+                    vidid = random.choice(list)
+                    list.clear()
                     query = f"https://www.youtube.com/watch?v={vidid}"
                     details = await Vivek.track(query)
                     title = details.get("title")
