@@ -165,13 +165,9 @@ class Vivek:
             ValueError,
             DownloadError,
         ) as e:
-            try:
-                path = await download(vidid, video)
-                return path
-            except MelodyError as fallback_error:
-                raise DownloadError(
-                    f"Download failed after fallback attempt: {str(fallback_error)}"
-                )
+            raise DownloadError(
+                f"Download failed after fallback attempt: {str(fallback_error)}"
+            )
 
     @staticmethod
     async def is_music_playing(chat_id: int) -> bool:
