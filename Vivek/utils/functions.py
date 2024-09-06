@@ -10,8 +10,7 @@ from pyrogram.enums import ChatMemberStatus, MessageEntityType
 from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
 
-from config import LOG_GROUP_ID, ONLY_FOR_SUDO
-
+from config import LOG_GROUP_ID
 
 S12KK = {}
 pause = {}
