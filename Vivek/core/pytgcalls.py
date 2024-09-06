@@ -20,7 +20,18 @@ from Vivek.utils.functions import MelodyError, Vivek, chatlist
 from Vivek.utils.queue import Queue
 
 from .clients import app
+from pyrogram import Client
+from pyrogram import filters
+from pyrogram.types import Message
 
+from pytgcalls import filters as fl
+from pytgcalls import PyTgCalls
+from pytgcalls.types import ChatUpdate
+from pytgcalls.types import MediaStream
+from pytgcalls.types import Update
+
+test_stream = 'http://docs.evostream.com/sample_content/assets/' \
+              'sintel1m720p.mp4'
 
 class MusicPlayer(PyTgCalls):
     def __init__(self):
@@ -173,6 +184,18 @@ class MusicPlayer(PyTgCalls):
         async def my_handler(client: PyTgCalls, update: Update):
             if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
                 await self.change_stream(update.chat_id)
+        @call.on_update(fl.chat_update(ChatUpdate.Status.INCOMING_CALL))
+        async def incoming_handler(_: PyTgCalls, update: Update):
+            await call_py.mtproto_client.send_message(
+                update.chat_id,
+                'You are calling me!',
+            )
+            await call.play(
+                update.chat_id,
+                test_stream,
+        
+            )
+
 
 
 call = MusicPlayer()
