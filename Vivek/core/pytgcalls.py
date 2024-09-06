@@ -147,6 +147,10 @@ class MusicPlayer(PyTgCalls):
                 )
         except Exception as e:
             await mystic.edit(e)
+            await Vivek.remove_active_chat(chat_id)
+            await self.leave_call(chat_id)
+
+
 
     async def dec(self):
 
@@ -154,6 +158,7 @@ class MusicPlayer(PyTgCalls):
         async def my_handler(client: PyTgCalls, update: Update):
             if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
                 await self.change_stream(update.chat_id)
+
 
 
 call = MusicPlayer()
