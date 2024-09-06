@@ -120,82 +120,9 @@ class Vivek:
         stdout, stderr = await process.communicate()
         return process.returncode, stdout.decode(), stderr.decode()
 
-    @staticmethod
-    async def download(vidid, video=False, retries=3):
-        videoid = vidid
-        url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
-
-        for attempt in range(retries):
-            try:
-                response = requests.get(url)
-                video_data = response.json()
-
-                formats = video_data.get("adaptiveFormats", [])
-                if not formats:
-                    raise MelodyError("No media formats found")
-
-                if video:
-                    video_url = None
-                    video_path = os.path.join("downloads", f"{videoid}.mp4")
-
-                    fmta = video_data.get("formatStreams", [])
-                    for fmt in fmta:
-                        video_url = fmt.get("url")
-                        if video_url:
-                            break
-
-                    if video_url is None:
-                        raise MelodyError("Video URL not found in requests")
-                    a = request s.get(f"http://tinyurl.com/api-create.php?url={video_url}")
-
-
-                    url = a.content.decode()
-                    cmd = f'yt-dlp -o "{video_path}" "{url}"'
-                    returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
-
-                    if returncode != 0:
-                        raise MelodyError(f"Video download failed with error: {stderr}")
-
-                    return video_path
-                else:
-                    audio_url = None
-                    audio_path = os.path.join("downloads", f"{videoid}.m4a")
-
-                    for fmt in formats:
-                        if fmt.get("audioQuality") == "AUDIO_QUALITY_MEDIUM":
-                            audio_url = fmt.get("url")
-                            break
-
-                    if audio_url is None:
-                        for fmt in formats:
-                            if fmt.get("type") in ["audio/mp4", "audio/webm"]:
-                                audio_url = fmt.get("url")
-                                break
-
-                    if audio_url is None:
-                        raise MelodyError("Audio URL not found")
-
-                    a = request s.get(f"http://tinyurl.com/api-create.php?url={audio_url}")
-
-
-                    url = a.content.decode()
-                    cmd = f'yt-dlp -o "{audio_path}" "{url}"'
-                    returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
-
-                    if returncode != 0:
-                        raise MelodyError(f"Audio download failed with error: {stderr}")
-
-                    return audio_path
-
-            except (requests.RequestException, MelodyError) as e:
-                if attempt + 1 == retries:
-                    raise MelodyError(f"An error occurred after {retries} retries: {e}")
-                await asyncio.sleep(2)
-
-        raise MelodyError(f"Failed to download after {retries} attempts")
 
     @staticmethod
-    async def get_download(vidid: str, video: bool = False):
+    async def download(vidid: str, video: bool = False):
         API = "https://api.cobalt.tools/api/json"
         headers = {
             "Accept": "application/json",
@@ -226,7 +153,7 @@ class Vivek:
                 if not results:
                     raise ValueError("No download URL found in the response")
 
-                cmd = ["yt-dlp", results, "-o", path]
+                cmd = f'yt-dlp "{results}" -o "{path}"'
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
 
                 if returncode == 0 and os.path.isfile(path):
