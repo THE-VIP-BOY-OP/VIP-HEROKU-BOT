@@ -1,7 +1,6 @@
 import os
 from typing import Union
 
-import httpx
 import requests
 from ntgcalls import TelegramServerError
 from pyrogram.enums import ParseMode
@@ -102,7 +101,9 @@ class MusicPlayer(PyTgCalls):
                 if chat_id not in chatlist:
                     await self.leave_call(chat_id)
                     await Vivek.remove_active_chat(chat_id)
-                    return await mystic.edit("No More songs in Queue. Leaving Voice Chat")
+                    return await mystic.edit(
+                        "No More songs in Queue. Leaving Voice Chat"
+                    )
                 else:
                     url = f"https://invidious.jing.rocks/api/v1/videos/{vidid}"
                     response = requests.get(url)
