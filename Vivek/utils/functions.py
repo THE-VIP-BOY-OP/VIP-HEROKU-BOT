@@ -4,7 +4,6 @@ import random
 from typing import Optional, Union
 
 import httpx
-import requests
 from pyrogram import Client
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
@@ -119,7 +118,6 @@ class Vivek:
 
         stdout, stderr = await process.communicate()
         return process.returncode, stdout.decode(), stderr.decode()
-
 
     @staticmethod
     async def download(vidid: str, video: bool = False):
