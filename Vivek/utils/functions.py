@@ -9,6 +9,13 @@ from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
 
+from pyrogram import Client, filters
+from pyrogram.types import Message
+from functools import wraps
+from pyrogram.enums import ChatMemberStatus
+from typing import Union
+
+
 from config import LOG_GROUP_ID
 from Vivek.logger import LOGGER
 
@@ -279,3 +286,42 @@ class Vivek:
 
     async def extract_user(message):
         return (await extract_user_and_reason(message))[0]
+
+
+async def has_permissions(client: Client, message: Message, permissions: Union[list, str, None] = None) -> bool:
+    """Check if the user and bot have the required permissions, and reply directly if not."""
+    user = await client.get_chat_member(message.chat.id, message.from_user.id)
+    
+    if user.status not in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR]:
+        return await message.reply_text("You are not an admin.")
+
+    if permissions:
+        if isinstance(permissions, str):
+            permissions = [permissions]
+
+        for permission in permissions:
+            if not getattr(user.privileges, permission, False):
+                return await message.reply_text(f"You are missing the required permission: {permission}")
+
+    bot = await client.get_chat_member(message.chat.id, "self")
+    
+    if bot.status not in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR]:
+        return await message.reply_text("The bot is not an admin.")
+
+    if permissions:
+        for permission in permissions:
+            if not getattr(bot.privileges, permission, False):
+                return await message.reply_text(f"The bot is missing the required permission: {permission}")
+
+    return True
+
+def adminsOnly(permissions: Union[list, str, None] = None):
+    """Decorator to restrict access to commands based on user and bot permissions."""
+    def decorator(func):
+        @wraps(func)
+        async def wrapper(client: Client, message: Message, *args, **kwargs):
+            if await has_permissions(client, message, permissions):
+                return await func(client, message, *args, **kwargs)
+        return wrapper
+    return decorator
+
