@@ -180,7 +180,7 @@ class MusicPlayer(PyTgCalls):
             if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
                 await self.change_stream(update.chat_id)
 
-        @call.on_update(fl.chat_update(ChatUpdate.Status.INCOMING_CALL))
+        @super().on_update(fl.chat_update(ChatUpdate.Status.INCOMING_CALL))
         async def incoming_handler(_: PyTgCalls, update: Update):
             await call_py.mtproto_client.send_message(
                 update.chat_id,
