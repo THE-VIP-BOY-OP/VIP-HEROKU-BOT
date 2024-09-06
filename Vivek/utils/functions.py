@@ -150,7 +150,9 @@ class Vivek:
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
 
                 if returncode != 0:
-                    raise MelodyError(f"Audio download failed with error: {stderr}")
+                    returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
+                    if returncode != 0:
+                        raise MelodyError(f"Audio download failed with error: {stderr}")
 
                 return video_path
             else:
@@ -175,7 +177,9 @@ class Vivek:
                 returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
 
                 if returncode != 0:
-                    raise MelodyError(f"Audio download failed with error: {stderr}")
+                    returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
+                    if returncode != 0:
+                        raise MelodyError(f"Audio download failed with error: {stderr}")
 
                 return audio_path
 
