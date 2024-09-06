@@ -9,7 +9,6 @@ from pyrogram import Client
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
-from yt_dlp import YoutubeDL
 
 from config import LOG_GROUP_ID
 from Vivek.logger import LOGGER
@@ -187,7 +186,7 @@ class Vivek:
                 await asyncio.sleep(2)
 
         raise MelodyError(f"Failed to download after {retries} attempts")
- 
+
     @staticmethod
     async def get_download(vidid: str, video: bool = False):
         API = "https://api.cobalt.tools/api/json"
