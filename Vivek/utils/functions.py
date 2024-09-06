@@ -122,151 +122,72 @@ class Vivek:
         return process.returncode, stdout.decode(), stderr.decode()
 
     @staticmethod
-    async def download(vidid, video=False):
+    async def download(vidid, video=False, retries=3):
         videoid = vidid
         url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
 
-        try:
-            response = requests.get(url)
-            video_data = response.json()
+        for attempt in range(retries):
+            try:
+                response = requests.get(url)
+                video_data = response.json()
 
-            formats = video_data.get("adaptiveFormats", [])
-            if not formats:
-                raise MelodyError("No media formats found")
+                formats = video_data.get("adaptiveFormats", [])
+                if not formats:
+                    raise MelodyError("No media formats found")
 
-            if video:
-                video_url = None
-                video_path = os.path.join("downloads", f"{videoid}.mp4")
+                if video:
+                    video_url = None
+                    video_path = os.path.join("downloads", f"{videoid}.mp4")
 
-                fmta = video_data.get("formatStreams", [])
-                for fmt in fmta:
-                    video_url = fmt.get("url")
-                    if video_url:
-                        break
-
-                if video_url is None:
-                    raise MelodyError("Video URL not found in request")
-
-                ydl_opts = {
-                    "outtmpl": video_path,
-                    "quiet": True,
-                    "noplaylist": True,
-                    "http_headers": {
-                        "User-Agent": "Mozilla/5.0",
-                        "Accept-Language": "en-US,en;q=0.5",
-                        "Referer": url,  # Refer back to the original page
-                    },
-                }
-                with YoutubeDL(ydl_opts) as ydl:
-                    ydl.download([video_url])
-
-                return video_path
-            else:
-                audio_url = None
-                audio_path = os.path.join("downloads", f"{videoid}.m4a")
-
-                for fmt in formats:
-                    if fmt.get("audioQuality") == "AUDIO_QUALITY_MEDIUM":
-                        audio_url = fmt.get("url")
-                        break
-
-                if audio_url is None:
-                    for fmt in formats:
-                        if fmt.get("type") in ["audio/mp4", "audio/webm"]:
-                            audio_url = fmt.get("url")
+                    fmta = video_data.get("formatStreams", [])
+                    for fmt in fmta:
+                        video_url = fmt.get("url")
+                        if video_url:
                             break
 
-                if audio_url is None:
-                    raise MelodyError("Audio URL not found")
+                    if video_url is None:
+                        raise MelodyError("Video URL not found in requests")
 
-                ydl_opts = {
-                    "outtmpl": audio_path,
-                    "quiet": True,
-                    "noplaylist": True,
-                    "http_headers": {
-                        "User-Agent": "Mozilla/5.0",
-                        "Accept-Language": "en-US,en;q=0.5",
-                        "Referer": url,  # Refer back to the original page
-                    },
-                }
-                with YoutubeDL(ydl_opts) as ydl:
-                    ydl.download([audio_url])
-
-                return audio_path
-
-        except requests.RequestException as e:
-            raise MelodyError(f"Request failed: {e}")
-        except Exception as e:
-            raise MelodyError(f"An error occurred: {e}")
-
-    @staticmethod
-    async def as_download(vidid, video=False):
-        videoid = vidid
-        url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
-        try:
-            response = requests.get(url)
-            video_data = response.json()
-
-            formats = video_data.get("adaptiveFormats", [])
-
-            if not formats:
-                raise MelodyError("No media formats found")
-
-            if video:
-                video_url = None
-                video_path = os.path.join("downloads", f"{videoid}.mp4")
-
-                fmta = video_data.get("formatStreams", [])
-                for fmt in fmta:
-                    video_url = fmt.get("url")
-                    if video_url:
-                        break
-
-                if video_url is None:
-                    raise MelodyError("Video URL not found Not found in requests")
-
-                cmd = f'yt-dlp -o "{video_path}" "{video_url}"'
-                returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
-
-                if returncode != 0:
+                    cmd = f'yt-dlp -o "{video_path}" "{video_url}"'
                     returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
+
                     if returncode != 0:
                         raise MelodyError(f"Video download failed with error: {stderr}")
 
-                return video_path
-            else:
-                audio_url = None
-                audio_path = os.path.join("downloads", f"{videoid}.m4a")
+                    return video_path
+                else:
+                    audio_url = None
+                    audio_path = os.path.join("downloads", f"{videoid}.m4a")
 
-                for fmt in formats:
-                    if fmt.get("audioQuality") == "AUDIO_QUALITY_MEDIUM":
-                        audio_url = fmt.get("url")
-                        break
-
-                if audio_url is None:
                     for fmt in formats:
-                        if fmt.get("type") in ["audio/mp4", "audio/webm"]:
+                        if fmt.get("audioQuality") == "AUDIO_QUALITY_MEDIUM":
                             audio_url = fmt.get("url")
                             break
 
-                if audio_url is None:
-                    raise MelodyError("Audio URL not found")
+                    if audio_url is None:
+                        for fmt in formats:
+                            if fmt.get("type") in ["audio/mp4", "audio/webm"]:
+                                audio_url = fmt.get("url")
+                                break
 
-                cmd = f'yt-dlp -o "{audio_path}" "{audio_url}"'
-                returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
+                    if audio_url is None:
+                        raise MelodyError("Audio URL not found")
 
-                if returncode != 0:
+                    cmd = f'yt-dlp -o "{audio_path}" "{audio_url}"'
                     returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
+
                     if returncode != 0:
                         raise MelodyError(f"Audio download failed with error: {stderr}")
 
-                return audio_path
+                    return audio_path
 
-        except requests.RequestException as e:
-            raise MelodyError(f"Request failed: {e}")
-        except Exception as e:
-            raise MelodyError(f"An error occurred: {e}")
+            except (requests.RequestException, MelodyError) as e:
+                if attempt + 1 == retries:
+                    raise MelodyError(f"An error occurred after {retries} retries: {e}")
+                await asyncio.sleep(2)
 
+        raise MelodyError(f"Failed to download after {retries} attempts")
+ 
     @staticmethod
     async def get_download(vidid: str, video: bool = False):
         API = "https://api.cobalt.tools/api/json"
