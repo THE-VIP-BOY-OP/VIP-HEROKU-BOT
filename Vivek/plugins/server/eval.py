@@ -12,6 +12,8 @@ from pyrogram.types import Message
 
 from Vivek import app
 
+from config import OWNER_ID
+
 
 async def aexec(code, client, message):
     exec(
@@ -29,28 +31,28 @@ async def edit_or_reply(msg: Message, **kwargs):
 
 @app.on_edited_message(
     filters.command(["eval", "ev"])
-    & filters.sudo
+    & filters.user(OWNER_ID)
     & ~filters.forwarded
     & ~filters.via_bot,
     group=6,
 )
 @app.on_message(
     filters.command(["eval", "ev"])
-    & filters.sudo
+    & filters.user(OWNER_ID)
     & ~filters.forwarded
     & ~filters.via_bot,
     group=6,
 )
 @app.bot.on_edited_message(
     filters.command(["eval", "ev"])
-    & filters.sudo
+    & filters.user(OWNER_ID)
     & ~filters.forwarded
     & ~filters.via_bot,
     group=6,
 )
 @app.bot.on_message(
     filters.command(["eval", "ev"])
-    & filters.sudo
+    & filters.user(OWNER_ID)
     & ~filters.forwarded
     & ~filters.via_bot,
     group=6,
@@ -104,19 +106,19 @@ async def executor(client: Client, message: Message):
 
 
 @app.on_edited_message(
-    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
+    filters.command("sh") & filters.user(OWNER_ID) & ~filters.forwarded & ~filters.via_bot,
     group=6,
 )
 @app.on_message(
-    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
+    filters.command("sh") & filters.user(OWNER_ID) & ~filters.forwarded & ~filters.via_bot,
     group=6,
 )
 @app.bot.on_edited_message(
-    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
+    filters.command("sh") & filters.user(OWNER_ID) & ~filters.forwarded & ~filters.via_bot,
     group=6,
 )
 @app.bot.on_message(
-    filters.command("sh") & filters.sudo & ~filters.forwarded & ~filters.via_bot,
+    filters.command("sh") & filters.user(OWNER_ID) & ~filters.forwarded & ~filters.via_bot,
     group=6,
 )
 async def shellrunner(client: Client, message: Message):
