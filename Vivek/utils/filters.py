@@ -4,7 +4,7 @@ from typing import List, Union
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from config import OWNER_ID, PREFIX, ONLY_FOR_SUDO
+from config import ONLY_FOR_SUDO, OWNER_ID, PREFIX
 
 SPACE = True
 
@@ -18,18 +18,23 @@ def edit_filters():
         filters.sudo = filters.create(
             lambda _, __, m: bool(
                 m.from_user and (m.from_user.id in OWNER_ID or m.from_user.is_self)
-        ),
+            ),
             "SudoFilter",
         )
     else:
 
         filters.sudo = filters.create(
             lambda _, __, m: bool(
-                m.from_user and (m.from_user.id in OWNER_ID or m.from_user.is_self or m.chat and m.chat.is_admin)
-        ),
+                m.from_user
+                and (
+                    m.from_user.id in OWNER_ID
+                    or m.from_user.is_self
+                    or m.chat
+                    and m.chat.is_admin
+                )
+            ),
             "SudoFilter",
         )
-
 
     def command(commands: Union[str, List[str]], case_sensitive: bool = False):
         command_re = re.compile(r"([\"'])(.*?)(?<!\\)\1|(\S+)")
