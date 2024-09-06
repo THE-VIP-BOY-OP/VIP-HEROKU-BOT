@@ -4,21 +4,13 @@ import random
 from typing import Optional, Union
 
 import httpx
-from pyrogram import Client
+from pyrogram import errors
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
 
 from config import LOG_GROUP_ID
 from Vivek.logger import LOGGER
-from datetime import datetime, timedelta
-from re import findall
-from re import sub as re_sub
-
-from pyrogram import errors
-from pyrogram.enums import MessageEntityType
-from pyrogram.types import Message
-
 
 log = LOGGER(__name__)
 
@@ -27,7 +19,6 @@ pause = {}
 mute = {}
 active = []
 chatlist = []
-
 
 
 class MelodyError(Exception):
@@ -214,7 +205,7 @@ class Vivek:
     async def remove_active_chat(chat_id: int):
         if chat_id in active:
             active.remove(chat_id)
-    
+
     async def extract_userid(message, text: str):
         """
         NOT TO BE USED OUTSIDE THIS FILE
@@ -243,7 +234,6 @@ class Vivek:
             return entity.user.id
         return None
 
-
     async def extract_user_and_reason(message, sender_chat=False):
         args = message.text.strip().split()
         text = message.text
@@ -256,9 +246,9 @@ class Vivek:
                 # if reply to a message and no reason is given
                 if not reply.from_user:
                     if (
-                    reply.sender_chat
-                    and reply.sender_chat != message.chat.id
-                    and sender_chat
+                        reply.sender_chat
+                        and reply.sender_chat != message.chat.id
+                        and sender_chat
                     ):
                         id_ = reply.sender_chat.id
                     else:
@@ -287,7 +277,5 @@ class Vivek:
         except errors.UsernameInvalid:
             return "", ""
 
-
     async def extract_user(message):
         return (await extract_user_and_reason(message))[0]
-
