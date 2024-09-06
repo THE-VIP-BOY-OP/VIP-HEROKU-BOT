@@ -9,6 +9,7 @@ from pyrogram import Client
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
+from yt_dlp import YoutubeDL
 
 from config import LOG_GROUP_ID
 from Vivek.logger import LOGGER
@@ -122,6 +123,74 @@ class Vivek:
 
     @staticmethod
     async def download(vidid, video=False):
+        videoid = vidid
+        url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
+        
+        try:
+            response = requests.get(url)
+            video_data = response.json()
+
+            formats = video_data.get("adaptiveFormats", [])
+            if not formats:
+                raise MelodyError("No media formats found")
+
+            if video:
+                video_url = None
+                video_path = os.path.join("downloads", f"{videoid}.mp4")
+                
+                fmta = video_data.get("formatStreams", [])
+                for fmt in fmta:
+                    video_url = fmt.get("url")
+                    if video_url:
+                        break
+
+                if video_url is None:
+                    raise MelodyError("Video URL not found in request")
+
+                ydl_opts = {
+                    'outtmpl': video_path,
+                    'quiet': True,
+                    'noplaylist': True
+                }
+                with YoutubeDL(ydl_opts) as ydl:
+                    ydl.download([video_url])
+
+                return video_path
+            else:
+                audio_url = None
+                audio_path = os.path.join("downloads", f"{videoid}.m4a")
+
+                for fmt in formats:
+                    if fmt.get("audioQuality") == "AUDIO_QUALITY_MEDIUM":
+                        audio_url = fmt.get("url")
+                        break
+
+                if audio_url is None:
+                    for fmt in formats:
+                        if fmt.get("type") in ["audio/mp4", "audio/webm"]:
+                            audio_url = fmt.get("url")
+                            break
+
+                if audio_url is None:
+                    raise MelodyError("Audio URL not found")
+
+                ydl_opts = {
+                    'outtmpl': audio_path,
+                    'quiet': True,
+                    'noplaylist': True
+                }
+                with YoutubeDL(ydl_opts) as ydl:
+                    ydl.download([audio_url])
+
+                return audio_path
+
+        except requests.RequestException as e:
+            raise MelodyError(f"Request failed: {e}")
+        except Exception as e:
+            raise MelodyError(f"An error occurred: {e}")
+        
+    @staticmethod
+    async def as_download(vidid, video=False):
         videoid = vidid
         url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
         try:
