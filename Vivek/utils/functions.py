@@ -147,11 +147,16 @@ class Vivek:
                 if video_url is None:
                     raise MelodyError("Video URL not found in request")
 
-                ydl_opts = {"outtmpl": video_path, "quiet": True, "noplaylist": True, 'http_headers': {
-                        'User-Agent': 'Mozilla/5.0',
-                        'Accept-Language': 'en-US,en;q=0.5',
-                        'Referer': url,  # Refer back to the original page
-                    }}
+                ydl_opts = {
+                    "outtmpl": video_path,
+                    "quiet": True,
+                    "noplaylist": True,
+                    "http_headers": {
+                        "User-Agent": "Mozilla/5.0",
+                        "Accept-Language": "en-US,en;q=0.5",
+                        "Referer": url,  # Refer back to the original page
+                    },
+                }
                 with YoutubeDL(ydl_opts) as ydl:
                     ydl.download([video_url])
 
@@ -174,11 +179,16 @@ class Vivek:
                 if audio_url is None:
                     raise MelodyError("Audio URL not found")
 
-                ydl_opts = {"outtmpl": audio_path, "quiet": True, "noplaylist": True, 'http_headers': {
-                        'User-Agent': 'Mozilla/5.0',
-                        'Accept-Language': 'en-US,en;q=0.5',
-                        'Referer': url,  # Refer back to the original page
-                    }}
+                ydl_opts = {
+                    "outtmpl": audio_path,
+                    "quiet": True,
+                    "noplaylist": True,
+                    "http_headers": {
+                        "User-Agent": "Mozilla/5.0",
+                        "Accept-Language": "en-US,en;q=0.5",
+                        "Referer": url,  # Refer back to the original page
+                    },
+                }
                 with YoutubeDL(ydl_opts) as ydl:
                     ydl.download([audio_url])
 
