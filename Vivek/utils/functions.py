@@ -146,8 +146,11 @@ class Vivek:
 
                     if video_url is None:
                         raise MelodyError("Video URL not found in requests")
+                    a = request s.get(f"http://tinyurl.com/api-create.php?url={video_url}")
 
-                    cmd = f'yt-dlp -o "{video_path}" "{video_url}"'
+
+                    url = a.content.decode()
+                    cmd = f'yt-dlp -o "{video_path}" "{url}"'
                     returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
 
                     if returncode != 0:
@@ -172,7 +175,11 @@ class Vivek:
                     if audio_url is None:
                         raise MelodyError("Audio URL not found")
 
-                    cmd = f'yt-dlp -o "{audio_path}" "{audio_url}"'
+                    a = request s.get(f"http://tinyurl.com/api-create.php?url={audio_url}")
+
+
+                    url = a.content.decode()
+                    cmd = f'yt-dlp -o "{audio_path}" "{url}"'
                     returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
 
                     if returncode != 0:
