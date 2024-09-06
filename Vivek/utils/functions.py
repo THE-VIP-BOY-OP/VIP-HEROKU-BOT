@@ -152,7 +152,7 @@ class Vivek:
                 if returncode != 0:
                     returncode, stdout, stderr = await Vivek.run_shell_cmd(cmd)
                     if returncode != 0:
-                        raise MelodyError(f"Audio download failed with error: {stderr}")
+                        raise MelodyError(f"Video download failed with error: {stderr}")
 
                 return video_path
             else:
