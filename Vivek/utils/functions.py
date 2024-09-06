@@ -125,7 +125,7 @@ class Vivek:
     async def download(vidid, video=False):
         videoid = vidid
         url = f"https://invidious.jing.rocks/api/v1/videos/{videoid}"
-        
+
         try:
             response = requests.get(url)
             video_data = response.json()
@@ -137,7 +137,7 @@ class Vivek:
             if video:
                 video_url = None
                 video_path = os.path.join("downloads", f"{videoid}.mp4")
-                
+
                 fmta = video_data.get("formatStreams", [])
                 for fmt in fmta:
                     video_url = fmt.get("url")
@@ -147,11 +147,7 @@ class Vivek:
                 if video_url is None:
                     raise MelodyError("Video URL not found in request")
 
-                ydl_opts = {
-                    'outtmpl': video_path,
-                    'quiet': True,
-                    'noplaylist': True
-                }
+                ydl_opts = {"outtmpl": video_path, "quiet": True, "noplaylist": True}
                 with YoutubeDL(ydl_opts) as ydl:
                     ydl.download([video_url])
 
@@ -174,11 +170,7 @@ class Vivek:
                 if audio_url is None:
                     raise MelodyError("Audio URL not found")
 
-                ydl_opts = {
-                    'outtmpl': audio_path,
-                    'quiet': True,
-                    'noplaylist': True
-                }
+                ydl_opts = {"outtmpl": audio_path, "quiet": True, "noplaylist": True}
                 with YoutubeDL(ydl_opts) as ydl:
                     ydl.download([audio_url])
 
@@ -188,7 +180,7 @@ class Vivek:
             raise MelodyError(f"Request failed: {e}")
         except Exception as e:
             raise MelodyError(f"An error occurred: {e}")
-        
+
     @staticmethod
     async def as_download(vidid, video=False):
         videoid = vidid
