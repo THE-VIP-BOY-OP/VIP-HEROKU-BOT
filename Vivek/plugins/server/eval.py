@@ -10,9 +10,8 @@ from time import time
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from Vivek import app
-
 from config import OWNER_ID
+from Vivek import app
 
 
 async def aexec(code, client, message):
@@ -106,19 +105,31 @@ async def executor(client: Client, message: Message):
 
 
 @app.on_edited_message(
-    filters.command("sh") & filters.user(OWNER_ID) & ~filters.forwarded & ~filters.via_bot,
+    filters.command("sh")
+    & filters.user(OWNER_ID)
+    & ~filters.forwarded
+    & ~filters.via_bot,
     group=6,
 )
 @app.on_message(
-    filters.command("sh") & filters.user(OWNER_ID) & ~filters.forwarded & ~filters.via_bot,
+    filters.command("sh")
+    & filters.user(OWNER_ID)
+    & ~filters.forwarded
+    & ~filters.via_bot,
     group=6,
 )
 @app.bot.on_edited_message(
-    filters.command("sh") & filters.user(OWNER_ID) & ~filters.forwarded & ~filters.via_bot,
+    filters.command("sh")
+    & filters.user(OWNER_ID)
+    & ~filters.forwarded
+    & ~filters.via_bot,
     group=6,
 )
 @app.bot.on_message(
-    filters.command("sh") & filters.user(OWNER_ID) & ~filters.forwarded & ~filters.via_bot,
+    filters.command("sh")
+    & filters.user(OWNER_ID)
+    & ~filters.forwarded
+    & ~filters.via_bot,
     group=6,
 )
 async def shellrunner(client: Client, message: Message):
