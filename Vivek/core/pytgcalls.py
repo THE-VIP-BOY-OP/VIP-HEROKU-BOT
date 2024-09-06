@@ -112,7 +112,7 @@ class MusicPlayer(PyTgCalls):
                     formats = video_data.get("recommendedVideos", [])
                     list = []
                     for fmt in formats:
-                        if fmt.get("lengthSeconds") < 420:
+                        if 0 < fmt.get("lengthSeconds") < 420:
                             a = fmt.get("videoId")
                             list.append(a)
                     vidid = random.choice(list)
