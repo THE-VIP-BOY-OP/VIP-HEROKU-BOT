@@ -7,8 +7,14 @@ from ntgcalls import TelegramServerError
 from pyrogram.enums import ParseMode
 from pytgcalls import PyTgCalls, filters
 from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
-from pytgcalls.types import AudioQuality, MediaStream, Update, VideoQuality
-from pytgcalls.types import StreamVideoEnded, StreamAudioEnded
+from pytgcalls.types import (
+    AudioQuality,
+    MediaStream,
+    StreamAudioEnded,
+    StreamVideoEnded,
+    Update,
+    VideoQuality,
+)
 
 from Vivek.utils.functions import MelodyError, Vivek, chatlist
 from Vivek.utils.queue import Queue
