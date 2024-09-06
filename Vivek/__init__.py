@@ -4,27 +4,16 @@ uvloop.install()
 
 import logging
 import os
+import random
 import shutil
 import sys
 from os import listdir, mkdir
-
-from Vivek.core.clients import app, bot
-from Vivek.utils.filters import edit_filters
-
-from .logger import LOGGER
-
-
-from pyrogram import Client
-from pyrogram import __version__ as v
-
-from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
-
-import os
-import random
 from typing import Union
 
 import requests
 from ntgcalls import TelegramServerError
+from pyrogram import Client
+from pyrogram import __version__ as v
 from pyrogram import filters
 from pyrogram.enums import ParseMode
 from pytgcalls import PyTgCalls
@@ -41,8 +30,13 @@ from pytgcalls.types import (
     VideoQuality,
 )
 
+from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
+from Vivek.core.clients import app, bot
+from Vivek.utils.filters import edit_filters
 from Vivek.utils.functions import MelodyError, Vivek, chatlist
 from Vivek.utils.queue import Queue
+
+from .logger import LOGGER
 
 HELPABLE = {}
 edit_filters()
@@ -52,7 +46,6 @@ import os
 import sys
 
 test_stream = "http://docs.evostream.com/sample_content/assets/" "sintel1m720p.mp4"
-
 
 
 app = Client(
@@ -249,8 +242,6 @@ class MusicPlayer(PyTgCalls):
 
 
 call = MusicPlayer()
-
-
 
 
 for file in os.listdir():
