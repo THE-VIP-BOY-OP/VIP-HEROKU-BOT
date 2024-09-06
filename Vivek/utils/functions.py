@@ -10,10 +10,8 @@ from pyrogram.enums import ChatMemberStatus, MessageEntityType
 from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
 
-from config import LOG_GROUP_ID
-from Vivek.logger import LOGGER
+from config import LOG_GROUP_ID, ONLY_FOR_SUDO
 
-log = LOGGER(__name__)
 
 S12KK = {}
 pause = {}
