@@ -244,7 +244,7 @@ async def incoming_handler(_: PyTgCalls, update: Update):
         update.chat_id,
         "You are calling me!",
     )
-   await call.play(
+    await call.play(
         update.chat_id,
         MediaStream(
             test_stream,
