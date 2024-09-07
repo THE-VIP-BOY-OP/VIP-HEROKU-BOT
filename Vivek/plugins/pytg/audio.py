@@ -4,14 +4,13 @@ import ffmpeg
 from pyrogram import filters
 
 from config import LOG_GROUP_ID
-from Vivek import app
-from Vivek.core.pytgcalls import call
+from Vivek import app, call
 from Vivek.utils.functions import S12K, Vivek
 from Vivek.utils.queue import Queue
 
 
 @app.on_message(
-    filters.sudo & filters.chat(LOG_GROUP_ID) & (filters.audio | filters.voice)
+filters.chat(LOG_GROUP_ID) & (filters.audio | filters.voice)
 )
 async def audio_play(client, message):
     if message.audio:
@@ -30,10 +29,6 @@ async def audio_play(client, message):
         .overwrite_output()
         .run()
     )
-    """audio = AudioSegment.from_file(file_name)
-    low_passed = low_pass_filter(audio, cutoff=700)
-    bass_boosted = low_passed + 7
-    bass_boosted.export(file_name, format="mp3")"""
     chat_id = S12K()
     await call.play(chat_id, file_name)
     await message.reply_text("Started Playing")
