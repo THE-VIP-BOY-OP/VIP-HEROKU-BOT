@@ -24,7 +24,7 @@ async def main():
     await idle()
 
     await app.stop()
-    await bot.stop()
+    await app.bot.stop()
 
 
 if __name__ == "__main__":
