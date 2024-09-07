@@ -4,7 +4,7 @@ import ffmpeg
 from pyrogram import filters
 
 from config import LOG_GROUP_ID
-from Vivek import app, call
+from Vivek import app, MusicPlayer
 from Vivek.utils.functions import S12K, Vivek
 from Vivek.utils.queue import Queue
 
@@ -28,7 +28,7 @@ async def audio_play(client, message):
         .run()
     )
     chat_id = S12K()
-    await call.play(chat_id, file_name)
+    await MusicPlayer.play(chat_id, file_name)
     await message.reply_text("Started Playing")
     os.remove(a)
     os.remove(file_name)
@@ -45,6 +45,6 @@ async def audio_play(client, message):
 @app.on_message(filters.sudo & filters.command("end"))
 async def audio_play(client, message):
     chat_id = message.chat.id
-    await call.leave_call(chat_id)
+    await MusicPlayer.leave_call(chat_id)
     await Queue.clear(chat_id)
     await Vivek.remove_active_chat(chat_id)
