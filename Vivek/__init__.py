@@ -242,7 +242,7 @@ async def incoming_handler(_: PyTgCalls, update: Update):
         update.chat_id,
         "You are calling me!",
     )
-    await call.play(
+    await MusicPlayer.play(
         update.chat_id,
         test_stream,
     )
