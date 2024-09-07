@@ -68,7 +68,8 @@ bot = Client(
     max_concurrent_transmissions=9,
 )
 
-call =  PyTgCalls(app)
+call = PyTgCalls(app)
+
 
 async def restart():
     os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
@@ -80,7 +81,7 @@ app.call = call
 
 
 class MusicPlayer:
-    
+
     @staticmethod
     async def play(
         chat_id: int,
@@ -229,21 +230,24 @@ class MusicPlayer:
             await Vivek.remove_active_chat(chat_id)
             await self.leave_call(chat_id)
 
+
 @call.on_update(filters.stream_end)
 async def my_handler(client: PyTgCalls, update: Update):
     if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
         await self.change_stream(update.chat_id)
 
+
 @call.on_update(fl.chat_update(ChatUpdate.Status.INCOMING_CALL))
 async def incoming_handler(_: PyTgCalls, update: Update):
     await call.mtproto_client.send_message(
-     update.chat_id,
-    "You are calling me!",
-)
+        update.chat_id,
+        "You are calling me!",
+    )
     await call.play(
         update.chat_id,
         test_stream,
     )
+
 
 for file in os.listdir():
     if (
