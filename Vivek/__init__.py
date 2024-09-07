@@ -69,6 +69,67 @@ bot = Client(
 
 call = PyTgCalls(app)
 
+from typing import Callable, Optional, Union, List
+
+import pyrogram
+from pyrogram.filters import Filter
+
+
+class App:
+    def __init__(self, clients: List[pyrogram.Client]):
+        self.clients = clients
+
+    def on_message(
+        self: Union[Filter, None] = None,
+        filters: Optional[Filter] = None,
+        group: int = 0,
+    ) -> Callable:
+        def decorator(func: Callable) -> Callable:
+            if isinstance(self, App):
+                for client in self.clients:
+                    client.add_handler(pyrogram.handlers.MessageHandler(func, filters), group)
+            elif isinstance(self, Filter) or self is None:
+                if not hasattr(func, "handlers"):
+                    func.handlers = []
+
+                func.handlers.append(
+                    (
+                        pyrogram.handlers.MessageHandler(func, self),
+                        group if filters is None else filters
+                    )
+                )
+
+            return func
+
+        return decorator
+        
+
+    def on_edited_message(
+        self: Union[Filter, None] = None,
+        filters: Optional[Filter] = None,
+        group: int = 0,
+    ) -> Callable:
+        def decorator(func: Callable) -> Callable:
+            if isinstance(self, App):
+                for client in self.clients:
+                    client.add_handler(pyrogram.handlers.EditedMessageHandler(func, filters), group)
+            elif isinstance(self, Filter) or self is None:
+                if not hasattr(func, "handlers"):
+                    func.handlers = []
+
+                func.handlers.append(
+                    (
+                        pyrogram.handlers.EditedMessageHandler(func, self),
+                        group if filters is None else filters
+                    )
+                )
+
+            return func
+
+        return decorator
+        
+
+ap = App([app, bot])
 
 async def restart():
     os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
