@@ -31,7 +31,6 @@ from pytgcalls.types import (
 )
 
 from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
-from Vivek.core.clients import app, bot
 from Vivek.utils.filters import edit_filters
 from Vivek.utils.functions import MelodyError, Vivek, chatlist
 from Vivek.utils.queue import Queue
