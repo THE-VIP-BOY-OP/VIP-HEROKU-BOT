@@ -1,6 +1,7 @@
 from pyrogram import filters
 
-from Vivek import app, MusicPlayer as call
+from Vivek import MusicPlayer as call
+from Vivek import app
 from Vivek.utils.functions import Vivek
 
 
