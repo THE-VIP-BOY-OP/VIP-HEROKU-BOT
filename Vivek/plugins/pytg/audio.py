@@ -4,7 +4,7 @@ import ffmpeg
 from pyrogram import filters
 
 from config import LOG_GROUP_ID
-from Vivek import app, MusicPlayer
+from Vivek import MusicPlayer, app
 from Vivek.utils.functions import S12K, Vivek
 from Vivek.utils.queue import Queue
 
