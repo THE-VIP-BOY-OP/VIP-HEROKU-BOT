@@ -44,9 +44,7 @@ edit_filters()
 import os
 import sys
 
-test_stream = 'http://docs.evostream.com/sample_content/assets/' \
-              'sintel1m720p.mp4'
-
+test_stream = "http://docs.evostream.com/sample_content/assets/" "sintel1m720p.mp4"
 
 
 app = Client(
@@ -250,6 +248,7 @@ async def incoming_handler(_: PyTgCalls, update: Update):
             test_stream,
         ),
     )
+
 
 for file in os.listdir():
     if (
