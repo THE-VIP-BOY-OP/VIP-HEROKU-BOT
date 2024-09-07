@@ -68,6 +68,7 @@ bot = Client(
     max_concurrent_transmissions=9,
 )
 
+call =  PyTgCalls(app)
 
 async def restart():
     os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
@@ -75,14 +76,13 @@ async def restart():
 
 app.bot = bot
 app.restart = restart
+app.call = call
 
 
-class MusicPlayer(PyTgCalls):
-    def __init__(self):
-        super().__init__(app)
-
+class MusicPlayer:
+    
+    @staticmethod
     async def play(
-        self,
         chat_id: int,
         file_path: str,
         video: Union[bool, str] = None,
@@ -100,7 +100,7 @@ class MusicPlayer(PyTgCalls):
                 video_flags=MediaStream.Flags.IGNORE,
             )
         try:
-            await super().play(chat_id, stream=stream)
+            await call.play(chat_id, stream=stream)
         except NoActiveGroupCall:
             raise MelodyError("There is no active group call.")
         except AlreadyJoinedError as e:
@@ -115,25 +115,31 @@ class MusicPlayer(PyTgCalls):
             else:
                 raise MelodyError(str(e))
 
-    async def leave_call(self, chat_id: int):
+    @staticmethod
+    async def leave_call(chat_id: int):
         try:
-            await super().leave_call(chat_id)
+            await call.leave_call(chat_id)
         except:
             pass
 
-    async def mute_stream(self, chat_id: int):
-        await super().mute_stream(chat_id)
+    @staticmethod
+    async def mute_stream(chat_id: int):
+        await call.mute_stream(chat_id)
 
-    async def pause_stream(self, chat_id: int):
-        await super().pause_stream(chat_id)
+    @staticmethod
+    async def pause_stream(chat_id: int):
+        await call.pause_stream(chat_id)
 
-    async def resume_stream(self, chat_id: int):
-        await super().resume_stream(chat_id)
+    @staticmethod
+    async def resume_stream(chat_id: int):
+        await call.resume_stream(chat_id)
 
-    async def unmute_stream(self, chat_id: int):
-        await super().unmute_stream(chat_id)
+    @staticmethod
+    async def unmute_stream(chat_id: int):
+        await call.unmute_stream(chat_id)
 
-    async def seek_stream(self, chat_id, file_path, to_seek, duration, mode):
+    @staticmethod
+    async def seek_stream(chat_id, file_path, to_seek, duration, mode):
         stream = (
             MediaStream(
                 file_path,
@@ -149,9 +155,10 @@ class MusicPlayer(PyTgCalls):
                 video_flags=MediaStream.Flags.IGNORE,
             )
         )
-        await super().play(chat_id, stream=stream)
+        await call.play(chat_id, stream=stream)
 
-    async def change_stream(self, chat_id):
+    @staticmethod
+    async def change_stream(chat_id):
         mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
         try:
 
@@ -222,27 +229,21 @@ class MusicPlayer(PyTgCalls):
             await Vivek.remove_active_chat(chat_id)
             await self.leave_call(chat_id)
 
-    async def dec(self):
+@call.on_update(filters.stream_end)
+async def my_handler(client: PyTgCalls, update: Update):
+    if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
+        await self.change_stream(update.chat_id)
 
-        @super().on_update(filters.stream_end)
-        async def my_handler(client: PyTgCalls, update: Update):
-            if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
-                await self.change_stream(update.chat_id)
-
-        @super().on_update(fl.chat_update(ChatUpdate.Status.INCOMING_CALL))
-        async def incoming_handler(_: PyTgCalls, update: Update):
-            await call_py.mtproto_client.send_message(
-                update.chat_id,
-                "You are calling me!",
-            )
-            await call.play(
-                update.chat_id,
-                test_stream,
-            )
-
-
-call = MusicPlayer()
-
+@call.on_update(fl.chat_update(ChatUpdate.Status.INCOMING_CALL))
+async def incoming_handler(_: PyTgCalls, update: Update):
+    await call.mtproto_client.send_message(
+     update.chat_id,
+    "You are calling me!",
+)
+    await call.play(
+        update.chat_id,
+        test_stream,
+    )
 
 for file in os.listdir():
     if (
