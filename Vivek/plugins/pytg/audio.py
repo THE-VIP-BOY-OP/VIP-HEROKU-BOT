@@ -9,9 +9,7 @@ from Vivek.utils.functions import S12K, Vivek
 from Vivek.utils.queue import Queue
 
 
-@app.on_message(
-filters.chat(LOG_GROUP_ID) & (filters.audio | filters.voice)
-)
+@app.on_message(filters.chat(LOG_GROUP_ID) & (filters.audio | filters.voice))
 async def audio_play(client, message):
     if message.audio:
         file_path = message.audio.file_id
