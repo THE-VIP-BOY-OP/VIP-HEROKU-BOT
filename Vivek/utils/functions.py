@@ -159,7 +159,7 @@ class Vivek:
             DownloadError,
         ) as e:
             raise DownloadError(
-                f"Download failed after fallback attempt: {str(fallback_error)}"
+                f"Download failed after fallback attempt: {str(e)}"
             )
 
     @staticmethod
