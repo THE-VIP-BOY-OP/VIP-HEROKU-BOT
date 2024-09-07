@@ -295,7 +295,7 @@ class MusicPlayer:
             await self.leave_call(chat_id)
 
 
-@call.on_update(filters.stream_end)
+@call.on_update(fl.stream_end)
 async def my_handler(client: PyTgCalls, update: Update):
     if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
         await self.change_stream(update.chat_id)
