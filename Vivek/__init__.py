@@ -17,7 +17,6 @@ from pyrogram import __version__ as v
 from pyrogram import filters
 from pyrogram.enums import ParseMode
 from pytgcalls import PyTgCalls
-from pytgcalls import filters
 from pytgcalls import filters as fl
 from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
 from pytgcalls.types import (
