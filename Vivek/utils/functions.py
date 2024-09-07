@@ -158,9 +158,7 @@ class Vivek:
             ValueError,
             DownloadError,
         ) as e:
-            raise DownloadError(
-                f"Download failed after fallback attempt: {str(e)}"
-            )
+            raise DownloadError(f"Download failed after fallback attempt: {str(e)}")
 
     @staticmethod
     async def is_music_playing(chat_id: int) -> bool:
