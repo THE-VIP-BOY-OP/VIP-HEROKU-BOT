@@ -84,7 +84,7 @@ class App:
         group: int = 0,
     ) -> Callable:
         def decorator(func: Callable) -> Callable:
-            if isinstance(self, Userbot):
+            if isinstance(self, App):
                 for client in self.clients:
                     client.add_handler(
                         pyrogram.handlers.MessageHandler(func, filters), group
