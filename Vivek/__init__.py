@@ -84,52 +84,11 @@ class App:
         group: int = 0,
     ) -> Callable:
         def decorator(func: Callable) -> Callable:
-            if isinstance(self, App):
+            if isinstance(self, Userbot):
                 for client in self.clients:
-                    client.add_handler(
-                        pyrogram.handlers.MessageHandler(func, filters), group
-                    )
-            elif isinstance(self, Filter) or self is None:
-                if not hasattr(func, "handlers"):
-                    func.handlers = []
-
-                func.handlers.append(
-                    (
-                        pyrogram.handlers.MessageHandler(func, self),
-                        group if filters is None else filters,
-                    )
-                )
-
+                    client.add_handler(pyrogram.handlers.MessageHandler(func, filters), group)
             return func
-
         return decorator
-
-    def on_edited_message(
-        self: Union[Filter, None] = None,
-        filters: Optional[Filter] = None,
-        group: int = 0,
-    ) -> Callable:
-        def decorator(func: Callable) -> Callable:
-            if isinstance(self, App):
-                for client in self.clients:
-                    client.add_handler(
-                        pyrogram.handlers.EditedMessageHandler(func, filters), group
-                    )
-            elif isinstance(self, Filter) or self is None:
-                if not hasattr(func, "handlers"):
-                    func.handlers = []
-
-                func.handlers.append(
-                    (
-                        pyrogram.handlers.EditedMessageHandler(func, self),
-                        group if filters is None else filters,
-                    )
-                )
-
-            return func
-
-        return decorator
-
 
 ap = App([app, bot])
 
