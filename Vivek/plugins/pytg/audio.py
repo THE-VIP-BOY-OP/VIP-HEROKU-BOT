@@ -5,13 +5,14 @@ from pyrogram import filters
 
 from config import LOG_GROUP_ID
 from Vivek import MusicPlayer, app
-from Vivek.utils.functions import S12K, Vivek, MelodyError
+from Vivek.utils.functions import S12K, MelodyError, Vivek
 from Vivek.utils.queue import Queue
+
 
 @app.on_message(filters.chat(LOG_GROUP_ID) & (filters.audio | filters.voice))
 async def audio_play(client, message):
     mystic = await message.reply_text("processing")
-	
+
     if message.audio:
         file_id = message.audio.file_id
         file_name = message.audio.file_name
@@ -20,8 +21,7 @@ async def audio_play(client, message):
         file_id = message.voice.file_id
         duration = message.voice.duration
         file_name = f"{message.voice.file_unique_id}.ogg"
-        
-        
+
     file_path = os.path.join("downloads", file_name)
     user_name = "🤗"
     a = await app.download_media(file_id)
@@ -35,7 +35,7 @@ async def audio_play(client, message):
     )
     chat_id = S12K()
     title = "Playing Local Audio/Voice"
-    
+
     if await Vivek.is_active_chat(chat_id):
         await Queue.add(
             chat_id,
@@ -72,6 +72,7 @@ async def audio_play(client, message):
     await Vivek.add_active_chat(message.chat.id)
     await mystic.edit("Started Playing")
     os.remove(a)
+
 
 @app.on_message(filters.sudo & filters.command("playhere"))
 async def audio_play(client, message):
