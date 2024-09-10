@@ -49,7 +49,7 @@ async def audio_play(client, message):
         )
         count = len(await Queue.get_queues(chat_id)) - 1
         return await mystic.edit(
-            f"<b>Added To Queue At {count}</b>\n<b>Title:</b> {title}\n<b>Duration</b>: {duration_min}\n<b>By</b>: {user_name}",
+            f"<b>Added To Queue At {count}</b>\n<b>Title:</b> {title}\n<b>Duration</b>: {duration_min} seconds\n<b>By</b>: {user_name}",
             disable_web_page_preview=True,
         )
 
