@@ -10,7 +10,7 @@ from Vivek.utils.queue import Queue
 
 @app.on_message(filters.chat(LOG_GROUP_ID) & (filters.audio | filters.voice))
 async def audio_play(client, message):
-	mystic = await message.reply_text("processing")
+    mystic = await message.reply_text("processing")
 	
     if message.audio:
         file_id = message.audio.file_id
