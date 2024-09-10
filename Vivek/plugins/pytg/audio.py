@@ -51,7 +51,6 @@ async def audio_play(client, message):
         return await mystic.edit(
             f"<b>Added To Queue At {count}</b>\n<b>Title:</b> {title}\n<b>Duration</b>: {duration_min}\n<b>By</b>: {user_name}",
             disable_web_page_preview=True,
-            parse_mode=ParseMode.HTML,
         )
 
     try:
