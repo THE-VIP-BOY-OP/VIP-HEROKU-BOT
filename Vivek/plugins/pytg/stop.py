@@ -1,13 +1,8 @@
-import os
-
-import ffmpeg
 from pyrogram import filters
 
-from config import LOG_GROUP_ID
 from Vivek import MusicPlayer, app
-from Vivek.utils.functions import S12K, Vivek
+from Vivek.utils.functions import Vivek
 from Vivek.utils.queue import Queue
-
 
 
 @app.on_message(filters.sudo & filters.command("end"))
