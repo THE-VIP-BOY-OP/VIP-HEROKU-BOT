@@ -16,10 +16,10 @@ async def audio_play(client, message):
     if message.audio:
         file_id = message.audio.file_id
         file_name = message.audio.file_name
-        duration = message.audio.duration
+        duration_min = message.audio.duration
     if message.voice:
         file_id = message.voice.file_id
-        duration = message.voice.duration
+        duration_min = message.voice.duration
         file_name = f"{message.voice.file_unique_id}.ogg"
 
     file_path = os.path.join("downloads", file_name)
