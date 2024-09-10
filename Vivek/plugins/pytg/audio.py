@@ -24,6 +24,7 @@ async def audio_play(client, message):
 
     file_path = os.path.join("downloads", file_name)
     user_name = "🤗"
+    video=False
     a = await app.download_media(file_id)
 
     (
@@ -42,7 +43,7 @@ async def audio_play(client, message):
             title=title,
             duration=duration_min,
             vidid=None,
-            video=False,
+            video=video,
             file_path=file_path,
             by=user_name,
         )
@@ -64,7 +65,7 @@ async def audio_play(client, message):
         title=title,
         duration=duration_min,
         vidid=None,
-        video=False,
+        video=video,
         file_path=file_path,
         by=user_name,
     )
