@@ -1,4 +1,6 @@
+import asyncio
 import importlib
+from typing import Awaitable, Callable
 
 import pyromod.listen  # noqa
 from pyrogram import __version__ as v
@@ -10,8 +12,6 @@ from Vivek.plugins import ALL_MODULES
 
 from .logger import LOGGER
 
-import asyncio
-from typing import Callable, Awaitable
 
 class App(VClient):
     def __init__(self):
@@ -53,8 +53,6 @@ class App(VClient):
 
     def run(fnc: Callable[[], Awaitable[None]]):
         asyncio.get_event_loop_policy().get_event_loop().run_until_complete(fnc())
-
-
 
 
 app = App()
