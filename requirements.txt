@@ -1,13 +1,10 @@
 asyncio
 aiohttp
-ffmpeg-python
 gitpython
 python-dotenv
-pydub
 httpx[http2]
 requests
 tgcrypto
 uvloop
 pyromod
 git+https://github.com/KurimuzonAkuma/pyrogram
-git+https://github.com/yt-dlp/yt-dlp
