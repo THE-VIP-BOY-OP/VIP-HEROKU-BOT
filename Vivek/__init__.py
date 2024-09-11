@@ -1,23 +1,23 @@
 import uvloop
 
 uvloop.install()
-import pyromod.listem #noqa
-import os
-import sys
 import logging
 import os
 import random
 import shutil
 import sys
 from os import listdir, mkdir
-from typing import Union
+from typing import Callable, List, Optional, Union
 
+import pyrogram
+import pyromod.listem  # noqa
 import requests
 from ntgcalls import TelegramServerError
-from pyrogram import Client, types
+from pyrogram import Client
 from pyrogram import __version__ as v
-from pyrogram import filters
+from pyrogram import filters, types
 from pyrogram.enums import ParseMode
+from pyrogram.filters import Filter
 from pytgcalls import PyTgCalls
 from pytgcalls import filters as fl
 from pytgcalls.exceptions import AlreadyJoinedError, NoActiveGroupCall
@@ -35,10 +35,6 @@ from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
 from Vivek.utils.filters import edit_filters
 from Vivek.utils.functions import MelodyError, Vivek, chatlist
 from Vivek.utils.queue import Queue
-from typing import Callable, List, Optional, Union
-
-import pyrogram
-from pyrogram.filters import Filter
 
 from .logger import LOGGER
 
@@ -70,6 +66,7 @@ bot = Client(
 
 call = PyTgCalls(app)
 
+
 async def restart():
     os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
 
@@ -97,15 +94,16 @@ if "downloads" in listdir():
     shutil.rmtree("downloads")
     mkdir("downloads")
 
+
 def ikb(*button_rows):
     """
     Create an inline keyboard with buttons using an even more simplified syntax.
-    Automatically defaults to "url" if type is not provided, 
+    Automatically defaults to "url" if type is not provided,
     and supports passing rows directly as arguments.
-    
+
     button_rows: Each row is a list of button parameters like:
     [text, value] or [text, value, type]. If type is omitted, defaults to "url".
-    
+
     Example:
     ikb(
         ["Google", "https://google.com"],  # Defaults to url
@@ -119,19 +117,23 @@ def ikb(*button_rows):
             text = button[0]
             value = button[1]
             button_type = button[2] if len(button) == 3 else "url"
-            
+
             if button_type == "url":
                 button_row.append(types.InlineKeyboardButton(text=text, url=value))
             elif button_type == "callback":
-                button_row.append(types.InlineKeyboardButton(text=text, callback_data=value))
+                button_row.append(
+                    types.InlineKeyboardButton(text=text, callback_data=value)
+                )
             else:
                 raise ValueError("Button type must be either 'url' or 'callback'")
-        
+
         keyboard.append(button_row)
-    
+
     return types.InlineKeyboardMarkup(keyboard)
-    
+
+
 types.ikb = ikb
+
 
 class MusicPlayer:
 
