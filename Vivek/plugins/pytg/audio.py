@@ -7,7 +7,7 @@ from config import LOG_GROUP_ID
 from Vivek import MusicPlayer, app
 from Vivek.utils.functions import S12K, MelodyError, Vivek
 from Vivek.utils.queue import Queue
-from config import LOG_GROUP_ID
+
 
 def get_path(file_path):
     base, ext = os.path.splitext(file_path)
