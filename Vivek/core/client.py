@@ -10,6 +10,8 @@ from Vivek.plugins import ALL_MODULES
 
 from .logger import LOGGER
 
+import asyncio
+from typing import Callable, Awaitable
 
 class App(VClient):
     def __init__(self):
@@ -48,6 +50,11 @@ class App(VClient):
         LOGGER(__name__).info(f"Radhe Radhe\nStopping....")
         await super().stop()
         await self.bot.stop()
+
+    def run(fnc: Callable[[], Awaitable[None]]):
+        asyncio.get_event_loop_policy().get_event_loop().run_until_complete(fnc())
+
+
 
 
 app = App()
