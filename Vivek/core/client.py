@@ -1,10 +1,11 @@
 import pyromod.listen  # noqa
-from pyrogram import Client
 from pyrogram import __version__ as v
 
 from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
 
-app = Client(
+from Vivek.functions.client import VClient
+
+app = VClient(
     name="Vivek",
     api_id=API_ID,
     api_hash=API_HASH,
@@ -13,7 +14,7 @@ app = Client(
     in_memory=True,
     plugins=dict(root="Vivek/plugins"),
 )
-bot = Client(
+bot = VClient(
     name="Vivek1",
     api_id=API_ID,
     api_hash=API_HASH,
@@ -25,8 +26,6 @@ bot = Client(
 )
 
 
-async def restart():
-    os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
 
 
 app.bot = bot
