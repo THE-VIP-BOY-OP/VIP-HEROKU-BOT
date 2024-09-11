@@ -70,6 +70,7 @@ async def play_command(client, message: Message):
     if await Vivek.is_active_chat(message.chat.id):
         await Queue.add(
             message.chat.id,
+            chatid=message.chat.id,
             title=title,
             duration=duration_min,
             vidid=vidid,
@@ -92,6 +93,7 @@ async def play_command(client, message: Message):
         return await mystic.edit(e)
     await Queue.add(
         message.chat.id,
+        chatid=message.chat.id,
         title=title,
         duration=duration_min,
         vidid=vidid,
