@@ -1,16 +1,10 @@
 import asyncio
-import importlib
 
-from pyrogram import idle
-
-from config import LOG_GROUP_ID
-from Vivek import LOGGER, app
-from Vivek.plugins import ALL_MODULES
+from Vivek import app
 
 
 async def main():
     await app.start()
-
 
 
 if __name__ == "__main__":
