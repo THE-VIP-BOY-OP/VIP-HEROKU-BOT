@@ -8,16 +8,18 @@ from Vivek import MusicPlayer, app
 from Vivek.utils.functions import S12K, MelodyError, Vivek
 from Vivek.utils.queue import Queue
 
+
 def get_path(file_path):
     base, ext = os.path.splitext(file_path)
     counter = 1
     new_file_path = file_path
-    
+
     while os.path.exists(new_file_path):
         new_file_path = f"{base}_{counter}{ext}"
         counter += 1
-        
+
     return new_file_path
+
 
 @app.on_message(filters.chat(LOG_GROUP_ID) & (filters.audio | filters.voice))
 async def audio_play(client, message):
