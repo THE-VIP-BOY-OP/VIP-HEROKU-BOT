@@ -26,4 +26,3 @@ bot = VClient(
 
 
 app.bot = bot
-
