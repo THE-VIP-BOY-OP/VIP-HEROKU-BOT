@@ -45,6 +45,7 @@ class App(VClient):
         await self.stop()
 
     async def stop(self):
+        LOGGER(__name__).info(f"Radhe Radhe\nStopping....")
         await super().stop()
         await self.bot.stop()
 
