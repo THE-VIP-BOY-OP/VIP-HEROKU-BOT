@@ -1,7 +1,9 @@
 import uvloop
 
 uvloop.install()
-
+import pyromod.listem #noqa
+import os
+import sys
 import logging
 import os
 import random
@@ -12,7 +14,7 @@ from typing import Union
 
 import requests
 from ntgcalls import TelegramServerError
-from pyrogram import Client
+from pyrogram import Client, types
 from pyrogram import __version__ as v
 from pyrogram import filters
 from pyrogram.enums import ParseMode
@@ -33,15 +35,15 @@ from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
 from Vivek.utils.filters import edit_filters
 from Vivek.utils.functions import MelodyError, Vivek, chatlist
 from Vivek.utils.queue import Queue
+from typing import Callable, List, Optional, Union
+
+import pyrogram
+from pyrogram.filters import Filter
 
 from .logger import LOGGER
 
 HELPABLE = {}
 edit_filters()
-
-
-import os
-import sys
 
 test_stream = "http://docs.evostream.com/sample_content/assets/" "sintel1m720p.mp4"
 
@@ -68,35 +70,6 @@ bot = Client(
 
 call = PyTgCalls(app)
 
-from typing import Callable, List, Optional, Union
-
-import pyrogram
-from pyrogram.filters import Filter
-
-
-class App:
-    def __init__(self, clients: List[pyrogram.Client]):
-        self.clients = clients
-
-    def on_message(
-        self: Union[Filter, None] = None,
-        filters: Optional[Filter] = None,
-        group: int = 0,
-    ) -> Callable:
-        def decorator(func: Callable) -> Callable:
-            if isinstance(self, App):
-                for client in self.clients:
-                    client.add_handler(
-                        pyrogram.handlers.MessageHandler(func, filters), group
-                    )
-            return func
-
-        return decorator
-
-
-ap = App([app, bot])
-
-
 async def restart():
     os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
 
@@ -105,6 +78,60 @@ app.bot = bot
 app.restart = restart
 app.call = call
 
+
+for file in os.listdir():
+    if (
+        file.endswith(".jpg")
+        or file.endswith(".jpeg")
+        or file.endswith(".mp3")
+        or file.endswith(".m4a")
+        or file.endswith(".mp4")
+        or file.endswith(".webm")
+        or file.endswith(".png")
+        or file.endswith(".session")
+        or file.endswith(".session-journal")
+    ):
+        os.remove(file)
+
+if "downloads" in listdir():
+    shutil.rmtree("downloads")
+    mkdir("downloads")
+
+def ikb(*button_rows):
+    """
+    Create an inline keyboard with buttons using an even more simplified syntax.
+    Automatically defaults to "url" if type is not provided, 
+    and supports passing rows directly as arguments.
+    
+    button_rows: Each row is a list of button parameters like:
+    [text, value] or [text, value, type]. If type is omitted, defaults to "url".
+    
+    Example:
+    ikb(
+        ["Google", "https://google.com"],  # Defaults to url
+        ["Click Me", "my_callback", "callback"]
+    )
+    """
+    keyboard = []
+    for row in button_rows:
+        button_row = []
+        for button in row:
+            text = button[0]
+            value = button[1]
+            button_type = button[2] if len(button) == 3 else "url"
+            
+            if button_type == "url":
+                button_row.append(types.InlineKeyboardButton(text=text, url=value))
+            elif button_type == "callback":
+                button_row.append(types.InlineKeyboardButton(text=text, callback_data=value))
+            else:
+                raise ValueError("Button type must be either 'url' or 'callback'")
+        
+        keyboard.append(button_row)
+    
+    return types.InlineKeyboardMarkup(keyboard)
+    
+types.ikb = ikb
 
 class MusicPlayer:
 
@@ -264,36 +291,3 @@ class MusicPlayer:
 async def my_handler(client: PyTgCalls, update: Update):
     if isinstance(update, (StreamVideoEnded, StreamAudioEnded)):
         await MusicPlayer.change_stream(update.chat_id)
-
-
-@call.on_update(fl.chat_update(ChatUpdate.Status.INCOMING_CALL))
-async def incoming_handler(_: PyTgCalls, update: Update):
-    await call.mtproto_client.send_message(
-        update.chat_id,
-        "You are calling me!",
-    )
-    await call.play(
-        update.chat_id,
-        MediaStream(
-            test_stream,
-        ),
-    )
-
-
-for file in os.listdir():
-    if (
-        file.endswith(".jpg")
-        or file.endswith(".jpeg")
-        or file.endswith(".mp3")
-        or file.endswith(".m4a")
-        or file.endswith(".mp4")
-        or file.endswith(".webm")
-        or file.endswith(".png")
-        or file.endswith(".session")
-        or file.endswith(".session-journal")
-    ):
-        os.remove(file)
-
-if "downloads" in listdir():
-    shutil.rmtree("downloads")
-    mkdir("downloads")
