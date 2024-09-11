@@ -1,0 +1,76 @@
+{
+    "name": "Vivek",
+    "description": "A simple Pyrogram user client",
+    "logo": "https://graph.org/file/c0e014ff34f34d1056627.png",
+    "keywords": [
+    "python3",
+    "telegram",
+    "bot",
+    "telegram-bot",
+    "pyrogram"
+    ],
+
+    "stack": "container",
+    "env": {
+      "API_ID": {
+        "description": "Get this value from https://my.telegram.org",
+        "value": "",
+        "required": true
+      },
+      "API_HASH": {
+        "description": "Get this value from https://my.telegram.org",
+        "value": "",
+        "required": true
+      },
+      "BOT_TOKEN": {
+        "description": "A Bot's token Get it from Botfather",
+        "value": "",
+        "required": true
+      },
+      "ONLY_FOR_SUDO": {
+        "description": "Set it True if you want that only SUDOERS can use commands else any admin of chat will able to use the commands",
+        "value": "True",
+        "required": true
+      },
+      "OWNER_ID": {
+        "description": "The user id(s) of user(s) whom you would like to add as a OWNER. Multiple values shall be seperated with a space.",
+        "value": "",
+        "required": true
+      },
+      "STRING_SESSION": {
+        "description": "A Pyrogram String Session. One Assistant is Compulsory.",
+        "value": "",
+        "required": true
+      },
+
+      "LOG_GROUP_ID": {
+        "description": "Your Log Group ID, add your bot and promote as an admin with full rights!. Use only Group. Please don't use Channel ID.",
+        "value": "",
+        "required": true
+      },
+      "UPSTREAM_REPO": {
+        "description": "If you dont know this, Leave as it is",
+        "value": "https://github.com/TheTeamVivek/YukkiMusic",
+        "required": true
+      },
+      "UPSTREAM_BRANCH": {
+        "description": "Upstream Repo's Branch Name",
+        "value": "master",
+        "required": true
+      }
+    },
+    "buildpacks": [
+          {
+              "url": "heroku/python"
+          },
+          {
+              "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+          }
+      ],
+      "formation": {
+          "worker": {
+              "quantity": 1,
+              "size": "basic"
+          }
+      }
+  }
