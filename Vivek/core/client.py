@@ -2,7 +2,6 @@ import pyromod.listen  # noqa
 from pyrogram import __version__ as v
 
 from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
-
 from Vivek.functions.client import VClient
 
 app = VClient(
@@ -24,8 +23,6 @@ bot = VClient(
     plugins=dict(root="Vivek/plugins"),
     max_concurrent_transmissions=9,
 )
-
-
 
 
 app.bot = bot
