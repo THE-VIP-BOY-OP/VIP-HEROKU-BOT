@@ -3,7 +3,7 @@ from pyrogram import __version__ as v
 
 from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
 from Vivek.functions.client import VClient
-from Vivek.plugins import ALL_MODULES
+
 from .logger import LOGGER
 
 
@@ -35,12 +35,9 @@ class App(VClient):
         await self.bot.start()
         LOGGER(__name__).info(f"bot started")
 
-
     async def stop(self):
         await super().stop()
         await self.bot.stop()
-
-    
 
 
 app = App()
