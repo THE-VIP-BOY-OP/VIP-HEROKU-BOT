@@ -54,7 +54,7 @@ async def audio_play(client, message):
         )
 
     try:
-        await MusicPlayer.play(message.chat.id, file_path, video)
+        await MusicPlayer.play(chat_id, file_path, video)
     except MelodyError as e:
         return await mystic.edit(e)
     except Exception as e:
@@ -69,7 +69,7 @@ async def audio_play(client, message):
         by=user_name,
     )
 
-    await Vivek.add_active_chat(message.chat.id)
+    await Vivek.add_active_chat(chat_id)
     await mystic.edit("Started Playing")
     os.remove(a)
 
