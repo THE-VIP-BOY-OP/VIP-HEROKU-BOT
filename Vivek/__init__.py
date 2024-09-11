@@ -246,7 +246,7 @@ class MusicPlayer:
             if by == "ENDLESS PLAY MODE":
                 await Queue.add(
                     chat_id,
-                    chatid = chatid,
+                    chatid=chatid,
                     title=title,
                     duration=duration,
                     vidid=vidid,
