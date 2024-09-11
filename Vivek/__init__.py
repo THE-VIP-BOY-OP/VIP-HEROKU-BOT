@@ -94,7 +94,6 @@ if "downloads" in listdir():
     shutil.rmtree("downloads")
     mkdir("downloads")
 
-
 def ikb(*buttons_data):
     keyboard = []
     for row in buttons_data:
@@ -106,15 +105,12 @@ def ikb(*buttons_data):
             if button_type == "url":
                 button_row.append(types.InlineKeyboardButton(text=text, url=value))
             elif button_type == "callback":
-                button_row.append(
-                    types.InlineKeyboardButton(text=text, callback_data=value)
-                )
+                button_row.append(types.InlineKeyboardButton(text=text, callback_data=value))
             else:
                 raise ValueError("Button type must be either 'url' or 'callback'")
 
         keyboard.append(button_row)
     return types.InlineKeyboardMarkup(keyboard)
-
 
 types.ikb = ikb
 
