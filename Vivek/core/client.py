@@ -1,7 +1,5 @@
 import importlib
 
-from .logger import LOGGER
-
 import pyromod.listen  # noqa
 from pyrogram import __version__ as v
 from pyrogram import idle
