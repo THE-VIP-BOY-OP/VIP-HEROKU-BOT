@@ -9,5 +9,6 @@ requests
 tgcrypto
 uvloop
 py-tgcalls
+pyromod
 git+https://github.com/KurimuzonAkuma/pyrogram
 git+https://github.com/yt-dlp/yt-dlp
