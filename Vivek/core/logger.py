@@ -12,6 +12,7 @@ logging.basicConfig(
 )
 
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
+logging.getLogger("pyromod").setLevel(logging.ERROR)
 logging.getLogger("httpx").setLevel(logging.ERROR)
 
 
