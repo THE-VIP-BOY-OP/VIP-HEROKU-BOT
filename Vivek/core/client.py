@@ -2,6 +2,7 @@ import importlib
 
 import pyromod.listen  # noqa
 from pyrogram import __version__ as v
+from pyrogram import idle
 
 from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
 from Vivek.functions.client import VClient
@@ -9,6 +10,7 @@ from Vivek.plugins import ALL_MODULES
 
 from .logger import LOGGER
 
+from config import LOG_GROUP_ID
 
 class App(VClient):
     def __init__(self):
@@ -36,9 +38,12 @@ class App(VClient):
         await super().start()
         LOGGER(__name__).info(f"Userbot started")
         await self.bot.start()
+        await app.bot.send_message(LOG_GROUP_ID, "started")
         LOGGER(__name__).info(f"bot started")
         for all_module in ALL_MODULES:
             importlib.import_module("Vivek.plugins" + all_module)
+        await idle()
+        await self.stop()
 
     async def stop(self):
         await super().stop()
