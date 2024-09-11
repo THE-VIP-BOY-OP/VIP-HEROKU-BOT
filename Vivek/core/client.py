@@ -26,4 +26,4 @@ bot = VClient(
 
 
 app.bot = bot
-app.restart_script = restart
+
