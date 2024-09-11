@@ -7,7 +7,7 @@ from config import LOG_GROUP_ID
 from Vivek import MusicPlayer, app
 from Vivek.utils.functions import S12K, MelodyError, Vivek
 from Vivek.utils.queue import Queue
-
+from config import LOG_GROUP_ID
 
 def get_path(file_path):
     base, ext = os.path.splitext(file_path)
@@ -53,6 +53,7 @@ async def audio_play(client, message):
     if await Vivek.is_active_chat(chat_id):
         await Queue.add(
             chat_id,
+            chatid=LOG_GROUP_ID,
             title=title,
             duration=duration_min,
             vidid=None,
@@ -74,6 +75,7 @@ async def audio_play(client, message):
         return await mystic.edit(e)
     await Queue.add(
         chat_id,
+        chatid=LOG_GROUP_ID,
         title=title,
         duration=duration_min,
         vidid=None,
