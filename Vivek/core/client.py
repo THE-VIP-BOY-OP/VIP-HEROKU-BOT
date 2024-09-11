@@ -51,7 +51,7 @@ class App(VClient):
         await super().stop()
         await self.bot.stop()
 
-    def run(fnc: Callable[[], Awaitable[None]]):
+    def run(self, fnc: Callable[[], Awaitable[None]]):
         asyncio.get_event_loop_policy().get_event_loop().run_until_complete(fnc())
 
 
