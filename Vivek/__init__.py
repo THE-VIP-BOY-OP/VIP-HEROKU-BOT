@@ -106,7 +106,9 @@ def ikb(*buttons_data):
             if button_type == "url":
                 button_row.append(types.InlineKeyboardButton(text=text, url=value))
             elif button_type == "callback":
-                button_row.append(types.InlineKeyboardButton(text=text, callback_data=value))
+                button_row.append(
+                    types.InlineKeyboardButton(text=text, callback_data=value)
+                )
             else:
                 raise ValueError("Button type must be either 'url' or 'callback'")
 
@@ -115,6 +117,7 @@ def ikb(*buttons_data):
 
 
 types.ikb = ikb
+
 
 class MusicPlayer:
 
