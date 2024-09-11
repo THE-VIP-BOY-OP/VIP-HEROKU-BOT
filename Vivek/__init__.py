@@ -195,7 +195,7 @@ class MusicPlayer:
             file_path = None
             if not details:
                 if chat_id not in chatlist:
-                    await call.leave_call(chat_id)
+                    await MusicPlayer.leave_call(chat_id)
                     await Vivek.remove_active_chat(chat_id)
                     return await mystic.edit(
                         "No More songs in Queue. Leaving Voice Chat"
@@ -229,8 +229,9 @@ class MusicPlayer:
                 file_path = details.get("file_path")
                 by = details.get("by")
 
-            if file_path is None and not os.path.isfile(file_path):
-                file_path = await Vivek.download(vidid=vidid, video=video)
+            if vidid is not None:
+                if file_path is None or not os.path.isfile(file_path):
+                    file_path = await Vivek.download(vidid=vidid, video=video)
 
             await MusicPlayer.play(chat_id, file_path, video)
 
