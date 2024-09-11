@@ -186,13 +186,14 @@ class MusicPlayer:
 
     @staticmethod
     async def change_stream(chat_id):
-        mystic = await app.send_message(chat_id, "Downloading Next track from Queue")
         try:
 
             vidid = (await Queue.get(chat_id)).get("vidid")
             video = (await Queue.get(chat_id)).get("video")
+            chatid = (await Queue.get(chat_id)).get("chatid")
             details = await Queue.next(chat_id)
             file_path = None
+            mystic = await app.send_message(chatid, "Downloading Next track from Queue")
             if not details:
                 if chat_id not in chatlist:
                     await MusicPlayer.leave_call(chat_id)
