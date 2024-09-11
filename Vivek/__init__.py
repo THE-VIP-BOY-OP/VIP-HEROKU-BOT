@@ -26,6 +26,6 @@ for file in os.listdir():
     ):
         os.remove(file)
 
-if "downloads" in listdir():
+if "downloads" in os.listdir():
     shutil.rmtree("downloads")
     os.mkdir("downloads")
