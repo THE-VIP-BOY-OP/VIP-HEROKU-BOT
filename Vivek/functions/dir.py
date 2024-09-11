@@ -1,6 +1,6 @@
 import os
 import shutil
-
+from Vivek.core import LOGGER
 
 def dir():
     files = [
@@ -22,3 +22,4 @@ def dir():
     if "downloads" in os.listdir():
         shutil.rmtree("downloads")
         os.mkdir("downloads")
+    LOGGER(__name__).info("Files refreshed")
