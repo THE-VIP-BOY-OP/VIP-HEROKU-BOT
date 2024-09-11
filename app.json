@@ -50,7 +50,7 @@
       },
       "UPSTREAM_REPO": {
         "description": "If you dont know this, Leave as it is",
-        "value": "https://github.com/TheTeamVivek/YukkiMusic",
+        "value": "https://github.com/Vivekkumar-IN/Vivek",
         "required": true
       },
       "UPSTREAM_BRANCH": {
