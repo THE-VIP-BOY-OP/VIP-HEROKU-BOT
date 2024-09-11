@@ -17,16 +17,15 @@ class App(VClient):
         )
 
         self.bot = VClient(
-                name="Vivek1",
-                api_id=API_ID,
-                api_hash=API_HASH,
-                app_version=f"Cute {v}",
-                bot_token=BOT_TOKEN,
-                in_memory=True,
-                max_concurrent_transmissions=9,
-            )
+            name="Vivek1",
+            api_id=API_ID,
+            api_hash=API_HASH,
+            app_version=f"Cute {v}",
+            bot_token=BOT_TOKEN,
+            in_memory=True,
+            max_concurrent_transmissions=9,
+        )
 
-    
     async def start(self):
         await super().start()
         await self.bot.start()
