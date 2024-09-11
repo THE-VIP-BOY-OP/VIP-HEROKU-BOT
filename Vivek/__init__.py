@@ -6,6 +6,7 @@ import shutil
 import sys
 
 from .core.logger import LOGGER
+from .core.client import app
 from .functions.filters import edit_filters
 
 edit_filters()
