@@ -95,45 +95,26 @@ if "downloads" in listdir():
     mkdir("downloads")
 
 
-def ikb(*button_rows):
-    """
-    Create an inline keyboard with buttons using an even more simplified syntax.
-    Automatically defaults to "url" if type is not provided,
-    and supports passing rows directly as arguments.
-
-    button_rows: Each row is a list of button parameters like:
-    [text, value] or [text, value, type]. If type is omitted, defaults to "url".
-
-    Example:
-    ikb(
-        ["Google", "https://google.com"],  # Defaults to url
-        ["Click Me", "my_callback", "callback"]
-    )
-    """
+def ikb(*buttons_data):
     keyboard = []
-    for row in button_rows:
+    for row in buttons_data:
         button_row = []
         for button in row:
-            text = button[0]
-            value = button[1]
-            button_type = button[2] if len(button) == 3 else "url"
+            text, value = button[:2]
+            button_type = "url" if len(button) == 2 else button[2]
 
             if button_type == "url":
                 button_row.append(types.InlineKeyboardButton(text=text, url=value))
             elif button_type == "callback":
-                button_row.append(
-                    types.InlineKeyboardButton(text=text, callback_data=value)
-                )
+                button_row.append(types.InlineKeyboardButton(text=text, callback_data=value))
             else:
                 raise ValueError("Button type must be either 'url' or 'callback'")
 
         keyboard.append(button_row)
-
     return types.InlineKeyboardMarkup(keyboard)
 
 
 types.ikb = ikb
-
 
 class MusicPlayer:
 
