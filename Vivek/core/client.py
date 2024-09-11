@@ -34,6 +34,8 @@ class App(VClient):
         LOGGER(__name__).info(f"Userbot started")
         await self.bot.start()
         LOGGER(__name__).info(f"bot started")
+        for all_module in ALL_MODULES:
+            importlib.import_module("Vivek.plugins" + all_module)
 
     async def stop(self):
         await super().stop()
