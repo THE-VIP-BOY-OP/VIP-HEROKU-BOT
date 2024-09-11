@@ -232,7 +232,7 @@ class MusicPlayer:
             if file_path is None and not os.path.isfile(file_path):
                 file_path = await Vivek.download(vidid=vidid, video=video)
 
-            await call.play(chat_id, file_path, video)
+            await MusicPlayer.play(chat_id, file_path, video)
 
             await app.send_message(
                 chat_id,
