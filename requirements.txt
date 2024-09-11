@@ -1,5 +1,4 @@
 asyncio
-aiohttp
 gitpython
 python-dotenv
 httpx[http2]
