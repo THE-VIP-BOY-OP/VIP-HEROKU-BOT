@@ -1,9 +1,6 @@
 import uvloop
-
 uvloop.install()
-import os
-import shutil
-import sys
+
 
 from .core.client import app
 from .core.logger import LOGGER
