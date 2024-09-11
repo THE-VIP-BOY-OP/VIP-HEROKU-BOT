@@ -10,7 +10,7 @@ from os import listdir, mkdir
 from typing import Callable, List, Optional, Union
 
 import pyrogram
-import pyromod.listem  # noqa
+import pyromod.listen  # noqa
 import requests
 from ntgcalls import TelegramServerError
 from pyrogram import Client
