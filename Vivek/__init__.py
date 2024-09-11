@@ -6,14 +6,12 @@ import shutil
 import sys
 
 import pyromod.listen  # noqa
- 
-from pyrogram import Client, __version__ as v
+from pyrogram import Client
+from pyrogram import __version__ as v
 
 from config import API_HASH, API_ID, BOT_TOKEN, STRING_SESSION
-from Vivek.utils.filters import edit_filters
-
 from Vivek.core.logger import LOGGER
-
+from Vivek.utils.filters import edit_filters
 
 edit_filters()
 
