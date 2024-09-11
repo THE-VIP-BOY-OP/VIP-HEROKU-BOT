@@ -237,7 +237,7 @@ class MusicPlayer:
             await MusicPlayer.play(chat_id, file_path, video)
 
             await app.send_message(
-                chat_id,
+                chatid,
                 f"<b>Started Streaming</b>\n\n<b>Title</b>: {title}\n<b>Duration</b>: {duration}\n<b>By</b>: {by}",
                 disable_web_page_preview=True,
                 parse_mode=ParseMode.HTML,
@@ -246,6 +246,7 @@ class MusicPlayer:
             if by == "ENDLESS PLAY MODE":
                 await Queue.add(
                     chat_id,
+                    chatid = chatid,
                     title=title,
                     duration=duration,
                     vidid=vidid,
