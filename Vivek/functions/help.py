@@ -36,17 +36,17 @@ class BotHelp:
         return self
 
     def get_menu(self) -> str:
-        result = f"**𝖯𝗅𝗎𝗀𝗂𝗇 𝖢𝖺𝗍𝖾𝗀𝗈𝗋𝗒:** `{self.category}`"
+        result = f"**Plugin Category:** `{self.category}`"
         if self.command_info:
-            result += f"\n**𝖯𝗅𝗎𝗀𝗂𝗇 𝖨𝗇𝖿𝗈:** __{self.command_info}__"
+            result += f"\n**Plugin info:** __{self.command_info}__"
         result += "\n\n"
         for command in self.command_dict:
             command = self.command_dict[command]
             result += (
-                f"**{SYMBOLS['radio_select']} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `/{command['command']}`\n"
+                f"**{SYMBOLS['radio_select']} Command:** `/{command['command']}`\n"
             )
             if command["description"]:
-                result += f"**{SYMBOLS['arrow_right']} 𝖣𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇:** __{command['description']}__\n"
+                result += f"**{SYMBOLS['arrow_right']} Description:** __{command['description']}__\n"
             result += "\n"
 
             BOT_CMD_INFO[command["command"]] = {
