@@ -19,12 +19,22 @@ SYMBOLS = {
     "radio_unselect": "〇",
 }
 
-
 class BotHelp:
-    def __init__(self, file: str) -> None:
-        self.category = file
-        self.command_dict = {}
-        self.command_info = ""
+    _help_instances = {}
+
+    def __new__(cls, category):
+        if category in cls._help_instances:
+            return cls._help_instances[category]
+        instance = super(BotHelp, cls).__new__(cls)
+        cls._help_instances[category] = instance
+        return instance
+
+    def __init__(self, category: str) -> None:
+        if not hasattr(self, 'initialized'):
+            self.category = category
+            self.command_dict = {}
+            self.command_info = ""
+            self.initialized = True
 
     def add(self, command: str, description: str):
         self.command_dict[command] = {"command": command, "description": description}
@@ -41,11 +51,11 @@ class BotHelp:
         result += "\n\n"
         for command in self.command_dict:
             command_data = self.command_dict[command]
-            result += (
-                f"**{SYMBOLS['radio_select']} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `/{command_data['command']}`\n"
-            )
+            result += f"**{SYMBOLS['radio_select']} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `/{command_data['command']}`\n"
             if command_data["description"]:
-                result += f"**{SYMBOLS['arrow_right']} 𝖣𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇:** __{command_data['description']}__\n"
+                result += (
+                    f"**{SYMBOLS['arrow_right']} 𝖣𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇:** __{command_data['description']}__\n"
+                )
             result += "\n"
         return result
 
