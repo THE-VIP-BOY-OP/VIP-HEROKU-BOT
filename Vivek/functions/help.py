@@ -1,7 +1,6 @@
 # This Bothelp function taken from < https://github.com/The-HellBot/Plugins >
 # Credit goes to The-HellBot.
 #
-from ..core import app
 
 BOT_CMD_INFO = {}
 BOT_CMD_MENU = {}
@@ -42,11 +41,11 @@ class BotHelp:
         result += "\n\n"
         for command in self.command_dict:
             command_data = self.command_dict[command]
-            result += f"**{SYMBOLS['radio_select']} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `/{command_data['command']}`\n"
+            result += (
+                f"**{SYMBOLS['radio_select']} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `/{command_data['command']}`\n"
+            )
             if command_data["description"]:
-                result += (
-                    f"**{SYMBOLS['arrow_right']} 𝖣𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇:** __{command_data['description']}__\n"
-                )
+                result += f"**{SYMBOLS['arrow_right']} 𝖣𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇:** __{command_data['description']}__\n"
             result += "\n"
         return result
 
