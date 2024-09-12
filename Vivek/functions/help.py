@@ -20,6 +20,7 @@ SYMBOLS = {
     "radio_unselect": "〇",
 }
 
+
 class BotHelp:
     def __init__(self, file: str) -> None:
         self.category = file
@@ -41,11 +42,11 @@ class BotHelp:
         result += "\n\n"
         for command in self.command_dict:
             command = self.command_dict[command]
-            result += f"**{SYMBOLS['radio_select']} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `/{command['command']}`\n"
+            result += (
+                f"**{SYMBOLS['radio_select']} 𝖢𝗈𝗆𝗆𝖺𝗇𝖽:** `/{command['command']}`\n"
+            )
             if command["description"]:
-                result += (
-                    f"**{SYMBOLS['arrow_right']} 𝖣𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇:** __{command['description']}__\n"
-                )
+                result += f"**{SYMBOLS['arrow_right']} 𝖣𝖾𝗌𝖼𝗋𝗂𝗉𝗍𝗂𝗈𝗇:** __{command['description']}__\n"
             result += "\n"
 
             BOT_CMD_INFO[command["command"]] = {
@@ -65,4 +66,3 @@ class BotHelp:
 
 
 app.help = BotHelp
-            
