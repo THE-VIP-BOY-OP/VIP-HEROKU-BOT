@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from Vivek.core import LOGGER
+from .core import LOGGER
 
 
 def dir():
