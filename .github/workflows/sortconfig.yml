@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'config.py'
+  workflow_dispatch:
 
 jobs:
   sort-vars:
@@ -27,10 +28,10 @@ jobs:
           awk '/^#|^$/{print;next} {print | "sort"}' config.py > sorted_config.py
           mv sorted_config.py config.py
 
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add config.py
-          git commit -m "Sorted variables in config.py"
-          git push
+      - name: Auto commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Auto Fixes"
+          commit_options: "--no-verify"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
