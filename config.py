@@ -28,4 +28,4 @@ ONLY_FOR_SUDO = bool(getenv("ONLY_FOR_SUDO", True))
 
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
 
-UPSTREAM_REPO = getenv("UPSTREAM_REPO", "")
+UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/Vivekkumar-IN/Vivek")
