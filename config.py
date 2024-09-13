@@ -25,3 +25,7 @@ PREFIX = list(map(str, getenv("PREFIX", "!").split()))
 
 
 ONLY_FOR_SUDO = bool(getenv("ONLY_FOR_SUDO", True))
+
+UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
+
+UPSTREAM_REPO = getenv("UPSTREAM_REPO","")
