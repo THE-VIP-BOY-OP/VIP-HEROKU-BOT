@@ -9,9 +9,7 @@ COPY . /app/
 
 WORKDIR /app
 
-RUN python -m pip install --no-cache-dir --upgrade pip \
-    && python -m venv venv \
-    && . ./venv/bin/activate \
+RUN python -m pip install --no-cache-dir --upgrade pip setuptools \
     && pip install --no-cache-dir --upgrade --requirement requirements.txt
 
-CMD bash -c "source ./venv/bin/activate && python3 -m Vivek"
+CMD python3 -m Vivek
