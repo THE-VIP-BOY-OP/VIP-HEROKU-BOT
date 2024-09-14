@@ -9,7 +9,7 @@ async def ytsearch(client, message):
     m = await message.reply_text("Searching....")
     try:
         if len(message.command) < 2:
-            return await message.reply_text(
+            return await m.edit_text(
                 "Provide A Song/Video Name To Search In Youtube"
             )
         query = message.text.split(None, 1)[1]
