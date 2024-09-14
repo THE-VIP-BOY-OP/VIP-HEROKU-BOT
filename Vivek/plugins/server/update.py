@@ -68,3 +68,6 @@ async def update_(client, message):
     execute("git stash &> /dev/null && git pull")
     execute("pip3 install --no-cache-dir -U -r requirements.txt")
     await app.restart_script()
+
+
+app.help("server").info("Server management plugin").add("update", "Checks for and applies updates from the Git repository, then restarts the bot.").done()
