@@ -4,12 +4,13 @@ from math import ceil
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQuery
 
-from Vivek import app
+from Vivek import app, LOGGER
 from Vivek.functions.help import BOT_CMD_MENU, SYMBOLS
 
 COLUMN_SIZE = 4  # number of button height
 NUM_COLUMNS = 3  # number of button width
 
+log=LOGGER(__name__)
 
 class EqInlineKeyboardButton(InlineKeyboardButton):
     def __eq__(self, other):
@@ -182,6 +183,6 @@ async def inline_query_handler(client, query):
             )
         )
         try:
-            return await client.answer_inline_query(query.id, results=answers)
-        except:
-            return
+            await app.bot.answer_inline_query(query.id, results=answers)
+        except Exception as e:
+            log.info(f"Error: {e}")
