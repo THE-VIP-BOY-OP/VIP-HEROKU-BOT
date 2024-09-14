@@ -2,13 +2,14 @@ import re
 from math import ceil
 
 from pyrogram import filters
+from pyrogram.errors import BotInlineDisabled
 from pyrogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     InlineQuery,
     InlineQueryResultPhoto,
 )
-from pyrogram.errors import BotInlineDisabled
+
 from Vivek import LOGGER, app
 from Vivek.functions.help import BOT_CMD_MENU, SYMBOLS
 
