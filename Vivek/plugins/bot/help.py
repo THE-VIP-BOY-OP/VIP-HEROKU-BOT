@@ -108,7 +108,7 @@ async def help_button(client, query: types.InlineQuery):
             ]
         )
 
-        await app.edit_inline_text(
+        await app.bot.edit_inline_text(
             query.inline_message_id,
             text=text,
             reply_markup=key,
@@ -125,7 +125,7 @@ async def help_button(client, query: types.InlineQuery):
 
     elif prev_match:
         curr_page = int(prev_match.group(1))
-        await app.edit_inline_text(
+        await app.bot.edit_inline_text(
             query.inline_message_id,
             text=top_text,
             reply_markup=paginate_modules(curr_page, BOT_CMD_MENU, "help"),
@@ -134,7 +134,7 @@ async def help_button(client, query: types.InlineQuery):
 
     elif next_match:
         next_page = int(next_match.group(1))
-        await app.edit_inline_text(
+        await app.bot.edit_inline_text(
             query.inline_message_id,
             text=top_text,
             reply_markup=paginate_modules(next_page, BOT_CMD_MENU, "help"),
@@ -143,7 +143,7 @@ async def help_button(client, query: types.InlineQuery):
 
     elif back_match:
         prev_page_num = int(back_match.group(1))
-        await app.edit_inline_text(
+        await app.bot.edit_inline_text(
             query.inline_message_id,
             text=top_text,
             reply_markup=paginate_modules(prev_page_num, BOT_CMD_MENU, "help"),
@@ -153,7 +153,7 @@ async def help_button(client, query: types.InlineQuery):
     elif create_match:
         keyboard = paginate_modules(0, BOT_CMD_MENU, "help")
 
-        await app.edit_inline_text(
+        await app.bot.edit_inline_text(
             query.inline_message_id,
             text=top_text,
             reply_markup=keyboard,
