@@ -46,7 +46,7 @@ class BotHelp:
         return self
 
     def get_menu(self) -> str:
-        result = f"**Plugin Category:** `{self.category}`"
+        result = f"**Plugin Category:** `{self.category}`\n"
         if self.command_info:
             result += f"\n**Info:** __{self.command_info}__"
         result += "\n\n"
