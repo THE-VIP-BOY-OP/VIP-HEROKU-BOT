@@ -86,13 +86,14 @@ def paginate_modules(page_n, module_dict, prefix, chat=None, close: bool = False
 
 @app.bot.on_callback_query(filters.regex(r"help_(.*?)"))
 async def help_button(client, query: types.CallbackQuery):
-    home_match = re.match(r"help_home(.+?)", query.data)
-    mod_match = re.match(r"help_module(.+?),(.+?)", query.data)
-    prev_match = re.match(r"help_prev(.+?)", query.data)
-    next_match = re.match(r"help_next(.+?)", query.data)
-    back_match = re.match(r"help_back(\d+)", query.data)
+    home_match = re.match(r"help_home\((.+?)\)", query.data)
+    mod_match = re.match(r"help_module\((.+?),(.+?)\)", query.data)
+    prev_match = re.match(r"help_prev\((.+?)\)", query.data)
+    next_match = re.match(r"help_next\((.+?)\)", query.data)
+    back_match = re.match(r"help_back\((\d+)\)", query.data)
     create_match = re.match(r"help_create", query.data)
     top_text = "Click Below buttons for more info"
+
 
     if mod_match:
         module = mod_match.group(1)
