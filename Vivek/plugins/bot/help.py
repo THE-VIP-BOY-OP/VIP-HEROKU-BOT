@@ -170,7 +170,7 @@ async def inline_query_handler(client, query):
     if text.strip() == "":
         return
 
-    if text == "RadheRadhe_GiveMeHelp":
+    if text == "help_menu":
         photo = "https://te.legra.ph/file/4ec5ae4381dffb039b4ef.jpg"
         buttons = paginate_modules(0, BOT_CMD_MENU, "help")
         answers.append(
