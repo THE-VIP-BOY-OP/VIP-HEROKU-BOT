@@ -70,4 +70,7 @@ async def update_(client, message):
     await app.restart_script()
 
 
-app.help("server").info("Server management plugin").add("update", "Checks for and applies updates from the Git repository, then restarts the bot.").done()
+app.help("server").info("Server management plugin").add(
+    "update",
+    "Checks for and applies updates from the Git repository, then restarts the bot.",
+).done()
