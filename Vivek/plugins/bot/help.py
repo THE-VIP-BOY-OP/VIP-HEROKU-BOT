@@ -28,7 +28,7 @@ def paginate_modules(page_n, module_dict, prefix, chat=None, close: bool = False
             [
                 EqInlineKeyboardButton(
                     x,
-                    callback_data="{}_module({},{})".format(prefix, x.lower(), page_n),
+                    callback_data="{}_module({},{})".format(prefix, x, page_n),
                 )
                 for x in module_dict.keys()
             ]
@@ -39,7 +39,7 @@ def paginate_modules(page_n, module_dict, prefix, chat=None, close: bool = False
                 EqInlineKeyboardButton(
                     x,
                     callback_data="{}_module({},{},{})".format(
-                        prefix, chat, x.lower(), page_n
+                        prefix, chat, x, page_n
                     ),
                 )
                 for x in module_dict.keys()
@@ -97,10 +97,7 @@ async def help_button(client, query: types.CallbackQuery):
     if mod_match:
         module = mod_match.group(1)
         prev_page_num = int(mod_match.group(2))
-        text = (
-            f"<b><u>Here Is The Help For {module}:</u></b>\n"
-            + BOT_CMD_MENU[module.lower()]
-        )
+        text = BOT_CMD_MENU[module]
 
         key = InlineKeyboardMarkup(
             [
