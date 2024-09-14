@@ -1,7 +1,7 @@
 import re
 from math import ceil
 
-from pyrogram import filters
+from pyrogram import filters, errors
 from pyrogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
@@ -169,6 +169,14 @@ async def help_button(client, query: InlineQuery):
 
     await client.answer_callback_query(query.id)
 
+@app.on_message(filters.command("help") & filters.sudo)
+async def help_(client, message):
+    try:
+        results = await app.get_inline_bot_results(app.bot.me.username, query="help_menu")
+        await message.reply_inline_bot_result(results.query_id, results.results[0].id)
+    except BotInlineDisabled:
+        await message.reply_text("Please Turn on the InlineMode of the bot Then you will be able to use the bot")
+    
 
 @app.bot.on_inline_query()
 async def inline_query_handler(client, query):
