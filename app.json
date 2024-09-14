@@ -1,7 +1,6 @@
 {
     "name": "Vivek",
     "description": "A simple Pyrogram user client",
-    "logo": "https://graph.org/file/c0e014ff34f34d1056627.png",
     "keywords": [
     "python3",
     "telegram",
