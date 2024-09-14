@@ -193,4 +193,8 @@ async def shellrunner(client: Client, message: Message):
     await message.stop_propagation()
 
 
-app.help("eval").info("Executes Python code or shell commands, returning results or errors to the chat.").add("eval", "Executes Python code, returning results or errors").add("sh", "Runs shell commands, displaying output or errors").done()
+app.help("eval").info(
+    "Executes Python code or shell commands, returning results or errors to the chat."
+).add("eval", "Executes Python code, returning results or errors").add(
+    "sh", "Runs shell commands, displaying output or errors"
+).done()
