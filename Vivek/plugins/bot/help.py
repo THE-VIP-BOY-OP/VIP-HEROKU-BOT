@@ -8,7 +8,7 @@ from pyrogram.types import (
     InlineQuery,
     InlineQueryResultPhoto,
 )
-
+from pyrogram.errors import BotInlineDisabled
 from Vivek import LOGGER, app
 from Vivek.functions.help import BOT_CMD_MENU, SYMBOLS
 
