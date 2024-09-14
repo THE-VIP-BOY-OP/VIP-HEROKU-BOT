@@ -2,12 +2,8 @@ import re
 from math import ceil
 
 from pyrogram import filters
-from pyrogram.types import (
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    InlineQueryResultPhoto,
-    InlineQuery,
-)
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQuery
+
 from Vivek import app
 from Vivek.functions.help import BOT_CMD_MENU, SYMBOLS
 
@@ -177,4 +173,3 @@ async def inline_query_handler(client, query):
     if text == "RadheRadhe_GiveMeHelp":
         photo = "https://te.legra.ph/file/4ec5ae4381dffb039b4ef.jpg"
         buttons = ""
-
