@@ -53,7 +53,7 @@ class BotHelp:
         for command in self.command_dict:
             command_data = self.command_dict[command]
             result += (
-                f"**{SYMBOLS['radio_select']} Command:** `/{command_data['command']}`\n"
+                f"**{SYMBOLS['radio_select']} Command:** /{command_data['command']}\n"
             )
             if command_data["description"]:
                 result += f"**{SYMBOLS['arrow_right']} Description:** __{command_data['description']}__\n"
