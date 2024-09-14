@@ -8,8 +8,6 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from Vivek import app
 from Vivek.functions.help import SYMBOLS, BOT_HELP, BOT_CMD_MENU
 
-
-
 COLUMN_SIZE = 4  # number of button height
 NUM_COLUMNS = 3  # number of button width
 
@@ -86,14 +84,13 @@ def paginate_modules(page_n, module_dict, prefix, chat=None, close: bool = False
 
     return InlineKeyboardMarkup(pairs)
 
-
 @app.bot.on_callback_query(filters.regex(r"help_(.*?)"))
-async def help_button(client, query:):
-    home_match = re.match(r"help_home\((.+?)\)", query.data)
-    mod_match = re.match(r"help_module\((.+?),(.+?)\)", query.data)
-    prev_match = re.match(r"help_prev\((.+?)\)", query.data)
-    next_match = re.match(r"help_next\((.+?)\)", query.data)
-    back_match = re.match(r"help_back\((\d+)\)", query.data)
+async def help_button(client, query: types.CallbackQuery):
+    home_match = re.match(r"help_home(.+?)", query.data)
+    mod_match = re.match(r"help_module(.+?),(.+?)", query.data)
+    prev_match = re.match(r"help_prev(.+?)", query.data)
+    next_match = re.match(r"help_next(.+?)", query.data)
+    back_match = re.match(r"help_back(\d+)", query.data)
     create_match = re.match(r"help_create", query.data)
     top_text = "Click Below buttons for more info"
 
@@ -127,7 +124,7 @@ async def help_button(client, query:):
             query.from_user.id,
             text=top_text,
             reply_markup=paginate_modules(0, BOT_CMD_MENU, "help"),
-            ),
+        )
         await query.message.delete()
 
     elif prev_match:
@@ -150,7 +147,7 @@ async def help_button(client, query:):
         prev_page_num = int(back_match.group(1))
         await query.message.edit(
             text=top_text,
-            reply_markup=  paginate_modules(prev_page_num, BOT_CMD_MENU, "help"),
+            reply_markup=paginate_modules(prev_page_num, BOT_CMD_MENU, "help"),
             disable_web_page_preview=True,
         )
 
