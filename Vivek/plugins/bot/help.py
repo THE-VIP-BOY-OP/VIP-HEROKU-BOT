@@ -1,15 +1,15 @@
 import re
 from math import ceil
-from typing import Union
 
 from pyrogram import filters, types
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from Vivek import app
-from Vivek.functions.help import SYMBOLS, BOT_HELP, BOT_CMD_MENU
+from Vivek.functions.help import BOT_CMD_MENU, BOT_HELP, SYMBOLS
 
 COLUMN_SIZE = 4  # number of button height
 NUM_COLUMNS = 3  # number of button width
+
 
 class EqInlineKeyboardButton(InlineKeyboardButton):
     def __eq__(self, other):
@@ -21,15 +21,14 @@ class EqInlineKeyboardButton(InlineKeyboardButton):
     def __gt__(self, other):
         return self.text > other.text
 
+
 def paginate_modules(page_n, module_dict, prefix, chat=None, close: bool = False):
     if not chat:
         modules = sorted(
             [
                 EqInlineKeyboardButton(
                     x,
-                    callback_data="{}_module({},{})".format(
-                        prefix, x.lower(), page_n
-                    ),
+                    callback_data="{}_module({},{})".format(prefix, x.lower(), page_n),
                 )
                 for x in module_dict.keys()
             ]
@@ -47,13 +46,13 @@ def paginate_modules(page_n, module_dict, prefix, chat=None, close: bool = False
             ]
         )
 
-    pairs = [modules[i: i + NUM_COLUMNS] for i in range(0, len(modules), NUM_COLUMNS)]
+    pairs = [modules[i : i + NUM_COLUMNS] for i in range(0, len(modules), NUM_COLUMNS)]
 
     max_num_pages = ceil(len(pairs) / COLUMN_SIZE) if len(pairs) > 0 else 1
     modulo_page = page_n % max_num_pages
 
     if len(pairs) > COLUMN_SIZE:
-        pairs = pairs[modulo_page * COLUMN_SIZE: COLUMN_SIZE * (modulo_page + 1)] + [
+        pairs = pairs[modulo_page * COLUMN_SIZE : COLUMN_SIZE * (modulo_page + 1)] + [
             (
                 EqInlineKeyboardButton(
                     SYMBOLS["arrow_left"],
@@ -84,6 +83,7 @@ def paginate_modules(page_n, module_dict, prefix, chat=None, close: bool = False
 
     return InlineKeyboardMarkup(pairs)
 
+
 @app.bot.on_callback_query(filters.regex(r"help_(.*?)"))
 async def help_button(client, query: types.CallbackQuery):
     home_match = re.match(r"help_home(.+?)", query.data)
@@ -98,8 +98,7 @@ async def help_button(client, query: types.CallbackQuery):
         module = mod_match.group(1)
         prev_page_num = int(mod_match.group(2))
         text = (
-            f"<b><u>Here Is The Help For {module}:</u></b>\n"
-            + BOT_HELP[module]["info"]
+            f"<b><u>Here Is The Help For {module}:</u></b>\n" + BOT_HELP[module]["info"]
         )
 
         key = InlineKeyboardMarkup(
