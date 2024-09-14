@@ -49,6 +49,8 @@ async def gen_link_s(client, message):
     file_type = replied.media
     if file_type not in [
         enums.MessageMediaType.PHOTO,
+        enums.MessageMediaType.VOICE,
+        enums.MessageMediaType.VIDEO_NOTE,
         enums.MessageMediaType.VIDEO,
         enums.MessageMediaType.AUDIO,
         enums.MessageMediaType.DOCUMENT,
