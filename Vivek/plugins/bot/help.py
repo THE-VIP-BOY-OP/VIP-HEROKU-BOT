@@ -4,13 +4,14 @@ from math import ceil
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQuery
 
-from Vivek import app, LOGGER
+from Vivek import LOGGER, app
 from Vivek.functions.help import BOT_CMD_MENU, SYMBOLS
 
 COLUMN_SIZE = 4  # number of button height
 NUM_COLUMNS = 3  # number of button width
 
-log=LOGGER(__name__)
+log = LOGGER(__name__)
+
 
 class EqInlineKeyboardButton(InlineKeyboardButton):
     def __eq__(self, other):
