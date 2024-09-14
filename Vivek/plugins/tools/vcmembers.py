@@ -42,4 +42,6 @@ async def vc_members(client, message):
         await msg.edit(str(e))
 
 
-app.help("voicechat").info("This script retrieves and displays details of voice chat participants").add("vcmembers", "Retrieves and lists participants in the current voice chat").done()
+app.help("voicechat").info(
+    "This script retrieves and displays details of voice chat participants"
+).add("vcmembers", "Retrieves and lists participants in the current voice chat").done()
