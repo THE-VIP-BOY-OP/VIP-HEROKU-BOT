@@ -38,9 +38,7 @@ def paginate_modules(page_n, module_dict, prefix, chat=None, close: bool = False
             [
                 EqInlineKeyboardButton(
                     x,
-                    callback_data="{}_module({},{},{})".format(
-                        prefix, chat, x, page_n
-                    ),
+                    callback_data="{}_module({},{},{})".format(prefix, chat, x, page_n),
                 )
                 for x in module_dict.keys()
             ]
