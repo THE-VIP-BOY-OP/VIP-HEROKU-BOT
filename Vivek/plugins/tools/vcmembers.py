@@ -40,3 +40,6 @@ async def vc_members(client, message):
         await msg.edit(TEXT or "No Participants in Voice Chat")
     except ValueError as e:
         await msg.edit(str(e))
+
+
+app.help("voicechat").info("This script retrieves and displays details of voice chat participants").add("vcmembers", "Retrieves and lists participants in the current voice chat").done()
