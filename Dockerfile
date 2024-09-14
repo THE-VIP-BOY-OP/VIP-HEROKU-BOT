@@ -2,6 +2,7 @@ FROM python:3.12.6-slim
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends curl ffmpeg git \
+    build-essential libssl-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
