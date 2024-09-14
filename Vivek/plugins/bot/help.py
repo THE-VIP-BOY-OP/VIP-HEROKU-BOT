@@ -174,12 +174,12 @@ async def inline_query_handler(client, query):
         photo = "https://te.legra.ph/file/4ec5ae4381dffb039b4ef.jpg"
         buttons = paginate_modules(0, BOT_CMD_MENU, "help")
         answers.append(
-                InlineQueryResultPhoto(
-                    photo_url=photo,
-                    thumb_url=photo,
-                    caption="Here are the help of my Plugins",
-                    reply_markup=buttons,
-                )
+            InlineQueryResultPhoto(
+                photo_url=photo,
+                thumb_url=photo,
+                caption="Here are the help of my Plugins",
+                reply_markup=buttons,
+            )
         )
         try:
             return await client.answer_inline_query(query.id, results=answers)
