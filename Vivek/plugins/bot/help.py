@@ -5,7 +5,7 @@ from pyrogram import filters, types
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from Vivek import app
-from Vivek.functions.help import BOT_CMD_MENU, BOT_HELP, SYMBOLS
+from Vivek.functions.help import BOT_CMD_MENU, SYMBOLS
 
 COLUMN_SIZE = 4  # number of button height
 NUM_COLUMNS = 3  # number of button width
@@ -97,9 +97,7 @@ async def help_button(client, query: types.CallbackQuery):
     if mod_match:
         module = mod_match.group(1)
         prev_page_num = int(mod_match.group(2))
-        text = (
-            f"<b><u>Here Is The Help For {module}:</u></b>\n" + BOT_CMD_MENU[module]
-        )
+        text = f"<b><u>Here Is The Help For {module}:</u></b>\n" + BOT_CMD_MENU[module]
 
         key = InlineKeyboardMarkup(
             [
