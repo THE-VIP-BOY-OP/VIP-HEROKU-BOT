@@ -2,7 +2,12 @@ import re
 from math import ceil
 
 from pyrogram import filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQuery, InlineQueryResultPhoto
+from pyrogram.types import (
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InlineQuery,
+    InlineQueryResultPhoto,
+)
 
 from Vivek import LOGGER, app
 from Vivek.functions.help import BOT_CMD_MENU, SYMBOLS
