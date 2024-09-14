@@ -126,7 +126,7 @@ async def help_button(client, query:):
         await app.bot.send_message(
             query.from_user.id,
             text=top_text,
-            reply_markup=paginate_modules(0, BOT_CMD_MENU, "help")
+            reply_markup=paginate_modules(0, BOT_CMD_MENU, "help"),
             ),
         await query.message.delete()
 
@@ -134,7 +134,7 @@ async def help_button(client, query:):
         curr_page = int(prev_match.group(1))
         await query.message.edit(
             text=top_text,
-            reply_markup=paginate_modules(curr_page, BOT_CMD_MENU, "help")
+            reply_markup=paginate_modules(curr_page, BOT_CMD_MENU, "help"),
             disable_web_page_preview=True,
         )
 
@@ -142,7 +142,7 @@ async def help_button(client, query:):
         next_page = int(next_match.group(1))
         await query.message.edit(
             text=top_text,
-            reply_markup=paginate_modules(next_page, BOT_CMD_MENU, "help")
+            reply_markup=paginate_modules(next_page, BOT_CMD_MENU, "help"),
             disable_web_page_preview=True,
         )
 
@@ -150,7 +150,7 @@ async def help_button(client, query:):
         prev_page_num = int(back_match.group(1))
         await query.message.edit(
             text=top_text,
-            reply_markup=  paginate_modules(prev_page_num, BOT_CMD_MENU, "help")
+            reply_markup=  paginate_modules(prev_page_num, BOT_CMD_MENU, "help"),
             disable_web_page_preview=True,
         )
 
