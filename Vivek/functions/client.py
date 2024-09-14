@@ -11,5 +11,5 @@ class VClient(Client):
         super().__init__(*args, **kwargs)
         self.help = BotHelp
 
-    async def restart_script():
+    async def restart_script(self):
         os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
