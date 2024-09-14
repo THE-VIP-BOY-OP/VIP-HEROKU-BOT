@@ -97,7 +97,7 @@ async def help_button(client, query: InlineQuery):
     next_match = re.match(r"help_next\((.+?)\)", query.data)
     back_match = re.match(r"help_back\((\d+)\)", query.data)
     create_match = re.match(r"help_create", query.data)
-    top_text = "Click Below buttons for more info"
+    top_text = "Click Below buttons for getting help about my Plugins"
 
     if mod_match:
         module = mod_match.group(1)
@@ -182,9 +182,10 @@ async def inline_query_handler(client, query):
         buttons = paginate_modules(0, BOT_CMD_MENU, "help")
         answers.append(
             InlineQueryResultPhoto(
+                title="What do you think about my plugins",
                 photo_url=photo,
                 thumb_url=photo,
-                caption="Here are the help of my Plugins",
+                caption="Click Below buttons for getting help about my Plugins",
                 reply_markup=buttons,
             )
         )
