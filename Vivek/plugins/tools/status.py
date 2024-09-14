@@ -50,3 +50,5 @@ async def set_online(client, message):
         await m.edit_text("Successfully Switched to Online mode")
     except Exception as e:
         await m.edit_text(str(e))
+
+app.help("status").info("This script toggles the user profile between offline and online modes.").add("offline", "Switches the profile to offline mode.").add("online", "Switches the profile back to online mode.").done()
