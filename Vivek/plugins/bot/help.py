@@ -83,7 +83,7 @@ def paginate_modules(page_n, module_dict, prefix, chat=None, close: bool = False
 
 
 @app.bot.on_callback_query(filters.regex(r"help_(.*?)"))
-async def help_button(client, query: types.CallbackQuery):
+async def help_button(client, query: types.InlineQuery):
     home_match = re.match(r"help_home\((.+?)\)", query.data)
     mod_match = re.match(r"help_module\((.+?),(.+?)\)", query.data)
     prev_match = re.match(r"help_prev\((.+?)\)", query.data)
@@ -108,7 +108,8 @@ async def help_button(client, query: types.CallbackQuery):
             ]
         )
 
-        await query.message.edit(
+        await app.edit_inline_text(
+            query.inline_message_id,
             text=text,
             reply_markup=key,
             disable_web_page_preview=True,
@@ -124,7 +125,8 @@ async def help_button(client, query: types.CallbackQuery):
 
     elif prev_match:
         curr_page = int(prev_match.group(1))
-        await query.message.edit(
+        await app.edit_inline_text(
+            query.inline_message_id,
             text=top_text,
             reply_markup=paginate_modules(curr_page, BOT_CMD_MENU, "help"),
             disable_web_page_preview=True,
@@ -132,7 +134,8 @@ async def help_button(client, query: types.CallbackQuery):
 
     elif next_match:
         next_page = int(next_match.group(1))
-        await query.message.edit(
+        await app.edit_inline_text(
+            query.inline_message_id,
             text=top_text,
             reply_markup=paginate_modules(next_page, BOT_CMD_MENU, "help"),
             disable_web_page_preview=True,
@@ -140,7 +143,8 @@ async def help_button(client, query: types.CallbackQuery):
 
     elif back_match:
         prev_page_num = int(back_match.group(1))
-        await query.message.edit(
+        await app.edit_inline_text(
+            query.inline_message_id,
             text=top_text,
             reply_markup=paginate_modules(prev_page_num, BOT_CMD_MENU, "help"),
             disable_web_page_preview=True,
@@ -149,7 +153,8 @@ async def help_button(client, query: types.CallbackQuery):
     elif create_match:
         keyboard = paginate_modules(0, BOT_CMD_MENU, "help")
 
-        await query.message.edit(
+        await app.edit_inline_text(
+            query.inline_message_id,
             text=top_text,
             reply_markup=keyboard,
             disable_web_page_preview=True,
