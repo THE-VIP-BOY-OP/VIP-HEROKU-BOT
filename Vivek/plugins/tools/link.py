@@ -48,6 +48,7 @@ async def gen_link_s(client, message):
         return await message.reply("Reply to a message to get a shareable link.")
     file_type = replied.media
     if file_type not in [
+        enums.MessageMediaType.PHOTO,
         enums.MessageMediaType.VIDEO,
         enums.MessageMediaType.AUDIO,
         enums.MessageMediaType.DOCUMENT,
