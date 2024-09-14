@@ -97,7 +97,7 @@ async def help_button(client, query: types.CallbackQuery):
     if mod_match:
         module = mod_match.group(1)
         prev_page_num = int(mod_match.group(2))
-        text = f"<b><u>Here Is The Help For {module}:</u></b>\n" + BOT_CMD_MENU[module]
+        text = f"<b><u>Here Is The Help For {module}:</u></b>\n" + BOT_CMD_MENU[module.lower()]
 
         key = InlineKeyboardMarkup(
             [
