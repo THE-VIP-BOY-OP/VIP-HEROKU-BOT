@@ -1,9 +1,13 @@
 import re
 from math import ceil
 
-from pyrogram import filters, types
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
+from pyrogram import filters
+from pyrogram.types import (
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InlineQueryResultPhoto,
+    InlineQuery,
+)
 from Vivek import app
 from Vivek.functions.help import BOT_CMD_MENU, SYMBOLS
 
@@ -83,7 +87,7 @@ def paginate_modules(page_n, module_dict, prefix, chat=None, close: bool = False
 
 
 @app.bot.on_callback_query(filters.regex(r"help_(.*?)"))
-async def help_button(client, query: types.InlineQuery):
+async def help_button(client, query: InlineQuery):
     home_match = re.match(r"help_home\((.+?)\)", query.data)
     mod_match = re.match(r"help_module\((.+?),(.+?)\)", query.data)
     prev_match = re.match(r"help_prev\((.+?)\)", query.data)
@@ -161,3 +165,16 @@ async def help_button(client, query: types.InlineQuery):
         )
 
     await client.answer_callback_query(query.id)
+
+
+@app.bot.on_inline_query()
+async def inline_query_handler(client, query):
+    text = query.query.strip().lower()
+    answers = []
+    if text.strip() == "":
+        return
+
+    if text == "RadheRadhe_GiveMeHelp":
+        photo = "https://te.legra.ph/file/4ec5ae4381dffb039b4ef.jpg"
+        buttons = ""
+
