@@ -63,7 +63,7 @@ async def gen_link_s(client, message):
     string = file_id
     outstr = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
     user_id = message.from_user.id
-    share_link = f"https://t.me/{app.username}?start={outstr}"
+    share_link = f"https://t.me/{app.bot.me.username}?start={outstr}"
     await message.reply(
         f"<b>⭕ ʜᴇʀᴇ ɪs ʏᴏᴜʀ ʟɪɴᴋ:\n\n🔗 ᴏʀɪɢɪɴᴀʟ ʟɪɴᴋ :- {share_link}</b>",
         disable_web_page_preview=True,
