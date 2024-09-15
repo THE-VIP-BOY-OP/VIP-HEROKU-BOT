@@ -38,7 +38,7 @@ def unpack_new_file_id(new_file_id: str) -> str:
 
     file_ref = base64.urlsafe_b64encode(decoded.file_reference).decode().rstrip("=")
 
-    return file_ref
+    return file_id, file_ref
 
 
 @app.on_message(filters.command(["link"]) & filters.sudo)
