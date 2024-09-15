@@ -1,6 +1,7 @@
 asyncio
 aiosqlite
 gitpython
+pyromod
 python-dotenv
 requests
 tgcrypto
