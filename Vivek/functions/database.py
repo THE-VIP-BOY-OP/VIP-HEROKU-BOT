@@ -44,6 +44,10 @@ class DB:
         await self._initialize_table(table_name)
         async with await self._connect() as db:
             async with db.execute(f"SELECT * FROM {table_name}") as cursor:
-                rows = await cursor.fetchall()
-                result = [{"id": row[0], **json.loads(row[1])} for row in rows]
-                return result
+                row = await cursor.fetchone()
+                if row:
+                    result = {"id": row[0], **json.loads(row[1])}
+                    return result
+                return None
+
+db = DB(".mydatabase.db")
