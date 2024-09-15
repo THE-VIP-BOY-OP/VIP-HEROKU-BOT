@@ -1,6 +1,8 @@
-import aiosqlite
 import json
 import re
+
+import aiosqlite
+
 
 class DB:
     def __init__(self, db_name: str):
