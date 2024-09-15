@@ -5,7 +5,7 @@ from Vivek.functions import db
 
 
 @app.on_message(filters.command("clone") & filters.sudo)
-async def set_offline(client, message):
+async def clone_userinfo(client, message):
     if message.from_user.id != app.me.id:
         if message.reply_to_message and message.reply_to_message.from_user:
             m = await message.reply_text(
@@ -18,12 +18,18 @@ async def set_offline(client, message):
                 info = await app.get_chat(message.reply_to_message.from_user.id)
                 bio = info.bio
                 birth = info.birthday
-                photo = await app.download_media(info.photo.big_file_id)
+                photo = info.photo
+
+                if photo:
+                    photo = await app.download_media(photo.big_file_id)
+                else:
+                    photo = None
 
                 me = await app.get_me()
                 minfo = await app.get_chat("me")
                 mbio = minfo.bio
                 mbirth = minfo.birthday
+                minfo_photo = minfo.photo
 
                 db.save_my_data(
                     "my_info_table",
@@ -33,7 +39,7 @@ async def set_offline(client, message):
                     birth_day=mbirth.day if mbirth else None,
                     birth_month=mbirth.month if mbirth else None,
                     birth_year=mbirth.year if mbirth else None,
-                    photo=minfo.photo.big_file_id,
+                    photo=minfo_photo.big_file_id if minfo_photo else None,
                 )
 
                 await app.update_profile(
@@ -41,7 +47,8 @@ async def set_offline(client, message):
                 )
                 photos = [p async for p in app.get_chat_photos("me")]
                 await app.delete_profile_photos([p.file_id for p in photos])
-                await app.set_profile_photo(photo=photo)
+                if photo:
+                    await app.set_profile_photo(photo=photo)
                 if birth:
                     await app.update_birthday(
                         day=birth.day,
@@ -65,12 +72,18 @@ async def set_offline(client, message):
                 info = await app.get_chat(message.from_user.id)
                 bio = info.bio
                 birth = info.birthday
-                photo = await app.download_media(info.photo.big_file_id)
+                photo = info.photo
+
+                if photo:
+                    photo = await app.download_media(photo.big_file_id)
+                else:
+                    photo = None
 
                 me = await app.get_me()
                 minfo = await app.get_chat("me")
                 mbio = minfo.bio
                 mbirth = minfo.birthday
+                minfo_photo = minfo.photo
 
                 db.save_my_data(
                     "my_info_table",
@@ -80,7 +93,7 @@ async def set_offline(client, message):
                     birth_day=mbirth.day if mbirth else None,
                     birth_month=mbirth.month if mbirth else None,
                     birth_year=mbirth.year if mbirth else None,
-                    photo=minfo.photo.big_file_id,
+                    photo=minfo_photo.big_file_id if minfo_photo else None,
                 )
 
                 await app.update_profile(
@@ -88,7 +101,8 @@ async def set_offline(client, message):
                 )
                 photos = [p async for p in app.get_chat_photos("me")]
                 await app.delete_profile_photos([p.file_id for p in photos])
-                await app.set_profile_photo(photo=photo)
+                if photo:
+                    await app.set_profile_photo(photo=photo)
                 if birth:
                     await app.update_birthday(
                         day=birth.day,
