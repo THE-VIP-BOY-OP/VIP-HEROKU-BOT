@@ -10,7 +10,7 @@ SPACE = True
 
 
 def edit_filters():
-    
+
     filters.commmand = filters.command
     filters.reaction = filters.create(
         lambda _, __, m: bool(m.reactions), "ReactionFilter"
