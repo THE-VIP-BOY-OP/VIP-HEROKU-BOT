@@ -1,12 +1,16 @@
 from pyrogram import filters
+
 from Vivek import app
 from Vivek.functions import db
+
 
 @app.on_message(filters.command("clone") & filters.sudo)
 async def set_offline(client, message):
     if message.from_user.id != app.me.id:
         if message.reply_to_message and message.reply_to_message.from_user:
-            m = await message.reply_text("Cloning replied user's details, please wait...")
+            m = await message.reply_text(
+                "Cloning replied user's details, please wait..."
+            )
             try:
                 user = await app.get_users(message.reply_to_message.from_user.id)
                 first_name = user.first_name
@@ -30,13 +34,19 @@ async def set_offline(client, message):
                     photo=minfo.photo.big_file_id,
                 )
 
-                await app.update_profile(first_name=first_name, last_name=last_name, bio=bio)
+                await app.update_profile(
+                    first_name=first_name, last_name=last_name, bio=bio
+                )
                 photos = [p async for p in app.get_chat_photos("me")]
                 await app.delete_profile_photos([p.file_id for p in photos])
                 await app.set_profile_photo(photo=photo)
-                await app.update_birthday(day=birth.day, month=birth.month, year=birth.year)
+                await app.update_birthday(
+                    day=birth.day, month=birth.month, year=birth.year
+                )
 
-                return await m.edit_text(f"Successfully cloned the details of {user.mention}")
+                return await m.edit_text(
+                    f"Successfully cloned the details of {user.mention}"
+                )
 
             except Exception as e:
                 await m.edit_text(str(e))
@@ -66,11 +76,15 @@ async def set_offline(client, message):
                     photo=minfo.photo.big_file_id,
                 )
 
-                await app.update_profile(first_name=first_name, last_name=last_name, bio=bio)
+                await app.update_profile(
+                    first_name=first_name, last_name=last_name, bio=bio
+                )
                 photos = [p async for p in app.get_chat_photos("me")]
                 await app.delete_profile_photos([p.file_id for p in photos])
                 await app.set_profile_photo(photo=photo)
-                await app.update_birthday(day=birth.day, month=birth.month, year=birth.year)
+                await app.update_birthday(
+                    day=birth.day, month=birth.month, year=birth.year
+                )
 
                 return await m.edit_text(f"Successfully cloned your details")
 
