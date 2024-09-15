@@ -1,8 +1,6 @@
+import aiosqlite
 import json
 import re
-
-import aiosqlite
-
 
 class DB:
     def __init__(self, db_name: str):
@@ -28,7 +26,10 @@ class DB:
     async def save_my_data(self, table_name: str, **kwargs):
         await self._initialize_table(table_name)
         async with await self._connect() as db:
-            data = json.dumps(kwargs)  # Safer storage format
+            await db.execute(f"DELETE FROM {table_name}")
+            await db.commit()
+
+            data = json.dumps(kwargs)
             await db.execute(
                 f"""
                 INSERT INTO {table_name} (my_info) VALUES (?)
@@ -42,11 +43,5 @@ class DB:
         async with await self._connect() as db:
             async with db.execute(f"SELECT * FROM {table_name}") as cursor:
                 rows = await cursor.fetchall()
-                result = [
-                    {"id": row[0], **json.loads(row[1])} for row in rows
-                ]  # Safely load JSON data
+                result = [{"id": row[0], **json.loads(row[1])} for row in rows]
                 return result
-
-
-# Example usage
-db = DB(".mydatabase.db")
