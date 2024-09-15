@@ -65,6 +65,6 @@ async def gen_link_s(client, message):
     user_id = message.from_user.id
     share_link = f"https://t.me/{app.bot.me.username}?start={outstr}"
     await message.reply(
-        f"<b>⭕ ʜᴇʀᴇ ɪs ʏᴏᴜʀ ʟɪɴᴋ:\n\n🔗 ᴏʀɪɢɪɴᴀʟ ʟɪɴᴋ :- {share_link}</b>",
+        f"<b>⭕ ʜᴇʀᴇ ɪs ʏᴏᴜʀ ʟɪɴᴋ:\n\n🔗 [ʟɪɴᴋ]({share_link})</b>",
         disable_web_page_preview=True,
     )
