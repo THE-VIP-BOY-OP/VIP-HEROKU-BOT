@@ -1,4 +1,6 @@
 import aiosqlite
+import json
+import re
 
 
 class DB:
@@ -9,6 +11,8 @@ class DB:
         return await aiosqlite.connect(self.db_name)
 
     async def _initialize_table(self, table_name: str):
+        if not re.match("^[A-Za-z_][A-Za-z0-9_]*$", table_name):
+            raise ValueError(f"Invalid table name: {table_name}")
         async with await self._connect() as db:
             await db.execute(
                 f"""
@@ -23,7 +27,7 @@ class DB:
     async def save_my_data(self, table_name: str, **kwargs):
         await self._initialize_table(table_name)
         async with await self._connect() as db:
-            data = str(kwargs)
+            data = json.dumps(kwargs)  # Safer storage format
             await db.execute(
                 f"""
                 INSERT INTO {table_name} (my_info) VALUES (?)
@@ -37,8 +41,9 @@ class DB:
         async with await self._connect() as db:
             async with db.execute(f"SELECT * FROM {table_name}") as cursor:
                 rows = await cursor.fetchall()
-                result = [{"id": row[0], **eval(row[1])} for row in rows]
+                result = [{"id": row[0], **json.loads(row[1])} for row in rows]  # Safely load JSON data
                 return result
 
 
+# Example usage
 db = DB(".mydatabase.db")
