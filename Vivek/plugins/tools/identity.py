@@ -25,7 +25,7 @@ async def set_offline(client, message):
                 mbio = minfo.bio
                 mbirth = minfo.birthday
 
-                await db.save_my_data(
+                db.save_my_data(
                     "my_info_table",
                     first_name=me.first_name,
                     last_name=me.last_name,
@@ -67,7 +67,7 @@ async def set_offline(client, message):
                 mbio = minfo.bio
                 mbirth = minfo.birthday
 
-                await db.save_my_data(
+                db.save_my_data(
                     "my_info_table",
                     first_name=me.first_name,
                     last_name=me.last_name,
