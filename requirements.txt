@@ -1,9 +1,8 @@
 asyncio
+aiosqlite
 gitpython
 python-dotenv
-httpx[http2]
 requests
 tgcrypto
 uvloop
-pyromod
 git+https://github.com/KurimuzonAkuma/pyrogram
