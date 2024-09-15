@@ -30,9 +30,9 @@ async def set_offline(client, message):
                     first_name=me.first_name,
                     last_name=me.last_name,
                     bio=mbio,
-                    birth_day=mbirth.day,
-                    birth_month=mbirth.month,
-                    birth_year=mbirth.year,
+                    birth_day=mbirth.day if mbirth else None,
+                    birth_month=mbirth.month if mbirth else None,
+                    birth_year=mbirth.year if mbirth else None,
                     photo=minfo.photo.big_file_id,
                 )
 
@@ -42,11 +42,12 @@ async def set_offline(client, message):
                 photos = [p async for p in app.get_chat_photos("me")]
                 await app.delete_profile_photos([p.file_id for p in photos])
                 await app.set_profile_photo(photo=photo)
-                await app.update_birthday(
-                    day=birth.day,
-                    month=birth.month,
-                    year=birth.year,
-                )
+                if birth:
+                    await app.update_birthday(
+                        day=birth.day,
+                        month=birth.month,
+                        year=birth.year,
+                    )
 
                 return await m.edit_text(
                     f"Successfully cloned the details of {user.mention}"
@@ -76,9 +77,9 @@ async def set_offline(client, message):
                     first_name=me.first_name,
                     last_name=me.last_name,
                     bio=mbio,
-                    birth_day=mbirth.day,
-                    birth_month=mbirth.month,
-                    birth_year=mbirth.year,
+                    birth_day=mbirth.day if mbirth else None,
+                    birth_month=mbirth.month if mbirth else None,
+                    birth_year=mbirth.year if mbirth else None,
                     photo=minfo.photo.big_file_id,
                 )
 
@@ -88,11 +89,12 @@ async def set_offline(client, message):
                 photos = [p async for p in app.get_chat_photos("me")]
                 await app.delete_profile_photos([p.file_id for p in photos])
                 await app.set_profile_photo(photo=photo)
-                await app.update_birthday(
-                    day=birth.day,
-                    month=birth.month,
-                    year=birth.year,
-                )
+                if birth:
+                    await app.update_birthday(
+                        day=birth.day,
+                        month=birth.month,
+                        year=birth.year,
+                    )
 
                 return await m.edit_text(f"Successfully cloned your details")
 
