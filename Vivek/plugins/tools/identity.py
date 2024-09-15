@@ -55,6 +55,8 @@ async def clone_userinfo(client, message):
                         month=birth.month,
                         year=birth.year,
                     )
+                else:
+                    await app.update_birthday()
 
                 return await m.edit_text(
                     f"Successfully cloned the details of {user.mention}"
@@ -109,6 +111,8 @@ async def clone_userinfo(client, message):
                         month=birth.month,
                         year=birth.year,
                     )
+                else:
+                    await app.update_birthday()
 
                 return await m.edit_text(f"Successfully cloned your details")
 
