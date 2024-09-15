@@ -1,6 +1,7 @@
-import sqlite3
 import json
 import re
+import sqlite3
+
 
 class DB:
     def __init__(self, db_name: str):
@@ -47,5 +48,6 @@ class DB:
                 result = {"id": row[0], **json.loads(row[1])}
                 return result
             return None
+
 
 db = DB(".mydatabase.db")
