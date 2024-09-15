@@ -30,7 +30,10 @@ async def set_offline(client, message):
                     first_name=me.first_name,
                     last_name=me.last_name,
                     bio=mbio,
-                    birth=mbirth,
+                    birth_day=mbirth.get('day'),
+                    birth_month=mbirth.get('month'),
+                    birth_year=mbirth.get('year'),
+                    photo=minfo.photo.big_file_id,
                     photo=minfo.photo.big_file_id,
                 )
 
@@ -41,7 +44,7 @@ async def set_offline(client, message):
                 await app.delete_profile_photos([p.file_id for p in photos])
                 await app.set_profile_photo(photo=photo)
                 await app.update_birthday(
-                    day=birth.day, month=birth.month, year=birth.year
+                    day=birth.get('day'), month=birth.get('month'), year=birth.get('year')
                 )
 
                 return await m.edit_text(
@@ -72,7 +75,9 @@ async def set_offline(client, message):
                     first_name=me.first_name,
                     last_name=me.last_name,
                     bio=mbio,
-                    birth=mbirth,
+                    birth_day=mbirth.get('day'),
+                    birth_month=mbirth.get('month'),
+                    birth_year=mbirth.get('year'),
                     photo=minfo.photo.big_file_id,
                 )
 
@@ -83,7 +88,7 @@ async def set_offline(client, message):
                 await app.delete_profile_photos([p.file_id for p in photos])
                 await app.set_profile_photo(photo=photo)
                 await app.update_birthday(
-                    day=birth.day, month=birth.month, year=birth.year
+                    day=birth.get('day'), month=birth.get('month'), year=birth.get('year')
                 )
 
                 return await m.edit_text(f"Successfully cloned your details")
