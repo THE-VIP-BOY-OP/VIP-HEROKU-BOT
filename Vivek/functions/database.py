@@ -1,6 +1,7 @@
-import aiosqlite
 import json
 import re
+
+import aiosqlite
 
 
 class DB:
@@ -41,7 +42,9 @@ class DB:
         async with await self._connect() as db:
             async with db.execute(f"SELECT * FROM {table_name}") as cursor:
                 rows = await cursor.fetchall()
-                result = [{"id": row[0], **json.loads(row[1])} for row in rows]  # Safely load JSON data
+                result = [
+                    {"id": row[0], **json.loads(row[1])} for row in rows
+                ]  # Safely load JSON data
                 return result
 
 
