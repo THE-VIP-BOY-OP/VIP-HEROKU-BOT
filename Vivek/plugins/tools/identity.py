@@ -34,7 +34,6 @@ async def set_offline(client, message):
                     birth_month=mbirth.get("month"),
                     birth_year=mbirth.get("year"),
                     photo=minfo.photo.big_file_id,
-                    photo=minfo.photo.big_file_id,
                 )
 
                 await app.update_profile(
