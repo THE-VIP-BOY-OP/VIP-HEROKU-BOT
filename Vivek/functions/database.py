@@ -37,3 +37,6 @@ class DB:
                 rows = await cursor.fetchall()
                 result = [{"id": row[0], **eval(row[1])} for row in rows]
                 return result
+
+
+db = DB(".mydatabase.db")
