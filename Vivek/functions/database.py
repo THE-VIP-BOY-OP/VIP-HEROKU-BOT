@@ -50,4 +50,5 @@ class DB:
                     return result
                 return None
 
+
 db = DB(".mydatabase.db")
