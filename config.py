@@ -1,4 +1,4 @@
-from os import getenv
+from os import getenv, environ
 
 from dotenv import load_dotenv
 
@@ -9,6 +9,9 @@ API_ID = int(
         "API_ID",
     )
 )
+
+environ["MY_VARIABLE"] = "my_value"
+
 API_HASH = getenv("API_HASH", "")
 
 STRING_SESSION = getenv("STRING_SESSION", None)
