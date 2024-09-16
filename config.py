@@ -1,4 +1,4 @@
-from os import getenv, environ
+from os import environ, getenv
 
 from dotenv import load_dotenv
 
