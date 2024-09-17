@@ -56,8 +56,7 @@ class App(VClient):
 
     async def stop(self):
         LOGGER(__name__).info(f"Radhe Radhe\nStopping....")
-        a = await app.send_document(DATABASE_CHANNEL_ID, ".mydatabase.db")
-        await app.pin_chat_message(DATABASE_CHANNEL_ID, a.id)
+        await super().export_database()
         await super().stop()
         await self.bot.stop()
 
