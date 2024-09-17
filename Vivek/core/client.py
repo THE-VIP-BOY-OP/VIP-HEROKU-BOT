@@ -46,6 +46,7 @@ class App(VClient):
         await super().start()
         LOGGER(__name__).info(f"Userbot started")
         await self.bot.start()
+        await super().load_database()
         await app.bot.send_message(LOG_GROUP_ID, "started")
         LOGGER(__name__).info(f"bot started")
         for all_module in ALL_MODULES:
