@@ -25,7 +25,7 @@ def handle_exit():
 atexit.register(handle_exit)
 signal.signal(signal.SIGINT, handle_signal)
 signal.signal(signal.SIGTERM, handle_signal)
-
+signal.signal(signal.SIGQUIT, handle_signal)
 
 async def main():
     await app.start()
