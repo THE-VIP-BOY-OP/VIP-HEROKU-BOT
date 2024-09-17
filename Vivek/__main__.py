@@ -36,5 +36,6 @@ async def main():
 if __name__ == "__main__":
     try:
         loop.run_until_complete(main())
-    except Exception:
+    except Exception as e:
         run_shutdown()
+        raise e
