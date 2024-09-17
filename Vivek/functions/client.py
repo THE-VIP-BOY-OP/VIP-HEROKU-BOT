@@ -1,5 +1,7 @@
 import os
+from datetime import datetime
 
+import pytz
 from pyrogram import Client
 from pyrogram.enums import MessageMediaType, MessagesFilter
 from pyrogram.types import InputMediaDocument
@@ -7,8 +9,7 @@ from pyrogram.types import InputMediaDocument
 from config import DATABASE_CHANNEL_ID
 
 from .help import BotHelp
-from datetime import datetime
-import pytz
+
 
 class VClient(Client):
     def __init__(self, *args, **kwargs):
@@ -71,7 +72,9 @@ class VClient(Client):
                 await self.delete_messages(DATABASE_CHANNEL_ID, message.id)
 
         if os.path.isfile(".mydatabase.db"):
-            time = datetime.now(pytz.timezone('Asia/Kolkata')).strftime("%Y-%m-%d %H:%M:%S")
+            time = datetime.now(pytz.timezone("Asia/Kolkata")).strftime(
+                "%Y-%m-%d %H:%M:%S"
+            )
 
             media = InputMediaDocument(
                 media=".mydatabase.db",
