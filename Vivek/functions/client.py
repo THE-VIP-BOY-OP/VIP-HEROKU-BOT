@@ -16,7 +16,8 @@ class VClient(Client):
         self.help = BotHelp
 
     async def restart_script(self):
-        os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
+        # os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
+        os.system(f"kill -9 {os.getpid()} && python3 -m YukkiMusic")
 
     async def load_database(self):
         messages = []
