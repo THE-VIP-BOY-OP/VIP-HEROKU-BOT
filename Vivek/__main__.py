@@ -2,6 +2,7 @@ import asyncio
 import atexit
 import signal
 import sys
+from pyrogram import idle
 
 from Vivek import app
 
