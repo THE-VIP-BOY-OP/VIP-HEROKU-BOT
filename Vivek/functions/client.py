@@ -1,5 +1,4 @@
 import os
-import sys
 
 from pyrogram import Client
 from pyrogram.enums import MessageMediaType, MessagesFilter
