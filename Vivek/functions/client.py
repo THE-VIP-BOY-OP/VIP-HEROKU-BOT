@@ -7,7 +7,8 @@ from pyrogram.types import InputMediaDocument
 from config import DATABASE_CHANNEL_ID
 
 from .help import BotHelp
-
+from datetime import datetime
+import pytz
 
 class VClient(Client):
     def __init__(self, *args, **kwargs):
@@ -70,9 +71,11 @@ class VClient(Client):
                 await self.delete_messages(DATABASE_CHANNEL_ID, message.id)
 
         if os.path.isfile(".mydatabase.db"):
+            time = datetime.now(pytz.timezone('Asia/Kolkata')).strftime("%Y-%m-%d %H:%M:%S")
+
             media = InputMediaDocument(
                 media=".mydatabase.db",
-                caption=f"this is DATABASE of {self.me.mention} Please don't Delete or Unpin This message\nElse your bot data will be deleted",
+                caption=f"> this is DATABASE of {self.me.mention} Please don't Delete or Unpin This message\n> Else your bot data will be deleted\n Refreshed at {time}",
             )
             await self.edit_message_media(
                 chat_id=DATABASE_CHANNEL_ID,
