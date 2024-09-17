@@ -2,9 +2,10 @@ import os
 import sys
 
 from pyrogram import Client
+from pyrogram.enums import MessageMediaType, MessagesFilter
+
 from config import DATABASE_CHANNEL_ID
-import os
-from pyrogram.enums import MessagesFilter, MessageMediaType
+
 from .help import BotHelp
 
 
@@ -16,21 +17,20 @@ class VClient(Client):
     async def restart_script(self):
         os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
 
-
-    
-
     async def load_database():
         messages = []
-    
-        async for message in self.search_messages(DATABASE_CHANNEL_ID, filter=MessagesFilter.PINNED):
+
+        async for message in self.search_messages(
+            DATABASE_CHANNEL_ID, filter=MessagesFilter.PINNED
+        ):
             if message.media == MessageMediaType.DOCUMENT:
                 if message.caption and "DATABASE" in message.caption:
                     if message.document.file_name.endswith(".db"):
                         messages.append(message)
-    
+
         if len(messages) == 0:
             return False
-    
+
         msg = messages[0]
 
         if os.path.isfile(".mydatabase.db"):
@@ -45,4 +45,3 @@ class VClient(Client):
         await msg.download(file_name=file_path)
 
         return os.path.isfile(".mydatabase.db")
-                    
