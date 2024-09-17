@@ -44,17 +44,13 @@ class App(VClient):
         LOGGER(__name__).info(f"bot started")
         for all_module in ALL_MODULES:
             importlib.import_module("Vivek.plugins" + all_module)
-        await idle()
-        await self.stop()
+        
 
     async def stop(self):
         LOGGER(__name__).info(f"Radhe Radhe\nStopping....")
         await super().export_database()
         await super().stop()
         await self.bot.stop()
-
-    def run(self, fnc: Callable[[], Awaitable[None]]):
-        asyncio.get_event_loop_policy().get_event_loop().run_until_complete(fnc())
 
 
 app = App()
