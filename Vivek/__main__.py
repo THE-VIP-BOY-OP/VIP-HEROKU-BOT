@@ -24,7 +24,6 @@ def handle_exit():
     run_shutdown()
 
 
- 
 async def main():
     atexit.register(handle_exit)
     signal.signal(signal.SIGINT, handle_signal)
