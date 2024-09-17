@@ -6,7 +6,7 @@ import pyromod.listen  # noqa
 from pyrogram import __version__ as v
 from pyrogram import idle
 
-from config import API_HASH, API_ID, BOT_TOKEN, LOG_GROUP_ID, STRING_SESSION
+from config import API_HASH, API_ID, BOT_TOKEN, LOG_GROUP_ID, STRING_SESSION, DATABASE_CHANNEL_ID
 from Vivek.functions.client import VClient
 from Vivek.plugins import ALL_MODULES
 
@@ -48,6 +48,8 @@ class App(VClient):
 
     async def stop(self):
         LOGGER(__name__).info(f"Radhe Radhe\nStopping....")
+        a = await app.send_document(DATABASE_CHANNEL_ID, ".mydatabase.db")
+        await app.pin_chat_message(DATABASE_CHANNEL_ID, a.id)
         await super().stop()
         await self.bot.stop()
 
