@@ -17,7 +17,7 @@ class VClient(Client):
     async def restart_script(self):
         os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
 
-    async def load_database():
+    async def load_database(self):
         messages = []
 
         async for message in self.search_messages(
