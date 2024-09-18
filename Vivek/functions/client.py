@@ -2,14 +2,13 @@ import os
 from datetime import datetime
 
 import pytz
+import requests
 from pyrogram import Client
 from pyrogram.enums import MessageMediaType, MessagesFilter
-from pyrogram.types import InputMediaDocument
 
-from config import DATABASE_CHANNEL_ID, BOT_TOKEN
+from config import BOT_TOKEN, DATABASE_CHANNEL_ID
 
 from .help import BotHelp
-import requests
 
 _msg = None
 
@@ -64,12 +63,9 @@ class VClient(Client):
                 "%Y-%m-%d %H:%M:%S"
             )
 
-            caption=f"> this is DATABASE of {self.me.mention} Please don't Delete or Unpin This message\n> Else your bot data will be deleted\n Refreshed at {time}"
+            caption = f"> this is DATABASE of {self.me.mention} Please don't Delete or Unpin This message\n> Else your bot data will be deleted\n Refreshed at {time}"
 
-            new_media = {
-                "type": "document",
-                "media": ".mydatabase.db"
-            }
+            new_media = {"type": "document", "media": ".mydatabase.db"}
 
             url = f"https://api.telegram.org/bot{BOT_TOKEN}/editMessageMedia"
 
@@ -78,7 +74,7 @@ class VClient(Client):
                 "message_id": _msg.id,
                 "media": new_media,
                 "caption": caption,
-                "parse_mode": "Markdown"
+                "parse_mode": "Markdown",
             }
 
             response = requests.post(url, json=data)
