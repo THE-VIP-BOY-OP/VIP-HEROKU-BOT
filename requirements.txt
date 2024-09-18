@@ -5,6 +5,7 @@ pyromod
 pytz
 python-dotenv
 requests
+httpx
 tgcrypto
 uvloop
 git+https://github.com/KurimuzonAkuma/pyrogram
