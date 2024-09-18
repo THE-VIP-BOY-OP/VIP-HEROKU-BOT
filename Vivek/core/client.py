@@ -42,11 +42,11 @@ class App(VClient):
         for all_module in ALL_MODULES:
             importlib.import_module("Vivek.plugins" + all_module)
 
-    async def stop(self):
+    def stop(self):
         LOGGER(__name__).info(f"Radhe Radhe\nStopping....")
-        await super().export_database()
-        await super().stop()
-        await self.bot.stop()
+        super().export_database()
+        super().stop()
+        self.bot.stop()
 
 
 app = App()
