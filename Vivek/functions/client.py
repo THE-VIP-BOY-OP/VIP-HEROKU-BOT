@@ -1,4 +1,5 @@
 import os
+import sys
 
 from pyrogram import Client
 from pyrogram.enums import MessageMediaType, MessagesFilter
@@ -7,7 +8,6 @@ from config import DATABASE_CHANNEL_ID
 
 from .help import BotHelp
 
-import sys
 
 class VClient(Client):
     def __init__(self, *args, **kwargs):
