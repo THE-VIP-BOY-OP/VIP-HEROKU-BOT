@@ -4,20 +4,25 @@ import signal
 import sys
 
 from pyrogram import idle
+
 from Vivek import app
 
 loop = asyncio.get_event_loop_policy().get_event_loop()
 
+
 def run_shutdown():
     asyncio.run(app.stop())
+
 
 def handle_signal(signal_number, frame):
     run_shutdown()
     loop.stop()
     sys.exit(0)
 
+
 def handle_exit():
     run_shutdown()
+
 
 async def main():
     atexit.register(handle_exit)
@@ -26,6 +31,7 @@ async def main():
     signal.signal(signal.SIGQUIT, handle_signal)
     await app.start()
     await idle()
+
 
 if __name__ == "__main__":
     try:
