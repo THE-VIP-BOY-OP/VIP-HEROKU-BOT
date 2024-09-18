@@ -1,9 +1,19 @@
+import asyncio
 import importlib
+from typing import Awaitable, Callable
 
 import pyromod.listen  # noqa
 from pyrogram import __version__ as v
+from pyrogram import idle
 
-from config import API_HASH, API_ID, BOT_TOKEN, LOG_GROUP_ID, STRING_SESSION
+from config import (
+    API_HASH,
+    API_ID,
+    BOT_TOKEN,
+    DATABASE_CHANNEL_ID,
+    LOG_GROUP_ID,
+    STRING_SESSION,
+)
 from Vivek.functions.client import VClient
 from Vivek.plugins import ALL_MODULES
 
@@ -41,12 +51,16 @@ class App(VClient):
         LOGGER(__name__).info(f"bot started")
         for all_module in ALL_MODULES:
             importlib.import_module("Vivek.plugins" + all_module)
+        await idle()
+        await self.stop()
 
-    def stop(self):
+    async def stop(self):
         LOGGER(__name__).info(f"Radhe Radhe\nStopping....")
-        super().export_database()
-        super().stop()
-        self.bot.stop()
+        await super().stop()
+        await self.bot.stop()
+
+    def run(self, fnc: Callable[[], Awaitable[None]]):
+        asyncio.get_event_loop_policy().get_event_loop().run_until_complete(fnc())
 
 
 app = App()
