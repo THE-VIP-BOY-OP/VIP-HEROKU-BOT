@@ -7,6 +7,7 @@ from config import DATABASE_CHANNEL_ID
 
 from .help import BotHelp
 
+import sys
 
 class VClient(Client):
     def __init__(self, *args, **kwargs):
