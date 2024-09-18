@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 import pytz
-import requests
+import httpx
 from pyrogram import Client
 from pyrogram.enums import MessageMediaType, MessagesFilter
 
@@ -79,6 +79,5 @@ class VClient(Client):
                 "caption": caption,
                 "parse_mode": "Markdown",
             }
-
-            response = requests.post(url, json=data)
-            log.info(response.json())
+            with httpx.Client() as client:
+                response = client.post(url, json=data)
