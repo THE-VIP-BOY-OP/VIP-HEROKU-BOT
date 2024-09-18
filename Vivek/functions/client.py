@@ -6,9 +6,10 @@ from pyrogram import Client
 from pyrogram.enums import MessageMediaType, MessagesFilter
 from pyrogram.types import InputMediaDocument
 
-from config import DATABASE_CHANNEL_ID
+from config import DATABASE_CHANNEL_ID, BOT_TOKEN
 
 from .help import BotHelp
+import requests
 
 _msg = None
 
@@ -56,20 +57,29 @@ class VClient(Client):
 
         return os.path.isfile(".mydatabase.db")
 
-    async def export_database(self):
+    def export_database(self):
         global _msg
         if os.path.isfile(".mydatabase.db"):
             time = datetime.now(pytz.timezone("Asia/Kolkata")).strftime(
                 "%Y-%m-%d %H:%M:%S"
             )
 
-            media = InputMediaDocument(
-                media=".mydatabase.db",
-                caption=f"> this is DATABASE of {self.me.mention} Please don't Delete or Unpin This message\n> Else your bot data will be deleted\n Refreshed at {time}",
-            )
-            await self.edit_message_media(
-                chat_id=DATABASE_CHANNEL_ID,
-                message_id=_msg.id,
-                media=media,
-                file_name=".mydatabase.db",
-            )
+            caption=f"> this is DATABASE of {self.me.mention} Please don't Delete or Unpin This message\n> Else your bot data will be deleted\n Refreshed at {time}"
+
+            new_media = {
+                "type": "document",
+                "media": ".mydatabase.db"
+            }
+
+            url = f"https://api.telegram.org/bot{BOT_TOKEN}/editMessageMedia"
+
+            data = {
+                "chat_id": DATABASE_CHANNEL_ID,
+                "message_id": msg.id,
+                "media": new_media,
+                "caption": caption,
+                "parse_mode": "Markdown"
+            }
+
+            response = requests.post(url, json=data)
+            log.info(response.json())
