@@ -21,7 +21,9 @@ async def export_database():
                     messages.append(message)
 
     if len(messages) == 0:
-        return await app.send_document(DATABASE_CHANNEL_ID, ".mydatabase.db", caption="DATABASE")
+        return await app.send_document(
+            DATABASE_CHANNEL_ID, ".mydatabase.db", caption="DATABASE"
+        )
 
     msg = max(messages, key=lambda msg: max(msg.date, msg.edit_date or msg.date))
     for message in messages:
