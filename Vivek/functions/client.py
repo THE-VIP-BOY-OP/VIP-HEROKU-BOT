@@ -75,7 +75,7 @@ class VClient(Client):
 
             data = {
                 "chat_id": DATABASE_CHANNEL_ID,
-                "message_id": msg.id,
+                "message_id": _msg.id,
                 "media": new_media,
                 "caption": caption,
                 "parse_mode": "Markdown"
