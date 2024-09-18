@@ -91,13 +91,13 @@ class VClient(Client):
             caption = f"> this is DATABASE of {self.me.mention} Please don't Delete or Unpin This message\n> Else your bot data will be deleted\n Refreshed at {time}"
 
             if _msg is None:
-               url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument"
+                url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument"
 
-               with open(".mydatabase.db", "rb") as file:
-               files = {"document": file}
-               data = {"chat_id": LOG_GROUP_ID, caption=caption}
+                with open(".mydatabase.db", "rb") as file:
+                files = {"document": file}
+                data = {"chat_id": LOG_GROUP_ID, caption=caption}
 
-               response = httpx.post(url, data=data, files=files)
+                return httpx.post(url, data=data, files=files)
             file_id = get_file_id()
 
             new_media = {"type": "document", "media": file_id}
