@@ -15,6 +15,26 @@ _msg = None
 
 log = LOGGER(__name__)
 
+import httpx
+from config import BOT_TOKEN, LOG_GROUP_ID
+
+def get_file_id():
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument"
+    
+    with open(".mydatabase.db", "rb") as file:
+        files = {"document": file}
+        data = {"chat_id": LOG_GROUP_ID}
+        
+        response = httpx.post(url, data=data, files=files)
+        
+        if response.status_code == 200:
+            result = response.json()
+            if result["ok"]:
+                file_id = result["result"]["document"]["file_id"]
+                return file_id
+        else:
+            return None
+
 
 class VClient(Client):
     def __init__(self, *args, **kwargs):
@@ -68,7 +88,7 @@ class VClient(Client):
 
             caption = f"> this is DATABASE of {self.me.mention} Please don't Delete or Unpin This message\n> Else your bot data will be deleted\n Refreshed at {time}"
 
-            new_media = {"type": "document", "media": ".mydatabase.db"}
+            new_media = {"type": "document", "media": get_file_id()}
 
             url = f"https://api.telegram.org/bot{BOT_TOKEN}/editMessageMedia"
 
