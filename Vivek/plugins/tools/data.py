@@ -7,7 +7,7 @@ from pyrogram.enums import MessageMediaType, MessagesFilter
 from pyrogram.types import InputMediaDocument
 
 from config import DATABASE_CHANNEL_ID
-
+from Vivek import app
 
 async def export_database():
     messages = []
