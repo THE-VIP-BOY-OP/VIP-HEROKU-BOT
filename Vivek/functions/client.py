@@ -8,34 +8,7 @@ from pyrogram.enums import MessageMediaType, MessagesFilter
 
 from config import BOT_TOKEN, DATABASE_CHANNEL_ID
 
-from ..core.logger import LOGGER
 from .help import BotHelp
-
-_msg = None
-
-log = LOGGER(__name__)
-
-import httpx
-
-from config import BOT_TOKEN, LOG_GROUP_ID
-
-
-def get_file_id():
-    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument"
-
-    with open(".mydatabase.db", "rb") as file:
-        files = {"document": file}
-        data = {"chat_id": LOG_GROUP_ID}
-
-        response = httpx.post(url, data=data, files=files)
-
-        if response.status_code == 200:
-            result = response.json()
-            if result["ok"]:
-                file_id = result["result"]["document"]["file_id"]
-                return file_id
-        else:
-            return None
 
 
 class VClient(Client):
@@ -44,8 +17,7 @@ class VClient(Client):
         self.help = BotHelp
 
     async def restart_script(self):
-        # os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
-        os.system(f"kill -9 {os.getpid()} && python3 -m YukkiMusic")
+        os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
 
     async def load_database(self):
         global _msg
@@ -80,36 +52,3 @@ class VClient(Client):
         await msg.download(file_name=file_path)
 
         return os.path.isfile(".mydatabase.db")
-
-    def export_database(self):
-        global _msg
-        if os.path.isfile(".mydatabase.db"):
-            time = datetime.now(pytz.timezone("Asia/Kolkata")).strftime(
-                "%Y-%m-%d %H:%M:%S"
-            )
-
-            caption = f"> this is DATABASE of {self.me.mention} Please don't Delete or Unpin This message\n> Else your bot data will be deleted\n Refreshed at {time}"
-
-            if _msg is None:
-                url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument"
-
-                with open(".mydatabase.db", "rb") as file:
-                files = {"document": file}
-                data = {"chat_id": LOG_GROUP_ID, caption=caption}
-
-                return httpx.post(url, data=data, files=files)
-            file_id = get_file_id()
-
-            new_media = {"type": "document", "media": file_id}
-
-            url = f"https://api.telegram.org/bot{BOT_TOKEN}/editMessageMedia"
-
-            data = {
-                "chat_id": DATABASE_CHANNEL_ID,
-                "message_id": _msg.id,
-                "media": new_media,
-                "caption": caption,
-                "parse_mode": "Markdown",
-            }
-            with httpx.Client() as client:
-                response = client.post(url, json=data)
