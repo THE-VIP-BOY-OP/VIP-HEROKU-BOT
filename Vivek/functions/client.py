@@ -9,9 +9,10 @@ from pyrogram.enums import MessageMediaType, MessagesFilter
 from config import BOT_TOKEN, DATABASE_CHANNEL_ID
 
 from .help import BotHelp
-
+from ..core.logger import LOGGER
 _msg = None
 
+log = LOGGER(__name__)
 
 class VClient(Client):
     def __init__(self, *args, **kwargs):
