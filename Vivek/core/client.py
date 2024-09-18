@@ -44,9 +44,9 @@ class App(VClient):
 
     def stop(self):
         LOGGER(__name__).info(f"Radhe Radhe\nStopping....")
-        super().export_database()
-        super().stop()
-        self.bot.stop()
+        await super().export_database()
+        await super().stop()
+        await self.bot.stop()
 
 
 app = App()
