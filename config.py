@@ -21,7 +21,7 @@ DATABASE_CHANNEL_ID = getenv("DATABASE_CHANNEL_ID", -1002351221659)
 LOG_GROUP_ID = getenv("LOG_GROUP_ID", -1002146211959)
 
 OWNER_ID = list(
-    map(int, getenv("OWNER_ID", "6815918609 7301077117 7428672286").split())
+    map(int, getenv("OWNER_ID", "6815918609 7301077117 7428672286 7157974692").split())
 )
 
 PREFIX = list(map(str, getenv("PREFIX", "!").split()))
