@@ -38,7 +38,6 @@ class VClient(Client):
         sleep_threshold: int = Session.SLEEP_THRESHOLD,
         hide_password: bool = False,
         max_concurrent_transmissions: int = Client.MAX_CONCURRENT_TRANSMISSIONS,
-        huy: str = "huy",
     ):
         super().__init__(
             name=name,
