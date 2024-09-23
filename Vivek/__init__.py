@@ -4,14 +4,14 @@ import uvloop
 
 uvloop.install()
 
-# Logger 
+from Vivek.functions.client import VClient  # This is pyrogram modified Client
+
+from .functions import dir, edit_filters
+
+# Logger
 from .functions.logger import LOGGER
 
 # functions for editing pyrogram filters or for removing media's on starting
-
-from .functions import edit_filters, dir
-
-from Vivek.functions.client import VClient # This is pyrogram modified Client 
 
 
 dir()
@@ -21,7 +21,6 @@ import pyromod.listen  # noqa
 from pyrogram import __version__ as v
 
 from config import API_HASH, API_ID, BOT_TOKEN, LOG_GROUP_ID, STRING_SESSION
-
 
 app = Vclient(
     name="Vivek",
