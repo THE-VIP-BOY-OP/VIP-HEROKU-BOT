@@ -16,7 +16,7 @@ async def ytsearch(client, message):
         results = VideosSearch(query, limit=1)
         for result in (await results.next())["result"]:
             title = result["title"]
-            type= result["type"]
+            type = result["type"]
             duration_min = result["duration"]
             thumbnail = result["thumbnails"][0]["url"].split("?")[0]
             vidid = result["id"]
