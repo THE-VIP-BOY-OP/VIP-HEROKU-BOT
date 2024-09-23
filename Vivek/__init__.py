@@ -1,12 +1,16 @@
 import uvloop
-uvloop.install() # Applying uvloop event loop policy
-from .functions.logger import LOGGER # Logger 
-from .functions import edit_filters, dir # functions for editing pyrogram filters or for removing media's on starting
-from Vivek.functions.client import VClient # This is pyrogram modified Client 
+
+uvloop.install()  # Applying uvloop event loop policy
 from pyrogram import __version__ as v
+
 from config import API_HASH, API_ID, BOT_TOKEN, LOG_GROUP_ID, STRING_SESSION
+from Vivek.functions.client import VClient  # This is pyrogram modified Client
 
-
+from .functions import (  # functions for editing pyrogram filters or for removing media's on starting
+    dir,
+    edit_filters,
+)
+from .functions.logger import LOGGER  # Logger
 
 dir()
 edit_filters()
