@@ -18,7 +18,7 @@ async def main():
     for all_module in ALL_MODULES:
         importlib.import_module("Vivek.plugins" + all_module)
     await idle()  # Run this bot without stopping
-    # Stop the app of keyboard interrupt (CTRL + C PRESSED)
+    # Stop the app and bot if keyboard interrupt (CTRL + C PRESSED)
     await app.stop()
     await app.bot.stop()
 
