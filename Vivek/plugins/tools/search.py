@@ -16,25 +16,30 @@ async def ytsearch(client, message):
         results = VideosSearch(query, limit=1)
         for result in (await results.next())["result"]:
             title = result["title"]
+            type= result["type"]
             duration_min = result["duration"]
             thumbnail = result["thumbnails"][0]["url"].split("?")[0]
             vidid = result["id"]
             channel = result["channel"]["name"]
+            channe_link = result["channel"]["link"]
             views = result["viewCount"]["short"]
             upload_date = result["publishedTime"]
-
+            thumbnail = result["thumbnails"]["url"]
         text = (
             f"**🎵 Title**: [{title}](https://www.youtube.com/watch?v={vidid})\n"
             f"**⏱ Duration**: {duration_min}\n"
             f"**📅 Uploaded**: {upload_date}\n"
+            f"**📹 Type**: {type}\n"
             f"**👁 Views**: {views}\n"
-            f"**📺 Channel**: {channel}\n"
+            f"**📺 Channel**: [{channel}]({channe_link})\n"
             f"**🔗 [Watch on YouTube](https://www.youtube.com/watch?v={vidid})**"
         )
 
-        await m.edit_text(
-            text=text,
-            disable_web_page_preview=True,
+        await m.delete()
+        await message.reply_photo(
+            thumbnail,
+            caption=text,
+            disable_web_page_preview=True,,
         )
     except Exception as e:
         await m.edit_text(f"⚠️ An error occurred: {str(e)}")
