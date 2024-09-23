@@ -6,14 +6,16 @@ from pyrogram import __version__ as v
 from config import API_HASH, API_ID, BOT_TOKEN, LOG_GROUP_ID, STRING_SESSION
 from Vivek.functions.client import VClient  # This is pyrogram modified Client
 
-from .functions import (  # functions for editing pyrogram filters or for removing media's on starting
+from .functions import (
     dir,
     edit_filters,
 )
 from .functions.logger import LOGGER  # Logger
 
-dir()
-edit_filters()
+dir() # remove all media files 
+
+edit_filters() # Editing Some Pyrogram Filters
+
 app = Vclient(
     name="Vivek",
     api_id=API_ID,
