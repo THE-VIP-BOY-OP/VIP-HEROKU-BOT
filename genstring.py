@@ -24,7 +24,7 @@ async def main():
     xx = f"HERE IS YOUR STRING SESSION, COPY IT, DON'T SHARE!!\n\n`{ss}`\n\n STRING GENERATED"
     try:
         await i.send_message("me", xx)
-    except BaseException:
+    except Exception:
         pass
 
 
