@@ -6,8 +6,6 @@ from config import LOG_GROUP_ID
 from Vivek import LOGGER, app
 from Vivek.plugins import ALL_MODULES
 
-from .logger import LOGGER
-
 
 async def main():
     await app.start()  # Starting Userbot client
