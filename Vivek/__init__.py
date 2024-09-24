@@ -15,7 +15,7 @@ from .functions.logger import LOGGER  # Logger
 
 edit_filters()  # Editing Some Pyrogram Filters
 
-app = Vclient(
+app = VClient(
     name="Vivek",
     api_id=API_ID,
     api_hash=API_HASH,
