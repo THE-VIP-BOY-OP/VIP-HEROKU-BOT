@@ -1,10 +1,7 @@
 import os
 import sys
-from typing import Union
 
-from pyrogram import Client, enums
-from pyrogram.session import Session
-from pyrogram.storage import Storage
+from pyrogram import Client
 
 from .help import BotHelp
 
