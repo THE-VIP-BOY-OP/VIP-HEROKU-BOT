@@ -36,6 +36,7 @@ help.add(
 #         └─ List of command names (can be multiple)
 
 ```
+And add you plugins in  Folder's [Vivek/plugins](https://github.com/Vivekkumar-in/Vivek/blob/master/Vivek/plugins) In sub folder according to your script type
 
-#### And add you plugins in  Folder's [Vivek/plugins](https://github.com/Vivekkumar-in/Vivek/blob/master/Vivek/plugins) In sub folder according to your script type
-p
+#####This Project is Licensed under [MIT License](https://github.com/Vivekkumar-IN/Vivek/blob/master/LICENSE)",
+
