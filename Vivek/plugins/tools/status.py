@@ -3,7 +3,7 @@ import urllib
 
 from pyrogram import filters
 
-from Vivek import app, ModuleHelp
+from Vivek import ModuleHelp, app
 
 OFFLINE_TAG = "[OFFLINE]"
 
@@ -52,6 +52,9 @@ async def status_online(client, message):
         await m.edit_text(str(e))
 
 
-ModuleHelp("status", "This script toggles the user profile between offline and online modes.").add(["offline", "Switches the profile to offline mode."], [
-    "online", "Switches the profile back to online mode."
-])
+ModuleHelp(
+    "status", "This script toggles the user profile between offline and online modes."
+).add(
+    ["offline", "Switches the profile to offline mode."],
+    ["online", "Switches the profile back to online mode."],
+)
