@@ -14,7 +14,6 @@ from .functions import ModuleHelp, edit_filters
 from .functions.logger import LOGGER  # Logger
 
 edit_filters()  # Editing Some Pyrogram Filters
-modules = {}  # stored loaded modules
 FUNCTIONS = {}  # All functions of commamds that stored here
 app = VClient(
     name="Vivek",
