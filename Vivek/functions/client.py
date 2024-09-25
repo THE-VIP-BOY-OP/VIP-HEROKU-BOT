@@ -14,7 +14,6 @@ class VClient(Client):
         super().__init__(*args, **kwargs)
         self.help = BotHelp
 
-    @staticmethod
     async def restart_script(self):
         """Restarts the script by executing the current Python file."""
         os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
