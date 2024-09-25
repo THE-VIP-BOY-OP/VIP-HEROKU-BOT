@@ -1,9 +1,10 @@
 import os
 import sys
 from typing import Callable, Optional
+
 from pyrogram import Client
-from pyrogram.handlers import MessageHandler
 from pyrogram.filters import Filter
+from pyrogram.handlers import MessageHandler
 
 from .help import BotHelp
 
@@ -30,7 +31,7 @@ class VClient(Client):
             self.add_handler(handler, group)
             if not hasattr(func, "handlers"):
                 func.handlers = []
-            
+
             func.handlers.append((handler, group))
 
             return func
