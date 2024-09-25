@@ -36,9 +36,9 @@ module_help.add(
     [["example_command1", "example_command2"], "Example command help"],  # List of commands with their help description
     [["example_command"], "Example help for command"]  # Single command with its help description
 )
-#           |                               |
-#           |                               └─ Command description
-#           └─ List of command names (can be multiple)
+#         |                             |
+#         |                              └─ Command description
+#         └─ List of command names (can be multiple)
 
 ```
 
