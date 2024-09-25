@@ -12,8 +12,8 @@ async def list_all_modules(client, message):
     count = 0
     text = ""
     for func in all_funcs:
-        if func.__name__ == sys._getframe().f_code.co_name:
-            func.remove(sys._getframe().f_code.co_name)
+        if func.__name__ == "list_all_modules":
+            all_funcs.remove(func)
             continue
         count += 1
         text += f"{count} `{func.__name__}`\n"
