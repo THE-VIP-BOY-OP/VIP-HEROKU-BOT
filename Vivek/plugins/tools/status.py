@@ -52,9 +52,10 @@ async def status_online(client, message):
         await m.edit_text(str(e))
 
 
-ModuleHelp(
+help = ModuleHelp(
     "status", "This script toggles the user profile between offline and online modes."
-).add(
+)
+help.add(
     ["offline", "Switches the profile to offline mode."],
     ["online", "Switches the profile back to online mode."],
 )
