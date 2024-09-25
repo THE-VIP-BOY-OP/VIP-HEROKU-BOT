@@ -32,7 +32,7 @@ async def set_offline(client, message):
 
 
 @app.on_message(filters.command("online") & filters.sudo)
-async def set_onli(client, message):
+async def set_online(client, message):
     m = await message.reply_text("Switching to Online Mode")
     try:
         me = await app.get_me()
