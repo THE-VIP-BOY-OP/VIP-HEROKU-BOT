@@ -46,4 +46,3 @@ app.help("Common").info("Get Common chats between about a user").add(
     "common_chats",
     "provide username or reply to a user's message to find common chat groups with the bot",
 ).done()
-
