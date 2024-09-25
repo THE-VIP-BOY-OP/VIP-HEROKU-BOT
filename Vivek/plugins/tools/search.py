@@ -1,7 +1,7 @@
 from pyrogram import filters
 from youtubesearchpython.__future__ import VideosSearch
 
-from Vivek import app, ModuleHelp
+from Vivek import ModuleHelp, app
 
 
 @app.on_message(filters.command(["search"]))
@@ -43,4 +43,6 @@ async def ytsearch(client, message):
         await m.edit_text(f"⚠️ An error occurred: {str(e)}")
 
 
-ModuleHelp("Youtube", "Searches YouTube for a video and provides details like title, views.").add(["search", "Provide a <query> to search for videos or songs on YouTube."])
+ModuleHelp(
+    "Youtube", "Searches YouTube for a video and provides details like title, views."
+).add(["search", "Provide a <query> to search for videos or songs on YouTube."])
