@@ -10,13 +10,14 @@ from pyrogram.types import (
     InlineQueryResultPhoto,
 )
 
-from Vivek import LOGGER, app
+from Vivek import LOGGER, app, modules #noqa
 from Vivek.functions.help import BOT_CMD_MENU, SYMBOLS
 
 COLUMN_SIZE = 4  # number of button height
 NUM_COLUMNS = 3  # number of button width
 
 log = LOGGER(__name__)
+
 
 
 class EqInlineKeyboardButton(InlineKeyboardButton):
