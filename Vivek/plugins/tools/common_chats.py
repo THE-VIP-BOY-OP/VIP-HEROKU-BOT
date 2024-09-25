@@ -1,7 +1,7 @@
 from pyrogram import filters
 from pyrogram.errors import UsernameInvalid
 
-from Vivek import app, ModuleHelp
+from Vivek import ModuleHelp, app
 
 
 @app.on_message(filters.sudo & filters.command(["common_chats"]))
@@ -43,7 +43,9 @@ async def common_chats(client, message):
 
 
 help = ModuleHelp("Common", "Get Common chats between about a user")
-help.add([
-    "common_chats",
-    "provide username or reply to a user's message to find common chat groups with the bot",
-])
+help.add(
+    [
+        "common_chats",
+        "provide username or reply to a user's message to find common chat groups with the bot",
+    ]
+)
