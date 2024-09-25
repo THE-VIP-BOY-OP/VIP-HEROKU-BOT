@@ -24,7 +24,9 @@ async def modules(client, message):
     msg = await message.reply_text("Unloading....")
     user_input = " ".join(message.command[1:])
     if not user_input:
-        return await msg.edit("Provide a function name two unload it you can checkout all functions from loaded module by 'listloaded'")
+        return await msg.edit(
+            "Provide a function name two unload it you can checkout all functions from loaded module by 'listloaded'"
+        )
     for func in FUNCTIONS["MODULES"]:
         if user_input == func.__name__:
             handler = func.handlers
