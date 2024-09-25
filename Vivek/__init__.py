@@ -15,7 +15,7 @@ from .functions.logger import LOGGER  # Logger
 
 edit_filters()  # Editing Some Pyrogram Filters
 modules = {}  # stored loaded modules
-FUNCTIONS = []  # All functions of commamds that stored here
+FUNCTIONS = {}  # All functions of commamds that stored here
 app = VClient(
     name="Vivek",
     api_id=API_ID,
