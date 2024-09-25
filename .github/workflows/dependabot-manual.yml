@@ -1,0 +1,14 @@
+name: "Dependabot Trigger"
+on:
+  workflow_dispatch: # manually trigger the dependabot.yml
+  
+jobs:
+  trigger-dependabot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Dependabot
+        run: |
+          gh api -X POST /repos/${{ github.repository }}/dependabot/updates/requests \
+          -f "package-ecosystem=pip" \
+          -f "directory=/" \
+          -f "target-branch=master"
