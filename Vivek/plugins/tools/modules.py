@@ -10,7 +10,7 @@ async def list_all_modules(client, message):
     count = 0
     text = ""
     for func in all_funcs:
-        if func.__name__ == str("list_all_modules"):
+        if func.__name__ == str("list_all_modules") or func.__name__ == str("modules"):
             all_funcs.remove(func)
             continue
         count += 1
