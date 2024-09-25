@@ -25,17 +25,6 @@ app = VClient(
     in_memory=True,
 )
 
-# Initialising bot client as app.bot
-app.bot = VClient(
-    name="Vivek1",
-    api_id=API_ID,
-    api_hash=API_HASH,
-    app_version=f"Cute {v}",
-    bot_token=BOT_TOKEN,
-    in_memory=True,
-    max_concurrent_transmissions=9,
-)
-
 files = [
     ".jpg",
     ".jpeg",
