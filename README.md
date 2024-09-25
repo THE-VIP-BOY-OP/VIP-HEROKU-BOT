@@ -22,8 +22,6 @@ async def help_command(client, message: Message):
 
 # Initialize ModuleHelp for this plugin
 module_help = ModuleHelp("example_plugin", "This plugin does XYZ.")
-# Structure of the ModuleHelp initialization:
-# module_help = ModuleHelp(plugin_name, optional_info)
 #                   |                          |
 #                   |                          └─ Optional info about the plugin (string)
 #                   └─ Name of the plugin
@@ -37,7 +35,7 @@ module_help.add(
     [["example_command"], "Example help for command"]  # Single command with its help description
 )
 #         |                             |
-#         |                              └─ Command description
+#         |                            └─ Command description
 #         └─ List of command names (can be multiple)
 
 ```
