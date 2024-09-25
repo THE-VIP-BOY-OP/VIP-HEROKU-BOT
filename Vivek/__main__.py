@@ -30,7 +30,7 @@ async def main():
             for func in functions
             if hasattr(getattr(imported_module, func), "handlers")
         ]
-        for func in functions_with_handlers:
+        for func in handlers:
             FUNCTIONS.append(func)
 
     await idle()  # Run this bot without stopping
