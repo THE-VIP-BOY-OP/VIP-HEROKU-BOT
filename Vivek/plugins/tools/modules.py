@@ -21,10 +21,13 @@ async def list_all_modules(client, message):
 
 @app.on_message(filters.command("unload") & filters.sudo)
 async def modules(client, message):
-    await message.reply_text("Unloading....")
+    msg = await message.reply_text("Unloading....")
     user_input = " ".join(message.command[1:])
+    if not user_input:
+        return await msg.edit("Provide a function name two unload it you can checkout all functions from loaded module by 'listloaded'")
     for func in FUNCTIONS["MODULES"]:
         if user_input == func.__name__:
             handler = func.handlers
             for h in handler:
                 app.remove_handler(*h)
+            await msg.edit(f"Sucessfully unloaded {func.__name__}")
