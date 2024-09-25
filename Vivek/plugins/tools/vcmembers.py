@@ -45,3 +45,5 @@ async def vc_members(client, message):
 app.help("voicechat").info(
     "This script retrieves and displays details of voice chat participants"
 ).add("vcmembers", "Retrieves and lists participants in the current voice chat").done()
+
+__handlers__ = [vc_members]
