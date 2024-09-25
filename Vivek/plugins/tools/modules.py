@@ -21,5 +21,5 @@ async def list_all_modules(client, message):
 async def list_all_modules(client, message):
     user_input = " ".join(message.command[1:])
     for func in FUNCTIONS["MODULES"]:
-        if user_input == func.__name__
+        if user_input == func.__name__:
             await message.reply_text("True")
