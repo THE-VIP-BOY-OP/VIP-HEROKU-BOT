@@ -58,4 +58,3 @@ app.help("status").info(
     "online", "Switches the profile back to online mode."
 ).done()
 
-__handlers__ = [set_offline, set_online]
