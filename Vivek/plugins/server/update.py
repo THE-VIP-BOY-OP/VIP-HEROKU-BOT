@@ -70,7 +70,7 @@ async def update_(client, message):
     await app.restart_script()
 
 
-help = ModuleHelp("server", "Server management plugin").
+help = ModuleHelp("server", "Server management plugin")
 help.add([
     "update",
     "Checks for and applies updates from the Git repository, then restarts the bot.",
