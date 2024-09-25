@@ -21,7 +21,9 @@ class ModuleHelp:
         for command_help in commands_help:
             # Check if the first element is a list (multiple commands)
             if isinstance(command_help[0], list):
-                commands = ", ".join(command_help[0])
+                commands = ""
+                for cmd in command_help[0]:
+                    commands += f"{cmd} "
             else:
                 # Single command as a string
                 commands = command_help[0]
