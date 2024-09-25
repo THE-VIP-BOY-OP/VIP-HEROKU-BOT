@@ -1,5 +1,3 @@
-import sys
-
 from pyrogram import filters
 
 from Vivek import FUNCTIONS, app
