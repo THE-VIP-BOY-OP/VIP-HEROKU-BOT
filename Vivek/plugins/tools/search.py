@@ -24,7 +24,6 @@ async def ytsearch(client, message):
             channe_link = result["channel"]["link"]
             views = result["viewCount"]["short"]
             upload_date = result["publishedTime"]
-            thumbnail = result["thumbnails"]["url"]
         text = (
             f"**🎵 Title**: [{title}](https://www.youtube.com/watch?v={vidid})\n"
             f"**⏱ Duration**: {duration_min}\n"
