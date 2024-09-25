@@ -44,6 +44,8 @@ module_help.add(
 # )
 #           |                               |
 #           |                               └─ Command description
-#           └─ List of command names (can be multiple)```
+#           └─ List of command names (can be multiple)
+
+```
 
 ## And add you plugins in  Folder's [Vivek/plugins](https://github.com/Vivekkumar-in/Vivek/blob/master/Vivek/plugins) In sub folder according to your script type
