@@ -33,3 +33,18 @@ async def modules(client, message):
             for h in handler:
                 app.remove_handler(*h)
             await msg.edit(f"Sucessfully unloaded {func.__name__}")
+
+@app.on_message(filters.command("load") & filters.sudo)
+async def modules(client, message):
+    msg = await message.reply_text("loading....")
+    user_input = " ".join(message.command[1:])
+    if not user_input:
+        return await msg.edit(
+            "Provide a function name to load it you can checkout all functions from loaded module by 'listloaded'"
+        )
+    for func in FUNCTIONS["MODULES"]:
+        if user_input == func.__name__:
+            handler = func.handlers
+            for h in handler:
+                app.add_handler(*h)
+            await msg.edit(f"Sucessfully loaded {func.__name__}")
