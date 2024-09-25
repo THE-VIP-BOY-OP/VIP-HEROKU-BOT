@@ -1,4 +1,4 @@
-from pyrogram import filters
+qfrom pyrogram import filters
 
 from Vivek import FUNCTIONS, app
 
@@ -10,7 +10,7 @@ async def list_all_modules(client, message):
     count = 0
     text = ""
     for func in all_funcs:
-        if func.__name__ != "list_all_modules":
+        if func.__name__ != str("list_all_modules"):
             count += 1
             text += f"{count} `{func.__name__}`\n"
     if text != "":
