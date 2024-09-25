@@ -8,7 +8,7 @@ from pyrogram import filters
 from urllib3 import disable_warnings, exceptions
 
 from config import GIT_TOKEN, UPSTREAM_BRANCH, UPSTREAM_REPO
-from Vivek import app
+from Vivek import app, ModuleHelp
 
 disable_warnings(exceptions.InsecureRequestWarning)
 
@@ -70,7 +70,8 @@ async def update_(client, message):
     await app.restart_script()
 
 
-app.help("server").info("Server management plugin").add(
+help = ModuleHelp("server", "Server management plugin").
+help.add([
     "update",
     "Checks for and applies updates from the Git repository, then restarts the bot.",
-).done()
+])
