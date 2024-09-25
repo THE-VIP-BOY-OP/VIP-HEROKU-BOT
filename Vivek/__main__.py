@@ -3,7 +3,7 @@ import importlib
 
 from pyrogram import idle
 
-from Vivek import LOGGER, app, modules
+from Vivek import LOGGER, app, modules, FUNCTIONS
 from Vivek.plugins import ALL_MODULES
 
 
@@ -20,6 +20,9 @@ async def main():
                 modules[imported_module.__mod__.lower()] = (
                     imported_module  # storing the impported module in 'modules' dictionary
                 )
+        if hasattr(imported_module, "__handlers__") and imported_module__handlers__:
+            for function in imported_module__handlers__:
+                FUNCTIONS.append(function)
     await idle()  # Run this bot without stopping
     # Stop the app and bot if keyboard interrupt (CTRL + C PRESSED)
     await app.stop()
