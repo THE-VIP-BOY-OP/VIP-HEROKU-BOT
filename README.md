@@ -22,12 +22,9 @@ async def help_command(client, message: Message):
 
 # Initialize ModuleHelp for this plugin
 module_help = ModuleHelp("example_plugin", "This plugin does XYZ.")
-#                   |                          |
-#                   |                          └─ Optional info about the plugin (string)
-#                   └─ Name of the plugin
-# 
-# Example:
-# module_help = ModuleHelp("example_plugin")  # You can also omit the info if not needed
+#                 |                          |
+#                 |                          └─ Optional info about the plugin (string)
+#                 └─ Name of the plugin
 
 # Add command help descriptions
 module_help.add(
