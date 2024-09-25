@@ -20,7 +20,7 @@ async def list_all_modules(client, message):
 
 
 @app.on_message(filters.command("unload") & filters.sudo)
-async def modules(client, message):
+async def unload(client, message):
     msg = await message.reply_text("Unloading....")
     user_input = " ".join(message.command[1:])
     if not user_input:
@@ -34,9 +34,8 @@ async def modules(client, message):
                 app.remove_handler(*h)
             await msg.edit(f"Sucessfully unloaded {func.__name__}")
 
-
 @app.on_message(filters.command("load") & filters.sudo)
-async def modules(client, message):
+async def load(client, message):
     msg = await message.reply_text("loading....")
     user_input = " ".join(message.command[1:])
     if not user_input:
