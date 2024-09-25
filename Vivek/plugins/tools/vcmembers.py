@@ -1,7 +1,7 @@
 from pyrogram import filters
 from pyrogram.enums import ChatType
 
-from Vivek import app
+from Vivek import app, ModuleHelp
 
 
 @app.on_message(filters.command("vcmembers") & filters.sudo)
@@ -42,6 +42,5 @@ async def vc_members(client, message):
         await msg.edit(str(e))
 
 
-app.help("voicechat").info(
-    "This script retrieves and displays details of voice chat participants"
-).add("vcmembers", "Retrieves and lists participants in the current voice chat").done()
+ModuleHelp("voicechat", "This script retrieves and displays details of voice chat participants"
+).add(["vcmembers", "Retrieves and lists participants in the current voice chat"])
