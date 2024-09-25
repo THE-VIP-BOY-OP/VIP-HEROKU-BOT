@@ -10,7 +10,6 @@ from Vivek.plugins import ALL_MODULES
 async def main():
     await app.start()  # Starting Userbot client
     LOGGER(__name__).info(f"Userbot started")
-    await app.bot.start()  # Starting bot client
     LOGGER(__name__).info(f"Bot started")
 
     FUNCTIONS["MODULES"] = []
@@ -34,7 +33,6 @@ async def main():
     await idle()  # Run this bot without stopping
     # Stop the app and bot if keyboard interrupt (CTRL + C PRESSED)
     await app.stop()
-    await app.bot.stop()
 
 
 if __name__ == "__main__":
