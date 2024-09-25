@@ -36,7 +36,7 @@ async def main():
         ]
         for func in handlers:
             FUNCTIONS["MODULES"].append(getattr(imported_module, func))
-
+    FUNCTIONS["LOADED"] = FUNCTIONS["MODULES"].copy()
     await idle()  # Run this bot without stopping
     # Stop the app and bot if keyboard interrupt (CTRL + C PRESSED)
     await app.stop()
