@@ -32,9 +32,9 @@ async def main():
             for func in functions
             if hasattr(getattr(imported_module, func), "handlers")
         ]
-
+        FUNCTIONS["MODULES"] = []
         for func in handlers:
-            FUNCTIONS.append(getattr(imported_module, func))
+            FUNCTIONS["MODULES"].append(getattr(imported_module, func))
 
     await idle()  # Run this bot without stopping
     # Stop the app and bot if keyboard interrupt (CTRL + C PRESSED)
