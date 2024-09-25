@@ -104,7 +104,6 @@ async def executor(client: Client, message: Message):
     & ~filters.via_bot,
     group=6,
 )
-
 async def shellrunner(client: Client, message: Message):
     if len(message.command) < 2:
         return await edit_or_reply(message, text="<b>ᴇxᴀᴍᴩʟᴇ :</b>\n/sh git pull")
