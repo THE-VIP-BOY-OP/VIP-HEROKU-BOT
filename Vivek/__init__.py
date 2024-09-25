@@ -10,7 +10,7 @@ from pyrogram import __version__ as v
 from config import API_HASH, API_ID, LOG_GROUP_ID, STRING_SESSION
 from Vivek.functions.client import VClient  # This is pyrogram modified Client
 
-from .functions import edit_filters, ModuleHelp
+from .functions import ModuleHelp, edit_filters
 from .functions.logger import LOGGER  # Logger
 
 edit_filters()  # Editing Some Pyrogram Filters
