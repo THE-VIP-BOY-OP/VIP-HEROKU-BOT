@@ -9,7 +9,7 @@ OFFLINE_TAG = "[OFFLINE]"
 
 
 @app.on_message(filters.command("offline") & filters.sudo)
-async def set_offline(client, message):
+async def status_offline(client, message):
     m = await message.reply_text("Switching to Offline Mode")
     try:
         me = await app.get_me()
@@ -32,7 +32,7 @@ async def set_offline(client, message):
 
 
 @app.on_message(filters.command("online") & filters.sudo)
-async def set_online(client, message):
+async def status_online(client, message):
     m = await message.reply_text("Switching to Online Mode")
     try:
         me = await app.get_me()
