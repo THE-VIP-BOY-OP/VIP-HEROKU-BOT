@@ -1,12 +1,10 @@
 import os
 import sys
-from inspect import getfullargspec
 from typing import Callable, Optional
 
 from pyrogram import Client
 from pyrogram.filters import Filter
 from pyrogram.handlers import MessageHandler
-from pyrogram.types import Message
 
 from .help import BotHelp
 
