@@ -1,9 +1,9 @@
 # Radhe radhe
 
-## How to add plugins
+### How to add plugins
 
 
-### Example Script
+#### Example Script
 
 ```python
 from Vivek import app  # This is the Pyrogram client
@@ -38,5 +38,5 @@ help.add(
 ```
 And add you plugins in  Folder's [Vivek/plugins](https://github.com/Vivekkumar-in/Vivek/blob/master/Vivek/plugins) In sub folder according to your script type
 
-#####This Project is Licensed under [MIT License](https://github.com/Vivekkumar-IN/Vivek/blob/master/LICENSE)",
+##### This Project is Licensed under [MIT License](https://github.com/Vivekkumar-IN/Vivek/blob/master/LICENSE)",
 
