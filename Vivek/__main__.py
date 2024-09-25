@@ -20,8 +20,8 @@ async def main():
                 modules[imported_module.__mod__.lower()] = (
                     imported_module  # storing the impported module in 'modules' dictionary
                 )
-        if hasattr(imported_module, "__handlers__") and imported_module__handlers__:
-            for function in imported_module__handlers__:
+        if hasattr(imported_module, "__handlers__") and imported_module.__handlers__:
+            for function in imported_module.__handlers__:
                 FUNCTIONS.append(function)
     await idle()  # Run this bot without stopping
     # Stop the app and bot if keyboard interrupt (CTRL + C PRESSED)
