@@ -5,7 +5,7 @@ from Vivek import app
 
 
 @app.on_message(filters.sudo & filters.command(["common_chats"]))
-async def get_common_chats(client, message):
+async def common_chats(client, message):
 
     if len(message.command) < 2 and not message.reply_to_message:
         return await message.reply_text(
