@@ -5,7 +5,7 @@
 
 ### Example Script
 
-```python
+```python5
 from Vivek import app  # This is the Pyrogram client
 from pyrogram import filters  # Pyrogram filters
 from pyrogram.types import Message
@@ -16,7 +16,7 @@ from Vivek.functions.help import ModuleHelp  # For module help
 async def start_command(client, message: Message):
     await message.reply_text("This is an example module.")
 
-@app.on_message(filters.sudo & filters.command(["example_command", "example_command2"]))
+@app.on_message(filters.sudo & filters.command(["example_command1", "example_command2"]))
 async def help_command(client, message: Message):
     await message.reply_text("This is an example help module.")
 
