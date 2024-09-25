@@ -120,5 +120,3 @@ async def clone_userinfo(client, message):
                 await m.edit_text(str(e))
     else:
         await message.reply_text("Reply to a user's message to clone their details")
-
-

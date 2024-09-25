@@ -57,4 +57,3 @@ app.help("status").info(
 ).add("offline", "Switches the profile to offline mode.").add(
     "online", "Switches the profile back to online mode."
 ).done()
-
