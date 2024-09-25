@@ -3,7 +3,7 @@ import importlib
 
 from pyrogram import idle
 
-from Vivek import LOGGER, app, modules, FUNCTIONS
+from Vivek import FUNCTIONS, LOGGER, app, modules
 from Vivek.plugins import ALL_MODULES
 
 
