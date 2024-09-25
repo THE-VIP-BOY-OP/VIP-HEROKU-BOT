@@ -20,9 +20,15 @@ async def main():
                 modules[imported_module.__mod__.lower()] = (
                     imported_module  # storing the impported module in 'modules' dictionary
                 )
-        functions = [func for func in dir(imported_module) if callable(getattr(imported_module, func))]
+        functions = [
+            func
+            for func in dir(imported_module)
+            if callable(getattr(imported_module, func))
+        ]
         handlers = [
-            func for func in functions if hasattr(getattr(imported_module, func), 'handlers')
+            func
+            for func in functions
+            if hasattr(getattr(imported_module, func), "handlers")
         ]
         for func in functions_with_handlers:
             FUNCTIONS.append(func)
