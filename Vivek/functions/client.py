@@ -15,10 +15,12 @@ class VClient(Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.help = BotHelp
+
     @staticmethod
     async def restart_script(self):
         """Restarts the script by executing the current Python file."""
         os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
+
     @staticmethod
     async def eor(msg: Message, **kwargs):
         func = msg.edit_text if msg.from_user.is_self else msg.reply
