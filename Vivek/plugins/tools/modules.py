@@ -19,4 +19,7 @@ async def list_all_modules(client, message):
 
 @app.on_message(filters.command("module") & filters.sudo)
 async def list_all_modules(client, message):
-    all_funcs = FUNCTIONS["MODULES"]
+    user_input = " ".join(message.command[1:])
+    all_func = FUNCTIONS["MODULES"]
+    if user_input and user_input in all_funcs:
+        await message.reply_text("True")
