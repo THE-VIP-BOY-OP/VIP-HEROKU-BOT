@@ -7,7 +7,6 @@ from pyrogram.filters import Filter
 from pyrogram.handlers import MessageHandler
 
 
-
 class VClient(Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
