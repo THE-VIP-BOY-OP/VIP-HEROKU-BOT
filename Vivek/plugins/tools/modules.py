@@ -34,6 +34,7 @@ async def unload(client, message):
                 app.remove_handler(*h)
             await msg.edit(f"Sucessfully unloaded {func.__name__}")
 
+
 @app.on_message(filters.command("load") & filters.sudo)
 async def load(client, message):
     msg = await message.reply_text("loading....")
