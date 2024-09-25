@@ -42,6 +42,7 @@ async def vc_members(client, message):
         await msg.edit(str(e))
 
 
-ModuleHelp(
+help = ModuleHelp(
     "voicechat", "This script retrieves and displays details of voice chat participants"
-).add(["vcmembers", "Retrieves and lists participants in the current voice chat"])
+)
+help.add(["vcmembers", "Retrieves and lists participants in the current voice chat"])
