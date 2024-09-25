@@ -3,9 +3,8 @@ import importlib
 
 from pyrogram import idle
 
-from Vivek import LOGGER, app
+from Vivek import LOGGER, app, modules
 from Vivek.plugins import ALL_MODULES
-
 
 async def main():
     await app.start()  # Starting Userbot client
@@ -13,7 +12,11 @@ async def main():
     await app.bot.start()  # Starting bot client
     LOGGER(__name__).info(f"bot started")
     for all_module in ALL_MODULES:
-        importlib.import_module("Vivek.plugins" + all_module)
+        imported_module = importlib.import_module("Vivek.plugins" + all_module)
+
+        if hasattr(imported_module, "__mod__") and imported_module.__mod__:
+            if hasattr(imported_module, "__help__") and imported_module.__help__:
+                modules[imported_module.__mod__.lower()] = imported_module # storing the impported module in 'modules' dictionary
     await idle()  # Run this bot without stopping
     # Stop the app and bot if keyboard interrupt (CTRL + C PRESSED)
     await app.stop()
