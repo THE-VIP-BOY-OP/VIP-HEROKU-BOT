@@ -15,6 +15,6 @@ async def list_all_modules(client, message):
     text = ""
     for func in FUNCTIONS:
         count += 1
-        text += f"{count} `{func.__name__}`"
+        text += f"{count} `{func.__name__}`\n"
     if text != "":
         await message.reply_text(text)
