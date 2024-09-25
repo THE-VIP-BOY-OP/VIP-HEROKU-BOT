@@ -6,13 +6,11 @@ from pyrogram import Client
 from pyrogram.filters import Filter
 from pyrogram.handlers import MessageHandler
 
-from .help import BotHelp
 
 
 class VClient(Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.help = BotHelp
 
     async def restart_script(self):
         """Restarts the script by executing the current Python file."""
