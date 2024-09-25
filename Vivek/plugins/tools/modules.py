@@ -10,9 +10,11 @@ async def list_all_modules(client, message):
     count = 0
     text = ""
     for func in all_funcs:
-        if func.__name__ != str("list_all_modules"):
-            count += 1
-            text += f"{count} `{func.__name__}`\n"
+        if func.__name__ == str("list_all_modules"):
+            all_funcs.remove(func)
+            continue
+        count += 1
+        text += f"{count} `{func.__name__}`\n"
     if text != "":
         await msg.edit(text)
 
