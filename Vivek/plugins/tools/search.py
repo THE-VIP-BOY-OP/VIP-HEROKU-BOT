@@ -38,7 +38,6 @@ async def ytsearch(client, message):
         await message.reply_photo(
             thumbnail,
             caption=text,
-            disable_web_page_preview=True,
         )
     except Exception as e:
         await m.edit_text(f"⚠️ An error occurred: {str(e)}")
