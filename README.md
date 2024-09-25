@@ -36,12 +36,6 @@ module_help.add(
     [["example_command1", "example_command2"], "Example command help"],  # List of commands with their help description
     [["example_command"], "Example help for command"]  # Single command with its help description
 )
-
-# Structure of the entries in module_help.add():
-# module_help.add(
-#     [["command1", "command2"], "Description of the commands."],  # Multiple commands as a list
-#     [["command"], "Description for a single command."]            # Single command as a list
-# )
 #           |                               |
 #           |                               └─ Command description
 #           └─ List of command names (can be multiple)
