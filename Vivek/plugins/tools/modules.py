@@ -19,6 +19,7 @@ async def list_all_modules(client, message):
 
 @app.on_message(filters.command("module") & filters.sudo)
 async def modules(client, message):
+    await message.reply_text("checking....")
     user_input = " ".join(message.command[1:])
     for func in FUNCTIONS["MODULES"]:
         if user_input == func.__name__:
