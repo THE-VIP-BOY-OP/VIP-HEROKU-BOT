@@ -13,6 +13,8 @@ async def main():
     await app.bot.start()  # Starting bot client
     LOGGER(__name__).info(f"Bot started")
 
+    FUNCTIONS["MODULES"] = []
+
     for all_module in ALL_MODULES:
         imported_module = importlib.import_module("Vivek.plugins" + all_module)
 
@@ -32,7 +34,6 @@ async def main():
             for func in functions
             if hasattr(getattr(imported_module, func), "handlers")
         ]
-        FUNCTIONS["MODULES"] = []
         for func in handlers:
             FUNCTIONS["MODULES"].append(getattr(imported_module, func))
 
