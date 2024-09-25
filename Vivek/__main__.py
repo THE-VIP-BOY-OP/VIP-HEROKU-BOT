@@ -3,7 +3,7 @@ import importlib
 
 from pyrogram import idle
 
-from Vivek import FUNCTIONS, LOGGER, app, modules
+from Vivek import FUNCTIONS, LOGGER, app
 from Vivek.plugins import ALL_MODULES
 
 
@@ -17,12 +17,6 @@ async def main():
 
     for all_module in ALL_MODULES:
         imported_module = importlib.import_module("Vivek.plugins" + all_module)
-
-        if hasattr(imported_module, "__mod__") and imported_module.__mod__:
-            if hasattr(imported_module, "__help__") and imported_module.__help__:
-                modules[imported_module.__mod__.lower()] = (
-                    imported_module  # Storing the imported module in 'modules' dictionary
-                )
 
         functions = [
             func
