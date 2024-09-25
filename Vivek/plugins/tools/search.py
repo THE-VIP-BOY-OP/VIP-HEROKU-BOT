@@ -47,4 +47,3 @@ app.help("Youtube").info(
     "Searches YouTube for a video and provides details like title, views."
 ).add("search", "Provide a <query> to search for videos or songs on YouTube.").done()
 
-__handlers__ = [ytsearch]
