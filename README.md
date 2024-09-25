@@ -21,13 +21,13 @@ async def help_command(client, message: Message):
     await message.reply_text("This is an example help module.")
 
 # Initialize ModuleHelp for this plugin
-module_help = ModuleHelp("example_plugin", "This plugin does XYZ.")
+help = ModuleHelp("example_plugin", "This plugin does XYZ.")
 #                             |                    |
 #                             |                    └─ Optional info about the plugin (string)
 #                             └─ Name of the plugin
 
 # Add command help descriptions
-module_help.add(
+help.add(
     (["example_command1", "example_command2"], "Example command help"),  # List of commands with their help description
     ("example_command", "Example help for command")  # Single command with its help description
 )
@@ -38,3 +38,4 @@ module_help.add(
 ```
 
 #### And add you plugins in  Folder's [Vivek/plugins](https://github.com/Vivekkumar-in/Vivek/blob/master/Vivek/plugins) In sub folder according to your script type
+p
