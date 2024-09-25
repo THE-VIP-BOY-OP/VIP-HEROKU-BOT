@@ -14,6 +14,7 @@ from .functions import edit_filters
 from .functions.logger import LOGGER  # Logger
 
 edit_filters()  # Editing Some Pyrogram Filters
+modules = {} # stored loaded modules that will use for creating help or load/unload
 
 app = VClient(
     name="Vivek",
