@@ -11,7 +11,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 
 from config import OWNER_ID
-from Vivek import app
+from Vivek import app, ModuleHelp
 
 
 async def aexec(code, client, message):
@@ -165,8 +165,8 @@ async def shellrunner(client: Client, message: Message):
     await message.stop_propagation()
 
 
-app.help("eval").info(
-    "Executes Python code or shell commands, returning results or errors to the chat."
-).add("eval", "Executes Python code, returning results or errors").add(
+help = ModuleHelp("eval","Executes Python code or shell commands, returning results or errors to the chat."
+)
+help.add(["eval", "Executes Python code, returning results or errors"],[
     "sh", "Runs shell commands, displaying output or errors"
-).done()
+])
