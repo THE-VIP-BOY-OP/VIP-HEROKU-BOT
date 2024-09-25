@@ -10,8 +10,6 @@ from Vivek.plugins import ALL_MODULES
 async def main():
     await app.start()  # Starting Userbot client
     LOGGER(__name__).info(f"Userbot started")
-    LOGGER(__name__).info(f"Bot started")
-
     FUNCTIONS["MODULES"] = []
 
     for all_module in ALL_MODULES:
