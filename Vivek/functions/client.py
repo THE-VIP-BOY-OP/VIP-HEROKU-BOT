@@ -1,5 +1,6 @@
 import os
 import sys
+from inspect import getfullargspec
 from typing import Callable, Optional
 
 from pyrogram import Client
@@ -17,6 +18,10 @@ class VClient(Client):
     async def restart_script(self):
         """Restarts the script by executing the current Python file."""
         os.execvp(sys.executable, [sys.executable, "-m", "Vivek", *sys.argv[1:]])
+    async def eor(msg: Message, **kwargs):
+        func = msg.edit_text if msg.from_user.is_self else msg.reply
+        spec = getfullargspec(func.__wrapped__).args
+        await func(**{k: v for k, v in kwargs.items() if k in spec})
 
     # pyrogram on_message decorator but adding handler, group in func.handlers without checking that it is Pyrogram.Client
     def on_message(
