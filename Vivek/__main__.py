@@ -14,7 +14,7 @@ async def main():
     LOGGER(__name__).info(f"Bot started")
 
     for all_module in ALL_MODULES:
-        imported_module = importlib.import_module("Vivek.plugins." + all_module)
+        imported_module = importlib.import_module("Vivek.plugins" + all_module)
 
         if hasattr(imported_module, "__mod__") and imported_module.__mod__:
             if hasattr(imported_module, "__help__") and imported_module.__help__:
