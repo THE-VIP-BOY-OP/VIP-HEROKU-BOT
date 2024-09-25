@@ -5,7 +5,7 @@
 
 ### Example Script
 
-```python4
+```python3
 from Vivek import app  # This is the Pyrogram client
 from pyrogram import filters  # Pyrogram filters
 from pyrogram.types import Message
