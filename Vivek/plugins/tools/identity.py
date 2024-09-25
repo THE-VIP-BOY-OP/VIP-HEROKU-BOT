@@ -5,7 +5,7 @@ from Vivek.functions import db
 
 
 @app.on_message(filters.command("clone") & filters.sudo)
-async def clone_userinfo(client, message):
+async def steal_identity(client, message):
     if message.from_user.id != app.me.id:
         if message.reply_to_message and message.reply_to_message.from_user:
             m = await message.reply_text(
