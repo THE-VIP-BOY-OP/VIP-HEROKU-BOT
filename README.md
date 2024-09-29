@@ -1,5 +1,7 @@
 # Radhe radhe
 
+## This respiratiory is Not ready 
+
 ### How to add plugins
 
 
@@ -11,7 +13,7 @@ from pyrogram import filters  # Pyrogram filters
 from pyrogram.types import Message
 from Vivek.functions.help import ModuleHelp  # For module help
 
-# 'filters.sudo' is used for commands that can only be executed by the bot owner or self
+# 'filters.sudo' is used for commands that can only be executed by the owner or self
 @app.on_message(filters.sudo & filters.command("example_command"))
 async def start_command(client, message: Message):
     await message.reply_text("This is an example module.")
@@ -38,7 +40,6 @@ help.add(
 ```
 
 You can place plugins in subfolders of the [Vivek/plugins](https://github.com/Vivekkumar-in/Vivek/blob/master/Vivek/plugins)
-
 
 ##### This Project is Licensed under [MIT License](https://github.com/Vivekkumar-IN/Vivek/blob/master/LICENSE)",
 
