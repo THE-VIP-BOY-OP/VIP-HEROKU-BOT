@@ -71,8 +71,8 @@ async def export_database(client, message):
     databases = await _mongo_async_.list_database_names()
 
     for db_name in databases:
-    	if db_name == "admin":
-    	    continue
+        if db_name == "admin":
+            continue
         db = _mongo_async_[db_name]
         if db_name != DB_NAME:
             mystic = await edit_or_reply(mystic, f"Found data of {db_name} database. Uploading and deleting...")
