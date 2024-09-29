@@ -5,7 +5,7 @@
 ### How to add plugins
 
 
-#### Example Script
+#### example_script.py
 
 ```python
 from Vivek import app  # This is the Pyrogram client
