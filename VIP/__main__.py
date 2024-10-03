@@ -3,33 +3,16 @@ import importlib
 
 from pyrogram import idle
 
-from VIP import FUNCTIONS, LOGGER, app
+from VIP import app
 from VIP.plugins import ALL_MODULES
 
 
 async def main():
-    await app.start()  # Starting Userbot client
-    LOGGER(__name__).info(f"Userbot started")
-    FUNCTIONS["MODULES"] = []
-
+    await app.start()
     for all_module in ALL_MODULES:
         imported_module = importlib.import_module("VIP.plugins" + all_module)
 
-        functions = [
-            func
-            for func in dir(imported_module)
-            if callable(getattr(imported_module, func))
-        ]
-        handlers = [
-            func
-            for func in functions
-            if hasattr(getattr(imported_module, func), "handlers")
-        ]
-        for func in handlers:
-            FUNCTIONS["MODULES"].append(getattr(imported_module, func))
-    FUNCTIONS["LOADED"] = FUNCTIONS["MODULES"].copy()
-    await idle()  # Run this bot without stopping
-    # Stop the app and bot if keyboard interrupt (CTRL + C PRESSED)
+    await idle(
     await app.stop()
 
 
