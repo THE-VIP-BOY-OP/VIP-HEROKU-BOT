@@ -9,6 +9,7 @@ from pyromod.exceptions import ListenerTimeout
 
 from VIP import app
 from config import OWNER_ID as SUDOERS
+
 # Import your MongoDB database structure
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -262,6 +263,7 @@ async def app_options(client, callback_query):
         reply_markup=reply_markup,
     )
 
+
 # Callback for using UPSTREAM_REPO
 @app.on_callback_query(filters.regex(r"^use_upstream_repo:(.+)") & filters.sudo)
 async def use_upstream_repo_callback(client, callback_query):
@@ -284,7 +286,6 @@ async def use_upstream_repo_callback(client, callback_query):
                 ),
                 timeout=300,
             )
-
 
             if response.from_user.id not in SUDOERS or response.chat.id != chat_id:
                 return await app.send_message(
@@ -457,6 +458,7 @@ async def use_external_repo_callback(client, callback_query):
     except Exception as e:
         await callback_query.message.reply_text(f"An error occurred: {e}")
 
+
 # Callback for "Re-Deploy" button
 @app.on_callback_query(filters.regex(r"^redeploy:(.+)") & filters.sudo)
 async def redeploy_callback(client, callback_query):
@@ -486,7 +488,6 @@ async def redeploy_callback(client, callback_query):
             ]
         ),
     )
-
 
 
 # Cancel the redeployment process
@@ -896,6 +897,7 @@ async def back_to_apps(client, callback_query):
 
 # Edit Environment Variables
 
+
 # Edit Environment Variables
 @app.on_callback_query(filters.regex(r"^edit_vars:(.+)") & filters.sudo)
 async def edit_vars(client, callback_query):
@@ -984,6 +986,7 @@ async def edit_variable_options(client, callback_query):
         convert_to_small_caps(f"Choose an option for the variable `{var_name}`:"),
         reply_markup=reply_markup,
     )
+
 
 # Step 1: Ask for the new value and then confirm with the user
 @app.on_callback_query(filters.regex(r"^edit_var_value:(.+):(.+)") & filters.sudo)
@@ -1277,6 +1280,7 @@ async def add_new_variable(client, callback_query):
         )
     except Exception as e:
         await callback_query.message.reply_text(f"An error occurred: {e}")
+
 
 async def save_new_variable_value(
     client, callback_query, app_name, var_name, var_value
