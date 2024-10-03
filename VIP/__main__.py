@@ -8,10 +8,11 @@ from VIP.plugins import ALL_MODULES
 
 
 async def main():
+    pring("Starting bot...")
     await app.start()
     for all_module in ALL_MODULES:
         imported_module = importlib.import_module("VIP.plugins" + all_module)
-
+    print('Bot Started')
     await idle()
     await app.stop()
 
