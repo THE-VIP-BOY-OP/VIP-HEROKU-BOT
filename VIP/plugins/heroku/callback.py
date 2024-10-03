@@ -1341,7 +1341,7 @@ async def confirm_app_deletion(client, callback_query):
 @app.on_callback_query(filters.regex(r"^confirm_delete:(.+)") & filters.sudo)
 async def delete_app_from_heroku(client, callback_query):
     app_name = callback_query.data.split(":")[1]
-    ok = await delete_app_info(callback_query.from_user.id, app_name)
+    
     buttons = [
         [
             InlineKeyboardButton(
