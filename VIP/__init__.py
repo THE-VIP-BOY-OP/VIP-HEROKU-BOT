@@ -10,8 +10,6 @@ app = Client(
 )
 
 filters.sudo = filters.create(
-        lambda _, __, m: bool(
-            m.from_user and m.from_user.id in OWNER_ID
-        ),
-        "SudoFilter",
-    )
+    lambda _, __, m: bool(m.from_user and m.from_user.id in OWNER_ID),
+    "SudoFilter",
+)
