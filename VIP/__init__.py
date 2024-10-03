@@ -1,7 +1,7 @@
 from pyrogram import Client
 from config import *
 
-app = VClient(
+app = Client(
     name="VIP",
     api_id=API_ID,
     api_hash=API_HASH,
