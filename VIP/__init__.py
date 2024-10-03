@@ -1,3 +1,4 @@
+import pyromod.listen # noqa
 from pyrogram import Client, filters
 from config import *
 
