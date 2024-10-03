@@ -1,13 +1,13 @@
 {
-    "name": "HEROKUBOT",
-    "description": "HEROKU CONTROL BOT IT CAN HANDLE ALL THINGS IN HEROKU WITH THE HELP OF HEROKU API KEY.",
-    "logo": "https://envs.sh/0oR.jpg",
+    "name": "VIP-HEROKU-BOT",
+    "description": "THIS IS HEROKU CONTROLER BOT. IT CONTROLS YOUR ALL HEROKU FUNCTION WITH THE HELP OF HEROKU API KEY. MAKE SURE YOU WILL FILL HEROKU API KEY VALUE CORRECTLY. YOU CAN USE ANY HEROKU API KEY THAT HEROKU ACCOUNT YOU WANT TO ACCESS AND HANDLE.",
+    "logo": "https://envs.sh/WkW.jpg",
     "keywords": [
     "python3",
     "telegram",
     "bot",
     "VIP",
-    "HEROKUBOT",
+    "VIPHEROKUBot",
     "telegram-bot",
     "pyrogram"
     ],
@@ -29,20 +29,16 @@
         "value": "",
         "required": true
       },
-      
       "OWNER_ID": {
         "description": "The user id(s) of user(s) whom you would like to add as a OWNER. Multiple values shall be seperated with a space.",
         "value": "",
         "required": true
       },
-      
       "HEROKU_API_KEY": {
         "description": "Your Heroku account's API key",
         "value": "",
-        "required": true
-      
-      
-      
+        "required": false
+      }
     },
     "buildpacks": [
           {
@@ -58,4 +54,4 @@
               "size": "basic"
           }
       }
-      }
+  }
