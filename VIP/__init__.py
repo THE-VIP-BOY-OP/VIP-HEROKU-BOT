@@ -1,4 +1,4 @@
-from pyrogram import Client
+from pyrogram import Client, filters
 from config import *
 
 app = Client(
@@ -8,3 +8,10 @@ app = Client(
     bot_token=BOT_TOKEN,
     in_memory=True,
 )
+
+filters.sudo = filters.create(
+        lambda _, __, m: bool(
+            m.from_user and m.from_user.id in OWNER_ID
+        ),
+        "SudoFilter",
+    )
