@@ -537,32 +537,3 @@ async def get_deployed_apps(client, message):
     )
 
 
-# ============================DELETE APP==================================#
-
-
-@app.on_message(filters.command("deletehost") & filters.private & filters.sudo)
-async def delete_deployed_app(client, message):
-    # Fetch the list of deployed apps for the user
-    user_apps = await fetch_apps()
-
-    # Check if the user has any deployed apps
-    if not user_apps:
-        await message.reply_text(convert_to_small_caps("You have no deployed bots"))
-        return
-
-    # Create buttons for each deployed app
-    buttons = [
-        [
-            InlineKeyboardButton(
-                convert_to_small_caps(app_name), callback_data=f"delete_app:{app_name}"
-            )
-        ]
-        for app_name in user_apps
-    ]
-    reply_markup = InlineKeyboardMarkup(buttons)
-
-    # Send a message to select the app for deletion
-    await message.reply_text(
-        convert_to_small_caps("Please select the app you want to delete:"),
-        reply_markup=reply_markup,
-    )
