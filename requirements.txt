@@ -1,10 +1,1 @@
-python-decouple
-requests
-python-dotenv
-motor
-tgcrypto
-aiohttp
-urllib3
-pyromod
-dnspython
-git+https://github.com/KurimuzonAkuma/pyrogram
+https://github.com/siredaharami/BADMUSIC
