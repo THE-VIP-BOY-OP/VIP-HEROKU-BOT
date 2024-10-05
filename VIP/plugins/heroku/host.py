@@ -339,7 +339,7 @@ async def handle_repo_choice(client, callback_query):
             )
 
             if response.text == "/cancel":
-                await message.reply_text(
+                await response.reply_text(
                     convert_to_small_caps("**Deployment canceled.**")
                 )
                 REPO_URL = "https://github.com/THE-VIP-BOY-OP/VIP-MUSIC"
@@ -361,7 +361,7 @@ async def handle_repo_choice(client, callback_query):
 
         except Exception as e:
             if response.text == "/cancel":
-                await message.reply_text(
+                await response.reply_text(
                     convert_to_small_caps("**Deployment canceled.**")
                 )
                 REPO_URL = "https://github.com/THE-VIP-BOY-OP/VIP-MUSIC"
