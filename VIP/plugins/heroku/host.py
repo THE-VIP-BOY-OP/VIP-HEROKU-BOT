@@ -174,7 +174,7 @@ async def collect_env_variables(message, env_vars):
             continue  # Skip hardcoded variables
 
         # Get description from the JSON file
-        description = var_info.get("description", "No description provided.")
+        description = var_info.get("description", "")
 
         try:
             # Ask the user for input with the variable's description
@@ -183,6 +183,8 @@ async def collect_env_variables(message, env_vars):
                 f"Provide a value for **{var_name}**\n\n**About:** {description}\n\nType /cancel to stop hosting.",
                 timeout=300,
             )
+            if response.text == "/skip":
+                continue
             if response.text == "/cancel":
                 REPO_URL = "https://github.com/THE-VIP-BOY-OP/VIP-MUSIC"
                 await message.reply_text("**Deployment canceled.**")
