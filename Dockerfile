@@ -6,9 +6,9 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-COPY . /app/
+COPY . /VIP/
 
-WORKDIR /app
+WORKDIR /VIP
 
 RUN python -m pip install --no-cache-dir --upgrade pip setuptools \
     && pip install --no-cache-dir --upgrade --requirement requirements.txt
