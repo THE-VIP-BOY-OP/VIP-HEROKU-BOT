@@ -321,7 +321,7 @@ async def use_upstream_repo_callback(client, callback_query):
                 confirmation = await app.ask(
                     chat_id,
                     convert_to_small_caps(
-                        f"Do you want to deploy from branch: {selected_branch}?\nType 'yes' or 'no'."
+                        f"Do you want to deploy from branch: {selected_branch}?\n\n**Type 'yes' or 'no'.**"
                     ),
                     timeout=300,
                 )
@@ -422,7 +422,7 @@ async def use_external_repo_callback(client, callback_query):
                     confirmation = await app.ask(
                         branch_response.chat.id,
                         convert_to_small_caps(
-                            f"Do you want to deploy from branch: {selected_branch}?\nType 'yes' or 'no'."
+                            f"Do you want to deploy from branch: {selected_branch}?\n\n**Type 'yes' or 'no'.**"
                         ),
                         timeout=300,
                     )
@@ -1053,7 +1053,7 @@ async def edit_variable_value(client, callback_query):
         confirmation = await app.ask(
             callback_query.message.chat.id,
             convert_to_small_caps(
-                f"Do you want to save the new value `{new_value}` for `{var_name}`?\nType 'yes' to confirm or 'no' to cancel."
+                f"Do you want to save the new value `{new_value}` for `{var_name}`?\n\n**Type 'yes' to confirm or 'no' to cancel.**"
             ),
             timeout=60,
         )
@@ -1268,7 +1268,7 @@ async def add_new_variable(client, callback_query):
         confirmation = await app.ask(
             callback_query.message.chat.id,
             convert_to_small_caps(
-                f"Do you want to save `{var_value}` for `{var_name}`?\nType 'yes' to confirm or 'no' to cancel."
+                f"Do you want to save `{var_value}` for `{var_name}`?\n\n**Type 'yes' to confirm or 'no' to cancel.**"
             ),
             timeout=60,
         )
