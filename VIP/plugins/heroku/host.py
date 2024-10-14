@@ -359,6 +359,7 @@ async def handle_repo_choice(client, callback_query):
                 return await handle_repo_choice(client, callback_query)
 
             default_branch = "master"
+            UPSTREAM_REPO = REPO_URL
             await ask_for_branch(callback_query, branches, default_branch)
 
         except Exception as e:
